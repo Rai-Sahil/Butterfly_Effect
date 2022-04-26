@@ -1,6 +1,7 @@
-const express = require('express');
-const app = express();
 const fs = require("fs");
+const express = require('express');
+
+const app = express();
 
 app.use('/js', express.static('./public/js'));
 app.use('/css', express.static('./public/css'));

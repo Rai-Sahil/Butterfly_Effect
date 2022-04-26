@@ -1,5 +1,3 @@
-
-
 console.log("Client script loaded.");
 
 function ajaxGET(path, callback) {
@@ -14,7 +12,6 @@ function ajaxGET(path, callback) {
 }
 
 ajaxGET("/data/newsfeed", function(data) {
-    //console.log(data);
     document.getElementById("newsfeed").innerHTML = data;
 });
 
@@ -23,7 +20,6 @@ document.querySelector("#click4NewsFeed").addEventListener("click", function(e) 
     e.preventDefault();
 
     ajaxGET("/data/newsfeed", function(data) {
-        //console.log(data);
         document.getElementById("newsfeed2").innerHTML = data;
     });
 
