@@ -11,6 +11,8 @@ function init() {
     xhr.open("GET", path);
     xhr.send();
   }
+
+  // @TODO make necessary requests here, will be called after docxument load.
 }
 
 document.onreadystatechange = () => {
