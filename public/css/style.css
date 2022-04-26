@@ -1,0 +1,20 @@
+
+@import url(https://fonts.googleapis.com/css?family=Hind);
+
+html, body {
+  background-color: beige;
+  margin: 0em;
+  padding: 1em;
+}
+
+body {
+  font-family: "Hind";
+  font-size: 18pt;
+}
+
+img {
+  display: block;
+  margin: 0px auto;
+  width: 35%;
+  height: auto;
+}
