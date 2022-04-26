@@ -1,26 +1,21 @@
-console.log("Client script loaded.");
+function init() {
+  console.log("Client script loaded.");
 
-function ajaxGET(path, callback) {
+  function ajaxGET(path, callback) {
     const xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            callback(this.responseText);
-        }
-    }
+    xhr.onload = function () {
+      if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+        callback(this.responseText);
+      }
+    };
     xhr.open("GET", path);
     xhr.send();
+  }
 }
 
-ajaxGET("/data/newsfeed", function(data) {
-    document.getElementById("newsfeed").innerHTML = data;
-});
-
-
-document.querySelector("#click4NewsFeed").addEventListener("click", function(e) {
-    e.preventDefault();
-
-    ajaxGET("/data/newsfeed", function(data) {
-        document.getElementById("newsfeed2").innerHTML = data;
-    });
-
-}, false);
+document.onreadystatechange = () => {
+  if (document.readyState === "complete") {
+    console.info("Document fully loaded.");
+    init();
+  }
+};

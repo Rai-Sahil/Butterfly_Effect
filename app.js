@@ -1,4 +1,3 @@
-const fs = require("fs");
 const express = require('express');
 const session = require("express-session");
 
@@ -40,11 +39,6 @@ app.get("/login", function (req, res) {
   } else {
     res.sendFile("login.html", { root: __dirname + "/public/html" });
   }
-});
-
-app.get('/data/newsfeed', function (req, res) {
-    let doc = fs.readFileSync('./app/models/newsfeed.xml', "utf8");
-    res.send(doc);
 });
 
 app.post("/login", function (req, res) {
