@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+
+    <!-- Mobile Viewport Setting (remove horizontal scaling) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link href="/img/favicon.ico" rel="icon" type="image/x-icon" />
+
+    <!-- Stylesheet Import -->
+    <link rel="stylesheet" href="/css/login.css" />
+
+    <title>BBY32</title>
+</head>
+
+<body>
+    <div id="login-panel">
+        <form id="login-form">
+            <h1 id="login-title">Welcome</h1>
+            <input id="login-email" type="email" required="required" placeholder="Enter email" value="" />
+            <input id="login-password" type="password" required="required" placeholder="Enter password" value="" />
+            <input type="button" value="Login" id="login-submit" />
+            <p><span id="serverMsg"></span></p>
+            <p id="login-error-message">&nbsp;</p>
+            <p id="login-forgot-password"><a href="#">Forgot password</a>?</p>
+            <input type="checkbox" id="login-remember-me" name="remember-me">
+            <label for="login-remember-me">Remember me</label>
+        </form>
+    </div>
+
+    <script type="text/javascript" src="js/login.js"></script>
+</body>
+
+</html>
