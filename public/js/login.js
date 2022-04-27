@@ -2,7 +2,7 @@ function init() {
     console.info("Client script loaded.")
 
     function ajaxPOST(url, callback, data) {
-        let params = typeof data == "string" ? data : Object
+        const params = typeof data == "string" ? data : Object
         .keys(data)
         .map({
             function (key) {
@@ -14,12 +14,10 @@ function init() {
 
         const xhr = new XMLHttpRequest();
         xhr.onload = function() {
-            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                callback(this.responseText);
-
-            } else {
+            if (!this.readyState == XMLHttpRequest.DONE || this.status != 200) {
                 console.warn(this.status);
             }
+            callback(this.responseText, this.status);
         }
         xhr.open("POST", url);
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
@@ -33,12 +31,14 @@ function init() {
         const email = document.getElementById("login-email");
         const password = document.getElementById("login-password");
         const queryString = "email=" + email.value + "&password=" + password.value;
-    
-        ajaxPOST("/login", function (data) {
+
+        ajaxPOST("/login", function (data, status) {
+            console.log(data);
             if (data) {
                 const responseJSON = JSON.parse(data);
-                if (responseJSON.status == "fail") {
-                    document.getElementById("login-error-message").innerHTML = responseJSON.msg;
+                
+                if (status != 200) {
+                    document.getElementById("login-error-message").innerHTML = responseJSON.message;
                 } else {
                     sessionStorage.setItem("userId", responseJSON.user.ID)
                     window.location.replace("/");

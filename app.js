@@ -84,12 +84,11 @@ app.use(function (req, res, next) {
 // @TODO connect to DB and check against users table
 async function authenticate(email, password, callback) {
   const user = users.find((user) => user[1] == email);
-  if (user) {
-    if (user && password == user[2]) {
-      return callback(user);
-    } else {
-      return callback(null);
-    }
+  console.log("user: ", user);
+  if (!user || user && password != user[2]) {
+    return callback(null);
+  } else {
+    return callback(user);
   }
 }
 

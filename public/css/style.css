@@ -1,5 +1,4 @@
-
-@import url(https://fonts.googleapis.com/css?family=Hind);
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 html, body {
   background-color: beige;
@@ -8,7 +7,7 @@ html, body {
 }
 
 body {
-  font-family: "Hind";
+  font-family: "Roboto", sans-serif;
   font-size: 18pt;
 }
 
