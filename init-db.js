@@ -1,7 +1,5 @@
 const mysql = require("mysql2/promise");
-require("dotenv").config();
-
-const dbName = "bby32";
+const { dbName, connectionParams } = require("./constants");
 
 // name | email | password
 const users = [
@@ -11,23 +9,16 @@ const users = [
   ["Sahil Rai", "sahilrai@bby32.com", "sahilrai"]
 ]
 
-
 async function initDB() {
   const connection = await mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
+    ...connectionParams,
     multipleStatements: true,
   });
 
-  /**
-   * Create specified database if it does not exist, uses it.
-   * Then, creates user table if it does not exist.
-   */
   const query = `
     CREATE DATABASE IF NOT EXISTS ${dbName};
     use ${dbName};
-    CREATE TABLE IF NOT EXISTS users (
+    CREATE TABLE IF NOT EXISTS USERS (
       ID int NOT NULL AUTO_INCREMENT,
       name varchar(30),
       email varchar(30),
@@ -36,10 +27,10 @@ async function initDB() {
     );`;
   await connection.query(query);
 
-  const [userRows] = await connection.query("SELECT * FROM users");
+  const [userRows] = await connection.query("SELECT * FROM USERS");
 
   if (userRows.length == 0) {
-    const insertUsers = `INSERT INTO users (name, email, password) values ?`;
+    const insertUsers = `INSERT INTO USERS (name, email, password) values ?`;
     await connection.query(insertUsers, [users]);
   }
 }

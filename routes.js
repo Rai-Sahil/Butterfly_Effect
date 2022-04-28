@@ -1,21 +1,27 @@
 const express = require("express");
 const router = express.Router();
-
-// name | email | password
-const users = [
-  ["Daniel Shen", "danielshen@bby32.com", "danielshen"],
-  ["Delson Tan", "delsontan@bby32.com", "delsontan"],
-  ["Navdeep Litt", "navdeeplitt@bby32.com", "navdeeplitt"],
-  ["Sahil Rai", "sahilrai@bby32.com", "sahilrai"]
-]
+const mysql = require("mysql2/promise");
+const { dbName, connectionParams } = require("./constants");
 
 // @TODO connect to DB and check against users table
 async function authenticate(email, password, callback) {
-  const user = users.find((user) => user[1] == email);
-  if (!user || (user && password != user[2])) {
-    return callback(null);
-  } else {
-    return callback(user);
+  const connection = await mysql.createConnection({
+    ...connectionParams,
+    database: dbName
+  })
+
+  const query = "SELECT * FROM USERS WHERE email = ? AND password = ? LIMIT 1;";
+
+  try {
+    const [rows] = await connection.query(query, [email, password]);
+    if (rows.length == 1) {
+      return callback(rows[0]);
+    } else {
+      return callback(null);
+    }
+
+  } catch (error) {
+    console.error("Error authenticating: ", error);
   }
 }
 

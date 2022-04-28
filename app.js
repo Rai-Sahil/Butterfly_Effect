@@ -1,8 +1,8 @@
 const express = require('express');
 const session = require("express-session");
+const { port } = require("./constants");
 
 const app = express();
-const port = 8000;
 
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
