@@ -13,4 +13,4 @@ Hi my name is Daniel. I am excited to learn more about code.
 ## Setup
 1. Clone repository
 2. Navigate to project root
-3. Type `npm install` to install depedencies, then type `node app.js` to start the app.
+3. Type `npm install` to install dependencies, then type `node app.js` to start the app.
