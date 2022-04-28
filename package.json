@@ -1,0 +1,23 @@
+{
+  "name": "bby32",
+  "version": "1.0.0",
+  "description": "COMP2800 group project, April 2022",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DelsonTan/BBY32.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DelsonTan/BBY32/issues"
+  },
+  "homepage": "https://github.com/DelsonTan/BBY32#readme",
+  "dependencies": {
+    "express": "^4.18.0",
+    "express-session": "^1.17.2"
+  }
+}
