@@ -19,6 +19,7 @@
   "homepage": "https://github.com/DelsonTan/BBY32#readme",
   "dependencies": {
     "express": "^4.18.0",
-    "express-session": "^1.17.2"
+    "express-session": "^1.17.2",
+    "mysql2": "^2.3.3"
   }
 }
