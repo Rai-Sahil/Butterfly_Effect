@@ -8,6 +8,8 @@ Hi my name is Delson. I look forward to working on an organized group project wi
 
 Hi My name is Sahil Rai. I am really excited to work on databases specially mongoDB and showing my Frontend Skills. It'll be great working with my team, everyone seems chill. 
 
+Hi my name is Kemp Liao. I am excited to create an interesting app that is attractive and useful together with this amazing team, and I hope to learn more skills that can be helpful in the future.
+
 
 ## Packages
 - express
