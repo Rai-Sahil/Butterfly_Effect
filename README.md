@@ -18,6 +18,8 @@ Hi My name is Sahil Rai. I am really excited to work on databases specially mong
 - Windows: visit https://dev.mysql.com/downloads/installer/ and download the installer, then follow the prompts to complete installation.
 
 ## Project Setup
-1. Clone repository
-2. Navigate to project root
-3. Type `npm install` to install dependencies, then type `npm start` to start the app.
+1. Clone repository.
+2. Navigate to project root.
+3. Type `npm install` to install dependencies.
+4. Type `npm run init-db` to initialize the db locally and seed it with data. (must have active mySQL connection on local device)
+5. Type `npm start` to start the app..
