@@ -1,4 +1,5 @@
 const mysql = require("mysql2/promise");
+require("dotenv").config();
 
 const dbName = "bby32";
 
@@ -13,9 +14,9 @@ const users = [
 
 async function initDB() {
   const connection = await mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "themark",
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
     multipleStatements: true,
   });
 
