@@ -1,12 +1,16 @@
 const mysql = require("mysql2/promise");
-const { dbName, connectionParams } = require("./constants");
+const {
+  dbName,
+  connectionParams
+} = require("./constants");
 
 // name | email | password
 const users = [
-  ["Daniel Shen", "danielshen@bby32.com", "danielshen"],
   ["Delson Tan", "delsontan@bby32.com", "delsontan"],
   ["Navdeep Litt", "navdeeplitt@bby32.com", "navdeeplitt"],
-  ["Sahil Rai", "sahilrai@bby32.com", "sahilrai"]
+  ["Sahil Rai", "sahilrai@bby32.com", "sahilrai"],
+  ["Minji Kong", "minjikong@bby32.com", "minjikong"],
+  ["Kemp Liao", "kempliao@bby32.com", "kempliao"]
 ]
 
 async function initDB() {
@@ -35,7 +39,7 @@ async function initDB() {
   }
 }
 
-initDB().then(()=> {
-    console.log("DB initiated.");
-    process.exit();
+initDB().then(() => {
+  console.log("DB initiated.");
+  process.exit();
 });
