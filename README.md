@@ -10,6 +10,8 @@ Hi My name is Sahil Rai. I am really excited to work on databases specially mong
 
 Hi my name is Kemp Liao. I am excited to create an interesting app that is attractive and useful together with this amazing team, and I hope to learn more skills that can be helpful in the future.
 
+Hi my name is Wendy Kong. I am excited to work on this another project with new people. I hope I can gain more cooperative and coding skills thoughout the journey and come up with a useful and creative app.
+
 
 ## Packages
 - express
