@@ -41,6 +41,14 @@ router.get("/login", function (req, res) {
   }
 });
 
+router.get("/signup", function (req, res) {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+  } else {
+    res.sendFile("signup.html", { root: __dirname + "/public/html" });
+  }
+});
+
 router.post("/login", function (req, res) {
   res.setHeader("Content-Type", "application/json");
 
