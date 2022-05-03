@@ -28,17 +28,42 @@ async function createUser(name, email, password, callback) {
   });
 
   const getUserByEmailQuery = "SELECT * FROM USERS WHERE email = ? LIMIT 1;";
-  const insertUserQuery = "INSERT INTO USERS (name, email, password) values (?, ?, ?)";
+  const insertUserQuery =
+    "INSERT INTO USERS (name, email, password) values (?, ?, ?)";
   try {
-    const [rows] = await connection.query(getUserByEmailQuery, [email]);
-    if (rows.length == 1) {
+    const [existingUsers] = await connection.query(getUserByEmailQuery, [email]);
+    if (existingUsers.length == 1) {
       return callback({ status: 409, message: "Email already in use." });
     }
     await connection.query(insertUserQuery, [name, email, password]);
     const [[user]] = await connection.query(getUserByEmailQuery, [email]);
-    callback({ status: 200, message: "User successfully created.", user });
+    return callback({
+      status: 200,
+      message: "User successfully created.",
+      user,
+    });
   } catch (error) {
     console.error("Error creating user: ", error);
+    return callback({ status: 500, message: "Internal server error." });
+  }
+}
+
+async function getUsers(callback) {
+  const connection = await mysql.createConnection({
+    ...connectionParams,
+    database: dbName,
+  });
+
+  const getUsersQuery = "SELECT * FROM USERS;";
+  try {
+    const [users] = await connection.query(getUsersQuery);
+    return callback({
+      status: 200,
+      message: "Users successfully fetched.",
+      users,
+    });
+  } catch (error) {
+    console.error("Error getting users: ", error);
     callback({ status: 500, message: "Internal server error." });
   }
 }
@@ -46,4 +71,5 @@ async function createUser(name, email, password, callback) {
 module.exports = {
   authenticate,
   createUser,
+  getUsers
 };

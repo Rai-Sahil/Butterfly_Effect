@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { authenticate, createUser } = require("./db");
+const { authenticate, createUser, getUsers } = require("./db");
 
 router.get("/", function (req, res) {
   if (req.session.loggedIn) {
@@ -77,6 +77,16 @@ router.post("/logout", function (req, res) {
     });
   }
 });
+
+router.get("/users", function (req, res) {
+  getUsers(({status, message, users})=> {
+    if (status !== 200) {
+      res.status(status).send({message});
+    } else {
+      res.status(status).send({message, users});
+    }
+  });
+})
 
 router.use(function (req, res, next) {
   res.status(404).send("There is nothing here, 404.");
