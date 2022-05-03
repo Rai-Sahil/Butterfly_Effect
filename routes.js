@@ -3,7 +3,6 @@ const router = express.Router();
 const mysql = require("mysql2/promise");
 const { dbName, connectionParams } = require("./constants");
 
-// @TODO connect to DB and check against users table
 async function authenticate(email, password, callback) {
   const connection = await mysql.createConnection({
     ...connectionParams,
