@@ -25,20 +25,20 @@ function init() {
         xhr.send(params);
     }
 
-    // Event listener to make login request to server.
-    document.querySelector("#login-submit").addEventListener("click", function(event) {
+    // Event listener to make signup request to server.
+    document.querySelector("#signup-submit").addEventListener("click", function(event) {
         event.preventDefault();
-        const email = document.getElementById("login-email");
-        const password = document.getElementById("login-password");
-        const queryString = "email=" + email.value + "&password=" + password.value;
+        const name = document.getElementById("signup-name");
+        const email = document.getElementById("signup-email");
+        const password = document.getElementById("signup-password");
+        const queryString = "name=" + name.value + "&email=" + email.value + "&password=" + password.value;
 
-        ajaxPOST("/login", function (data, status) {
-            console.log(data);
+        ajaxPOST("/signup", function (data, status) {
             if (data) {
                 const responseJSON = JSON.parse(data);
                 
                 if (status != 200) {
-                    document.getElementById("login-error-message").innerHTML = responseJSON.message;
+                    document.getElementById("signup-error-message").innerHTML = responseJSON.message;
                 } else {
                     sessionStorage.setItem("userId", responseJSON.user.ID)
                     window.location.replace("/");
