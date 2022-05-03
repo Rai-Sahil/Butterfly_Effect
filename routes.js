@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {authenticate} = require("./db");
+const { authenticate, createUser } = require("./db");
 
 router.get("/", function (req, res) {
   if (req.session.loggedIn) {
@@ -10,19 +10,29 @@ router.get("/", function (req, res) {
   }
 });
 
-router.get("/login", function (req, res) {
-  if (req.session.loggedIn) {
-    res.redirect("/");
-  } else {
-    res.sendFile("login.html", { root: __dirname + "/public/html" });
-  }
-});
-
 router.get("/signup", function (req, res) {
   if (req.session.loggedIn) {
     res.redirect("/");
   } else {
     res.sendFile("signup.html", { root: __dirname + "/public/html" });
+  }
+});
+
+router.post("/signup", function (req, res) {
+  res.setHeader("Content-Type", "application/json");
+
+  const { name, email, password } = req.body;
+
+  return createUser(name, email, password, ({status, message}) => {
+    res.status(status).send({message});
+  })
+});
+
+router.get("/login", function (req, res) {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+  } else {
+    res.sendFile("login.html", { root: __dirname + "/public/html" });
   }
 });
 

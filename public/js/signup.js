@@ -28,12 +28,12 @@ function init() {
     // Event listener to make signup request to server.
     document.querySelector("#signup-submit").addEventListener("click", function(event) {
         event.preventDefault();
+        const name = document.getElementById("signup-name");
         const email = document.getElementById("signup-email");
         const password = document.getElementById("signup-password");
-        const queryString = "email=" + email.value + "&password=" + password.value;
+        const queryString = "name=" + name.value + "&email=" + email.value + "&password=" + password.value;
 
         ajaxPOST("/signup", function (data, status) {
-            console.log(data);
             if (data) {
                 const responseJSON = JSON.parse(data);
                 
