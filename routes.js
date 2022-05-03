@@ -23,9 +23,19 @@ router.post("/signup", function (req, res) {
 
   const { name, email, password } = req.body;
 
-  return createUser(name, email, password, ({status, message}) => {
-    res.status(status).send({message});
-  })
+  return createUser(name, email, password, ({ status, message, user }) => {
+    if (status !== 200) {
+      res.status(status).send({ message });
+    } else {
+      req.session.loggedIn = true;
+      req.session.email = user.email;
+      req.session.name = user.name;
+      req.session.save(
+        (error) => error && console.error("Unable to save session:", error)
+      );
+      res.status(status).send({ message, user });
+    }
+  });
 });
 
 router.get("/login", function (req, res) {
@@ -45,11 +55,12 @@ router.post("/login", function (req, res) {
     if (user == null) {
       res.status(401).send({ message: "User authentication failed." });
     } else {
-      const { name, email } = user;
       req.session.loggedIn = true;
-      req.session.email = email;
-      req.session.name = name;
-      req.session.save((error) => error && console.error("Unable to save session:", error));
+      req.session.email = user.email;
+      req.session.name = user.name;
+      req.session.save(
+        (error) => error && console.error("Unable to save session:", error)
+      );
       res.status(200).send({ message: "User authentication succeeded.", user });
     }
   });
