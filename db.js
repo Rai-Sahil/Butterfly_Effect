@@ -1,5 +1,6 @@
 const mysql = require("mysql2/promise");
 const { dbName, connectionParams } = require("./constants");
+const bcrypt = require("bcrypt");
 
 async function authenticate(email, password, callback) {
   const connection = await mysql.createConnection({
@@ -7,14 +8,19 @@ async function authenticate(email, password, callback) {
     database: dbName,
   });
 
-  const query = "SELECT * FROM USER WHERE email = ? AND password = ? LIMIT 1;";
+  const query = "SELECT * FROM USER WHERE email = ? LIMIT 1;";
 
   try {
-    const [rows] = await connection.query(query, [email, password]);
-    if (rows.length == 1) {
-      return callback(rows[0]);
-    } else {
+    const [[user]] = await connection.query(query, [email]);
+    if (!user) {
       return callback(null);
+    } else {;
+      const passwordsMatch = await bcrypt.compare(password, user.password)
+      if (passwordsMatch) {
+        return callback(user);
+      } else {
+        return callback(null);
+      }
     }
   } catch (error) {
     console.error("Error authenticating: ", error);
