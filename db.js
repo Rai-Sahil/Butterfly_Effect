@@ -14,7 +14,7 @@ async function authenticate(email, password, callback) {
     const [[user]] = await connection.query(query, [email]);
     if (!user) {
       return callback(null);
-    } else {;
+    } else {
       const passwordsMatch = await bcrypt.compare(password, user.password)
       if (passwordsMatch) {
         return callback(user);
