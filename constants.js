@@ -10,8 +10,15 @@ const connectionParams = {
 
 const port = 8000;
 
+// name | email | password | role
+const users = [
+  ["Thomas Anderson", "admin@bby32.com", process.env.ADMIN_PASSWORD, "admin"],
+  ["John Doe", "user@bby32.com", process.env.USER_PASSWORD, "user"],
+];
+
 module.exports = {
   dbName,
   connectionParams,
-  port
+  port,
+  users
 };

@@ -1,18 +1,9 @@
 const mysql = require("mysql2/promise");
 const {
   dbName,
-  connectionParams
+  connectionParams,
+  users
 } = require("./constants");
-
-// name | email | password | role
-const users = [
-  ["Delson Tan", "delsontan@bby32.com", "delsontan", "admin"],
-  ["Navdeep Litt", "navdeeplitt@bby32.com", "navdeeplitt", "admin"],
-  ["Sahil Rai", "sahilrai@bby32.com", "sahilrai", "admin"],
-  ["Minji Kong", "minjikong@bby32.com", "minjikong", "admin"],
-  ["Kemp Liao", "kempliao@bby32.com", "kempliao", "admin"],
-  ["John Doe", "johndoe@bby32.com", "johndoe", "user"]
-];
 
 async function initDB() {
   const connection = await mysql.createConnection({
