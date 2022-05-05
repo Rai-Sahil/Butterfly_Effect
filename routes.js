@@ -1,13 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { authenticate, createUser, getUserById, getUsers } = require("./db");
+const { authenticate, createUser, getUsers } = require("./db");
+const { requireAdmin, requireLoggedIn } = require("./middleware");
 
-router.get("/", function (req, res) {
-  if (req.session.loggedIn) {
-    res.sendFile("index.html", { root: __dirname + "/public/html" });
-  } else {
-    res.redirect("/login");
-  }
+router.get("/", requireLoggedIn, function (_, res) {
+  res.sendFile("index.html", { root: __dirname + "/public/html" });
 });
 
 router.get("/signup", function (req, res) {
@@ -76,35 +73,18 @@ router.post("/logout", function (req, res) {
   }
 });
 
-router.get("/users", requireAdmin,  function (req, res) {
-  getUsers(({status, message, users})=> {
+router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
+  getUsers(({ status, message, users }) => {
     if (status !== 200) {
-      res.status(status).send({message});
+      res.status(status).send({ message });
     } else {
-      res.status(status).send({message, users});
+      res.status(status).send({ message, users });
     }
   });
-})
-
-router.use(function (req, res, next) {
-  res.status(404).send("There is nothing here, 404.");
 });
 
-async function requireAdmin(req, res, next) {
-  console.log(req.session.userId);
-  const {userId} = req.session;
-  if (!userId) {
-    res.status(404).send("There is nothing here, 404.");
-  }
-  await getUserById(userId, ({status, message, user}) => {
-    if (status !== 200) {
-      return res.status(status).send({message})
-    }
-    if (user.role != "admin") {
-      return res.status(403).send({message: "User is not admin."});
-    }
-    next();
-  })
-}
+router.use(function (_, res) {
+  res.status(404).send("There is nothing here, 404.");
+});
 
 module.exports = router;
