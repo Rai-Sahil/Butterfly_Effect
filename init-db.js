@@ -28,7 +28,6 @@ async function initDB() {
 
   if (userRows.length == 0) {
     const insertUsers = `INSERT INTO USER (name, email, password, role) values ?`;
-    console.log(users);
     await connection.query(insertUsers, [users]);
   }
 }
