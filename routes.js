@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { authenticate, createUser, getUsers } = require("./db");
+const { authenticate, createUser, getUserById, getUsers } = require("./db");
 
 router.get("/", function (req, res) {
   if (req.session.loggedIn) {
@@ -28,8 +28,7 @@ router.post("/signup", function (req, res) {
       res.status(status).send({ message });
     } else {
       req.session.loggedIn = true;
-      req.session.email = user.email;
-      req.session.name = user.name;
+      req.session.userId = user.id;
       req.session.save(
         (error) => error && console.error("Unable to save session:", error)
       );
@@ -56,8 +55,7 @@ router.post("/login", function (req, res) {
       res.status(401).send({ message: "User authentication failed." });
     } else {
       req.session.loggedIn = true;
-      req.session.email = user.email;
-      req.session.name = user.name;
+      req.session.userId = user.id;
       req.session.save(
         (error) => error && console.error("Unable to save session:", error)
       );
@@ -78,7 +76,7 @@ router.post("/logout", function (req, res) {
   }
 });
 
-router.get("/users", function (req, res) {
+router.get("/users", requireAdmin,  function (req, res) {
   getUsers(({status, message, users})=> {
     if (status !== 200) {
       res.status(status).send({message});
@@ -91,5 +89,22 @@ router.get("/users", function (req, res) {
 router.use(function (req, res, next) {
   res.status(404).send("There is nothing here, 404.");
 });
+
+async function requireAdmin(req, res, next) {
+  console.log(req.session.userId);
+  const {userId} = req.session;
+  if (!userId) {
+    res.status(404).send("There is nothing here, 404.");
+  }
+  await getUserById(userId, ({status, message, user}) => {
+    if (status !== 200) {
+      return res.status(status).send({message})
+    }
+    if (user.role != "admin") {
+      return res.status(403).send({message: "User is not admin."});
+    }
+    next();
+  })
+}
 
 module.exports = router;

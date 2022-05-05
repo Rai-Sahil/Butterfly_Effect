@@ -1,5 +1,6 @@
 const mysql = require("mysql2/promise");
 const { dbName, connectionParams } = require("./constants");
+const { connect } = require("./routes");
 
 async function authenticate(email, password, callback) {
   const connection = await mysql.createConnection({
@@ -48,6 +49,30 @@ async function createUser(name, email, password, callback) {
   }
 }
 
+async function getUserById(userId, callback) {
+  const connection = await mysql.createConnection({
+    ...connectionParams,
+    database: dbName,
+  });
+
+  const getUserByIdQuery = "SELECT * FROM USER WHERE id = ? LIMIT 1;";
+  try {
+    const [[user]] = await connection.query(getUserByIdQuery, userId);
+    if (!user) {
+      console.error("User not found.");
+      return callback({ status: 404, message: "User not found." });
+    }
+    return callback({
+      status: 200,
+      message: "User successfully fetched.",
+      user,
+    });
+  } catch (error) {
+    console.error("Error getting user: ", error);
+    return callback({ status: 500, message: "Internal server error." });
+  }
+}
+
 async function getUsers(callback) {
   const connection = await mysql.createConnection({
     ...connectionParams,
@@ -64,12 +89,13 @@ async function getUsers(callback) {
     });
   } catch (error) {
     console.error("Error getting users: ", error);
-    callback({ status: 500, message: "Internal server error." });
+    return callback({ status: 500, message: "Internal server error." });
   }
 }
 
 module.exports = {
   authenticate,
   createUser,
+  getUserById,
   getUsers
 };
