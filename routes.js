@@ -72,6 +72,14 @@ router.post("/logout", function (req, res) {
   }
 });
 
+router.get("/game", function (req, res) {
+  if (req.session.loggedIn) {
+    res.sendFile("game-card.html", { root: __dirname + "/public/html" });
+  } else {
+    res.redirect("/login");
+  }
+});
+
 router.use(function (req, res, next) {
   res.status(404).send("There is nothing here, 404.");
 });

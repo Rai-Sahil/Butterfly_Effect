@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Card</title>
+    <link rel="stylesheet" href="./css/game-card.css"/>
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="picture"><img src="https://dummyimage.com/1200x800/000/fff"></div>
+        <div class="status">
+            <div class="status-container" id="environ">
+                <img src="../img/environment.png">
+                <div class="meter" id="envi-meter"></div>
+            </div>
+            <div class="status-container" id="comfort">
+                <img src="../img/comfort.png">
+                <div class="meter" id="comfort-meter"></div>
+            </div>
+        </div>
+        <div class="text">
+            <div class="question">Should I turn on the A/C?</div>
+            <div class="choices">
+                <div class="choice-button">Yes, do it!</div>
+                <div class="choice-button">No!</div>
+            </div>
+        </div>
+        <div class="push"></div>
+    </div>
+
+    <template id="button1">
+        <div class="choice-button"></div>
+    </template>
+
+
+    <div class="footer">
+        <div class="footer-container">
+            <div class="footer-button">Homepage</div>
+            <div class="footer-button">Start Again</div>
+            <div class="footer-button">Save</div>
+            <div class="footer-button">Settings</div>
+        </div>
+    </div>
+    <script src="../js/game-card.js"></script>
+</body>
+</html>

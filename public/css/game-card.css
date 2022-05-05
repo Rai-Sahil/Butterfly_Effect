@@ -1,0 +1,127 @@
+body {
+    margin: 0;
+}
+
+.container {
+    min-height: 100%;
+    margin-bottom: -10vh;
+}
+
+.picture {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.picture img {
+    height: 100%;
+}
+
+.status {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 2%;
+}
+
+.status-container {
+    display: flex;
+    align-items: center;
+}
+
+.status img {
+    display: inline-block;
+    max-width: 30px;
+}
+
+.meter {
+    display: inline-block;
+    width: 70%;
+    height: 25px;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #0f0, #0ff var(--progress), transparent 0);
+    border: 1px solid #eee;
+    transition: .3s --progress;
+}
+
+#envi-meter {
+    --progress: 100%;
+}
+
+#comfort-meter {
+    --progress: 70%;
+}
+
+.text {
+    padding: 5%;
+}
+
+.question {
+    padding-bottom: 10%;
+}
+
+.choice-button {
+    border-radius: 25px;
+    border: 1px solid;
+    padding: 2%;
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.choice-button:hover {
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.24);
+}
+
+.footer,
+.push {
+    height: 10vh;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: 25vw 25vw 25vw 25vw;
+}
+
+.footer-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+    .container {
+        display: grid;
+        grid-template-rows: 40vh 10vh 40vh;
+    }
+
+    .picture {
+        grid-area: 1 / 1 / span 1 / span 1;
+    }
+
+    .status {
+        grid-area: 2 / 1 / span 1 / span 1;
+    }
+
+    .text {
+        grid-area: 3 / 1 / span 1 / span 1;
+    }
+}
+
+@media screen and (min-width: 801px) {
+    .container {
+        display: grid;
+        grid-template-columns: 40vw 60vw;
+        grid-template-rows: 10vh 80vh;
+    }
+
+    .picture {
+        grid-area: 1 / 1 / span 2 / span 1;
+    }
+
+    .status {
+        grid-area: 1 / 2 / span 1 / span 1;
+    }
+
+    .text {
+        grid-area: 2 / 2 / span 1 / span 1;
+    }
+}
