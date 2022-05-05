@@ -1,6 +1,5 @@
 const mysql = require("mysql2/promise");
 const { dbName, connectionParams } = require("./constants");
-const { connect } = require("./routes");
 
 async function authenticate(email, password, callback) {
   const connection = await mysql.createConnection({
