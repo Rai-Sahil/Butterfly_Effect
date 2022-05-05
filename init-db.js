@@ -23,20 +23,19 @@ async function initDB() {
   const query = `
     CREATE DATABASE IF NOT EXISTS ${dbName};
     use ${dbName};
-    CREATE TABLE IF NOT EXISTS USERS (
-      ID int NOT NULL AUTO_INCREMENT,
+    CREATE TABLE IF NOT EXISTS USER (
+      id varchar(40) DEFAULT (uuid()) NOT NULL PRIMARY KEY,
       name varchar(30),
       email varchar(30),
       password varchar(30),
       role varchar(30) DEFAULT 'user'
-      PRIMARY KEY (ID)
     );`;
   await connection.query(query);
 
-  const [userRows] = await connection.query("SELECT * FROM USERS");
+  const [userRows] = await connection.query("SELECT * FROM USER");
 
   if (userRows.length == 0) {
-    const insertUsers = `INSERT INTO USERS (name, email, password, role) values ?`;
+    const insertUsers = `INSERT INTO USER (name, email, password, role) values ?`;
     await connection.query(insertUsers, [users]);
   }
 }

@@ -7,7 +7,7 @@ async function authenticate(email, password, callback) {
     database: dbName,
   });
 
-  const query = "SELECT * FROM USERS WHERE email = ? AND password = ? LIMIT 1;";
+  const query = "SELECT * FROM USER WHERE email = ? AND password = ? LIMIT 1;";
 
   try {
     const [rows] = await connection.query(query, [email, password]);
@@ -27,9 +27,9 @@ async function createUser(name, email, password, callback) {
     database: dbName,
   });
 
-  const getUserByEmailQuery = "SELECT * FROM USERS WHERE email = ? LIMIT 1;";
+  const getUserByEmailQuery = "SELECT * FROM USER WHERE email = ? LIMIT 1;";
   const insertUserQuery =
-    "INSERT INTO USERS (name, email, password) values (?, ?, ?)";
+    "INSERT INTO USER (name, email, password) values (?, ?, ?)";
   try {
     const [existingUsers] = await connection.query(getUserByEmailQuery, [email]);
     if (existingUsers.length == 1) {
@@ -54,7 +54,7 @@ async function getUsers(callback) {
     database: dbName,
   });
 
-  const getUsersQuery = "SELECT * FROM USERS;";
+  const getUsersQuery = "SELECT * FROM USER;";
   try {
     const [users] = await connection.query(getUsersQuery);
     return callback({
