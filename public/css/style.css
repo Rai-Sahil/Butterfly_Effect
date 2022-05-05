@@ -1,19 +1,74 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-html, body {
-  background-color: beige;
-  margin: 0em;
-  padding: 1em;
-}
+/* @font-face {
+  font-family: 'mv-boli-regular';
+  src: url('/font/mvboli.ttf');
+} */
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap');
 
 body {
-  font-family: "Roboto", sans-serif;
+  /* font-family: 'mv-boli-regular', sans-serif; */
+  font-family: 'Signika Negative', sans-serif;
   font-size: 18pt;
+  background-color: #F5DFBB;
+  margin: 0;
+  padding: 0;
 }
 
-img {
-  display: block;
-  margin: 0px auto;
-  width: 35%;
-  height: auto;
+#app-name {
+  font-family: 'Oleo Script Swash Caps', cursive;
+  color: #5a245d;
+}
+
+a {
+  text-decoration: none;
+  color: #6A3E6D;
+}
+
+a:hover {
+  color: plum;
+}
+
+footer {
+  position: absolute;
+  bottom: 2%;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: 70% 15% 15%;
+  align-items: end;
+  justify-items: end;
+}
+
+footer p {
+  font-size: 15pt;
+  margin-bottom: -1%;
+  margin-right: 40%;
+}
+
+footer a {
+  text-decoration: none;
+  font-size: 15pt;
+  font-family: 'Smooch Sans', sans-serif;
+}
+
+@media screen and (max-width: 700px) {
+  img {
+    display: block;
+    margin: 0px auto;
+    width: 20%;
+    height: auto;
+  }
+
+  #mainpage {
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 701px) and (max-width: 1280px) {
+  img {
+    display: block;
+    margin: 0px auto;
+    width: 10%;
+    height: auto;
+  }
 }
