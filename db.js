@@ -78,7 +78,7 @@ async function getUsers(callback) {
     database: dbName,
   });
 
-  const getUsersQuery = "SELECT * FROM USER;";
+  const getUsersQuery = "SELECT name, email, role FROM USER;";
   try {
     const [users] = await connection.query(getUsersQuery);
     return callback({
