@@ -1,4 +1,5 @@
 require("dotenv").config();
+const bcrypt = require("bcrypt");
 
 const dbName = "bby32";
 
@@ -10,8 +11,28 @@ const connectionParams = {
 
 const port = 8000;
 
+const saltRounds = 10;
+
+// name | email | password | role
+const users = [
+  [
+    "Thomas Anderson",
+    "admin@bby32.com",
+    bcrypt.hashSync(process.env.ADMIN_PASSWORD, saltRounds),
+    "admin",
+  ],
+  [
+    "John Doe",
+    "user@bby32.com",
+    bcrypt.hashSync(process.env.USER_PASSWORD, saltRounds),
+    "user",
+  ],
+];
+
 module.exports = {
   dbName,
   connectionParams,
-  port
+  port,
+  saltRounds,
+  users
 };
