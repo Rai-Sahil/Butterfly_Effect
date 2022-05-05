@@ -1,5 +1,5 @@
 const mysql = require("mysql2/promise");
-const { dbName, connectionParams } = require("./constants");
+const { dbName, connectionParams, saltRounds } = require("./constants");
 const bcrypt = require("bcrypt");
 
 async function authenticate(email, password, callback) {
@@ -41,7 +41,8 @@ async function createUser(name, email, password, callback) {
     if (existingUsers.length == 1) {
       return callback({ status: 409, message: "Email already in use." });
     }
-    await connection.query(insertUserQuery, [name, email, password]);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    await connection.query(insertUserQuery, [name, email, hashedPassword]);
     const [[user]] = await connection.query(getUserByEmailQuery, [email]);
     return callback({
       status: 200,
