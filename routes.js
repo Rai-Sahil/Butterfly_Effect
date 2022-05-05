@@ -1,18 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const { authenticate, createUser, getUsers } = require("./db");
-const { requireAdmin, requireLoggedIn } = require("./middleware");
+const {
+  requireAdmin,
+  requireLoggedIn,
+  requireLoggedOut,
+} = require("./middleware");
 
 router.get("/", requireLoggedIn, function (_, res) {
   res.sendFile("index.html", { root: __dirname + "/public/html" });
 });
 
-router.get("/signup", function (req, res) {
-  if (req.session.loggedIn) {
-    res.redirect("/");
-  } else {
-    res.sendFile("signup.html", { root: __dirname + "/public/html" });
-  }
+router.get("/signup", requireLoggedOut, function (req, res) {
+  res.sendFile("signup.html", { root: __dirname + "/public/html" });
 });
 
 router.post("/signup", function (req, res) {
@@ -34,12 +34,8 @@ router.post("/signup", function (req, res) {
   });
 });
 
-router.get("/login", function (req, res) {
-  if (req.session.loggedIn) {
-    res.redirect("/");
-  } else {
-    res.sendFile("login.html", { root: __dirname + "/public/html" });
-  }
+router.get("/login", requireLoggedOut, function (req, res) {
+  res.sendFile("login.html", { root: __dirname + "/public/html" });
 });
 
 router.post("/login", function (req, res) {

@@ -16,6 +16,14 @@ async function requireAdmin(req, res, next) {
   });
 }
 
+async function requireLoggedOut(req, res, next) {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+  } else {
+    next();
+  }
+}
+
 async function requireLoggedIn(req, res, next) {
   if (!req.session.loggedIn) {
     res.redirect("/login");
