@@ -35,4 +35,5 @@ async function requireLoggedIn(req, res, next) {
 module.exports = {
   requireAdmin,
   requireLoggedIn,
+  requireLoggedOut
 };
