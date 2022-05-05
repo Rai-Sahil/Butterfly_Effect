@@ -1,21 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const { authenticate, createUser } = require("./db");
+const { authenticate, createUser, getUsers } = require("./db");
+const {
+  requireAdmin,
+  requireLoggedIn,
+  requireLoggedOut,
+} = require("./middleware");
 
-router.get("/", function (req, res) {
-  if (req.session.loggedIn) {
-    res.sendFile("index.html", { root: __dirname + "/public/html" });
-  } else {
-    res.redirect("/login");
-  }
+router.get("/", requireLoggedIn, function (_, res) {
+  res.sendFile("index.html", { root: __dirname + "/public/html" });
 });
 
-router.get("/signup", function (req, res) {
-  if (req.session.loggedIn) {
-    res.redirect("/");
-  } else {
-    res.sendFile("signup.html", { root: __dirname + "/public/html" });
-  }
+router.get("/signup", requireLoggedOut, function (req, res) {
+  res.sendFile("signup.html", { root: __dirname + "/public/html" });
 });
 
 router.post("/signup", function (req, res) {
@@ -28,8 +25,7 @@ router.post("/signup", function (req, res) {
       res.status(status).send({ message });
     } else {
       req.session.loggedIn = true;
-      req.session.email = user.email;
-      req.session.name = user.name;
+      req.session.userId = user.id;
       req.session.save(
         (error) => error && console.error("Unable to save session:", error)
       );
@@ -38,12 +34,8 @@ router.post("/signup", function (req, res) {
   });
 });
 
-router.get("/login", function (req, res) {
-  if (req.session.loggedIn) {
-    res.redirect("/");
-  } else {
-    res.sendFile("login.html", { root: __dirname + "/public/html" });
-  }
+router.get("/login", requireLoggedOut, function (req, res) {
+  res.sendFile("login.html", { root: __dirname + "/public/html" });
 });
 
 router.post("/login", function (req, res) {
@@ -56,8 +48,7 @@ router.post("/login", function (req, res) {
       res.status(401).send({ message: "User authentication failed." });
     } else {
       req.session.loggedIn = true;
-      req.session.email = user.email;
-      req.session.name = user.name;
+      req.session.userId = user.id;
       req.session.save(
         (error) => error && console.error("Unable to save session:", error)
       );
@@ -78,7 +69,17 @@ router.post("/logout", function (req, res) {
   }
 });
 
-router.use(function (req, res, next) {
+router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
+  getUsers(({ status, message, users }) => {
+    if (status !== 200) {
+      res.status(status).send({ message });
+    } else {
+      res.status(status).send({ message, users });
+    }
+  });
+});
+
+router.use(function (_, res) {
   res.status(404).send("There is nothing here, 404.");
 });
 
