@@ -131,7 +131,8 @@ header h4 {
 
 .hr1 {
   flex: left;
-  margin-right: 10%;
+  margin-left: 4%;
+  margin-right: 4%;
   width: 25%;
   background-color: white;
   border-bottom: #c7c7c7 2px solid;
@@ -151,13 +152,14 @@ header h4 {
   border-top: none;
   font-size: large;
   border-left: none;
+  margin-right: 4%;
   border-right: none;
 }
 
 @media screen and (min-width: 1249px) {
-  #login-submit {
-    font-size: 65px;
-    margin-left: 750%;
+  #signup-submit {
+    font-size: 85px;
+    margin-left: 1550%;
     color: #4390d8;
   }
 
@@ -186,9 +188,9 @@ div#box1 {
     display: flex;
     justify-content: center;
   }
-  #login-submit {
-    font-size: 65px;
-    margin-left: 650%;
+  #signup-submit {
+    font-size: 75px;
+    margin-left: 1450%;
     color: #4390d8;
   }
 
@@ -222,9 +224,9 @@ div#box1 {
     justify-content: center;
   }
 
-  #login-submit {
-    font-size: 65px;
-    margin-left: 550%;
+  #signup-submit {
+    font-size: 75px;
+    margin-left: 1550%;
     color: #4390d8;
   }
 
@@ -258,9 +260,9 @@ div#box1 {
     justify-content: center;
   }
 
-  #login-submit {
-    font-size: 65px;
-    margin-left: 450%;
+  #signup-submit {
+    font-size: 75px;
+    margin-left: 1450%;
     color: #4390d8;
   }
 
@@ -307,9 +309,9 @@ div#box1 {
     display: flex;
     justify-content: center;
   }
-  #login-submit {
-    font-size: 65px;
-    margin-left: 350%;
+  #signup-submit {
+    font-size: 75px;
+    margin-left: 1150%;
     color: #4390d8;
   }
 
@@ -366,7 +368,7 @@ div#box1 {
     display: flex;
     justify-content: center;
   }
-  #login-submit {
+  #signup-submit {
     font-size: 65px;
     margin-left: 275%;
     color: #4390d8;
@@ -425,17 +427,17 @@ div#box1 {
   }
   .hr1 {
     margin-left: 20%;
-    margin-top: 14%;
+    margin-top: 8%;
     width: 50%;
   }
 
   .hr2 {
     margin-left: 20%;
-    margin-top: 13%;
+    margin-top: 12%;
     width: 50%;
   }
 
-  #login-submit {
+  #signup-submit {
     font-size: 65px;
     margin-left: 40%;
     color: #4390d8;
@@ -492,7 +494,7 @@ div#box1 {
     width: 55%;
   }
 
-  #login-submit {
+  #signup-submit {
     margin-bottom: -700%;
     font-size: 65px;
     margin-left: 40%;
@@ -536,7 +538,7 @@ div#box1 {
     width: 60%;
   }
 
-  #login-submit {
+  #signup-submit {
     margin-top: -170%;
     font-size: 70px;
     margin-left: 50%;
@@ -580,7 +582,7 @@ div#box1 {
     width: 62%;
   }
 
-  #login-submit {
+  #signup-submit {
     margin-top: -190%;
     font-size: 70px;
     margin-left: 50%;
@@ -624,7 +626,7 @@ div#box1 {
     width: 70%;
   }
 
-  #login-submit {
+  #signup-submit {
     margin-top: -290%;
     font-size: 75px;
     margin-left: 50%;
@@ -668,7 +670,7 @@ div#box1 {
     width: 70%;
   }
 
-  #login-submit {
+  #signup-submit {
     margin-top: -100%;
     font-size: 65px;
     margin-left: 60%;
@@ -714,7 +716,7 @@ div#box1 {
     width: 75%;
   }
 
-  #login-submit {
+  #signup-submit {
     margin-top: -100%;
     font-size: 65px;
     margin-left: 60%;

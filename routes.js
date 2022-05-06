@@ -1,44 +1,41 @@
 const express = require("express");
 const router = express.Router();
-const mysql = require("mysql2/promise");
-const { dbName, connectionParams } = require("./constants");
+const { authenticate, createUser, getUsers } = require("./db");
+const {
+  requireAdmin,
+  requireLoggedIn,
+  requireLoggedOut,
+} = require("./middleware");
 
-// @TODO connect to DB and check against users table
-async function authenticate(email, password, callback) {
-  const connection = await mysql.createConnection({
-    ...connectionParams,
-    database: dbName
-  })
-
-  const query = "SELECT * FROM USERS WHERE email = ? AND password = ? LIMIT 1;";
-
-  try {
-    const [rows] = await connection.query(query, [email, password]);
-    if (rows.length == 1) {
-      return callback(rows[0]);
-    } else {
-      return callback(null);
-    }
-
-  } catch (error) {
-    console.error("Error authenticating: ", error);
-  }
-}
-
-router.get("/", function (req, res) {
-  if (req.session.loggedIn) {
-    res.sendFile("index.html", { root: __dirname + "/public/html" });
-  } else {
-    res.redirect("/login");
-  }
+router.get("/", requireLoggedIn, function (_, res) {
+  res.sendFile("index.html", { root: __dirname + "/public/html" });
 });
 
-router.get("/login", function (req, res) {
-  if (req.session.loggedIn) {
-    res.redirect("/");
-  } else {
-    res.sendFile("login.html", { root: __dirname + "/public/html" });
-  }
+router.get("/signup", requireLoggedOut, function (req, res) {
+  res.sendFile("signup.html", { root: __dirname + "/public/html" });
+});
+
+router.post("/signup", function (req, res) {
+  res.setHeader("Content-Type", "application/json");
+
+  const { name, email, password } = req.body;
+
+  return createUser(name, email, password, ({ status, message, user }) => {
+    if (status !== 200) {
+      res.status(status).send({ message });
+    } else {
+      req.session.loggedIn = true;
+      req.session.userId = user.id;
+      req.session.save(
+        (error) => error && console.error("Unable to save session:", error)
+      );
+      res.status(status).send({ message, user });
+    }
+  });
+});
+
+router.get("/login", requireLoggedOut, function (req, res) {
+  res.sendFile("login.html", { root: __dirname + "/public/html" });
 });
 
 router.post("/login", function (req, res) {
@@ -50,11 +47,11 @@ router.post("/login", function (req, res) {
     if (user == null) {
       res.status(401).send({ message: "User authentication failed." });
     } else {
-      const { name, email } = user;
       req.session.loggedIn = true;
-      req.session.email = email;
-      req.session.name = name;
-      req.session.save((error) => error && console.error("Unable to save session:", error));
+      req.session.userId = user.id;
+      req.session.save(
+        (error) => error && console.error("Unable to save session:", error)
+      );
       res.status(200).send({ message: "User authentication succeeded.", user });
     }
   });
@@ -80,7 +77,18 @@ router.get("/game", function (req, res) {
   }
 });
 
-router.use(function (req, res, next) {
+
+router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
+  getUsers(({ status, message, users }) => {
+    if (status !== 200) {
+      res.status(status).send({ message });
+    } else {
+      res.status(status).send({ message, users });
+    }
+  });
+});
+
+router.use(function (_, res) {
   res.status(404).send("There is nothing here, 404.");
 });
 
