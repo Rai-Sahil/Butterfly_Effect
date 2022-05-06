@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" type="image/png" href="/favicon.svg"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./Style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Project</title>
+  </head>
+  <body>
+    
+    
+
+    <div class="custom-shape-divider-top-1651646639">
+      <svg
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+          class="shape-fill"
+        ></path>
+      </svg>
+    </div>
+
+    <div id="dvCountDown" style = "display:none">
+      You will be redirected after <span id = "lblCount"></span>&nbsp;seconds.
+      </div>
+
+    <div class="custom-shape-divider-top-1651644543">
+      <svg
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+          class="shape-fill"
+        ></path>
+      </svg>
+    </div>
+
+    <div class="custom-shape-divider-top-1651645294">
+      <svg
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+          class="shape-fill"
+        ></path>
+      </svg>
+    </div>
+
+    <!-- <div class="intro">
+      <div class="intro2">
+         <img class='image' src="./Untitled-1.png"> 
+      </div>
+    </div> -->
+
+    <header>
+<svg width="207" height="207" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" overflow="hidden"><defs><clipPath id="clip0"><rect x="0" y="0" width="207" height="207"/></clipPath><image width="207" height="207" xlink:href="data:image/png;base64,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" preserveAspectRatio="none" id="img1"></image></defs><g clip-path="url(#clip0)"><use width="100%" height="100%" xlink:href="#img1" fill="none"></use></g></svg>
+
+    </header>
+
+    <div class="wrapper">
+      <input type="Username" name="Username" class="hr1" placeholder="Username"><input type="password" name="password" id="password-field" class="hr2" placeholder="Password">  </div><br>
+      <br><br><br><br><br><br>
+      <a href="#" style="margin-left:17%; font-size:large">New User? Register Here</a><a href="#" style="font-size:large; margin-left:2%">Forgot Password?</a>
+      <button type="submit" style="border: none; background-color: white;" onclick="slideIn('box1');"><a onclick="DelayRedirect()" > 
+      <i class="fa fa-arrow-circle-right" id="submitbutton"></a></i></button>
+   
+      <div id="box1"></div>
+
+    <script>
+
+      
+      // let intro = document.querySelector(".intro");
+      // let intro2 = document.querySelector(".intro2");
+      // let logo = document.querySelector(".logo-header");
+      // let logoSpan = document.querySelectorAll(".logo");
+
+      // window.addEventListener("DOMContentLoaded", () => {
+      //   setTimeout(() => {
+      //     logoSpan.forEach((span, idx) => {
+      //       setTimeout(() => {
+      //         span.classList.add("active");
+      //       }, (idx + 1) * 400);
+      //     });
+
+      //     setTimeout(() => {
+      //       logoSpan.forEach((span, idx) => {
+      //         setTimeout(() => {
+      //           span.classList.remove("active");
+      //           span.classList.add("fade");
+      //         }, (idx + 1) * 50);
+      //       });
+      //     }, 2000);
+
+      //     setTimeout(() => {
+      //       intro.style.top = "-80vh";
+      //       //Change this -100 if you want 100% desktop be changed.
+      //       intro2.style.top = "-180%";
+      //     }, 2300);
+      //   });
+      // });
+
+      // Login Name
+
+      const loginForm = document.getElementById("login-form");
+const loginButton = document.getElementById("login-form-submit");
+const loginErrorMsg = document.getElementById("login-error-msg");
+
+loginButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const username = loginForm.username.value;
+    const password = loginForm.password.value;
+
+    if (username === "user" && password === "web_dev") {
+        alert("You have successfully logged in.");
+        location.reload();
+    } else {
+        loginErrorMsg.style.opacity = 1;
+    }
+});
+
+
+function slideIn(el){
+    var elem = document.getElementById(el);
+    elem.style.transition = "top 0.5s ease-in 0s"
+    elem.style.top= "0";
+}
+
+function DelayRedirect() {
+    var seconds = 1;
+    var dvCountDown = document.getElementById("dvCountDown");
+    var lblCount = document.getElementById("lblCount");
+    dvCountDown.style.display = "block";
+    lblCount.innerHTML = seconds;
+    setInterval(function () {
+        seconds--;
+        lblCount.innerHTML = seconds;
+        if (seconds == 0) {
+            dvCountDown.style.display = "none";
+            window.location = "./Whatever.html";
+        }
+    }, 1000);
+}
+    </script>
+  </body>
+</html>
