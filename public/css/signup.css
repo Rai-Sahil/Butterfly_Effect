@@ -743,3 +743,22 @@ div#box1 {
     left: 34%;
   }
 }
+
+#signup-submit:hover{
+color: #49beaa;
+transition: .5s ease-in-out;
+transform: scale(1.2);
+}
+
+#login-submit:active{
+  transform: scale(1.5);
+}
+
+#signup-error-message{
+display: flex;
+margin-top: 2%;
+font-size: x-large;
+color:red;
+text-align: center;
+justify-content: center;
+}
