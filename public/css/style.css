@@ -1,74 +1,106 @@
-/* @font-face {
-  font-family: 'mv-boli-regular';
-  src: url('/font/mvboli.ttf');
-} */
 @import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap');
 
 body {
-  /* font-family: 'mv-boli-regular', sans-serif; */
   font-family: 'Signika Negative', sans-serif;
   font-size: 18pt;
-  background-color: #F5DFBB;
+  background-color: #49BEAA;
   margin: 0;
   padding: 0;
+  height: 100vh;
 }
 
 #app-name {
   font-family: 'Oleo Script Swash Caps', cursive;
-  color: #5a245d;
+  color: #F5DFBB;
+  font-size: 30pt;
+  margin-top: 2%;
+}
+
+#mainpage {
+  text-align: center;
 }
 
 a {
   text-decoration: none;
-  color: #6A3E6D;
+  color: #F5DFBB;
 }
 
 a:hover {
-  color: plum;
+  color: #4390D8;
 }
 
-footer {
-  position: absolute;
-  bottom: 2%;
-  left: 0;
-  right: 0;
-  display: grid;
-  grid-template-columns: 70% 15% 15%;
-  align-items: end;
-  justify-items: end;
+ul {
+  list-style: none;
+  display: contents;
+  font-weight: bold;
 }
 
-footer p {
+#logout-button {
+  background-color: #1B72C1;
+  color: #F5DFBB;
+  border-style: none;
+  border-radius: 5px;
   font-size: 15pt;
-  margin-bottom: -1%;
-  margin-right: 40%;
 }
 
-footer a {
-  text-decoration: none;
-  font-size: 15pt;
-  font-family: 'Smooch Sans', sans-serif;
-}
+/* #image {
+  width: 15%;
+  margin-top: 10%;
+  margin-left: 40%;
+} */
+
+/* @media screen and (max-width: 900px) {
+  #image {
+    width: 15%;
+    margin-top: 40%;
+    margin-left: 40%;
+  }
+} */
 
 @media screen and (max-width: 700px) {
   img {
     display: block;
     margin: 0px auto;
-    width: 20%;
+    width: 18%;
     height: auto;
+    margin-top: 13%;
   }
 
-  #mainpage {
-    text-align: center;
+  #app-name {
+    margin-bottom: 10%;
+  }
+
+  #mainpage .main-options li {
+    margin-top: 2%;
   }
 }
 
-@media screen and (min-width: 701px) and (max-width: 1280px) {
+@media screen and (min-width: 701px) and (max-width: 1023px) {
+  img {
+    display: block;
+    margin: 0px auto;
+    width: 14%;
+    height: auto;
+    margin-top: 10%;
+  }
+
+  #mainpage .main-options li {
+    margin-top: 3%;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 2048px) {
   img {
     display: block;
     margin: 0px auto;
     width: 10%;
     height: auto;
+    margin-top: 5%;
   }
+
+  #mainpage .main-options li {
+    margin-top: 1%;
+  }
+
 }
