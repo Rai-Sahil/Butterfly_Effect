@@ -15,7 +15,7 @@ async function authenticate(email, password, callback) {
     if (!user) {
       return callback(null);
     } else {
-      const passwordsMatch = await bcrypt.compare(password, user.password)
+      const passwordsMatch = await bcrypt.compare(password, user.password);
       if (passwordsMatch) {
         return callback(user);
       } else {
@@ -33,11 +33,31 @@ async function createUser(name, email, password, callback) {
     database: dbName,
   });
 
-  const getUserByEmailQuery = "SELECT * FROM USER WHERE email = ? LIMIT 1;";
-  const insertUserQuery =
-    "INSERT INTO USER (name, email, password) values (?, ?, ?)";
   try {
-    const [existingUsers] = await connection.query(getUserByEmailQuery, [email]);
+    if (!name) {
+      return callback({
+        status: 400,
+        message: "Cannot sign up without a name.",
+      });
+    }
+    if (!email) {
+      return callback({
+        status: 400,
+        message: "Cannot sign up without an email.",
+      });
+    }
+    if (!password) {
+      return callback({
+        status: 400,
+        message: "Cannot sign up without a password.",
+      });
+    }
+    const getUserByEmailQuery = "SELECT * FROM USER WHERE email = ? LIMIT 1;";
+    const insertUserQuery =
+      "INSERT INTO USER (name, email, password) values (?, ?, ?)";
+    const [existingUsers] = await connection.query(getUserByEmailQuery, [
+      email,
+    ]);
     if (existingUsers.length == 1) {
       return callback({ status: 409, message: "Email already in use." });
     }
@@ -103,5 +123,5 @@ module.exports = {
   authenticate,
   createUser,
   getUserById,
-  getUsers
+  getUsers,
 };
