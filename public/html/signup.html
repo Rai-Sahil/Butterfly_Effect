@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <link rel="icon" href="/img/favicon.svg" type="image/svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/css/login.css" />
+  <link rel="stylesheet" href="/css/signup.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Project</title>
 </head>
@@ -48,19 +48,19 @@
   </header>
 
   <div class="wrapper">
-    <input type="email" name="Email" id="login-email" class="hr1" placeholder="Enter email" required="required" value="">
-    <input type="password" name="Password" id="login-password" class="hr2" placeholder="Enter password" required="required" value=""><br>
-  </div>
-  <p id="login-error-message"><b>&nbsp;</b></p>
+    <input id="signup-name" type="name" required="required" name="name" class="hr1" placeholder="Enter name">
+    <input id="signup-email" type="email" required="required" name="email" class="hr2" placeholder="Enter email">
+    <input id="signup-password" type="password" required="required" name="password" class="hr2" placeholder="Enter password"><br>
+  </div><br>
+  <p id="signup-error-message">&nbsp;</p>
   <br><br><br>
   <div class="links">
-    <a class="newuser" href="./signup">New User? Register Here</a><a class="forgot" href="#">Forgot Password?</a>
     <button type="submit" style="border: none; background-color: white;"><a>
-        <i class="fa fa-arrow-circle-right" id="login-submit"></a></i></button>
+        <i class="fa fa-arrow-circle-right" id="signup-submit"></a></i></button>
   </div>
   <div id="box1"></div>
 
-  <script type="text/javascript" src="js/login.js"></script>
+  <script type="text/javascript" src="js/signup.js"></script>
 </body>
 
 </html>
