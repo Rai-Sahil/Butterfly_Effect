@@ -94,7 +94,7 @@ ul {
   }
 }
 
-@media screen and (min-width: 1024px) and (max-width: 2048px) {
+@media screen and (min-width: 1024px) {
   img {
     display: block;
     margin: 0px auto;
