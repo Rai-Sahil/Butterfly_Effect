@@ -45,7 +45,7 @@ router.post("/login", function (req, res) {
 
   return authenticate(email, password, function (user) {
     if (user == null) {
-      res.status(401).send({ message: "User authentication failed." });
+      res.status(401).send({ message: "Incorrect email or password." });
     } else {
       req.session.loggedIn = true;
       req.session.userId = user.id;
