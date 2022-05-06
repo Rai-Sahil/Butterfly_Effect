@@ -34,16 +34,16 @@ async function createUser(name, email, password, callback) {
   });
 
   try {
-    if (!email) {
-      return callback({
-        status: 400,
-        message: "Cannot sign up without an email.",
-      });
-    }
     if (!name) {
       return callback({
         status: 400,
         message: "Cannot sign up without a name.",
+      });
+    }
+    if (!email) {
+      return callback({
+        status: 400,
+        message: "Cannot sign up without an email.",
       });
     }
     if (!password) {
