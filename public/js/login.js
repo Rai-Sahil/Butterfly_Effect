@@ -50,7 +50,6 @@ function init() {
     // Event listener to make login request to server.
     document.querySelector("#login-submit").addEventListener("click", function(event) {
         event.preventDefault();
-        console.log("clicked")
         const email = document.getElementById("login-email");
         const password = document.getElementById("login-password");
         const queryString = "email=" + email.value + "&password=" + password.value;
