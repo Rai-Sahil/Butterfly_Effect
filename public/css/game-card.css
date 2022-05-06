@@ -4,7 +4,8 @@ body {
 
 .container {
     min-height: 100%;
-    margin-bottom: -10vh;
+    position: absolute;
+    z-index: 99;
 }
 
 .picture {
@@ -38,7 +39,7 @@ body {
     width: 70%;
     height: 25px;
     border-radius: 25px;
-    background: linear-gradient(90deg, #0f0, #0ff var(--progress), transparent 0);
+    background: linear-gradient(90deg, #49BEAA, #49BEAA var(--progress), transparent 0);
     border: 1px solid #eee;
     transition: .3s --progress;
 }
@@ -61,19 +62,20 @@ body {
 
 .choice-button {
     border-radius: 25px;
-    border: 1px solid;
+    border: 1px solid #49BEAA;
     padding: 2%;
     text-align: center;
     margin-bottom: 5%;
 }
 
 .choice-button:hover {
-    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.24);
+    box-shadow: 0px 0px 12px #49BEAA;
 }
 
-.footer,
-.push {
-    height: 10vh;
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .footer-container {
@@ -90,7 +92,7 @@ body {
 @media screen and (max-width: 800px) {
     .container {
         display: grid;
-        grid-template-rows: 40vh 10vh 40vh;
+        grid-template-rows: 40vh 10vh 40vh 10vh;
     }
 
     .picture {
@@ -104,17 +106,39 @@ body {
     .text {
         grid-area: 3 / 1 / span 1 / span 1;
     }
+
+    .footer {
+        grid-area: 4 / 1 / span 1 / span 1;
+    }
+
+    .footer-button img {
+        width: 20%;
+    }
+
+    /*Wave Animation for smaller screen*/
+    .anime:before {
+        bottom: 12vh;
+        border-radius: 46%;
+        animation-duration: 10s;
+    }
+
+    .anime:after {
+        bottom: 10vh;
+        opacity: 0.5;
+        border-radius: 48%;
+        animation-duration: 10s;
+    }
 }
 
 @media screen and (min-width: 801px) {
     .container {
         display: grid;
         grid-template-columns: 40vw 60vw;
-        grid-template-rows: 10vh 80vh;
+        grid-template-rows: 10vh 20vh 30vh 30vh 10vh;
     }
 
     .picture {
-        grid-area: 1 / 1 / span 2 / span 1;
+        grid-area: 3 / 1 / span 1 / span 1;
     }
 
     .status {
@@ -122,6 +146,63 @@ body {
     }
 
     .text {
-        grid-area: 2 / 2 / span 1 / span 1;
+        grid-area: 2 / 2 / span 3 / span 1;
+    }
+
+    .footer {
+        grid-area: 5 / 1 / span 1 / span 2;
+    }
+
+    .footer-button img {
+        width: 15%;
+    }
+
+    /*Wave Animation for bigger screen*/
+    .anime:before {
+        bottom: 12vh;
+        border-radius: 48%;
+        animation-duration: 10s;
+    }
+
+    .anime:after {
+        bottom: 10vh;
+        opacity: 0.5;
+        border-radius: 50%;
+        animation-duration: 10s;
+    }
+}
+
+/*Wave Animation*/
+.anime {
+    position: relative;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #49beaa;
+    overflow: hidden;
+}
+
+.anime:before,
+.anime:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    min-width: 300vw;
+    min-height: 300vw;
+    background-color: #fff;
+    animation-name: rotate;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@keyframes rotate {
+    0% {
+        transform: translate(-50%, 0) rotateZ(0deg);
+    }
+
+    50% {
+        transform: translate(-50%, -2%) rotateZ(180deg);
+    }
+
+    100% {
+        transform: translate(-50%, 0%) rotateZ(360deg);
     }
 }
