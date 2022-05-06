@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Node.js Template</title>
-    <meta charset="utf-8"/>
-    <link href="/img/favicon.svg" rel="icon" type="image/x-icon"/>
-    <link rel="stylesheet" href="/css/index.css"/>
-  </head>
-  <body>
-    <form action="/logout" method="post">
-      <input id="logout-button" type="submit" value="Logout" />
-  </form>
-    <p>Replace this with your HTML.</p>
-    <img src="/img/meme.jpg" alt="Programmers Googling Meme"/>
+
+<head>
+  <title>index</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="/img/blue.ico" rel="icon" type="image/x-icon" />
+  <link rel="stylesheet" href="/css/index.css" />
+</head>
+
+<body>
+  <div id="main-page">
+    <img src="" id="image" alt="logo" />
+    <div id="mainpage">
+      <div id="app-name">Butterfly Effect</div>
+      <ul class="main-options">
+        <li><a href="">START</a></li>
+        <li><a href="">HOW TO PLAY</a></li>
+        <li><a href="">PROFILE</a></li>
+        <br>
+      </ul>
+      <form action="/logout" method="post">
+        <input id="logout-button" type="submit" value="Logout" />
+      </form>
+    </div>
+
     <script src="/js/index.js"></script>
-  </body>
+    <script src="/js/logo.js"></script>
+  </div>
+</body>
+
 </html>
