@@ -1,0 +1,139 @@
+* {
+    margin: 0%;
+    padding-left: 0%;
+    box-sizing: border-box;
+}
+
+/* green: #49BEAA
+blue: #4390D8
+wheat: #F5DFBB */
+
+.container{
+    height: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 100px;
+    padding-bottom: 0px;
+    background-color: #4390D8;
+}
+
+.timeline-content{
+    width: 80%;
+    height: auto;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.decision-count{
+    color: wheat;
+}
+
+.decision-content{
+    color: white;
+    line-height: 37px;
+    font-weight: 300;
+}
+
+.ulist{
+    list-style: none;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.list{
+    padding: 20px;
+    background-color: black;
+    border-radius: 10px;
+    margin-top:10px;
+}
+
+@media only screen and (min-width: 800px){
+    .timeline-content ul li {
+        width: 50%;
+        margin-top: -5px;
+        margin-bottom: 15px;
+        position: relative;
+
+    }
+
+    .timeline-content ul li:nth-child(odd) {
+        float: left;
+        clear: right;
+        transform: translateX(-20%);
+        cursor: pointer;
+    }
+
+    .timeline-content ul li:nth-child(even) {
+        float: right;
+        clear: left;
+        transform: translateX(20%);
+        cursor: pointer;
+    }
+
+    .timeline-content ul li:hover:after{
+        background-color: yellow;
+        cursor: pointer;
+    }
+
+    .content:hover {
+        transform: scale(1.05);
+    }
+
+    .timeline-content::before {
+        content: '';
+        height: 100%;
+        width: 2px;
+        left: 50%;
+        position: absolute;
+        transform: translateX(-50%);
+        background-color: red;
+    }
+
+    .timeline-content ul li::after {
+        content: '';
+        height: 20px;
+        width: 20px;
+        position: absolute;
+        background-color: gray;
+        border-radius: 50%;
+        top: -10px;
+    }
+
+    .timeline-content ul li:nth-child(odd)::after {
+        right: -80px;
+        transform: translate(50%, -50%);
+    }
+
+    .timeline-content ul li:nth-child(even)::after {
+        left: -80px;
+        transform: translate(-50%, 50%);
+    }
+
+    .timeline-content ul li:nth-child(even)::before {
+        content: '';
+        height: 0;
+        position: absolute;
+        top: 22px;
+        width: 0;
+        z-index: 1;
+        left: -10px;
+        border: medium solid white;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent black transparent transparent;
+    }
+
+    .timeline-content ul li:nth-child(odd)::before {
+        content: '';
+        height: 0;
+        position: absolute;
+        top: 22px;
+        width: 0;
+        z-index: 1;
+        left: 400px;
+        border: medium solid white;
+        border-width: 10px 10px 10px 10px;
+        border-color: transparent transparent transparent black;
+    }
+}
