@@ -14,7 +14,7 @@ body {
   font-family: 'Oleo Script Swash Caps', cursive;
   color: #F5DFBB;
   font-size: 30pt;
-  margin-top: 2%;
+  margin-top: 1%;
 }
 
 #mainpage {
@@ -34,6 +34,7 @@ ul {
   list-style: none;
   display: contents;
   font-weight: bold;
+  font-size: 18pt;
 }
 
 #logout-button {
@@ -41,30 +42,25 @@ ul {
   color: #F5DFBB;
   border-style: none;
   border-radius: 5px;
-  font-size: 15pt;
+  font-size: 18pt;
+  cursor: pointer;
 }
 
-/* #image {
-  width: 15%;
-  margin-top: 10%;
-  margin-left: 40%;
-} */
-
-/* @media screen and (max-width: 900px) {
-  #image {
-    width: 15%;
-    margin-top: 40%;
-    margin-left: 40%;
-  }
-} */
+#logout-button:hover {
+  background-color: darkblue;
+}
 
 @media screen and (max-width: 700px) {
+  #main-page {
+    margin-top: 35%;
+  }
+
   img {
     display: block;
     margin: 0px auto;
-    width: 18%;
+    width: 30%;
     height: auto;
-    margin-top: 13%;
+    margin-top: 13vh;
   }
 
   #app-name {
@@ -72,7 +68,7 @@ ul {
   }
 
   #mainpage .main-options li {
-    margin-top: 2%;
+    margin-top: 5%;
   }
 }
 
@@ -85,6 +81,14 @@ ul {
     margin-top: 10%;
   }
 
+  #app-name {
+    font-size: 35pt;
+  }
+
+  ul {
+    font-size: 20pt;
+  }
+
   #mainpage .main-options li {
     margin-top: 3%;
   }
@@ -94,13 +98,21 @@ ul {
   img {
     display: block;
     margin: 0px auto;
-    width: 10%;
+    width: 15%;
     height: auto;
-    margin-top: 5%;
+    margin-top: 8%;
+  }
+
+  #app-name {
+    font-size: 45pt;
+    margin-bottom: 5%;
+  }
+
+  ul {
+    font-size: 30pt;
   }
 
   #mainpage .main-options li {
-    margin-top: 1%;
+    margin-top: 2%;
   }
-
 }
