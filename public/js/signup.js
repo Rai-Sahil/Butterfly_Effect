@@ -84,4 +84,4 @@ document.onreadystatechange = () => {
     console.info("Document fully loaded.");
     init();
   }
-};
+}
