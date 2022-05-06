@@ -1,6 +1,3 @@
-/* body{
-  width: 1280px;
-} */
 
 html,
 body {
@@ -120,101 +117,6 @@ header h4 {
 .custom-shape-divider-top-1651646639 .shape-fill {
   fill: #f5dfbb;
 }
-
-/* @media only screen and (max-width: 480px){
-    .custom-shape-divider-top-1651645294 {
-      position: absolute;
-      top: -25.5%;
-      left: -60%;
-      width: 190%;
-      overflow: hidden;
-      line-height: 0;
-      transform: rotate(170deg);
-    }
-  
-    .custom-shape-divider-top-1651645294 svg {
-      position: relative;
-      display: block;
-      width: calc(120% + 1.3px);
-      height: 370px;
-    }
-  
-    .custom-shape-divider-top-1651645294 .shape-fill {
-      fill: #49BEAA;
-    }
-
-    
-    .custom-shape-divider-top-1651644543 {
-      position: absolute;
-      top: -4.5%;
-      left: -0%;
-      width: 139%;
-      overflow: hidden;
-      line-height: 0;
-      transform: rotate(199deg);
-        }
-  
-    .custom-shape-divider-top-1651644543 svg {
-      position: relative;
-      display: block;
-      width: calc(164% + 1.3px);
-      height: 380px;
-      -webkit-transform: scaleX(-1);
-      transform: scaleX(-1);
-    }
-  
-    .custom-shape-divider-top-1651644543 .shape-fill {
-      fill: #4390D8;
-    }
-
-    
-    .custom-shape-divider-top-1651646639 {
-      position: absolute;
-      top: 15%;
-      left: 60%;
-      width: 50%;
-      overflow: hidden;
-      line-height: 0;
-      transform: rotate(152deg);
-    }
-  
-    .custom-shape-divider-top-1651646639 svg {
-      position: relative;
-      display: block;
-      width: calc(121% + 1.0px);
-      height: 170px;
-    }
-  
-    .custom-shape-divider-top-1651646639 .shape-fill {
-      fill: #F5DFBB;
-    }
-  
-    .hr1{
-      width:80%;
-      margin-top: 52%;
-      background-color: white;
-      border-bottom: #C7C7C7 2px solid;
-      border-top: none;
-      border-left: none;
-      border-right: none;
-    }
-
-    .hr2{
-      width:80%;
-      margin-top: 20%;
-      background-color: white;
-      border-bottom: #C7C7C7 2px solid;
-      border-top: none;
-      border-left: none;
-      border-right: none;
-    }
-
-    #signup-submit{
-      font-size:55px;
-      color:#4390D8;
-     margin-left: 610%;
-    }
-  } */
 
 .hr1:focus {
   outline: none;
