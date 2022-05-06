@@ -69,14 +69,13 @@ router.post("/logout", function (req, res) {
   }
 });
 
-router.get("/game", function (req, res) {
-  if (req.session.loggedIn) {
-    res.sendFile("game-card.html", { root: __dirname + "/public/html" });
-  } else {
-    res.redirect("/login");
-  }
+router.get("/game", requireLoggedIn, function (req, res) {
+  res.sendFile("game-card.html", { root: __dirname + "/public/html" });
 });
 
+router.get("/timeline", requireLoggedIn, function (req, res) {
+  res.sendFile("timeline.html", { root: __dirname + "/public/html" });
+});
 
 router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
   getUsers(({ status, message, users }) => {
