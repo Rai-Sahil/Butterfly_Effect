@@ -1,6 +1,19 @@
 function init() {
     console.info("Client script loaded.")
 
+    function slideIn() {
+      var elem = document.getElementById("box1");
+      elem.style.transition = "top 0.5s ease-in 0s"
+      elem.style.top = "0";
+    }
+
+    function DelayRedirect() {
+      setTimeout(function () {
+        dvCountDown.style.display = "none";
+        window.location.replace("/");
+      }, 1000);
+    }
+
     function ajaxPOST(url, callback, data) {
         const params = typeof data == "string" ? data : Object
         .keys(data)
@@ -41,7 +54,8 @@ function init() {
                     document.getElementById("login-error-message").innerHTML = responseJSON.message;
                 } else {
                     sessionStorage.setItem("userId", responseJSON.user.ID)
-                    window.location.replace("/");
+                    slideIn();
+                    DelayRedirect();
                 }
             }
         }, queryString);
