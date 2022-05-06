@@ -159,6 +159,7 @@ header h4 {
     font-size: 65px;
     margin-left: 750%;
     color: #4390d8;
+    transform: translateY(4px);
   }
 
   header {
@@ -740,4 +741,23 @@ div#box1 {
   header {
     left: 34%;
   }
+}
+
+#login-submit:hover{
+color: #49beaa;
+transition: .5s ease-in-out;
+transform: scale(1.2);
+}
+
+#login-submit:active{
+  transform: scale(1.5);
+}
+
+#login-error-message{
+display: flex;
+margin-top: 2%;
+font-size: x-large;
+color:red;
+text-align: center;
+justify-content: center;
 }
