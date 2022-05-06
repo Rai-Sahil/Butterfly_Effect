@@ -77,6 +77,9 @@ router.get("/game", function (req, res) {
   }
 });
 
+router.get("/timeline", requireLoggedIn, function (req, res) {
+  res.sendFile("timeline.html", { root: __dirname + "/public/html" });
+});
 
 router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
   getUsers(({ status, message, users }) => {
