@@ -1,12 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Hind);
+
 * {
     margin: 0%;
     padding-left: 0%;
     box-sizing: border-box;
 }
-
-/* green: #49BEAA
-blue: #4390D8
-wheat: #F5DFBB */
 
 .container{
     height: auto;
@@ -15,7 +13,7 @@ wheat: #F5DFBB */
     align-items: center;
     padding-top: 100px;
     padding-bottom: 0px;
-    background-color: #4390D8;
+    background-color: black;
 }
 
 .timeline-content{
@@ -27,10 +25,12 @@ wheat: #F5DFBB */
 }
 
 .decision-count{
+    font-family: 'Oleo Script Swash Caps', cursive;
     color: wheat;
 }
 
 .decision-content{
+    font-family: 'Signika Negative', sans-serif;
     color: white;
     line-height: 37px;
     font-weight: 300;
@@ -44,12 +44,99 @@ wheat: #F5DFBB */
 
 .list{
     padding: 20px;
-    background-color: black;
+    background-color: #49BEAA;
     border-radius: 10px;
     margin-top:10px;
 }
 
-@media only screen and (min-width: 800px){
+@media only screen and (min-width: 800px) {
+    .timeline-content ul li {
+        width: 50%;
+        margin-top: -5px;
+        margin-bottom: 15px;
+        position: relative;
+
+    }
+
+    .timeline-content ul li:nth-child(odd) {
+        transform: translateX(-20%);
+        cursor: pointer;
+        float: left;
+        clear: right;
+    }
+
+    .timeline-content ul li:nth-child(even) {
+        transform: translateX(20%);
+        cursor: pointer;
+        float: right;
+        clear: left;
+    }
+
+    .timeline-content ul li:hover:after{
+        background-color: yellow;
+        cursor: pointer;
+    }
+
+    .content:hover {
+        transform: scale(1.05);
+    }
+
+    .timeline-content::before {
+        content: '';
+        height: 100%;
+        width: 2px;
+        left: 50%;
+        position: absolute;
+        transform: translateX(-50%);
+        background-color: red;
+    }
+
+    .timeline-content ul li::after {
+        content: '';
+        height: 20px;
+        width: 20px;
+        position: absolute;
+        background-color: gray;
+        border-radius: 50%;
+        top: -10px;
+    }
+
+    .timeline-content ul li:nth-child(odd)::after {
+        right: -80px;
+        transform: translate(50%, -50%);
+    }
+
+    .timeline-content ul li:nth-child(even)::after {
+        left: -80px;
+        transform: translate(-50%, 50%);
+    }
+
+    .timeline-content ul li:nth-child(even)::before {
+        content: '';
+        height: 0;
+        position: absolute;
+        top: 13px;
+        width: 0;
+        left: -10px;
+        border: medium solid white;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent #49BEAA transparent transparent;
+    }
+
+    .timeline-content ul li:nth-child(odd)::before {
+        content: '';
+        height: 0;
+        position: absolute;
+        top: 13px;
+        width: 0;
+        left: 400px;
+        border: medium solid white;
+        border-width: 10px 10px 10px 10px;
+        border-color: transparent transparent transparent #49BEAA;
+    }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 799px) {
     .timeline-content ul li {
         width: 50%;
         margin-top: -5px;
@@ -102,12 +189,12 @@ wheat: #F5DFBB */
     }
 
     .timeline-content ul li:nth-child(odd)::after {
-        right: -80px;
+        right: -39px;
         transform: translate(50%, -50%);
     }
 
     .timeline-content ul li:nth-child(even)::after {
-        left: -80px;
+        left: -39px;
         transform: translate(-50%, 50%);
     }
 
@@ -115,25 +202,23 @@ wheat: #F5DFBB */
         content: '';
         height: 0;
         position: absolute;
-        top: 22px;
+        top: 13px;
         width: 0;
-        z-index: 1;
         left: -10px;
         border: medium solid white;
         border-width: 10px 10px 10px 0;
-        border-color: transparent black transparent transparent;
+        border-color: transparent #49BEAA transparent transparent;
     }
 
     .timeline-content ul li:nth-child(odd)::before {
         content: '';
         height: 0;
         position: absolute;
-        top: 22px;
+        top: 13px;
         width: 0;
-        z-index: 1;
-        left: 400px;
+        left: 193px;
         border: medium solid white;
         border-width: 10px 10px 10px 10px;
-        border-color: transparent transparent transparent black;
+        border-color: transparent transparent transparent #49BEAA;
     }
 }
