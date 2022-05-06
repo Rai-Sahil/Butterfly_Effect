@@ -755,7 +755,9 @@ transform: scale(1.2);
 
 #login-error-message{
 display: flex;
-font-size: large;
-color:#4390d8;
+margin-top: 2%;
+font-size: x-large;
+color:red;
 text-align: center;
+justify-content: center;
 }
