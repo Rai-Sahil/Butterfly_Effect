@@ -1,17 +1,10 @@
 const mysql = require("mysql2/promise");
+
 const {
   dbName,
-  connectionParams
+  connectionParams,
+  users
 } = require("./constants");
-
-// name | email | password
-const users = [
-  ["Delson Tan", "delsontan@bby32.com", "delsontan"],
-  ["Navdeep Litt", "navdeeplitt@bby32.com", "navdeeplitt"],
-  ["Sahil Rai", "sahilrai@bby32.com", "sahilrai"],
-  ["Minji Kong", "minjikong@bby32.com", "minjikong"],
-  ["Kemp Liao", "kempliao@bby32.com", "kempliao"]
-]
 
 async function initDB() {
   const connection = await mysql.createConnection({
@@ -22,19 +15,19 @@ async function initDB() {
   const query = `
     CREATE DATABASE IF NOT EXISTS ${dbName};
     use ${dbName};
-    CREATE TABLE IF NOT EXISTS USERS (
-      ID int NOT NULL AUTO_INCREMENT,
+    CREATE TABLE IF NOT EXISTS USER (
+      id varchar(40) DEFAULT (uuid()) NOT NULL PRIMARY KEY,
       name varchar(30),
       email varchar(30),
-      password varchar(30),
-      PRIMARY KEY (ID)
+      password varchar(60),
+      role varchar(30) DEFAULT 'user'
     );`;
   await connection.query(query);
 
-  const [userRows] = await connection.query("SELECT * FROM USERS");
+  const [userRows] = await connection.query("SELECT * FROM USER");
 
   if (userRows.length == 0) {
-    const insertUsers = `INSERT INTO USERS (name, email, password) values ?`;
+    const insertUsers = `INSERT INTO USER (name, email, password, role) values ?`;
     await connection.query(insertUsers, [users]);
   }
 }

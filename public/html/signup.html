@@ -2,33 +2,65 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-
-    <!-- Mobile Viewport Setting (remove horizontal scaling) -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link href="/img/favicon.ico" rel="icon" type="image/x-icon" />
-
-    <!-- Stylesheet Import -->
-    <link rel="stylesheet" href="/css/signup.css" />
-
-    <title>BBY32</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link rel="icon" type="image/png" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/signup.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Project</title>
 </head>
 
 <body>
-    <div id="signup-panel">
-        <form id="signup-form">
-            <h1 id="signup-title">Sign Up</h1>
-            <input id="signup-name" type="name" required="required" placeholder="Enter name" value="" />
-            <input id="signup-email" type="email" required="required" placeholder="Enter email" value="" />
-            <input id="signup-password" type="password" required="required" placeholder="Enter password" value="" />
-            <input type="button" value="Sign Up" id="signup-submit" />
-            <p><span id="serverMsg"></span></p>
-            <p id="signup-error-message">&nbsp;</p>
-        </form>
-    </div>
 
-    <script type="text/javascript" src="js/signup.js"></script>
+
+
+  <div class="custom-shape-divider-top-1651646639">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path
+        d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+        class="shape-fill"></path>
+    </svg>
+  </div>
+
+  <div id="dvCountDown" style="display:none">
+    You will be redirected after <span id="lblCount"></span>&nbsp;seconds.
+  </div>
+
+  <div class="custom-shape-divider-top-1651644543">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path
+        d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+        class="shape-fill"></path>
+    </svg>
+  </div>
+
+  <div class="custom-shape-divider-top-1651645294">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path
+        d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+        class="shape-fill"></path>
+    </svg>
+  </div>
+
+  <header>
+    <img src="../img/favicon.svg"></img>
+  </header>
+
+  <div class="wrapper">
+    <input id="signup-name" type="name" required="required" name="name"  class="hr1" placeholder="Enter name">
+    <input id="signup-email" type="email" required="required" name="email"  class="hr2" placeholder="Enter email">
+    <input id="signup-password" type="password" required="required" name="password"  class="hr2" placeholder="Enter password">
+    <p id="signup-error-message">&nbsp;</p>
+  </div><br>
+  <br><br><br><br><br><br>
+  <div class="links">
+    <button type="submit" style="border: none; background-color: white;"><a>
+        <i class="fa fa-arrow-circle-right" id="signup-submit"></a></i></button>
+  </div>
+  <div id="box1"></div>
+
+  <script type="text/javascript" src="js/signup.js"></script>
 </body>
 
 </html>
