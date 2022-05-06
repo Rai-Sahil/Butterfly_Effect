@@ -2,33 +2,78 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-
-    <!-- Mobile Viewport Setting (remove horizontal scaling) -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link href="/img/favicon.svg" rel="icon" type="image/x-icon" />
-
-    <!-- Stylesheet Import -->
-    <link rel="stylesheet" href="/css/signup.css" />
-
-    <title>BBY32</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link rel="icon" type="image/png" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/signup.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Project</title>
 </head>
 
 <body>
-    <div id="signup-panel">
-        <form id="signup-form">
-            <h1 id="signup-title">Sign Up</h1>
-            <input id="signup-name" type="name" required="required" placeholder="Enter name" value="" />
-            <input id="signup-email" type="email" required="required" placeholder="Enter email" value="" />
-            <input id="signup-password" type="password" required="required" placeholder="Enter password" value="" />
-            <input type="button" value="Sign Up" id="signup-submit" />
-            <p><span id="serverMsg"></span></p>
-            <p id="signup-error-message">&nbsp;</p>
-        </form>
-    </div>
 
-    <script type="text/javascript" src="js/signup.js"></script>
+
+
+  <div class="custom-shape-divider-top-1651646639">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path
+        d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+        class="shape-fill"></path>
+    </svg>
+  </div>
+
+  <div id="dvCountDown" style="display:none">
+    You will be redirected after <span id="lblCount"></span>&nbsp;seconds.
+  </div>
+
+  <div class="custom-shape-divider-top-1651644543">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path
+        d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+        class="shape-fill"></path>
+    </svg>
+  </div>
+
+  <div class="custom-shape-divider-top-1651645294">
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path
+        d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+        class="shape-fill"></path>
+    </svg>
+  </div>
+
+  <header>
+    <svg width="229" height="229" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" overflow="hidden">
+      <defs>
+        <clipPath id="clip0">
+          <rect x="0" y="0" width="229" height="229" />
+        </clipPath>
+        <image width="229" height="229"
+          xlink:href="data:image/png;base64,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"
+          preserveAspectRatio="none" id="img1"></image>
+      </defs>
+      <g clip-path="url(#clip0)">
+        <use width="100%" height="100%" xlink:href="#img1" fill="none"></use>
+      </g>
+    </svg>
+
+  </header>
+
+  <div class="wrapper">
+    <input id="signup-name" type="name" required="required" name="name"  class="hr1" placeholder="Enter name">
+    <input id="signup-email" type="email" required="required" name="email"  class="hr2" placeholder="Enter email">
+    <input id="signup-password" type="password" required="required" name="password"  class="hr2" placeholder="Enter password">
+    <p id="signup-error-message">&nbsp;</p>
+  </div><br>
+  <br><br><br><br><br><br>
+  <div class="links">
+    <button type="submit" style="border: none; background-color: white;"><a>
+        <i class="fa fa-arrow-circle-right" id="signup-submit"></a></i></button>
+  </div>
+  <div id="box1"></div>
+
+  <script type="text/javascript" src="js/signup.js"></script>
 </body>
 
 </html>

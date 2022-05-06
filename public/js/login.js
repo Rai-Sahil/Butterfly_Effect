@@ -13,7 +13,7 @@ function init() {
       var lblCount = document.getElementById("lblCount");
       dvCountDown.style.display = "block";
       lblCount.innerHTML = seconds;
-      setInterval(function () {
+      setTimeout(function () {
         seconds--;
         lblCount.innerHTML = seconds;
         if (seconds == 0) {
