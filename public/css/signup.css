@@ -10,6 +10,10 @@ body {
   box-sizing: border-box;
 }
 
+#image{
+  margin-top: 2%;
+  width:13%;
+}
 header {
   position: relative;
   left: 45%;
@@ -194,6 +198,8 @@ div#box1 {
     color: #4390d8;
   }
 
+  
+
   .hr1 {
     flex: left;
     margin-right: 6%;
@@ -266,6 +272,11 @@ div#box1 {
     color: #4390d8;
   }
 
+  #image{
+    margin-top: 6%;
+    width:18%;
+  }
+
   .hr1 {
     flex: left;
     margin-right: 7%;
@@ -321,6 +332,11 @@ div#box1 {
     width: 32%;
   }
 
+  #image{
+    margin-top: 6%;
+    width:18%;
+  }
+
   .hr2 {
     display: flex;
     justify-content: end;
@@ -352,6 +368,11 @@ div#box1 {
   .forgot {
     margin-top: -8%;
     margin-left: 14%;
+  }
+
+  #image{
+    margin-top: 7%;
+    width:20%;
   }
 
   .newuser {
@@ -412,6 +433,11 @@ div#box1 {
     margin-left: 14%;
   }
 
+  #image{
+    margin-top: 7%;
+    width:20%;
+  }
+
   .newuser {
     margin-top: -3%;
   }
@@ -467,6 +493,11 @@ div#box1 {
   .forgot {
     margin-top: -8%;
     margin-left: 14%;
+  }
+
+  #image{
+    margin-top: 8%;
+    width:21%;
   }
 
   .newuser {
@@ -532,6 +563,11 @@ div#box1 {
     width: 60%;
   }
 
+  #image{
+    margin-top: 8%;
+    width:21%;
+  }
+
   .hr2 {
     margin-left: 20%;
     margin-top: 14%;
@@ -570,6 +606,12 @@ div#box1 {
     display: flex;
     flex-direction: column;
   }
+
+  #image{
+    margin-top: 10%;
+    width:27%;
+  }
+
   .hr1 {
     margin-left: 20%;
     margin-top: 21%;
@@ -620,6 +662,11 @@ div#box1 {
     width: 70%;
   }
 
+  #image{
+    margin-top: 10%;
+    width:27%;
+  }
+
   .hr2 {
     margin-left: 13%;
     margin-top: 18%;
@@ -658,6 +705,14 @@ div#box1 {
     display: flex;
     flex-direction: column;
   }
+
+  #image{
+    margin-top: 12%;
+    width:31%;
+  }
+
+
+
   .hr1 {
     margin-left: 15%;
     margin-top: 32%;
@@ -708,6 +763,11 @@ div#box1 {
     margin-left: 14%;
     margin-top: 40%;
     width: 75%;
+  }
+
+  #image{
+    margin-top: 13%;
+    width:32%;
   }
 
   .hr2 {

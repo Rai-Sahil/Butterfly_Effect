@@ -10,6 +10,11 @@ body {
   box-sizing: border-box;
 }
 
+#image{
+  margin-top: 2%;
+  width:13%;
+}
+
 header {
   position: relative;
   left: 45%;
@@ -246,6 +251,10 @@ div#box1 {
     left: 39%;
   }
 
+  #image{
+    margin-top: 4%;
+     }
+
   .custom-shape-divider-top-1651645294 {
     top: -30%;
     left: -10%;
@@ -257,6 +266,11 @@ div#box1 {
     margin-top: 35%;
     display: flex;
     justify-content: center;
+  }
+
+  #image{
+    margin-top: 6%;
+    width:18%;
   }
 
   #login-submit {
@@ -314,6 +328,11 @@ div#box1 {
     color: #4390d8;
   }
 
+  #image{
+    margin-top: 6%;
+    width:18%;
+  }
+
   .hr1 {
     flex: left;
     margin-right: 7%;
@@ -352,6 +371,12 @@ div#box1 {
     margin-top: -8%;
     margin-left: 14%;
   }
+
+  #image{
+    margin-top: 7%;
+    width:20%;
+  }
+
 
   .newuser {
     margin-top: 0%;
@@ -411,6 +436,12 @@ div#box1 {
     margin-left: 14%;
   }
 
+  #image{
+    margin-top: 7%;
+    width:20%;
+  }
+
+
   .newuser {
     margin-top: -3%;
   }
@@ -467,6 +498,12 @@ div#box1 {
     margin-top: -8%;
     margin-left: 14%;
   }
+
+  #image{
+    margin-top: 8%;
+    width:21%;
+  }
+
 
   .newuser {
     margin-top: -3%;
@@ -531,6 +568,12 @@ div#box1 {
     width: 60%;
   }
 
+  #image{
+    margin-top: 9%;
+    width:25%;
+  }
+
+
   .hr2 {
     margin-left: 20%;
     margin-top: 14%;
@@ -573,6 +616,11 @@ div#box1 {
     margin-left: 20%;
     margin-top: 21%;
     width: 62%;
+  }
+
+  #image{
+    margin-top: 10%;
+    width:27%;
   }
 
   .hr2 {
@@ -625,6 +673,11 @@ div#box1 {
     width: 70%;
   }
 
+  #image{
+    margin-top: 12%;
+    width:28%;
+  }
+
   #login-submit {
     margin-top: -290%;
     font-size: 75px;
@@ -661,6 +714,11 @@ div#box1 {
     margin-left: 15%;
     margin-top: 32%;
     width: 70%;
+  }
+
+  #image{
+    margin-top: 12%;
+    width:31%;
   }
 
   .hr2 {
@@ -707,6 +765,11 @@ div#box1 {
     margin-left: 14%;
     margin-top: 40%;
     width: 75%;
+  }
+
+  #image{
+    margin-top: 13%;
+    width:32%;
   }
 
   .hr2 {

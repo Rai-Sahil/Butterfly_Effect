@@ -8,7 +8,7 @@ async function authenticate(email, password, callback) {
     database: dbName,
   });
 
-  const query = "SELECT * FROM USER WHERE email = ? LIMIT 1;";
+  const query = "SELECT * FROM BBY_32_USER WHERE email = ? LIMIT 1;";
 
   try {
     const [[user]] = await connection.query(query, [email]);
@@ -52,9 +52,10 @@ async function createUser(name, email, password, callback) {
         message: "Cannot sign up without a password.",
       });
     }
-    const getUserByEmailQuery = "SELECT * FROM USER WHERE email = ? LIMIT 1;";
+    const getUserByEmailQuery =
+      "SELECT * FROM BBY_32_USER WHERE email = ? LIMIT 1;";
     const insertUserQuery =
-      "INSERT INTO USER (name, email, password) values (?, ?, ?)";
+      "INSERT INTO BBY_32_USER (name, email, password) values (?, ?, ?)";
     const [existingUsers] = await connection.query(getUserByEmailQuery, [
       email,
     ]);
@@ -81,7 +82,7 @@ async function getUserById(userId, callback) {
     database: dbName,
   });
 
-  const getUserByIdQuery = "SELECT * FROM USER WHERE id = ? LIMIT 1;";
+  const getUserByIdQuery = "SELECT * FROM BBY_32_USER WHERE id = ? LIMIT 1;";
   try {
     const [[user]] = await connection.query(getUserByIdQuery, userId);
     if (!user) {
@@ -105,7 +106,7 @@ async function getUsers(callback) {
     database: dbName,
   });
 
-  const getUsersQuery = "SELECT * FROM USER;";
+  const getUsersQuery = "SELECT * FROM BBY_32_USER;";
   try {
     const [users] = await connection.query(getUsersQuery);
     return callback({

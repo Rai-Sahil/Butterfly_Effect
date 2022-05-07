@@ -1,7 +1,7 @@
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 
-const dbName = "bby32";
+const dbName = "COMP2800";
 
 const connectionParams = {
   host: process.env.DB_HOST,

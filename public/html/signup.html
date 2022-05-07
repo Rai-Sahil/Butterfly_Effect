@@ -7,6 +7,8 @@
   <link rel="icon" type="image/png" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/css/signup.css" />
+  <link rel="stylesheet" href="/css/logo.css" />
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Project</title>
 </head>
@@ -44,23 +46,25 @@
   </div>
 
   <header>
-    <img src="../img/favicon.svg"></img>
+    <img src="#" id="image" alt="logo" />
   </header>
 
   <div class="wrapper">
-    <input id="signup-name" type="name" required="required" name="name" class="hr1" placeholder="Enter name">
-    <input id="signup-email" type="email" required="required" name="email" class="hr2" placeholder="Enter email">
-    <input id="signup-password" type="password" required="required" name="password" class="hr2" placeholder="Enter password"><br>
+    <input id="signup-name" type="text" required="required" name="name" class="hr1" placeholder="Name">
+    <input id="signup-email" type="email" required="required" name="email" class="hr2" placeholder="Email">
+    <input id="signup-password" type="password" required="required" name="password" class="hr2" placeholder="Password"><br>
   </div><br>
   <p id="signup-error-message">&nbsp;</p>
   <br><br><br>
   <div class="links">
-    <button type="submit" style="border: none; background-color: white;"><a>
-        <i class="fa fa-arrow-circle-right" id="signup-submit"></a></i></button>
+    <button type="submit" style="border: none; background-color: white;">
+        <i class="fa fa-arrow-circle-right" id="signup-submit"></i></button>
   </div>
   <div id="box1"></div>
 
   <script type="text/javascript" src="js/signup.js"></script>
+  <script type="text/javascript" src="js/logo.js"></script>
+
 </body>
 
 </html>
