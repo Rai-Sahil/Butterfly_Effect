@@ -23,7 +23,6 @@ function init() {
             }
         })
         .join('&');
-        console.info("ajaxPOST params: ", params);
 
         const xhr = new XMLHttpRequest();
         xhr.onload = function() {
