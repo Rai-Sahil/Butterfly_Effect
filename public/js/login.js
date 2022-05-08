@@ -32,9 +32,6 @@ function init() {
 
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
-      if (!this.readyState == XMLHttpRequest.DONE || this.status != 200) {
-        console.warn(this.status);
-      }
       callback(this.responseText, this.status);
     };
     xhr.open("POST", url);
@@ -56,7 +53,6 @@ function init() {
       ajaxPOST(
         "/login",
         function (data, status) {
-          console.log(data);
           if (data) {
             const responseJSON = JSON.parse(data);
 
