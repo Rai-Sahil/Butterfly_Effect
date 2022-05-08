@@ -20,6 +20,7 @@ app.use(
 
 app.use(require("./routes"));
 
-app.listen(port, () =>
-  console.log("Example app listening on port " + port + "!")
-);
+app.listen(port, () => {
+  console.info("App listening on port " + port + "!");
+  console.info(`Visit: http://localhost:${port}/`);
+});
