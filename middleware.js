@@ -1,3 +1,5 @@
+"use strict";
+
 const { getUserById } = require("./db");
 
 async function requireAdmin(req, res, next) {
@@ -35,5 +37,5 @@ async function requireLoggedIn(req, res, next) {
 module.exports = {
   requireAdmin,
   requireLoggedIn,
-  requireLoggedOut
+  requireLoggedOut,
 };
