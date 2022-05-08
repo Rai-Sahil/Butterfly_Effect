@@ -1,3 +1,5 @@
+"use strict";
+
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 
@@ -34,5 +36,5 @@ module.exports = {
   connectionParams,
   port,
   saltRounds,
-  users
+  users,
 };

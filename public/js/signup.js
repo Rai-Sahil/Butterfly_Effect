@@ -1,3 +1,5 @@
+"use strict";
+
 function init() {
   console.info("Client script loaded.");
 
@@ -47,6 +49,7 @@ function init() {
     .addEventListener("click", function (event) {
       event.preventDefault();
       const name = document.getElementById("signup-name");
+
       const email = document.getElementById("signup-email");
       const password = document.getElementById("signup-password");
       const queryString =
@@ -83,4 +86,4 @@ document.onreadystatechange = () => {
     console.info("Document fully loaded.");
     init();
   }
-}
+};

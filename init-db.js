@@ -1,10 +1,8 @@
+"use strict";
+
 const mysql = require("mysql2/promise");
 
-const {
-  dbName,
-  connectionParams,
-  users
-} = require("./constants");
+const { dbName, connectionParams, users } = require("./constants");
 
 async function initDB() {
   const connection = await mysql.createConnection({
