@@ -15,7 +15,7 @@ async function initDB() {
   const query = `
     CREATE DATABASE IF NOT EXISTS ${dbName};
     use ${dbName};
-    CREATE TABLE IF NOT EXISTS USER (
+    CREATE TABLE IF NOT EXISTS BBY_32_USER (
       id varchar(40) DEFAULT (uuid()) NOT NULL PRIMARY KEY,
       name varchar(30),
       email varchar(30),
@@ -24,10 +24,10 @@ async function initDB() {
     );`;
   await connection.query(query);
 
-  const [userRows] = await connection.query("SELECT * FROM USER");
+  const [userRows] = await connection.query("SELECT * FROM BBY_32_USER");
 
   if (userRows.length == 0) {
-    const insertUsers = `INSERT INTO USER (name, email, password, role) values ?`;
+    const insertUsers = `INSERT INTO BBY_32_USER (name, email, password, role) values ?`;
     await connection.query(insertUsers, [users]);
   }
 }
