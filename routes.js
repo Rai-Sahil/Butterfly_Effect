@@ -2,7 +2,13 @@
 
 const express = require("express");
 const router = express.Router();
-const { authenticate, createUser, deleteUser, editUser, getUsers } = require("./db");
+const {
+  authenticate,
+  createUser,
+  deleteUser,
+  editUser,
+  getUsers,
+} = require("./db");
 const {
   requireAdmin,
   requireLoggedIn,
@@ -86,6 +92,13 @@ router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
     } else {
       res.status(status).send({ message, users });
     }
+  });
+});
+
+router.post("/users", requireAdmin, function (req, res) {
+  const { name, email, password } = req.body;
+  return createUser(name, email, password, ({ status, message }) => {
+    res.status(status).send({ message });
   });
 });
 
