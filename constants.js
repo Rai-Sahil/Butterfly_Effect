@@ -5,6 +5,8 @@ const bcrypt = require("bcrypt");
 
 const dbName = "COMP2800";
 
+const dbUserTable = "BBY_32_USER"
+
 const connectionParams = {
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -33,6 +35,7 @@ const users = [
 
 module.exports = {
   dbName,
+  dbUserTable,
   connectionParams,
   port,
   saltRounds,

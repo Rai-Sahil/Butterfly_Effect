@@ -2,7 +2,7 @@
 
 const mysql = require("mysql2/promise");
 
-const { dbName, connectionParams, users } = require("./constants");
+const { dbName, dbUserTable, connectionParams, users } = require("./constants");
 
 async function initDB() {
   const connection = await mysql.createConnection({
@@ -13,8 +13,9 @@ async function initDB() {
   const query = `
     CREATE DATABASE IF NOT EXISTS ${dbName};
     use ${dbName};
-    CREATE TABLE IF NOT EXISTS BBY_32_USER (
-      id varchar(40) DEFAULT (uuid()) NOT NULL PRIMARY KEY,
+    CREATE TABLE IF NOT EXISTS ${dbUserTable} (
+      id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      uuid varchar(40) DEFAULT (uuid()) NOT NULL,
       name varchar(30),
       email varchar(30),
       password varchar(60),
@@ -22,15 +23,15 @@ async function initDB() {
     );`;
   await connection.query(query);
 
-  const [userRows] = await connection.query("SELECT * FROM BBY_32_USER");
+  const [userRows] = await connection.query(`SELECT * FROM ${dbUserTable}`);
 
   if (userRows.length == 0) {
-    const insertUsers = `INSERT INTO BBY_32_USER (name, email, password, role) values ?`;
+    const insertUsers = `INSERT INTO ${dbUserTable} (name, email, password, role) values ?`;
     await connection.query(insertUsers, [users]);
   }
 }
 
 initDB().then(() => {
-  console.log("DB initiated.");
+  console.info("DB initiated.");
   process.exit();
 });
