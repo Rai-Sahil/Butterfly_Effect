@@ -102,13 +102,63 @@ async function getUserById(userId, callback) {
   }
 }
 
+async function deleteUser(userId, callback) {
+  const connection = await mysql.createConnection({
+    ...connectionParams,
+    database: dbName,
+  });
+  const deleteUserQuery = "DELETE FROM BBY_32_USER WHERE id = ? LIMIT 1";
+  try {
+    const [{ affectedRows }] = await connection.query(deleteUserQuery, [
+      userId,
+    ]);
+    if (affectedRows == 0) {
+      return callback({
+        status: 204,
+        message: "Successful attempt but no users deleted.",
+      });
+    }
+    return callback({ status: 200, message: "Successfully deleted user." });
+  } catch (error) {
+    console.error("Error getting users: ", error);
+    return callback({ status: 500, message: "Internal server error." });
+  }
+}
+
+async function editUser(userId, attribute, value, callback) {
+  const connection = await mysql.createConnection({
+    ...connectionParams,
+    database: dbName,
+  });
+  const editUserQuery = `UPDATE BBY_32_USER SET ${attribute} = ? WHERE id = ? LIMIT 1;`;
+  if (attribute == "password") {
+    value = await bcrypt.hash(value, saltRounds);
+  }
+  try {
+    const [{ changedRows }] = await connection.query(editUserQuery, [
+      value,
+      userId,
+    ]);
+    if (changedRows == 0) {
+      return callback({
+        status: 204,
+        message: "Successful attempt but no changes made to user.",
+      });
+    }
+    return callback({ status: 200, message: "Successfully updated user." });
+  } catch (error) {
+    console.error("Error getting users: ", error);
+    return callback({ status: 500, message: "Internal server error." });
+  }
+}
+
 async function getUsers(callback) {
   const connection = await mysql.createConnection({
     ...connectionParams,
     database: dbName,
   });
 
-  const getUsersQuery = "SELECT * FROM BBY_32_USER;";
+  const getUsersQuery = "SELECT name, email, role FROM BBY_32_USER;";
   try {
     const [users] = await connection.query(getUsersQuery);
     return callback({
@@ -125,6 +175,8 @@ async function getUsers(callback) {
 module.exports = {
   authenticate,
   createUser,
+  deleteUser,
+  editUser,
   getUserById,
   getUsers,
 };
