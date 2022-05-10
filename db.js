@@ -125,7 +125,6 @@ async function deleteUser(userId, callback) {
   }
 }
 
-
 async function editUser(userId, attribute, value, callback) {
   const connection = await mysql.createConnection({
     ...connectionParams,
