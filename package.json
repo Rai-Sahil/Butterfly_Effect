@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "init-db": "node init-db.js"
+    "init-db": "node init-db.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
