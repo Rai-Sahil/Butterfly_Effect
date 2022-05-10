@@ -36,10 +36,5 @@ module.exports = {
   connectionParams,
   port,
   saltRounds,
-<<<<<<< HEAD
   users,
 };
-=======
-  users
-};
->>>>>>> 3113a3e (Validated the HTML document, connected logo.js and logo.css)
