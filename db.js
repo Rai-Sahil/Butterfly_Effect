@@ -81,15 +81,15 @@ async function createUser(name, email, password, callback) {
   }
 }
 
-async function getUserById(userId, callback) {
+async function getUserByUUID(uuid, callback) {
   const connection = await mysql.createConnection({
     ...connectionParams,
     database: dbName,
   });
 
-  const getUserByIdQuery = `SELECT * FROM ${dbUserTable} WHERE id = ? LIMIT 1;`;
+  const getUserByIdQuery = `SELECT * FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
   try {
-    const [[user]] = await connection.query(getUserByIdQuery, userId);
+    const [[user]] = await connection.query(getUserByIdQuery, uuid);
     if (!user) {
       console.error("User not found.");
       return callback({ status: 404, message: "User not found." });
@@ -105,15 +105,15 @@ async function getUserById(userId, callback) {
   }
 }
 
-async function deleteUser(userId, callback) {
+async function deleteUser(uuid, callback) {
   const connection = await mysql.createConnection({
     ...connectionParams,
     database: dbName,
   });
-  const deleteUserQuery = `DELETE FROM ${dbUserTable} WHERE id = ? LIMIT 1`;
+  const deleteUserQuery = `DELETE FROM ${dbUserTable} WHERE uuid = ? LIMIT 1`;
   try {
     const [{ affectedRows }] = await connection.query(deleteUserQuery, [
-      userId,
+      uuid,
     ]);
     if (affectedRows == 0) {
       return callback({
@@ -128,19 +128,19 @@ async function deleteUser(userId, callback) {
   }
 }
 
-async function editUser(userId, attribute, value, callback) {
+async function editUser(uuid, attribute, value, callback) {
   const connection = await mysql.createConnection({
     ...connectionParams,
     database: dbName,
   });
-  const editUserQuery = `UPDATE ${dbUserTable} SET ${attribute} = ? WHERE id = ? LIMIT 1;`;
+  const editUserQuery = `UPDATE ${dbUserTable} SET ${attribute} = ? WHERE uuid = ? LIMIT 1;`;
   if (attribute == "password") {
     value = await bcrypt.hash(value, saltRounds);
   }
   try {
     const [{ changedRows }] = await connection.query(editUserQuery, [
       value,
-      userId,
+      uuid,
     ]);
     if (changedRows == 0) {
       return callback({
@@ -180,6 +180,6 @@ module.exports = {
   createUser,
   deleteUser,
   editUser,
-  getUserById,
+  getUserByUUID,
   getUsers,
 };

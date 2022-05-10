@@ -33,7 +33,7 @@ router.post("/signup", function (req, res) {
       res.status(status).send({ message });
     } else {
       req.session.loggedIn = true;
-      req.session.userId = user.id;
+      req.session.uuid = user.uuid;
       req.session.save(
         (error) => error && console.error("Unable to save session:", error)
       );
@@ -56,7 +56,7 @@ router.post("/login", function (req, res) {
       res.status(401).send({ message: "Incorrect email or password." });
     } else {
       req.session.loggedIn = true;
-      req.session.userId = user.id;
+      req.session.uuid = user.uuid;
       req.session.save(
         (error) => error && console.error("Unable to save session:", error)
       );

@@ -1,13 +1,13 @@
 "use strict";
 
-const { getUserById } = require("./db");
+const { getUserByUUID } = require("./db");
 
 async function requireAdmin(req, res, next) {
-  const { userId } = req.session;
-  if (!userId) {
+  const { uuid } = req.session;
+  if (!uuid) {
     res.status(404).send("No user found.");
   }
-  await getUserById(userId, ({ status, message, user }) => {
+  await getUserByUUID(uuid, ({ status, message, user }) => {
     if (status !== 200) {
       return res.status(status).send({ message });
     }

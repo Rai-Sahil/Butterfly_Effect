@@ -14,7 +14,8 @@ async function initDB() {
     CREATE DATABASE IF NOT EXISTS ${dbName};
     use ${dbName};
     CREATE TABLE IF NOT EXISTS ${dbUserTable} (
-      id varchar(40) DEFAULT (uuid()) NOT NULL PRIMARY KEY,
+      id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      uuid varchar(40) DEFAULT (uuid()) NOT NULL,
       name varchar(30),
       email varchar(30),
       password varchar(60),
@@ -31,6 +32,6 @@ async function initDB() {
 }
 
 initDB().then(() => {
-  console.log("DB initiated.");
+  console.info("DB initiated.");
   process.exit();
 });
