@@ -2,7 +2,6 @@
 
 const express = require("express");
 const session = require("express-session");
-const { port } = require("./constants");
 
 const app = express();
 
@@ -20,6 +19,7 @@ app.use(
 
 app.use(require("./routes"));
 
+const port = process.env.port || 8000;
 app.listen(port, () => {
   console.info("App listening on port " + port + "!");
   console.info(`Visit: http://localhost:${port}/`);

@@ -13,8 +13,6 @@ const connectionParams = {
   password: process.env.DB_PASSWORD,
 };
 
-const port = 8000;
-
 const saltRounds = 10;
 
 // name | email | password | role
@@ -37,7 +35,6 @@ module.exports = {
   dbName,
   dbUserTable,
   connectionParams,
-  port,
   saltRounds,
   users
 }
