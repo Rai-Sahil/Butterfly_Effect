@@ -102,6 +102,30 @@ async function getUserById(userId, callback) {
   }
 }
 
+async function deleteUser(userId, callback) {
+  const connection = await mysql.createConnection({
+    ...connectionParams,
+    database: dbName,
+  });
+  const deleteUserQuery = "DELETE FROM BBY_32_USER WHERE id = ? LIMIT 1";
+  try {
+    const [{ affectedRows }] = await connection.query(deleteUserQuery, [
+      userId,
+    ]);
+    if (affectedRows == 0) {
+      return callback({
+        status: 204,
+        message: "Successful attempt but no users deleted.",
+      });
+    }
+    return callback({ status: 200, message: "Successfully deleted user." });
+  } catch (error) {
+    console.error("Error getting users: ", error);
+    return callback({ status: 500, message: "Internal server error." });
+  }
+}
+
+
 async function editUser(userId, attribute, value, callback) {
   const connection = await mysql.createConnection({
     ...connectionParams,
@@ -149,6 +173,7 @@ async function getUsers(callback) {
 module.exports = {
   authenticate,
   createUser,
+  deleteUser,
   editUser,
   getUserById,
   getUsers,
