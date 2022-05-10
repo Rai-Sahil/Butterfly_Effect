@@ -2,7 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
-const { authenticate, createUser, editUser, getUsers } = require("./db");
+const { authenticate, createUser, deleteUser, editUser, getUsers } = require("./db");
 const {
   requireAdmin,
   requireLoggedIn,
@@ -113,7 +113,14 @@ router.put("/users/:id", function (req, res) {
   return editUser(userId, attribute, value, ({ status, message }) => {
     res.status(status).send({ message });
   });
-})
+});
+
+router.delete("/users/:id", function (req, res) {
+  const userId = req.params.id;
+  deleteUser(userId, ({ status, message }) => {
+    res.status(status).send({ message });
+  });
+});
 
 router.use(function (_, res) {
   res.status(404).send("There is nothing here, 404.");

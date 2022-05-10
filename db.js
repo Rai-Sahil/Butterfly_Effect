@@ -107,12 +107,18 @@ async function editUser(userId, attribute, value, callback) {
     ...connectionParams,
     database: dbName,
   });
-  const editUserQuery = `UPDATE BBY_32_USER SET ${attribute} = ? WHERE id = ?;`;
+  const editUserQuery = `UPDATE BBY_32_USER SET ${attribute} = ? WHERE id = ? LIMIT 1;`;
   if (attribute == "password") {
     value = await bcrypt.hash(value, saltRounds);
   }
   try {
-    await connection.query(editUserQuery, [value, userId]);
+    const [{ affectedRows }] = await connection.query(editUserQuery, [value, userId]);
+    if (affectedRows == 0) {
+      return callback({
+        status: 204,
+        message: "Successful attempt but no changes made.",
+      });
+    }
     return callback({ status: 200, message: "Successfully updated user." });
   } catch (error) {
     console.error("Error getting users: ", error);
