@@ -102,6 +102,24 @@ async function getUserById(userId, callback) {
   }
 }
 
+async function editUser(userId, attribute, value, callback) {
+  const connection = await mysql.createConnection({
+    ...connectionParams,
+    database: dbName,
+  });
+  const editUserQuery = `UPDATE BBY_32_USER SET ${attribute} = ? WHERE id = ?;`;
+  if (attribute == "password") {
+    value = await bcrypt.hash(value, saltRounds);
+  }
+  try {
+    await connection.query(editUserQuery, [value, userId]);
+    return callback({ status: 200, message: "Successfully updated user." });
+  } catch (error) {
+    console.error("Error getting users: ", error);
+    return callback({ status: 500, message: "Internal server error." });
+  }
+}
+
 async function getUsers(callback) {
   const connection = await mysql.createConnection({
     ...connectionParams,
@@ -125,6 +143,7 @@ async function getUsers(callback) {
 module.exports = {
   authenticate,
   createUser,
+  editUser,
   getUserById,
   getUsers,
 };
