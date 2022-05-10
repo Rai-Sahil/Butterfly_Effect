@@ -2,7 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
-const { authenticate, createUser, getUsers } = require("./db");
+const { authenticate, createUser, editUser, getUsers } = require("./db");
 const {
   requireAdmin,
   requireLoggedIn,
@@ -88,6 +88,32 @@ router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
     }
   });
 });
+
+router.put("/users/:id", function (req, res) {
+  const userId = req.params.id;
+  const { name, password, email, role } = req.body;
+  let attribute, value;
+  // only edit one attribute per request
+  if (name != undefined) {
+    attribute = "name";
+    value = name;
+  } else if (password != undefined) {
+    attribute = "password";
+    value = password;
+  } else if (email != undefined) {
+    attribute = "email";
+    value = email;
+  } else if (role != undefined) {
+    attribute = "role";
+    value = role;
+  } else {
+    res.status(400).send({ message: "No params provided, nothing to change." });
+  }
+
+  return editUser(userId, attribute, value, ({ status, message }) => {
+    res.status(status).send({ message });
+  });
+})
 
 router.use(function (_, res) {
   res.status(404).send("There is nothing here, 404.");
