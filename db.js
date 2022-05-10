@@ -136,8 +136,11 @@ async function editUser(userId, attribute, value, callback) {
     value = await bcrypt.hash(value, saltRounds);
   }
   try {
-    const [{ affectedRows }] = await connection.query(editUserQuery, [value, userId]);
-    if (affectedRows == 0) {
+    const [{ changedRows }] = await connection.query(editUserQuery, [
+      value,
+      userId,
+    ]);
+    if (changedRows == 0) {
       return callback({
         status: 204,
         message: "Successful attempt but no changes made.",
