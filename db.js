@@ -143,7 +143,7 @@ async function editUser(userId, attribute, value, callback) {
     if (changedRows == 0) {
       return callback({
         status: 204,
-        message: "Successful attempt but no changes made.",
+        message: "Successful attempt but no changes made to user.",
       });
     }
     return callback({ status: 200, message: "Successfully updated user." });

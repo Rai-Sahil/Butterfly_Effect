@@ -89,7 +89,7 @@ router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
   });
 });
 
-router.put("/users/:id", function (req, res) {
+router.put("/users/:id", requireAdmin, function (req, res) {
   const userId = req.params.id;
   const { name, password, email, role } = req.body;
   let attribute, value;
@@ -115,7 +115,7 @@ router.put("/users/:id", function (req, res) {
   });
 });
 
-router.delete("/users/:id", function (req, res) {
+router.delete("/users/:id", requireAdmin, function (req, res) {
   const userId = req.params.id;
   deleteUser(userId, ({ status, message }) => {
     res.status(status).send({ message });
