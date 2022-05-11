@@ -10,11 +10,7 @@ const {
 const bcrypt = require("bcrypt");
 
 async function authenticate(email, password, callback) {
-  const connection = await mysql.createConnection({
-    ...connectionParams,
-    database: dbName,
-  });
-
+  const connection = await mysql.createConnection(connectionParams);
   const query = `SELECT * FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
 
   try {
@@ -35,10 +31,7 @@ async function authenticate(email, password, callback) {
 }
 
 async function createUser(name, email, password, callback) {
-  const connection = await mysql.createConnection({
-    ...connectionParams,
-    database: dbName,
-  });
+  const connection = await mysql.createConnection(connectionParams);
 
   try {
     if (!name) {
@@ -82,10 +75,7 @@ async function createUser(name, email, password, callback) {
 }
 
 async function getUserByUUID(uuid, callback) {
-  const connection = await mysql.createConnection({
-    ...connectionParams,
-    database: dbName,
-  });
+  const connection = await mysql.createConnection(connectionParams);
 
   const getUserByIdQuery = `SELECT * FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
   try {
@@ -106,10 +96,7 @@ async function getUserByUUID(uuid, callback) {
 }
 
 async function deleteUser(uuid, callback) {
-  const connection = await mysql.createConnection({
-    ...connectionParams,
-    database: dbName,
-  });
+  const connection = await mysql.createConnection(connectionParams);
   const deleteUserQuery = `DELETE FROM ${dbUserTable} WHERE uuid = ? LIMIT 1`;
   try {
     const [{ affectedRows }] = await connection.query(deleteUserQuery, [
@@ -129,10 +116,7 @@ async function deleteUser(uuid, callback) {
 }
 
 async function editUser(uuid, attribute, value, callback) {
-  const connection = await mysql.createConnection({
-    ...connectionParams,
-    database: dbName,
-  });
+  const connection = await mysql.createConnection(connectionParams);
   const editUserQuery = `UPDATE ${dbUserTable} SET ${attribute} = ? WHERE uuid = ? LIMIT 1;`;
   if (attribute == "password") {
     value = await bcrypt.hash(value, saltRounds);
@@ -156,10 +140,7 @@ async function editUser(uuid, attribute, value, callback) {
 }
 
 async function getUsers(callback) {
-  const connection = await mysql.createConnection({
-    ...connectionParams,
-    database: dbName,
-  });
+  const connection = await mysql.createConnection(connectionParams);
 
   const getUsersQuery = `SELECT name, email, role FROM ${dbUserTable};`;
   try {
