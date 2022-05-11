@@ -1,12 +1,7 @@
 "use strict";
 
 const mysql = require("mysql2/promise");
-const {
-  dbName,
-  dbUserTable,
-  connectionParams,
-  saltRounds,
-} = require("./constants");
+const { dbUserTable, connectionParams, saltRounds } = require("./constants");
 const bcrypt = require("bcrypt");
 
 async function authenticate(email, password, callback) {
@@ -99,9 +94,7 @@ async function deleteUser(uuid, callback) {
   const connection = await mysql.createConnection(connectionParams);
   const deleteUserQuery = `DELETE FROM ${dbUserTable} WHERE uuid = ? LIMIT 1`;
   try {
-    const [{ affectedRows }] = await connection.query(deleteUserQuery, [
-      uuid,
-    ]);
+    const [{ affectedRows }] = await connection.query(deleteUserQuery, [uuid]);
     if (affectedRows == 0) {
       return callback({
         status: 204,
