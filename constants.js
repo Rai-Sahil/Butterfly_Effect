@@ -3,17 +3,16 @@
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 
-const dbName = "COMP2800";
+const dbName = process.env.DB_NAME || "COMP2800";
 
-const dbUserTable = "BBY_32_USER"
+const dbUserTable = "BBY_32_USER";
 
 const connectionParams = {
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
+  database: dbName,
 };
-
-const port = 8000;
 
 const saltRounds = 10;
 
@@ -37,7 +36,6 @@ module.exports = {
   dbName,
   dbUserTable,
   connectionParams,
-  port,
   saltRounds,
-  users
-}
+  users,
+};
