@@ -3,7 +3,7 @@
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 
-const dbName = "COMP2800";
+const dbName = process.env.DB_NAME || "COMP2800";
 
 const dbUserTable = "BBY_32_USER"
 
