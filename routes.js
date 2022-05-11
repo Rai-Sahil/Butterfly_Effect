@@ -11,6 +11,7 @@ const {
 } = require("./db");
 const {
   requireAdmin,
+  requireCurrentUser,
   requireLoggedIn,
   requireLoggedOut,
 } = require("./middleware");
@@ -102,7 +103,7 @@ router.post("/users", requireAdmin, function (req, res) {
   });
 });
 
-router.put("/users/:id", requireAdmin, function (req, res) {
+router.put("/users/:id", requireCurrentUser, function (req, res) {
   const userId = req.params.id;
   const { name, password, email, role } = req.body;
   let attribute, value;
