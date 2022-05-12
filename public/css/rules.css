@@ -2,20 +2,16 @@
     margin: 0%;
 }
 
-.body{
-    overflow-x: hidden;
-    overflow-y: hidden;
-}
-
 .grid-container{
     display: grid;
     grid-template-columns: repeat(10, 10%);
     grid-template-rows: repeat(10, 10%);
-    height: auto;
+    height: 100vh;
     width: auto;
     background: wheat;
     animation-name: colour;
-    animation-duration: 50s;
+    animation-duration: 30s;
+    animation-iteration-count: 3;
     overflow-x: hidden;
     overflow-y: hidden;
 }
@@ -49,7 +45,7 @@
 }
 
 #butterfly3{
-    transform: translateY(-130px);
+    transform: translateY(-50px);
     opacity: 40%;
 }
 
@@ -58,6 +54,7 @@
     margin-top: 60px;
     text-decoration: underline;
     text-decoration-style: double;
+    font-family: 'Oleo Script Swash Caps', cursive;
 }
 
 #lists{
@@ -65,6 +62,7 @@
     list-style: decimal inside;
     font-size: 40px;
     z-index: 1;
+    font-family: 'Signika Negative', sans-serif;
 }
 
 @keyframes colour {
