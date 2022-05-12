@@ -4,6 +4,32 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Signika Negative', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #49BEAA;
+}
+
+h1 {
+    margin: auto;
+    padding: 1%;
+    max-width: 95%;
+    text-align: center;
+    border: outset 2px #444;
+    background: #4290D8;
+    border-radius: 100px;
+    text-shadow: -1px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+.header {
+    padding-top: 60px;
+    color: #F5DFBB;
+    font-size: 20px;
+    margin: auto;
+    line-height: 50px;
+}
+
 .container{
     height: auto;
     width: 100%;
@@ -11,7 +37,7 @@
     align-items: center;
     padding-top: 100px;
     padding-bottom: 0px;
-    background-color: black;
+    background-color: #49BEAA;
 }
 
 .timeline-content{
@@ -25,13 +51,14 @@
 .decision-count{
     font-family: 'Oleo Script Swash Caps', cursive;
     color: wheat;
+    border: none;
 }
 
 .decision-content{
     font-family: 'Signika Negative', sans-serif;
     color: white;
     line-height: 37px;
-    font-weight: 300;
+    font-weight: 350px;
 }
 
 #points{
@@ -49,7 +76,7 @@
 
 .list{
     padding: 20px;
-    background-color: #49BEAA;
+    background-color: #4290D8;
     border-radius: 10px;
     margin-top:10px;
 }
@@ -78,7 +105,7 @@
     }
 
     .timeline-content ul li:hover:after{
-        background-color: yellow;
+        background-color: #3476b4;
         cursor: pointer;
     }
 
@@ -93,7 +120,7 @@
         left: 50%;
         position: absolute;
         transform: translateX(-50%);
-        background-color: red;
+        background-color: wheat;
     }
 
     .timeline-content ul li::after {
@@ -125,7 +152,7 @@
         left: -10px;
         border: medium solid white;
         border-width: 10px 10px 10px 0;
-        border-color: transparent #49BEAA transparent transparent;
+        border-color: transparent #4290D8 transparent transparent;
     }
 
     .timeline-content ul li:nth-child(odd)::before {
@@ -137,11 +164,11 @@
         left: 400px;
         border: medium solid white;
         border-width: 10px 10px 10px 10px;
-        border-color: transparent transparent transparent #49BEAA;
+        border-color: transparent transparent transparent #4290D8;
     }
 }
 
-@media only screen and (min-width: 0px) and (max-width: 799px) {
+@media only screen and (min-width: 200px) and (max-width: 799px) {
     .timeline-content ul li {
         width: 50%;
         margin-top: -5px;
@@ -165,7 +192,7 @@
     }
 
     .timeline-content ul li:hover:after{
-        background-color: yellow;
+        background-color: #3476b4;
         cursor: pointer;
     }
 
@@ -180,7 +207,7 @@
         left: 50%;
         position: absolute;
         transform: translateX(-50%);
-        background-color: red;
+        background-color: wheat;
     }
 
     .timeline-content ul li::after {
@@ -212,7 +239,7 @@
         left: -10px;
         border: medium solid white;
         border-width: 10px 10px 10px 0;
-        border-color: transparent #49BEAA transparent transparent;
+        border-color: transparent #4290D8 transparent transparent;
     }
 
     .timeline-content ul li:nth-child(odd)::before {
@@ -224,6 +251,6 @@
         left: 193px;
         border: medium solid white;
         border-width: 10px 10px 10px 10px;
-        border-color: transparent transparent transparent #49BEAA;
+        border-color: transparent transparent transparent #4290D8;
     }
 }
