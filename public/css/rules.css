@@ -1,0 +1,76 @@
+* {
+    margin: 0%;
+}
+
+.body{
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(10, 10%);
+    grid-template-rows: repeat(10, 10%);
+    height: auto;
+    width: auto;
+    background: wheat;
+    animation-name: colour;
+    animation-duration: 50s;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.container1{
+    height: 100vh;
+    grid-column: 1 / span 2;
+}
+.container2{
+    grid-column: 3 / span 6;
+    text-align: center;
+    height: 100vh;
+}
+
+.container3{
+    height: 100vh;
+    grid-column: 8 / span 10;
+    justify-content: center;
+}
+
+#butterfly1{
+    margin-top: 50px;
+    height: 400px;
+    opacity: 40%;
+}
+
+#butterfly2{
+    opacity: 40%;
+    margin-bottom: 0px;
+    transform: translateY(-170px);
+}
+
+#butterfly3{
+    transform: translateY(-130px);
+    opacity: 40%;
+}
+
+#temp{
+    font-size: 80px;
+    margin-top: 60px;
+    text-decoration: underline;
+    text-decoration-style: double;
+}
+
+#lists{
+    margin-top: 40px;
+    list-style: decimal inside;
+    font-size: 40px;
+    z-index: 1;
+}
+
+@keyframes colour {
+    0% {background-color: #49BEAA;}
+    25% {background-color: wheat;}
+    50% {background-color: #4390D8;}
+    75% {background-color: wheat;}
+    100% {background-color: #49BEAA;}
+  }
