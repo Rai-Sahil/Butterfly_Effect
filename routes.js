@@ -15,54 +15,83 @@ const {
   requireLoggedIn,
   requireLoggedOut,
 } = require("./middleware");
-const { uploadImages } = require("./upload-images");
+const {
+  uploadImages
+} = require("./upload-images");
 
 router.get("/", requireLoggedIn, function (_, res) {
-  res.sendFile("index.html", { root: __dirname + "/public/html" });
+  res.sendFile("index.html", {
+    root: __dirname + "/public/html"
+  });
 });
 
 router.get("/signup", requireLoggedOut, function (req, res) {
-  res.sendFile("signup.html", { root: __dirname + "/public/html" });
+  res.sendFile("signup.html", {
+    root: __dirname + "/public/html"
+  });
 });
 
 router.post("/signup", function (req, res) {
   res.setHeader("Content-Type", "application/json");
 
-  const { name, email, password } = req.body;
+  const {
+    name,
+    email,
+    password
+  } = req.body;
 
-  return createUser(name, email, password, ({ status, message, user }) => {
+  return createUser(name, email, password, ({
+    status,
+    message,
+    user
+  }) => {
     if (status !== 200) {
-      res.status(status).send({ message });
+      res.status(status).send({
+        message
+      });
     } else {
       req.session.loggedIn = true;
       req.session.uuid = user.uuid;
       req.session.save(
         (error) => error && console.error("Unable to save session:", error)
       );
-      res.status(status).send({ message, user });
+      res.status(status).send({
+        message,
+        user
+      });
     }
   });
 });
 
 router.get("/login", requireLoggedOut, function (req, res) {
-  res.sendFile("login.html", { root: __dirname + "/public/html" });
+  res.sendFile("login.html", {
+    root: __dirname + "/public/html"
+  });
 });
 
 router.post("/login", function (req, res) {
   res.setHeader("Content-Type", "application/json");
 
-  const { email, password } = req.body;
+  const {
+    email,
+    password
+  } = req.body;
 
   return authenticate(email, password, function (user) {
     if (user == null) {
-      res.status(401).send({ message: "Incorrect email or password." });
+      res.status(401).send({
+        message: "Incorrect email or password."
+      });
     } else {
       req.session.loggedIn = true;
       req.session.uuid = user.uuid;
       req.session.save(
         (error) => error && console.error("Unable to save session:", error)
       );
-      res.status(200).send({ message: "User authentication succeeded.", user });
+      res.status(200).send({
+        message: "User authentication succeeded.",
+        user
+      });
     }
   });
 });
@@ -80,33 +109,72 @@ router.post("/logout", function (req, res) {
 });
 
 router.get("/game", requireLoggedIn, function (req, res) {
-  res.sendFile("game-card.html", { root: __dirname + "/public/html" });
+  res.sendFile("game-card.html", {
+    root: __dirname + "/public/html"
+  });
 });
 
 router.get("/timeline", requireLoggedIn, function (req, res) {
-  res.sendFile("timeline.html", { root: __dirname + "/public/html" });
+  res.sendFile("timeline.html", {
+    root: __dirname + "/public/html"
+  });
+});
+
+router.get("/profile", requireLoggedIn, function (req, res) {
+  res.sendFile("profile.html", {
+    root: __dirname + "/public/html"
+  });
+});
+
+router.get("/contactus", requireLoggedIn, function (req, res) {
+  res.sendFile("contactus.html", {
+    root: __dirname + "/public/html"
+  });
 });
 
 router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
-  getUsers(({ status, message, users }) => {
+  getUsers(({
+    status,
+    message,
+    users
+  }) => {
     if (status !== 200) {
-      res.status(status).send({ message });
+      res.status(status).send({
+        message
+      });
     } else {
-      res.status(status).send({ message, users });
+      res.status(status).send({
+        message,
+        users
+      });
     }
   });
 });
 
 router.post("/users", requireAdmin, function (req, res) {
-  const { name, email, password } = req.body;
-  return createUser(name, email, password, ({ status, message }) => {
-    res.status(status).send({ message });
+  const {
+    name,
+    email,
+    password
+  } = req.body;
+  return createUser(name, email, password, ({
+    status,
+    message
+  }) => {
+    res.status(status).send({
+      message
+    });
   });
 });
 
 router.put("/users/:id", requireCurrentUser, function (req, res) {
   const userId = req.params.id;
-  const { name, password, email, role } = req.body;
+  const {
+    name,
+    password,
+    email,
+    role
+  } = req.body;
   let attribute, value;
   // only edit one attribute per request
   if (name != undefined) {
@@ -122,23 +190,37 @@ router.put("/users/:id", requireCurrentUser, function (req, res) {
     attribute = "role";
     value = role;
   } else {
-    res.status(400).send({ message: "No params provided, nothing to change." });
+    res.status(400).send({
+      message: "No params provided, nothing to change."
+    });
   }
 
-  return editUser(userId, attribute, value, ({ status, message }) => {
-    res.status(status).send({ message });
+  return editUser(userId, attribute, value, ({
+    status,
+    message
+  }) => {
+    res.status(status).send({
+      message
+    });
   });
 });
 
 router.delete("/users/:id", requireAdmin, function (req, res) {
   const userId = req.params.id;
-  deleteUser(userId, ({ status, message }) => {
-    res.status(status).send({ message });
+  deleteUser(userId, ({
+    status,
+    message
+  }) => {
+    res.status(status).send({
+      message
+    });
   });
 });
 
 router.get("/upload-test", requireLoggedIn, function (req, res) {
-  res.sendFile("upload-test.html", { root: __dirname + "/public/html" });
+  res.sendFile("upload-test.html", {
+    root: __dirname + "/public/html"
+  });
 });
 
 router.post("/upload-avatar-image", uploadImages.array("files"), function (req, res) {
