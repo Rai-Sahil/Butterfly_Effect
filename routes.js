@@ -11,9 +11,11 @@ const {
 } = require("./db");
 const {
   requireAdmin,
+  requireCurrentUser,
   requireLoggedIn,
   requireLoggedOut,
 } = require("./middleware");
+const { uploadImages } = require("./upload-images");
 
 router.get("/", requireLoggedIn, function (_, res) {
   res.sendFile("index.html", { root: __dirname + "/public/html" });
@@ -102,7 +104,7 @@ router.post("/users", requireAdmin, function (req, res) {
   });
 });
 
-router.put("/users/:id", requireAdmin, function (req, res) {
+router.put("/users/:id", requireCurrentUser, function (req, res) {
   const userId = req.params.id;
   const { name, password, email, role } = req.body;
   let attribute, value;
@@ -133,6 +135,15 @@ router.delete("/users/:id", requireAdmin, function (req, res) {
   deleteUser(userId, ({ status, message }) => {
     res.status(status).send({ message });
   });
+});
+
+router.get("/upload-test", requireLoggedIn, function (req, res) {
+  res.sendFile("upload-test.html", { root: __dirname + "/public/html" });
+});
+
+router.post("/upload-avatar-image", uploadImages.array("files"), function (req, res) {
+  console.info(req.files);
+  res.status(200).send("POST upload avatar image success");
 });
 
 router.use(function (_, res) {
