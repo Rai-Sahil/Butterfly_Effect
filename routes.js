@@ -97,40 +97,57 @@ router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
   });
 });
 
-router.post("/users", requireAdmin, function (req, res) {
+router.get("/users/:id", requireLoggedIn, requireCurrentUser, function (_, res) {
+  const userId = req.params.id;
+  getUsers(({ status, message, users }) => {
+    if (status !== 200) {
+      res.status(status).send({ message });
+    } else {
+      res.status(status).send({ message, users });
+    }
+  });
+});
+
+router.post("/users", requireLoggedIn, requireAdmin, function (req, res) {
   const { name, email, password } = req.body;
   return createUser(name, email, password, ({ status, message }) => {
     res.status(status).send({ message });
   });
 });
 
-router.put("/users/:id", requireCurrentUser, function (req, res) {
-  const userId = req.params.id;
-  const { name, password, email, role } = req.body;
-  let attribute, value;
-  // only edit one attribute per request
-  if (name != undefined) {
-    attribute = "name";
-    value = name;
-  } else if (password != undefined) {
-    attribute = "password";
-    value = password;
-  } else if (email != undefined) {
-    attribute = "email";
-    value = email;
-  } else if (role != undefined) {
-    attribute = "role";
-    value = role;
-  } else {
-    res.status(400).send({ message: "No params provided, nothing to change." });
+router.put(
+  "/users/:id",
+  requireLoggedIn, requireCurrentUser,
+  function (req, res) {
+    const userId = req.params.id;
+    const { name, password, email, role } = req.body;
+    let attribute, value;
+    // only edit one attribute per request
+    if (name != undefined) {
+      attribute = "name";
+      value = name;
+    } else if (password != undefined) {
+      attribute = "password";
+      value = password;
+    } else if (email != undefined) {
+      attribute = "email";
+      value = email;
+    } else if (role != undefined) {
+      attribute = "role";
+      value = role;
+    } else {
+      res
+        .status(400)
+        .send({ message: "No params provided, nothing to change." });
+    }
+
+    return editUser(userId, attribute, value, ({ status, message }) => {
+      res.status(status).send({ message });
+    });
   }
+);
 
-  return editUser(userId, attribute, value, ({ status, message }) => {
-    res.status(status).send({ message });
-  });
-});
-
-router.delete("/users/:id", requireAdmin, function (req, res) {
+router.delete("/users/:id", requireLoggedIn, requireAdmin, function (req, res) {
   const userId = req.params.id;
   deleteUser(userId, ({ status, message }) => {
     res.status(status).send({ message });
