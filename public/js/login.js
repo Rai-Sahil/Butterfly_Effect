@@ -3,6 +3,18 @@
 function init() {
   console.info("Client script loaded.");
 
+  const sign_in_btn = document.querySelector("#sign-in-btn");
+  const sign_up_btn = document.querySelector("#sign-up-btn");
+  const container = document.querySelector(".container");
+
+  sign_up_btn.addEventListener("click", () => {
+    container.classList.add("sign-up-mode");
+  });
+
+  sign_in_btn.addEventListener("click", () => {
+    container.classList.remove("sign-up-mode");
+  });
+
   function slideIn() {
     var elem = document.getElementById("box1");
     elem.style.transition = "top 0.5s ease-in 0s";
