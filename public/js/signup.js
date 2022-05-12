@@ -11,7 +11,7 @@ function init() {
 
   function DelayRedirect() {
     setTimeout(function () {
-      dvCountDown.style.display = "none";
+      // dvCountDown.style.display = "none";
       window.location.replace("/");
     }, 1000);
   }
