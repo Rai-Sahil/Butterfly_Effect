@@ -3,36 +3,23 @@
 function init() {
   console.info("Client script loaded.");
 
-  function ajaxRequest(method, url, callback, data) {
-    const params =
-      typeof data == "string"
-        ? data
-        : Object.keys(data)
-            .map({
-              function(key) {
-                return (
-                  encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
-                );
-              },
-            })
-            .join("&");
-
+  function ajaxGET(path, callback) {
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
-      callback(this.responseText, this.status);
+      if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+        callback(this.responseText);
+      }
     };
-    xhr.open(method, url);
-    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send(params);
+    xhr.open("GET", path);
+    xhr.send();
   }
 
-  ajaxRequest("GET", `/users/${sessionStorage.getItem("userId")}`, (data, status) => {
+  ajaxGET(`/users/${sessionStorage.getItem("userId")}`, (data, status) => {
     if (data) {
-        const responseJSON = JSON.parse(data);
-        console.log(responseJSON)
+      const responseJSON = JSON.parse(data);
+      console.log(responseJSON);
     }
-  })
+  });
 }
 
 document.onreadystatechange = () => {
