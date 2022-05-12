@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
     const files = fs.readdirSync(path);
     const avatarFileName = files.find((file) => file.includes("avatar-image"));
     if (avatarFileName) {
-      fs.unlinkSync(`${path}/${avatarFileName}`)
+      fs.unlinkSync(`${path}/${avatarFileName}`);
     }
     return callback(null, path);
   },
@@ -26,6 +26,9 @@ function getAvatarPathByUUID(uuid) {
   const avatarDirPath = `${__dirname}/app/${uuid}`;
   const files = fs.readdirSync(avatarDirPath);
   const avatarFileName = files.find((file) => file.includes("avatar-image"));
+  if (!avatarFileName) {
+    return null;
+  }
   return `${avatarDirPath}/${avatarFileName}`;
 }
 

@@ -101,16 +101,21 @@ router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
   });
 });
 
-router.get("/users/:id", requireLoggedIn, requireCurrentUser, function (_, res) {
-  const uuid = req.params.id;
-  return getUserByUUID(uuid, ({ status, message, user }) => {
-    if (status !== 200) {
-      res.status(status).send({ message });
-    } else {
-      res.status(status).send({ message, user });
-    }
-  });
-});
+router.get(
+  "/users/:id",
+  requireLoggedIn,
+  requireCurrentUser,
+  function (_, res) {
+    const uuid = req.params.id;
+    return getUserByUUID(uuid, ({ status, message, user }) => {
+      if (status !== 200) {
+        res.status(status).send({ message });
+      } else {
+        res.status(status).send({ message, user });
+      }
+    });
+  }
+);
 
 router.post("/users", requireLoggedIn, requireAdmin, function (req, res) {
   const { name, email, password } = req.body;
@@ -121,7 +126,8 @@ router.post("/users", requireLoggedIn, requireAdmin, function (req, res) {
 
 router.put(
   "/users/:id",
-  requireLoggedIn, requireCurrentUser,
+  requireLoggedIn,
+  requireCurrentUser,
   function (req, res) {
     const userId = req.params.id;
     const { name, password, email, role } = req.body;
@@ -163,15 +169,22 @@ router.get("/upload-test", requireLoggedIn, function (req, res) {
 });
 
 router.get("/avatar-image", requireLoggedIn, function (req, res) {
-  const {uuid} = req.session;
+  const { uuid } = req.session;
   const avatarPath = getAvatarPathByUUID(uuid);
-  res.sendFile(avatarPath);
+  if (!avatarPath) {
+    res.status(404).send("No avatar image found.");
+  }
+  res.status(200).sendFile(avatarPath);
 });
 
-router.post("/upload-avatar-image", uploadAvatarImage.array("files"), function (req, res) {
-  console.info(req.files);
-  res.status(200).send("POST upload avatar image success");
-});
+router.post(
+  "/upload-avatar-image",
+  uploadAvatarImage.array("files"),
+  function (req, res) {
+    console.info(req.files);
+    res.status(200).send("POST upload avatar image success");
+  }
+);
 
 router.use(function (_, res) {
   res.status(404).send("There is nothing here, 404.");
