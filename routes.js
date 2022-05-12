@@ -4,6 +4,7 @@ const express = require("express");
 const router = express.Router();
 const {
   authenticate,
+  getUserByUUID,
   createUser,
   deleteUser,
   editUser,
@@ -88,7 +89,7 @@ router.get("/timeline", requireLoggedIn, function (req, res) {
 });
 
 router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
-  getUsers(({ status, message, users }) => {
+  return getUsers(({ status, message, users }) => {
     if (status !== 200) {
       res.status(status).send({ message });
     } else {
@@ -98,12 +99,12 @@ router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
 });
 
 router.get("/users/:id", requireLoggedIn, requireCurrentUser, function (_, res) {
-  const userId = req.params.id;
-  getUsers(({ status, message, users }) => {
+  const uuid = req.params.id;
+  return getUserByUUID(uuid, ({ status, message, user }) => {
     if (status !== 200) {
       res.status(status).send({ message });
     } else {
-      res.status(status).send({ message, users });
+      res.status(status).send({ message, user });
     }
   });
 });
