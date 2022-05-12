@@ -17,56 +17,88 @@ const {
   requireLoggedOut,
 } = require("./middleware");
 const {
+<<<<<<< HEAD
   uploadAvatarImage,
   getAvatarPathByUUID,
 } = require("./upload-avatar-images");
+=======
+  uploadImages
+} = require("./upload-images");
+>>>>>>> origin/dev
 
 router.get("/", requireLoggedIn, function (_, res) {
-  res.sendFile("index.html", { root: __dirname + "/public/html" });
+  res.sendFile("index.html", {
+    root: __dirname + "/public/html"
+  });
 });
 
 router.get("/signup", requireLoggedOut, function (req, res) {
-  res.sendFile("signup.html", { root: __dirname + "/public/html" });
+  res.sendFile("signup.html", {
+    root: __dirname + "/public/html"
+  });
 });
 
 router.post("/signup", function (req, res) {
   res.setHeader("Content-Type", "application/json");
 
-  const { name, email, password } = req.body;
+  const {
+    name,
+    email,
+    password
+  } = req.body;
 
-  return createUser(name, email, password, ({ status, message, user }) => {
+  return createUser(name, email, password, ({
+    status,
+    message,
+    user
+  }) => {
     if (status !== 200) {
-      res.status(status).send({ message });
+      res.status(status).send({
+        message
+      });
     } else {
       req.session.loggedIn = true;
       req.session.uuid = user.uuid;
       req.session.save(
         (error) => error && console.error("Unable to save session:", error)
       );
-      res.status(status).send({ message, user });
+      res.status(status).send({
+        message,
+        user
+      });
     }
   });
 });
 
 router.get("/login", requireLoggedOut, function (req, res) {
-  res.sendFile("login.html", { root: __dirname + "/public/html" });
+  res.sendFile("login.html", {
+    root: __dirname + "/public/html"
+  });
 });
 
 router.post("/login", function (req, res) {
   res.setHeader("Content-Type", "application/json");
 
-  const { email, password } = req.body;
+  const {
+    email,
+    password
+  } = req.body;
 
   return authenticate(email, password, function (user) {
     if (user == null) {
-      res.status(401).send({ message: "Incorrect email or password." });
+      res.status(401).send({
+        message: "Incorrect email or password."
+      });
     } else {
       req.session.loggedIn = true;
       req.session.uuid = user.uuid;
       req.session.save(
         (error) => error && console.error("Unable to save session:", error)
       );
-      res.status(200).send({ message: "User authentication succeeded.", user });
+      res.status(200).send({
+        message: "User authentication succeeded.",
+        user
+      });
     }
   });
 });
@@ -84,19 +116,40 @@ router.post("/logout", function (req, res) {
 });
 
 router.get("/game", requireLoggedIn, function (req, res) {
-  res.sendFile("game-card.html", { root: __dirname + "/public/html" });
+  res.sendFile("game-card.html", {
+    root: __dirname + "/public/html"
+  });
 });
 
 router.get("/timeline", requireLoggedIn, function (req, res) {
-  res.sendFile("timeline.html", { root: __dirname + "/public/html" });
+  res.sendFile("timeline.html", {
+    root: __dirname + "/public/html"
+  });
+});
+
+router.get("/contactus", requireLoggedIn, function (req, res) {
+  res.sendFile("contactus.html", {
+    root: __dirname + "/public/html"
+  });
+});
+
+router.get("/profile", requireLoggedIn, function (req, res) {
+  res.sendFile("profile.html", {
+    root: __dirname + "/public/html"
+  });
 });
 
 router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
   return getUsers(({ status, message, users }) => {
     if (status !== 200) {
-      res.status(status).send({ message });
+      res.status(status).send({
+        message
+      });
     } else {
-      res.status(status).send({ message, users });
+      res.status(status).send({
+        message,
+        users
+      });
     }
   });
 });
@@ -159,13 +212,20 @@ router.put(
 
 router.delete("/users/:id", requireLoggedIn, requireAdmin, function (req, res) {
   const userId = req.params.id;
-  deleteUser(userId, ({ status, message }) => {
-    res.status(status).send({ message });
+  deleteUser(userId, ({
+    status,
+    message
+  }) => {
+    res.status(status).send({
+      message
+    });
   });
 });
 
 router.get("/upload-test", requireLoggedIn, function (req, res) {
-  res.sendFile("upload-test.html", { root: __dirname + "/public/html" });
+  res.sendFile("upload-test.html", {
+    root: __dirname + "/public/html"
+  });
 });
 
 router.get("/avatar-image", requireLoggedIn, function (req, res) {
