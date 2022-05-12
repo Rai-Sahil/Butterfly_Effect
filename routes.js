@@ -165,7 +165,6 @@ router.get("/upload-test", requireLoggedIn, function (req, res) {
 router.get("/avatar-image", requireLoggedIn, function (req, res) {
   const {uuid} = req.session;
   const avatarPath = getAvatarPathByUUID(uuid);
-  console.log("avatarPath", avatarPath);
   res.sendFile(avatarPath);
 });
 
