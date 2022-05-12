@@ -72,7 +72,7 @@ function init() {
               document.getElementById("login-error-message").innerHTML =
                 responseJSON.message;
             } else {
-              sessionStorage.setItem("userId", responseJSON.user.ID);
+              sessionStorage.setItem("userId", responseJSON.user.uuid);
               slideIn();
               DelayRedirect();
             }
