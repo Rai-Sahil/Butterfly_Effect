@@ -16,7 +16,10 @@ const {
   requireLoggedIn,
   requireLoggedOut,
 } = require("./middleware");
-const { uploadImages } = require("./upload-images");
+const {
+  uploadAvatarImage,
+  getAvatarPathByUUID,
+} = require("./upload-avatar-images");
 
 router.get("/", requireLoggedIn, function (_, res) {
   res.sendFile("index.html", { root: __dirname + "/public/html" });
@@ -159,7 +162,14 @@ router.get("/upload-test", requireLoggedIn, function (req, res) {
   res.sendFile("upload-test.html", { root: __dirname + "/public/html" });
 });
 
-router.post("/upload-avatar-image", uploadImages.array("files"), function (req, res) {
+router.get("/avatar-image", requireLoggedIn, function (req, res) {
+  const {uuid} = req.session;
+  const avatarPath = getAvatarPathByUUID(uuid);
+  console.log("avatarPath", avatarPath);
+  res.sendFile(avatarPath);
+});
+
+router.post("/upload-avatar-image", uploadAvatarImage.array("files"), function (req, res) {
   console.info(req.files);
   res.status(200).send("POST upload avatar image success");
 });

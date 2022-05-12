@@ -21,7 +21,7 @@ function requireAdmin(req, res, next) {
 function requireCurrentUser(req, res, next) {
   const { uuid } = req.session;
   if (!uuid) {
-    res.status(404).send("No user found.");
+    return res.status(404).send("No user found.");
   }
   return getUserByUUID(uuid, ({ status, message, user }) => {
     if (status !== 200) {
