@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap%27');
+
+html,
+body {
+  height: 100%;
+}
+body {
+  display: grid;
+  width: 100%;
+  /* CHANGE BACKGROUND HERE */
+  background-color: #7fd4c5;
+  font-family: 'Signika Negative', sans-serif;
+}
+div#error {
+  position: relative;
+  margin: auto;
+  padding: 20px;
+  z-index: 2;
+}
+div#error div#box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #000;
+}
+div#error:before,
+div#error:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0px 0px 0px 1px #000;
+  mix-blend-mode: multiply;
+  animation: dance 2s infinite steps(1);
+}
+div#error:before {
+  clip-path: polygon(0 0, 65% 0, 35% 100%, 0 100%);
+  box-shadow: inset 0px 0px 0px 1px currentColor;
+  color: #f0f;
+}
+div#error:after {
+  clip-path: polygon(65% 0, 100% 0, 100% 100%, 35% 100%);
+  animation-duration: 0.5s;
+  animation-direction: alternate;
+  box-shadow: inset 0px 0px 0px 1px currentColor;
+  color: #0ff;
+}
+h3 {
+  position: relative;
+  font-size: 5vw;
+  font-weight: 700;
+  text-transform: uppercase;
+  animation: blink 1.3s infinite steps(1);
+}
+h3:before,
+h3:after {
+  content: 'ERROR 404';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  mix-blend-mode: soft-light;
+  animation: dance 2s infinite steps(2);
+}
+h3:before {
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+  color: #f0f;
+  animation: shiftright 200ms steps(2) infinite;
+}
+h3:after {
+  clip-path: polygon(0 100%, 100% 100%, 100% 50%, 0 50%);
+  color: #0ff;
+  animation: shiftleft 200ms steps(2) infinite;
+}
+p {
+  position: relative;
+  margin-bottom: 8px;
+}
+p span {
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  color: #000;
+  animation: blink 3s steps(1) infinite;
+}
+p .found:before,
+p .found:after {
+  content: 'Found';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  mix-blend-mode: multiply;
+}
+p .save:before,
+p .save:after {
+  content: 'Save The Earth';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  mix-blend-mode: multiply;
+}
+p span:before {
+  clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+  color: #f0f;
+  animation: shiftright 1.5s steps(2) infinite;
+}
+p span:after {
+  clip-path: polygon(0 100%, 100% 100%, 100% 50%, 0 50%);
+  color: #0ff;
+  animation: shiftleft 1.7s steps(2) infinite;
+}
+@-moz-keyframes dance {
+  0%, 84%, 94% {
+    transform: skew(0deg);
+  }
+  85% {
+    transform: skew(5deg);
+  }
+  90% {
+    transform: skew(-5deg);
+  }
+  98% {
+    transform: skew(3deg);
+  }
+}
+@-webkit-keyframes dance {
+  0%, 84%, 94% {
+    transform: skew(0deg);
+  }
+  85% {
+    transform: skew(5deg);
+  }
+  90% {
+    transform: skew(-5deg);
+  }
+  98% {
+    transform: skew(3deg);
+  }
+}
+@-o-keyframes dance {
+  0%, 84%, 94% {
+    transform: skew(0deg);
+  }
+  85% {
+    transform: skew(5deg);
+  }
+  90% {
+    transform: skew(-5deg);
+  }
+  98% {
+    transform: skew(3deg);
+  }
+}
+@keyframes dance {
+  0%, 84%, 94% {
+    transform: skew(0deg);
+  }
+  85% {
+    transform: skew(5deg);
+  }
+  90% {
+    transform: skew(-5deg);
+  }
+  98% {
+    transform: skew(3deg);
+  }
+}
+@-moz-keyframes shiftleft {
+  0%, 87%, 100% {
+    transform: translate(0, 0) skew(0deg);
+  }
+  84%, 90% {
+    transform: translate(-8px, 0) skew(20deg);
+  }
+}
+@-webkit-keyframes shiftleft {
+  0%, 87%, 100% {
+    transform: translate(0, 0) skew(0deg);
+  }
+  84%, 90% {
+    transform: translate(-8px, 0) skew(20deg);
+  }
+}
+@-o-keyframes shiftleft {
+  0%, 87%, 100% {
+    transform: translate(0, 0) skew(0deg);
+  }
+  84%, 90% {
+    transform: translate(-8px, 0) skew(20deg);
+  }
+}
+@keyframes shiftleft {
+  0%, 87%, 100% {
+    transform: translate(0, 0) skew(0deg);
+  }
+  84%, 90% {
+    transform: translate(-8px, 0) skew(20deg);
+  }
+}
+@-moz-keyframes shiftright {
+  0%, 87%, 100% {
+    transform: translate(0, 0) skew(0deg);
+  }
+  84%, 90% {
+    transform: translate(8px, 0) skew(20deg);
+  }
+}
+@-webkit-keyframes shiftright {
+  0%, 87%, 100% {
+    transform: translate(0, 0) skew(0deg);
+  }
+  84%, 90% {
+    transform: translate(8px, 0) skew(20deg);
+  }
+}
+@-o-keyframes shiftright {
+  0%, 87%, 100% {
+    transform: translate(0, 0) skew(0deg);
+  }
+  84%, 90% {
+    transform: translate(8px, 0) skew(20deg);
+  }
+}
+@keyframes shiftright {
+  0%, 87%, 100% {
+    transform: translate(0, 0) skew(0deg);
+  }
+  84%, 90% {
+    transform: translate(8px, 0) skew(20deg);
+  }
+}
+@-moz-keyframes blink {
+  0%, 50%, 85%, 100% {
+    color: #000;
+  }
+  87%, 95% {
+    color: transparent;
+  }
+}
+@-webkit-keyframes blink {
+  0%, 50%, 85%, 100% {
+    color: #000;
+  }
+  87%, 95% {
+    color: transparent;
+  }
+}
+@-o-keyframes blink {
+  0%, 50%, 85%, 100% {
+    color: #000;
+  }
+  87%, 95% {
+    color: transparent;
+  }
+}
+@keyframes blink {
+  0%, 50%, 85%, 100% {
+    color: #000;
+  }
+  87%, 95% {
+    color: transparent;
+  }
+}
