@@ -1,18 +1,34 @@
 "use strict";
 
-const { getUserById } = require("./db");
+const { getUserByUUID } = require("./db");
 
 async function requireAdmin(req, res, next) {
-  const { userId } = req.session;
-  if (!userId) {
+  const { uuid } = req.session;
+  if (!uuid) {
     res.status(404).send("No user found.");
   }
-  await getUserById(userId, ({ status, message, user }) => {
+  await getUserByUUID(uuid, ({ status, message, user }) => {
     if (status !== 200) {
       return res.status(status).send({ message });
     }
     if (user.role != "admin") {
       return res.status(403).send({ message: "User is not admin." });
+    }
+    next();
+  });
+}
+
+async function requireCurrentUser(req, res, next) {
+  const { uuid } = req.session;
+  if (!uuid) {
+    res.status(404).send("No user found.");
+  }
+  await getUserByUUID(uuid, ({ status, message, user }) => {
+    if (status !== 200) {
+      return res.status(status).send({ message });
+    }
+    if (user.role != "admin" && uuid != req.params.id) {
+      return res.status(403).send({ message: "Cannot edit other users." });
     }
     next();
   });
@@ -36,6 +52,7 @@ async function requireLoggedIn(req, res, next) {
 
 module.exports = {
   requireAdmin,
+  requireCurrentUser,
   requireLoggedIn,
   requireLoggedOut,
 };

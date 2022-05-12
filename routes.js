@@ -2,12 +2,20 @@
 
 const express = require("express");
 const router = express.Router();
-const { authenticate, createUser, getUsers } = require("./db");
+const {
+  authenticate,
+  createUser,
+  deleteUser,
+  editUser,
+  getUsers,
+} = require("./db");
 const {
   requireAdmin,
+  requireCurrentUser,
   requireLoggedIn,
   requireLoggedOut,
 } = require("./middleware");
+const { uploadImages } = require("./upload-images");
 
 router.get("/", requireLoggedIn, function (_, res) {
   res.sendFile("index.html", { root: __dirname + "/public/html" });
@@ -27,7 +35,7 @@ router.post("/signup", function (req, res) {
       res.status(status).send({ message });
     } else {
       req.session.loggedIn = true;
-      req.session.userId = user.id;
+      req.session.uuid = user.uuid;
       req.session.save(
         (error) => error && console.error("Unable to save session:", error)
       );
@@ -50,7 +58,7 @@ router.post("/login", function (req, res) {
       res.status(401).send({ message: "Incorrect email or password." });
     } else {
       req.session.loggedIn = true;
-      req.session.userId = user.id;
+      req.session.uuid = user.uuid;
       req.session.save(
         (error) => error && console.error("Unable to save session:", error)
       );
@@ -87,6 +95,55 @@ router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
       res.status(status).send({ message, users });
     }
   });
+});
+
+router.post("/users", requireAdmin, function (req, res) {
+  const { name, email, password } = req.body;
+  return createUser(name, email, password, ({ status, message }) => {
+    res.status(status).send({ message });
+  });
+});
+
+router.put("/users/:id", requireCurrentUser, function (req, res) {
+  const userId = req.params.id;
+  const { name, password, email, role } = req.body;
+  let attribute, value;
+  // only edit one attribute per request
+  if (name != undefined) {
+    attribute = "name";
+    value = name;
+  } else if (password != undefined) {
+    attribute = "password";
+    value = password;
+  } else if (email != undefined) {
+    attribute = "email";
+    value = email;
+  } else if (role != undefined) {
+    attribute = "role";
+    value = role;
+  } else {
+    res.status(400).send({ message: "No params provided, nothing to change." });
+  }
+
+  return editUser(userId, attribute, value, ({ status, message }) => {
+    res.status(status).send({ message });
+  });
+});
+
+router.delete("/users/:id", requireAdmin, function (req, res) {
+  const userId = req.params.id;
+  deleteUser(userId, ({ status, message }) => {
+    res.status(status).send({ message });
+  });
+});
+
+router.get("/upload-test", requireLoggedIn, function (req, res) {
+  res.sendFile("upload-test.html", { root: __dirname + "/public/html" });
+});
+
+router.post("/upload-avatar-image", uploadImages.array("files"), function (req, res) {
+  console.info(req.files);
+  res.status(200).send("POST upload avatar image success");
 });
 
 router.use(function (_, res) {
