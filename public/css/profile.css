@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap%27');
+
+body {
+    font-family: 'Signika Negative', sans-serif;
+}
+
+img {
+    width: 10%;
+}
+
+#profile-page {
+    margin: 2%;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: 50% 50%;
+}
+
+#avatar button {
+    grid-column: 1 / span 1;
+    grid-row: 2;
+}
+
+h1 {
+    margin: auto;
+    padding: 1%;
+    max-width: 95%;
+    text-align: center;
+    border: outset 2px #369384;
+    background: linear-gradient(45deg, #49BEAA, #4390D8);
+    border-bottom-right-radius: 100px;
+    border-top-left-radius: 100px;
+}
+
+.header {
+    padding-top: 60px;
+    color: #444;
+    font-size: 20px;
+    margin: auto;
+    line-height: 50px;
+}
