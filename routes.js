@@ -228,7 +228,9 @@ router.post(
 );
 
 router.use(function (_, res) {
-  res.status(404).send("There is nothing here, 404.");
+  res.status(404).sendFile("404.html", {
+    root: __dirname + "/public/html",
+  });
 });
 
 module.exports = router;
