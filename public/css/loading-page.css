@@ -1,0 +1,35 @@
+* {
+    margin: 0%;
+}
+
+
+.container{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: repeat(5, 25%);
+    grid-template-rows: repeat(5, 25%);
+    height: 100vh;
+    width: 100%;
+    background: black;
+}
+
+
+.animation{
+    grid-column:  3/ 4;
+    grid-row: 1 / 5;
+    position: static;
+    background: #000 url(/public/img/hourglass2.gif) no-repeat center;
+    background-size: 56%;
+    height:40vh;
+    color: white;
+
+}
+
+.tip-message{
+    grid-column:  3/ 3;
+    grid-row: 4 / 5;
+    border: 2px solid red;
+    margin-top: 30px;
+    color: white;
+}
