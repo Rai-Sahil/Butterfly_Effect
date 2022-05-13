@@ -147,6 +147,10 @@ body {
     border: darkgrey solid;
 }
 
+#info {
+    font-size: 15pt;
+}
+
 /*Wave Animation*/
 .anime {
     position: relative;
