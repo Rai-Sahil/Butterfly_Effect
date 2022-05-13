@@ -142,7 +142,7 @@ router.get(
   "/users/:id",
   requireLoggedIn,
   requireCurrentUser,
-  function (_, res) {
+  function (req, res) {
     const uuid = req.params.id;
     return getUserByUUID(uuid, ({ status, message, user }) => {
       if (status !== 200) {
