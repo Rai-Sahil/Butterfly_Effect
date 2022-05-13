@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 
 async function authenticate(email, password, callback) {
   const connection = await mysql.createConnection(connectionParams);
-  const query = `SELECT * FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
+  const query = `SELECT uuid, name, email, password FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
 
   try {
     const [[user]] = await connection.query(query, [email]);
@@ -15,7 +15,7 @@ async function authenticate(email, password, callback) {
     } else {
       const passwordsMatch = await bcrypt.compare(password, user.password);
       if (passwordsMatch) {
-        return callback(user);
+        return callback({name: user.name, email: user.email, uuid: user.uuid});
       } else {
         return callback(null);
       }
