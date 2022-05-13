@@ -32,10 +32,31 @@ const users = [
   ],
 ];
 
+//question
+const questions = [
+  ["Should I turn on the A/C?"],
+  ["Should I go there?"],
+  ["What is carbon sink?"]
+]
+
+//question_id | text | environment | comfort | next_question
+const choices = [
+  [1, "Yes", -5, 5, 2],
+  [1, "No", 0, -5, 2],
+  [2, "Yes", 5, 5, 3],
+  [2, "No", 0, -5, 3],
+  [3, "Forest", 2, 0, 1],
+  [3, "Soil", 2, 0, 1],
+  [3, "Ocean", 2, 0, 1],
+  [3, "All", 6, 0, 1]
+]
+
 module.exports = {
   dbName,
   dbUserTable,
   connectionParams,
   saltRounds,
   users,
+  questions,
+  choices,
 };
