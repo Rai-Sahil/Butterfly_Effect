@@ -1,8 +1,10 @@
 "use strict";
 
-function init() {
+function initlogin() {
   console.info("Client script loaded.");
 
+<<<<<<< HEAD
+=======
   const sign_in_btn = document.querySelector("#sign-in-btn");
   const sign_up_btn = document.querySelector("#sign-up-btn");
   const container = document.querySelector(".container");
@@ -21,6 +23,7 @@ function init() {
     elem.style.top = "0";
   }
 
+>>>>>>> a4a6cd3329a3aa75255a4d26ff33ae1e3f7d966b
   function DelayRedirect() {
     setTimeout(function () {
       // dvCountDown.style.display = "none";
@@ -72,8 +75,13 @@ function init() {
               document.getElementById("login-error-message").innerHTML =
                 responseJSON.message;
             } else {
+<<<<<<< HEAD
+              sessionStorage.setItem("userId", responseJSON.user.ID);
+              
+=======
               sessionStorage.setItem("userId", responseJSON.user.uuid);
               slideIn();
+>>>>>>> a4a6cd3329a3aa75255a4d26ff33ae1e3f7d966b
               DelayRedirect();
             }
           }
@@ -83,12 +91,17 @@ function init() {
     });
 }
 
-document.onreadystatechange = () => {
+
+
+document.addEventListener('readystatechange', (event) => {
+  
   if (document.readyState === "complete") {
-    console.info("Document fully loaded.");
-    init();
+    console.info("Init login Starting Now");
+    initlogin();
   }
-};
+}
+
+);
 
 let image = document.getElementById("image");
 let image2 = document.getElementById("image2");

@@ -1,15 +1,9 @@
 "use strict";
 
-function init() {
+function initsignup() {
   console.info("Client script loaded.");
 
-  function slideIn() {
-    var elem = document.getElementById("box1");
-    elem.style.transition = "top 0.5s ease-in 0s";
-    elem.style.top = "0";
-  }
-
-  function DelayRedirect() {
+  function DelayRedirect2() {
     setTimeout(function () {
       // dvCountDown.style.display = "none";
       window.location.replace("/");
@@ -68,8 +62,8 @@ function init() {
                 responseJSON.message;
             } else {
               sessionStorage.setItem("userId", responseJSON.user.ID);
-              slideIn();
-              DelayRedirect();
+             
+              DelayRedirect2();
             }
           }
         },
@@ -78,9 +72,22 @@ function init() {
     });
 }
 
-document.onreadystatechange = () => {
-  if (document.readyState === "complete") {
-    console.info("Document fully loaded.");
-    init();
+
+
+document.addEventListener('readystatechange', (event) => {
+  
+    if (document.readyState === "complete") {
+      console.info("Init signup Starting Now");
+      initsignup();
+    }
   }
-};
+  
+  );
+
+
+
+
+
+
+
+
