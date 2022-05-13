@@ -1,13 +1,7 @@
 "use strict";
 
-function init() {
+function initlogin() {
   console.info("Client script loaded.");
-
-  function slideIn() {
-    var elem = document.getElementById("box1");
-    elem.style.transition = "top 0.5s ease-in 0s";
-    elem.style.top = "0";
-  }
 
   function DelayRedirect() {
     setTimeout(function () {
@@ -61,7 +55,7 @@ function init() {
                 responseJSON.message;
             } else {
               sessionStorage.setItem("userId", responseJSON.user.ID);
-              slideIn();
+              
               DelayRedirect();
             }
           }
@@ -71,12 +65,17 @@ function init() {
     });
 }
 
-document.onreadystatechange = () => {
+
+
+document.addEventListener('readystatechange', (event) => {
+  
   if (document.readyState === "complete") {
-    console.info("Document fully loaded.");
-    init();
+    console.info("Init login Starting Now");
+    initlogin();
   }
-};
+}
+
+);
 
 let image = document.getElementById("image");
 let image2 = document.getElementById("image2");

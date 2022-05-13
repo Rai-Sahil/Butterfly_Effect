@@ -28,7 +28,7 @@ router.get("/", requireLoggedIn, function (_, res) {
 });
 
 router.get("/signup", requireLoggedOut, function (req, res) {
-  res.sendFile("signup.html", {
+  res.sendFile("login.html", {
     root: __dirname + "/public/html",
   });
 });
