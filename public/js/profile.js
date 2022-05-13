@@ -14,19 +14,6 @@ function init() {
     xhr.send();
   }
 
-  ajaxGET(`/users/${sessionStorage.getItem("userId")}`, (data, status) => {
-    if (data) {
-      const { user, message } = JSON.parse(data);
-      console.log("user:", user);
-      if (status !== 200) {
-        document.getElementById("profile-error-message").innerHTML = message;
-      } else {
-        document.getElementById("name-input").value = user.name;
-        document.getElementById("email-input").value = user.email;
-      }
-    }
-  });
-
   function ajaxPUT(url, callback, data) {
     const params =
       typeof data == "string"
@@ -51,34 +38,54 @@ function init() {
     xhr.send(params);
   }
 
-  ajaxGET("/avatar-image", (data, status) => {
-    if (status == 200) {
-      const avatarImageElement = document.getElementById("avatar-image");
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      const img = new Image();
-      img.src="/avatar-image"
-      img.onload = () => {
-        const scale = Math.min(canvas.width / img.width, canvas.height / img.height);
-        const left = canvas.width / 2 - img.width * scale / 2;
-        const top = canvas.height / 2 - (img.height * scale) / 2;
-        
-        ctx.drawImage(img, left, top)
+  function loadAvatarImage() {
+    return ajaxGET("/avatar-image", (data, status) => {
+      if (status == 200) {
+        const avatarImageElement = document.getElementById("avatar-image");
+        const canvas = document.createElement("canvas");
+        canvas.id = "avatar-image"
+        const ctx = canvas.getContext("2d");
+        const img = new Image();
+        img.src = "/avatar-image";
+        img.onload = () => {
+          const scale = Math.min(
+            canvas.width / img.width,
+            canvas.height / img.height
+          );
+          const left = canvas.width / 2 - (img.width * scale) / 2;
+          const top = canvas.height / 2 - (img.height * scale) / 2;
+
+          ctx.drawImage(img, left, top);
+        };
+        avatarImageElement.replaceWith(canvas);
       }
-      avatarImageElement.replaceWith(canvas)
-    }
-  });
+    });
+  }
 
   function uploadAvatarImage(event) {
     event.preventDefault();
     const [avatarFile] = document.getElementById("avatar-input").files;
-    const formData = new FormData()
+    const formData = new FormData();
     formData.append("files", avatarFile);
     return fetch("/upload-avatar-image", {
       method: "POST",
       body: formData,
-    })
+    }).then(() => {loadAvatarImage()});
   }
+
+  ajaxGET(`/users/${sessionStorage.getItem("userId")}`, (data, status) => {
+    if (data) {
+      const { user, message } = JSON.parse(data);
+      console.log("user:", user);
+      if (status !== 200) {
+        document.getElementById("profile-error-message").innerHTML = message;
+      } else {
+        document.getElementById("name-input").value = user.name;
+        document.getElementById("email-input").value = user.email;
+      }
+    }
+  });
+  loadAvatarImage();
 
   document
     .getElementById("avatar-upload")
