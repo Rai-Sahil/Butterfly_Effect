@@ -43,7 +43,7 @@ function init() {
       if (status == 200) {
         const avatarImageElement = document.getElementById("avatar-image");
         const canvas = document.createElement("canvas");
-        canvas.id = "avatar-image"
+        canvas.id = "avatar-image";
         const ctx = canvas.getContext("2d");
         const img = new Image();
         img.src = "/avatar-image";
@@ -70,7 +70,9 @@ function init() {
     return fetch("/upload-avatar-image", {
       method: "POST",
       body: formData,
-    }).then(() => {loadAvatarImage()});
+    }).then(() => {
+      loadAvatarImage();
+    });
   }
 
   ajaxGET(`/users/${sessionStorage.getItem("userId")}`, (data, status) => {
