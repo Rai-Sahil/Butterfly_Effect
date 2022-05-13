@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Editor</title>
+    <link rel="stylesheet" href="/css/question-edit.css" />
+</head>
+
+<body>
+    <div class="mainframe">
+        <div class="anime">
+            <div class="container">
+                <div class="header">
+                    <div class="header-container">
+                        <span id="welcome">Welcome to the Game Editor</span>
+                    </div>
+                </div>
+                <div class="title-question"><div class="title-container">Questions</div></div>
+                <div class="title-choice"><div class="title-container">Choices</div></div>
+                <div class="question-column">
+                        <div id="questions"></div>
+                    <div class="adding" id="add-questions">
+                        <img src="../img/add.png" alt="">
+                    </div>
+                </div>
+                <div class="choice-column">
+                    <div id="options"></div>
+                    <div class="adding" id="add-choices">
+                        <img src="../img/add.png" alt="">
+                    </div>
+                </div>
+                <div class="footer">
+                    <div class="footer-container">
+                        <div class="footer-button"><a href="/"><img src="../img/home.png" alt="" title="Home"></a></div>
+                        <div class="footer-button"><a href="#"><img src="../img/tips.png" alt="" title="Tips"></a></div>
+                        <div class="footer-button"><a href="#"><img src="../img/setting.png" alt="" title="Settings"></a></div>
+                        <div class="footer-button"><a href="#"><img src="../img/quit.png" alt="" title="Exit"></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--Add new question modal-->
+    <div class="modal-wrap display-none" id="add-q">
+        <div class="modal">
+            <img src="../img/edit.png" alt="">
+            <h3>Add New Question</h3>
+            <textarea placeholder="Add new question here" class="large-input" id="add-new-question"></textarea><br>
+            <input type="submit" value="Add" class="modal-button-primary" id="add-new">
+            <button class="modal-button" id="new-question-close">Cancel</button>
+        </div>
+    </div>
+
+    <!--Add new choice modal-->
+    <div class="modal-wrap display-none" id="add-c">
+        <div class="modal">
+            <img src="../img/edit.png" alt="">
+            <h3>Add New Choice</h3>
+            <div class="input-container">
+                <table>
+                    <tr>
+                        <td>Choice Text</td>
+                        <td><input type="text" class="small-input" id="al1"></td>
+                    </tr>
+                    <tr>
+                        <td>Environment</td>
+                        <td><input type="number" class="small-input" id="al2"></td>
+                    </tr>
+                    <tr>
+                        <td>Happiness</td>
+                        <td><input type="number" class="small-input" id="al3"></td>
+                    </tr>
+                    <tr>
+                        <td>Next Question ID</td>
+                        <td><input type="number" class="small-input" id="al4"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <input type="submit" value="Add" class="modal-button-primary" id="insert-choice">
+            <button class="modal-button" id="new-choice-close">Cancel</button>
+        </div>
+    </div>
+
+    <!--Edit question modal-->
+    <div class="modal-wrap display-none" id="edit-q">
+        <div class="modal">
+            <img src="../img/edit.png" alt="">
+            <h3>Edit Question</h3>
+            <textarea class="large-input" id="edit-question"></textarea><br>
+            <input type="submit" value="Update" class="modal-button-primary" id="update-question">
+            <button class="modal-button" id="edit-question-close">Cancel</button>
+        </div>
+    </div>
+
+    <!--Edit choice modal-->
+    <div class="modal-wrap display-none" id="edit-c">
+        <div class="modal">
+            <img src="../img/edit.png" alt="">
+            <h3>Edit Choice</h3>
+            <div class="input-container">
+                <table>
+                    <tr>
+                        <td>Choice Text</td>
+                        <td><input type="text" class="small-input" id="l1"></td>
+                    </tr>
+                    <tr>
+                        <td>Environment</td>
+                        <td><input type="number" class="small-input" id="l2"></td>
+                    </tr>
+                    <tr>
+                        <td>Happiness</td>
+                        <td><input type="number" class="small-input" id="l3"></td>
+                    </tr>
+                    <tr>
+                        <td>Next Question ID</td>
+                        <td><input type="number" class="small-input" id="l4"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <input type="submit" value="Update" class="modal-button-primary" id="update-choice">
+            <button class="modal-button" id="edit-choice-close">Cancel</button>
+        </div>
+    </div>
+
+    <!--Popup info modal-->
+    <div class="modal-wrap display-none" id="popup">
+        <div class="modal">
+            <img src="../img/exclamation.png" alt="">
+            <h2 id="info"></h2>
+            <button class="modal-button" id="popup-close">OK</button>
+        </div>
+    </div>
+
+
+    <!--Templates-->
+    <template id="question-card">
+        <div class="question-card">
+            <div class="question-num" id="q-num">1</div>
+            <div class="question-content"><span id="text">What is carbon sink?</span> (<span id="q-id"></span>)</div>
+            <div class="edit-question"><img src="../img/edit.png" alt="" class="edit-icon" id="edit"></div>
+            <div class="delete-question"><img src="../img/delete.png" alt="" class="edit-icon" id="delete"></div>
+        </div>
+    </template>
+
+    <template id="option-card">
+        <div class="question-card">
+            <div class="question-num" id="opt-num">1</div>
+            <div class="question-content" id="opt-text">Yes</div>
+            <div class="edit-question"><img src="../img/edit.png" alt="" class="edit-icon" id="edit-option"></div>
+            <div class="delete-question"><img src="../img/delete.png" alt="" class="edit-icon" id="delete-option"></div>
+        </div>
+    </template>
+
+
+
+
+
+    <script type="text/javascript" src="js/question-edit.js"></script>
+</body>
+
+</html>
