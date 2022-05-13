@@ -5,8 +5,9 @@ const mysql = require("mysql2/promise");
 const { dbName, dbUserTable, connectionParams, users } = require("./constants");
 
 async function initDB() {
+  const {database, ...connectWithoutDB} = connectionParams;
   const connection = await mysql.createConnection({
-    ...connectionParams,
+    ...connectWithoutDB,
     multipleStatements: true,
   });
 
