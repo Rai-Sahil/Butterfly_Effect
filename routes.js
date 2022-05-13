@@ -125,7 +125,7 @@ router.get("/profile", requireLoggedIn, function (req, res) {
 
 router.get("/rules", requireLoggedIn, function (req, res) {
   res.sendFile("rules.html", {
-    root: __dirname + "/rules/html",
+    root: __dirname + "/public/html",
   });
 });
 
