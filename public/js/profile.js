@@ -6,8 +6,8 @@ function init() {
   function ajaxGET(path, callback) {
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
-      if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-        callback(this.responseText);
+      if (this.readyState == XMLHttpRequest.DONE) {
+        callback(this.responseText, this.status);
       }
     };
     xhr.open("GET", path);
@@ -16,8 +16,14 @@ function init() {
 
   ajaxGET(`/users/${sessionStorage.getItem("userId")}`, (data, status) => {
     if (data) {
-      const responseJSON = JSON.parse(data);
-      console.log(responseJSON);
+      console.log("status:", status)
+      const {user, message} = JSON.parse(data);
+      if (status !== 200) {
+        document.getElementById("profile-error-message").innerHTML = message; 
+      } else {
+        document.getElementById("name-input").value = user.name;
+        document.getElementById("email-input").value = user.email;
+      }
     }
   });
 }
