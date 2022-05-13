@@ -16,8 +16,8 @@ function init() {
 
   ajaxGET(`/users/${sessionStorage.getItem("userId")}`, (data, status) => {
     if (data) {
-      console.log("status:", status)
       const {user, message} = JSON.parse(data);
+      console.log("user:", user)
       if (status !== 200) {
         document.getElementById("profile-error-message").innerHTML = message; 
       } else {
@@ -25,6 +25,24 @@ function init() {
         document.getElementById("email-input").value = user.email;
       }
     }
+  });
+
+  document.getElementById("name-edit").addEventListener("click", ()=> {
+    document.getElementById("name-input").disabled = false;
+    document.getElementById("email-input").disabled = true;
+    document.getElementById("password-input").disabled = true;
+  })
+
+  document.getElementById("email-edit").addEventListener("click", () => {
+    document.getElementById("name-input").disabled = true;
+    document.getElementById("email-input").disabled = false;
+    document.getElementById("password-input").disabled = true;
+  });
+
+  document.getElementById("password-edit").addEventListener("click", () => {
+    document.getElementById("name-input").disabled = true;
+    document.getElementById("email-input").disabled = true;
+    document.getElementById("password-input").disabled = false;
   });
 }
 
