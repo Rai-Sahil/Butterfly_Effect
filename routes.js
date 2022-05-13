@@ -129,6 +129,12 @@ router.get("/rules", requireLoggedIn, function (req, res) {
   });
 });
 
+router.get("/admin-dashboard", requireLoggedIn, requireAdmin, function (req, res) {
+  res.sendFile("admin-dashboard.html", {
+    root: __dirname + "/public/html",
+  });
+});
+
 router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
   return getUsers(({ status, message, users }) => {
     if (status !== 200) {
