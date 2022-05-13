@@ -218,17 +218,16 @@ router.get("/upload-test", requireLoggedIn, function (req, res) {
 router.get("/avatar-image", requireLoggedIn, function (req, res) {
   const { uuid } = req.session;
   const avatarPath = getAvatarPathByUUID(uuid);
-  if (!avatarPath) {
-    res.status(404).send("No avatar image found.");
+  if (avatarPath == null) {
+    return res.status(404).send("No avatar image found.");
   }
-  res.status(200).sendFile(avatarPath);
+  return res.status(200).sendFile(avatarPath);
 });
 
 router.post(
   "/upload-avatar-image",
   uploadAvatarImage.array("files"),
   function (req, res) {
-    console.info(req.files);
     res.status(200).send("POST upload avatar image success");
   }
 );

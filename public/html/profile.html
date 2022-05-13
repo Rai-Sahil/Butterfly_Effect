@@ -17,8 +17,9 @@
     </div>
     <div id="profile-page">
         <div id="avatar">
-            <img src="/img/avatar5.png" alt="avatar">
-            <button type="button" id="changeAvatar">Change Avatar</button>
+            <img id="avatar-image" src="/img/default-avatar.png" alt="avatar">
+            <input id="avatar-input" type="file" value="Upload Image" accept="image/png, image/gif, image/jpeg" />
+            <input type="submit" id="avatar-upload" value="Change Avatar" class="changeAvatar" />
         </div>
         <div id="user-information">
             <h2>Account Settings</h2>
@@ -46,7 +47,7 @@
                 <button type="button" id="password-save" class="profile-button" onclick="">Save</button>
             </div>
             <br>
-            <p id="profile-status-message">Successfully updated!</p>
+            <p id="profile-status-message" hidden></p>
             </form>
         </div>
     </div>
