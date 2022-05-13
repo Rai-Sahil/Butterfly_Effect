@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 
 async function authenticate(email, password, callback) {
   const connection = await mysql.createConnection(connectionParams);
-  const query = `SELECT * FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
+  const query = `SELECT uuid, name, email, password FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
 
   try {
     const [[user]] = await connection.query(query, [email]);
@@ -15,7 +15,11 @@ async function authenticate(email, password, callback) {
     } else {
       const passwordsMatch = await bcrypt.compare(password, user.password);
       if (passwordsMatch) {
-        return callback(user);
+        return callback({
+          name: user.name,
+          email: user.email,
+          uuid: user.uuid,
+        });
       } else {
         return callback(null);
       }
@@ -72,7 +76,7 @@ async function createUser(name, email, password, callback) {
 async function getUserByUUID(uuid, callback) {
   const connection = await mysql.createConnection(connectionParams);
 
-  const getUserByIdQuery = `SELECT * FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
+  const getUserByIdQuery = `SELECT uuid, name, email, role FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
   try {
     const [[user]] = await connection.query(getUserByIdQuery, uuid);
     if (!user) {
@@ -94,13 +98,7 @@ async function deleteUser(uuid, callback) {
   const connection = await mysql.createConnection(connectionParams);
   const deleteUserQuery = `DELETE FROM ${dbUserTable} WHERE uuid = ? LIMIT 1`;
   try {
-    const [{ affectedRows }] = await connection.query(deleteUserQuery, [uuid]);
-    if (affectedRows == 0) {
-      return callback({
-        status: 204,
-        message: "Successful attempt but no users deleted.",
-      });
-    }
+    await connection.query(deleteUserQuery, [uuid]);
     return callback({ status: 200, message: "Successfully deleted user." });
   } catch (error) {
     console.error("Error getting users: ", error);
@@ -108,24 +106,27 @@ async function deleteUser(uuid, callback) {
   }
 }
 
+async function isEmailInUse(email, uuid, connection) {
+  const getUserByEmailQuery = `SELECT * FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
+  const [existingUsers] = await connection.query(getUserByEmailQuery, [email]);
+  return existingUsers.length === 1 && uuid !== existingUsers[0].uuid;
+}
+
 async function editUser(uuid, attribute, value, callback) {
   const connection = await mysql.createConnection(connectionParams);
+  if (attribute == "email" && await isEmailInUse(value, uuid, connection)) {
+    return callback({ status: 409, message: "Email already in use." });
+  }
   const editUserQuery = `UPDATE ${dbUserTable} SET ${attribute} = ? WHERE uuid = ? LIMIT 1;`;
   if (attribute == "password") {
     value = await bcrypt.hash(value, saltRounds);
   }
   try {
-    const [{ changedRows }] = await connection.query(editUserQuery, [
-      value,
-      uuid,
-    ]);
-    if (changedRows == 0) {
-      return callback({
-        status: 204,
-        message: "Successful attempt but no changes made to user.",
-      });
-    }
-    return callback({ status: 200, message: "Successfully updated user." });
+    await connection.query(editUserQuery, [value, uuid]);
+    return callback({
+      status: 200,
+      message: `Successfully updated ${attribute}.`,
+    });
   } catch (error) {
     console.error("Error getting users: ", error);
     return callback({ status: 500, message: "Internal server error." });

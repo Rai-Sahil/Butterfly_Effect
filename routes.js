@@ -123,6 +123,12 @@ router.get("/profile", requireLoggedIn, function (req, res) {
   });
 });
 
+router.get("/rules", requireLoggedIn, function (req, res) {
+  res.sendFile("rules.html", {
+    root: __dirname + "/public/html",
+  });
+});
+
 router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
   return getUsers(({ status, message, users }) => {
     if (status !== 200) {
@@ -142,7 +148,7 @@ router.get(
   "/users/:id",
   requireLoggedIn,
   requireCurrentUser,
-  function (_, res) {
+  function (req, res) {
     const uuid = req.params.id;
     return getUserByUUID(uuid, ({ status, message, user }) => {
       if (status !== 200) {
@@ -212,17 +218,16 @@ router.get("/upload-test", requireLoggedIn, function (req, res) {
 router.get("/avatar-image", requireLoggedIn, function (req, res) {
   const { uuid } = req.session;
   const avatarPath = getAvatarPathByUUID(uuid);
-  if (!avatarPath) {
-    res.status(404).send("No avatar image found.");
+  if (avatarPath == null) {
+    return res.status(404).send("No avatar image found.");
   }
-  res.status(200).sendFile(avatarPath);
+  return res.status(200).sendFile(avatarPath);
 });
 
 router.post(
   "/upload-avatar-image",
   uploadAvatarImage.array("files"),
   function (req, res) {
-    console.info(req.files);
     res.status(200).send("POST upload avatar image success");
   }
 );
