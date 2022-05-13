@@ -26,16 +26,16 @@ $(document).ready(function () {
   });
 
   $('[data-toggle="tooltip"]').tooltip();
-  var actions = $("table td:last-child").html();
   // Append table with add row form on add new button click
   $(".add-new").click(function () {
     $(this).attr("disabled", "disabled");
     var index = $("table tbody tr:last-child").index();
+	var actions = $("table td:last-child").html();
     var row =
       "<tr>" +
-      '<td><input type="text" class="form-control" name="name" id="name"></td>' +
-      '<td><input type="text" class="form-control" name="department" id="department"></td>' +
-      '<td><input type="text" class="form-control" name="phone" id="phone"></td>' +
+      '<td><input type="text" class="form-control" name="name" id="new-user-name"></td>' +
+      '<td><input type="text" class="form-control" name="email" id="new-user-email"></td>' +
+      '<td><input type="text" class="form-control" name="password" id="new-user-password"></td>' +
       "<td>" +
       actions +
       "</td>" +
