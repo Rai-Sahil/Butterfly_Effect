@@ -14,6 +14,20 @@
 
 <body>
 
+  <template id="template-user-row">
+    <tr>
+      <td class="user-row-name"></td>
+      <td class="user-row-email"></td>
+      <td class="user-row-password">&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;</td>
+      <td>
+        <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+        <a class="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+        <a class="delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+      </td>
+    </tr>
+    <tr>
+  </template>
+
   <div class="navbar">
     <div class="navbar_left">
         <span class="logo appname">Butterfly Effect</span>
@@ -60,36 +74,6 @@
             </tr>
           </thead>
           <tbody id="user-table-body">
-            <tr>
-              <td>John Doe</td>
-              <td>jonhdoe@gmail.com</td>
-              <td>user</td>
-              <td>
-                <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                <a class="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                <a class="delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-              </td>
-            </tr>
-            <tr>
-              <td>Peter Parker</td>
-              <td>jonhdoe@gmail.com</td>
-              <td>123</td>
-              <td>
-                <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                <a class="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                <a class="delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-              </td>
-            </tr>
-            <tr>
-              <td>Fran Wilson</td>
-              <td>jonhdoe@gmail.com</td>
-              <td>123456</td>
-              <td>
-                <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                <a class="edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                <a class="delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-              </td>
-            </tr>
           </tbody>
         </table>
       </div>
