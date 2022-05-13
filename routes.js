@@ -10,6 +10,7 @@ const {
   editUser,
   getUsers,
 } = require("./db");
+const { getQuestions, getChoices, updateQuestion, updateChoice, deleteQuestion } = require("./game-db");
 const {
   requireAdmin,
   requireCurrentUser,
@@ -237,6 +238,42 @@ router.post(
     res.status(200).send("POST upload avatar image success");
   }
 );
+
+//game-db
+router.get("/question-edit", function (req, res) {
+  res.sendFile("question-edit.html", { root: __dirname + "/public/html" });
+});
+
+router.get("/questions", function (req, res) {
+  getQuestions(res);
+});
+
+router.post("/questions", function (req, res) {
+  res.setHeader("Content-Type", "application/json");
+  var { question, qid } = req.body;
+  updateQuestion(question, qid, ({ status, message }) => {
+    res.status(status).send({ message });
+  })
+});
+
+router.get("/choices", function (req, res) {
+  var qid = req.query["qid"];
+  getChoices(qid, res);
+});
+
+router.post("/choices", function (req, res) {
+  res.setHeader("Content-Type", "application/json");
+  var { questionID, optionID, text, envi, comf, nextQuestion } = req.body;
+  updateChoice(questionID, optionID, text, envi, comf, nextQuestion, ({ status, message }) => {
+    res.status(status).send({ message });
+  })
+});
+
+router.delete("/delete", function (req, res) {
+  var qid = req.query["qid"];
+  var oid = req.query["oid"];
+  deleteQuestion(qid, oid, res);
+});
 
 router.use(function (_, res) {
   res.status(404).sendFile("404.html", {
