@@ -80,7 +80,7 @@ function init() {
       const { user, message } = JSON.parse(data);
       console.log("user:", user);
       if (status !== 200) {
-        document.getElementById("profile-error-message").innerHTML = message;
+        document.getElementById("profile-status-message").innerHTML = message;
       } else {
         document.getElementById("name-input").value = user.name;
         document.getElementById("email-input").value = user.email;
