@@ -1,7 +1,19 @@
 "use strict";
 
-function init() {
+function initlogin() {
   console.info("Client script loaded.");
+
+  const sign_in_btn = document.querySelector("#sign-in-btn");
+  const sign_up_btn = document.querySelector("#sign-up-btn");
+  const container = document.querySelector(".container");
+
+  sign_up_btn.addEventListener("click", () => {
+    container.classList.add("sign-up-mode");
+  });
+
+  sign_in_btn.addEventListener("click", () => {
+    container.classList.remove("sign-up-mode");
+  });
 
   function slideIn() {
     var elem = document.getElementById("box1");
@@ -61,7 +73,7 @@ function init() {
                 responseJSON.message;
             } else {
               sessionStorage.setItem("userId", responseJSON.user.ID);
-              slideIn();
+              
               DelayRedirect();
             }
           }
@@ -71,9 +83,23 @@ function init() {
     });
 }
 
-document.onreadystatechange = () => {
+
+
+document.addEventListener('readystatechange', (event) => {
+  
   if (document.readyState === "complete") {
-    console.info("Document fully loaded.");
-    init();
+    console.info("Init login Starting Now");
+    initlogin();
   }
-};
+}
+
+);
+
+let image = document.getElementById("image");
+let image2 = document.getElementById("image2");
+let images = ["./img/blue.svg", "./img/blueflap.svg"];
+setInterval(function () {
+  let random = Math.floor(Math.random() * 2);
+  image.src = images[random];
+  image2.src = images[random];
+}, 250);

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/img/favicon.svg" type="image/svg">
     <link rel="stylesheet" href="/css/profile.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Profile</title>
 </head>
 
@@ -16,22 +17,41 @@
     </div>
     <div id="profile-page">
         <div id="avatar">
-            <img src="/img/earth.svg" alt="">
-            <button type="button">Change Avatar</button>
+            <img id="avatar-image" src="/img/default-avatar.png" alt="avatar">
+            <input id="avatar-input" type="file" accept="image/png, image/gif, image/jpeg" />
+            <input type="submit" id="avatar-upload" value="Change Avatar" class="changeAvatar" />
         </div>
         <div id="user-information">
-            <label>NAME</label>
-            <input type="text" id="firstnameInput" class="profile-form" placeholder="Enter your full name">
-            <label>EMAIL ADDRESS</label>
-            <input type="text" id="emailInput" class="profile-form" placeholder="Enter your email">
-            <label>PASSWORD</label>
-            <input type="text" id="passwordInput" class="profile-form" placeholder="Enter your password">
+            <h2>Account Settings</h2>
+            <div id="name">
+                <label>NAME</label>
+                <br>
+                <input type="text" id="name-input" class="profile-form" placeholder="Enter your full name" disabled>
+                <button type="button" id="name-edit" class="profile-button" onclick="">Edit</button>
+                <button type="button" id="name-save" class="profile-button" onclick="">Save</button>
+            </div>
             <br>
-            <button type="button" class="profile-button" onclick="">Edit</button>
-            <button type="button" class="profile-button" onclick="">Save</button>
-            </form>
+            <div id="email">
+                <label>EMAIL ADDRESS</label>
+                <br>
+                <input type="text" id="email-input" class="profile-form" placeholder="Enter your email" disabled>
+                <button type="button" id="email-edit" class="profile-button" onclick="">Edit</button>
+                <button type="button" id="email-save" class="profile-button" onclick="">Save</button>
+            </div>
+            <br>
+            <div id="password">
+                <label>PASSWORD</label>
+                <br>
+                <input type="password" id="password-input" class="profile-form" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" disabled>
+                <button type="button" id="password-edit" class="profile-button" onclick="">Edit</button>
+                <button type="button" id="password-save" class="profile-button" onclick="">Save</button>
+            </div>
+            <br>
+            <p id="profile-status-message" hidden></p>
+
         </div>
     </div>
+    <script src="js/profile.js"></script>
 </body>
 
 </html>

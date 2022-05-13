@@ -2,12 +2,12 @@
 
 const { getUserByUUID } = require("./db");
 
-async function requireAdmin(req, res, next) {
+function requireAdmin(req, res, next) {
   const { uuid } = req.session;
   if (!uuid) {
     res.status(404).send("No user found.");
   }
-  await getUserByUUID(uuid, ({ status, message, user }) => {
+  return getUserByUUID(uuid, ({ status, message, user }) => {
     if (status !== 200) {
       return res.status(status).send({ message });
     }
@@ -18,12 +18,12 @@ async function requireAdmin(req, res, next) {
   });
 }
 
-async function requireCurrentUser(req, res, next) {
+function requireCurrentUser(req, res, next) {
   const { uuid } = req.session;
   if (!uuid) {
-    res.status(404).send("No user found.");
+    return res.status(404).send("No user found.");
   }
-  await getUserByUUID(uuid, ({ status, message, user }) => {
+  return getUserByUUID(uuid, ({ status, message, user }) => {
     if (status !== 200) {
       return res.status(status).send({ message });
     }
@@ -34,7 +34,7 @@ async function requireCurrentUser(req, res, next) {
   });
 }
 
-async function requireLoggedOut(req, res, next) {
+function requireLoggedOut(req, res, next) {
   if (req.session.loggedIn) {
     res.redirect("/");
   } else {
@@ -42,7 +42,7 @@ async function requireLoggedOut(req, res, next) {
   }
 }
 
-async function requireLoggedIn(req, res, next) {
+function requireLoggedIn(req, res, next) {
   if (!req.session.loggedIn) {
     res.redirect("/login");
   } else {

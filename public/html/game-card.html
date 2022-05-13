@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/img/favicon.svg" type="image/svg">
-    <title>Game Card</title>
+    <title>Game</title>
     <link rel="stylesheet" href="./css/game-card.css" />
 </head>
 
@@ -14,33 +14,47 @@
     <div class="mainframe">
         <div class="anime">
             <div class="container">
-                <div class="picture"><img src="../img/game/1.jpg" alt=""></div>
+                <div class="picture"><img src="../img/blue.svg" alt=""></div>
                 <div class="status">
-                    <div class="status-container" id="environ">
+                    <div class="status-container" id="environ" title="Environment">
                         <img src="../img/earth.svg" alt="">
-                        <div class="meter" id="envi-meter"></div>
+                        <div class="indicator-container">
+                            <div class="indicator" id="env-meter"></div>
+                        </div>
                     </div>
-                    <div class="status-container" id="comfort">
+                    <div class="status-container" id="comfort" title="Happiness">
                         <img src="../img/smileyface.svg" alt="">
-                        <div class="meter" id="comfort-meter"></div>
+                        <div class="indicator-container">
+                            <div class="indicator" id="com-meter"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="text">
-                    <div class="question">Should I turn on the A/C?</div>
-                    <div class="choices">
-                        <div class="choice-button">Yes, do it!</div>
-                        <div class="choice-button">No!</div>
-                    </div>
+                    <div class="question"></div>
+                    <div class="choices" id="choices-go-here"></div>
                 </div>
                 <div class="footer">
                     <div class="footer-container">
-                        <div class="footer-button"><a href="#"><img src="../img/home.png" alt=""></a></div>
-                        <div class="footer-button"><a href="#"><img src="../img/tips.png" alt=""></a></div>
-                        <div class="footer-button"><a href="#"><img src="../img/setting.png" alt=""></a></div>
-                        <div class="footer-button"><a href="#"><img src="../img/quit.png" alt=""></a></div>
+                        <div class="footer-button"><a href="/"><img src="../img/home.png" alt="" title="Home"></a></div>
+                        <div class="footer-button"><a href="#"><img src="../img/tips.png" alt="" title="Tips"></a></div>
+                        <div class="footer-button"><a href="#"><img src="../img/setting.png" alt="" title="Settings"></a></div>
+                        <div class="footer-button"><a href="#"><img src="../img/quit.png" alt="" title="Exit"></a></div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <template id="choice">
+        <div class="choice-button" id="option"></div>
+    </template>
+
+    <!--Modal-->
+    <div class="modal-wrap display-none" id="popup">
+        <div class="modal">
+            <img src="../img/exclamation.png" alt="">
+            <div id="info"></div>
+            <button class="modal-button" id="popup-close">OK</button>
         </div>
     </div>
 
