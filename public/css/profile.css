@@ -108,6 +108,16 @@ label{
     background-color: #49beaa;
 }
 
+p {
+    text-align: center;
+    margin: 5px 0 30px 140px;
+    border: outset 2px black;
+    background: #4290D8;
+    border-radius: 20px;
+    width: 40%;
+}
+
+
 @media screen and (max-width: 800px) {
 
     #profile-page{
@@ -149,4 +159,13 @@ label{
     #password{
         margin-bottom: 20px;
     }
+
+    input{
+        width: 50%;
+    }
+
+    p{
+        margin: 0 30px 10px 10px;
+    }
+
 }
