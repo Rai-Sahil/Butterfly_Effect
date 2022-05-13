@@ -240,15 +240,15 @@ router.post(
 );
 
 //game-db
-router.get("/question-edit", function (req, res) {
+router.get("/question-edit", requireLoggedIn, requireAdmin, function (req, res) {
   res.sendFile("question-edit.html", { root: __dirname + "/public/html" });
 });
 
-router.get("/questions", function (req, res) {
+router.get("/questions", requireLoggedIn,  function (req, res) {
   getQuestions(res);
 });
 
-router.post("/questions", function (req, res) {
+router.post("/questions", requireLoggedIn, requireAdmin, function (req, res) {
   res.setHeader("Content-Type", "application/json");
   var { question, qid } = req.body;
   updateQuestion(question, qid, ({ status, message }) => {
@@ -256,12 +256,12 @@ router.post("/questions", function (req, res) {
   })
 });
 
-router.get("/choices", function (req, res) {
+router.get("/choices", requireLoggedIn, function (req, res) {
   var qid = req.query["qid"];
   getChoices(qid, res);
 });
 
-router.post("/choices", function (req, res) {
+router.post("/choices", requireLoggedIn, requireAdmin, function (req, res) {
   res.setHeader("Content-Type", "application/json");
   var { questionID, optionID, text, envi, comf, nextQuestion } = req.body;
   updateChoice(questionID, optionID, text, envi, comf, nextQuestion, ({ status, message }) => {
@@ -269,7 +269,7 @@ router.post("/choices", function (req, res) {
   })
 });
 
-router.delete("/delete", function (req, res) {
+router.delete("/delete", requireLoggedIn, requireAdmin, function (req, res) {
   var qid = req.query["qid"];
   var oid = req.query["oid"];
   deleteQuestion(qid, oid, res);
