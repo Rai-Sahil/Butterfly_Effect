@@ -38,7 +38,6 @@ img {
   margin: 3%;
   border-radius: 20px;
   border: 2px solid #444;
-  background: rgb(255, 255, 255);
   background: linear-gradient(
     90deg,
     rgba(255, 255, 255, 1) 40%,
@@ -55,10 +54,10 @@ img {
   grid-column: 1 / span 1;
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: 85% 15%;
-  align-items: end;
+  grid-template-rows: 70% 15% 15%;
   justify-items: center;
   margin-right: 30px;
+  margin-top: -10px;
 }
 
 .changeAvatar {
@@ -76,7 +75,7 @@ img {
 #user-information {
   display: grid;
   grid-template-columns: 100%;
-  margin: -20px 0 -40px 35px;
+  margin: -20px 0 40px 35px;
 }
 
 input {
@@ -124,6 +123,10 @@ p {
   background: #4290d8;
   border-radius: 20px;
   width: 40%;
+}
+
+#avatar-input {
+  margin-bottom: 15px;
 }
 
 @media screen and (max-width: 800px) {
@@ -178,5 +181,9 @@ p {
 
   p {
     margin: 0 30px 10px 10px;
+  }
+
+  #avatar-input {
+    margin-left: 20px;
   }
 }
