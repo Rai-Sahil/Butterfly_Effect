@@ -123,6 +123,12 @@ router.get("/profile", requireLoggedIn, function (req, res) {
   });
 });
 
+router.get("/rules", requireLoggedIn, function (req, res) {
+  res.sendFile("rules.html", {
+    root: __dirname + "/public/html",
+  });
+});
+
 router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
   return getUsers(({ status, message, users }) => {
     if (status !== 200) {
