@@ -7,7 +7,6 @@ body {
   background-color: #49BEAA;
   margin: 0;
   padding: 0;
-  height: 100vh;
 }
 
 #app-name {
@@ -15,9 +14,10 @@ body {
   color: #F5DFBB;
   font-size: 30pt;
   margin-top: 1%;
+  text-shadow: -1px 0 #444, 0 2px #444, 2px 0 #444, 0 -2px #444;
 }
 
-#mainpage {
+#main-page {
   text-align: center;
 }
 
@@ -50,69 +50,40 @@ ul {
   background-color: darkblue;
 }
 
-@media screen and (max-width: 700px) {
-  #main-page {
-    margin-top: 35%;
-  }
-
-  img {
-    display: block;
-    margin: 0px auto;
-    width: 30%;
-    height: auto;
-    margin-top: 13vh;
-  }
-
-  #app-name {
-    margin-bottom: 10%;
-  }
-
-  #mainpage .main-options li {
-    margin-top: 5%;
-  }
+img{
+  width: 190px;
+  margin-top: 5%;
 }
 
-@media screen and (min-width: 701px) and (max-width: 1023px) {
-  img {
-    display: block;
-    margin: 0px auto;
-    width: 14%;
-    height: auto;
-    margin-top: 10%;
+li {
+  margin-bottom: 1.5%;
+  font-size: 20pt;
+}
+
+#app-name{
+  margin-bottom: 2%;
+  margin-top: -10px;
+  font-size: 40pt;
+}
+
+form{
+  margin-top: -1%;
+}
+
+@media screen and (max-width: 700px) {
+  img{
+    width: 150px;
+    margin-top: 12%;
   }
 
-  #app-name {
-    font-size: 35pt;
-  }
-
-  ul {
+  li {
+    margin-bottom: 4%;
     font-size: 20pt;
   }
-
-  #mainpage .main-options li {
-    margin-top: 3%;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  img {
-    display: block;
-    margin: 0px auto;
-    width: 15%;
-    height: auto;
-    margin-top: 8%;
-  }
-
-  #app-name {
-    font-size: 45pt;
-    margin-bottom: 5%;
-  }
-
-  ul {
-    font-size: 30pt;
-  }
-
-  #mainpage .main-options li {
-    margin-top: 2%;
+  
+  #app-name{
+    margin-bottom: 6%;
+    margin-top: -10px;
+    font-size: 35pt;
   }
 }
