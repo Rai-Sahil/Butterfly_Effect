@@ -23,33 +23,34 @@
         <div id="user-information">
             <h2>Account Settings</h2>
             <div id="name">
-            <label>NAME</label>
-            <br>
-            <input type="text" id="name-input" class="profile-form" placeholder="Enter your full name" disabled>
-            <button type="button" class="profile-button" onclick="">Edit</button>
-            <button type="button" class="profile-button" onclick="">Save</button>
+                <label>NAME</label>
+                <br>
+                <input type="text" id="name-input" class="profile-form" placeholder="Enter your full name" disabled>
+                <button type="button" id="name-edit" class="profile-button" onclick="">Edit</button>
+                <button type="button" id="name-save" class="profile-button" onclick="">Save</button>
             </div>
             <br>
             <div id="email">
-            <label>EMAIL ADDRESS</label>
-            <br>
-            <input type="text" id="email-input" class="profile-form" placeholder="Enter your email" disabled>
-            <button type="button" class="profile-button" onclick="">Edit</button>
-            <button type="button" class="profile-button" onclick="">Save</button>
+                <label>EMAIL ADDRESS</label>
+                <br>
+                <input type="text" id="email-input" class="profile-form" placeholder="Enter your email" disabled>
+                <button type="button" id="email-edit" class="profile-button" onclick="">Edit</button>
+                <button type="button" id="email-save" class="profile-button" onclick="">Save</button>
             </div>
             <br>
             <div id="password">
-            <label>PASSWORD</label>
-            <br>
-            <input type="text" id="password-input" class="profile-form" placeholder="Enter your password" disabled>
-            <button type="button" class="profile-button" onclick="">Edit</button>
-            <button type="button" class="profile-button" onclick="">Save</button>
+                <label>PASSWORD</label>
+                <br>
+                <input type="password" id="password-input" class="profile-form" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" disabled>
+                <button type="button" id="password-edit" class="profile-button" onclick="">Edit</button>
+                <button type="button" id="password-save" class="profile-button" onclick="">Save</button>
             </div>
             <br>
-            <p id="profile-error-message">&nbsp;</p>
+            <p id="profile-status-message">&nbsp;</p>
             </form>
         </div>
     </div>
 </body>
 <script src="js/profile.js"></script>
+
 </html>

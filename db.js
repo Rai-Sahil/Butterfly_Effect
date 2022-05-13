@@ -72,7 +72,7 @@ async function createUser(name, email, password, callback) {
 async function getUserByUUID(uuid, callback) {
   const connection = await mysql.createConnection(connectionParams);
 
-  const getUserByIdQuery = `SELECT * FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
+  const getUserByIdQuery = `SELECT uuid, name, email, role FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
   try {
     const [[user]] = await connection.query(getUserByIdQuery, uuid);
     if (!user) {
