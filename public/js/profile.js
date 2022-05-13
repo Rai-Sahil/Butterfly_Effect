@@ -51,6 +51,39 @@ function init() {
     xhr.send(params);
   }
 
+  ajaxGET("/avatar-image", (data, status) => {
+    if (status == 200) {
+      const avatarImageElement = document.getElementById("avatar-image");
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      const img = new Image();
+      img.src="/avatar-image"
+      img.onload = () => {
+        const scale = Math.min(canvas.width / img.width, canvas.height / img.height);
+        const left = canvas.width / 2 - img.width * scale / 2;
+        const top = canvas.height / 2 - (img.height * scale) / 2;
+        
+        ctx.drawImage(img, left, top)
+      }
+      avatarImageElement.replaceWith(canvas)
+    }
+  });
+
+  function uploadAvatarImage(event) {
+    event.preventDefault();
+    const [avatarFile] = document.getElementById("avatar-input").files;
+    const formData = new FormData()
+    formData.append("files", avatarFile);
+    return fetch("/upload-avatar-image", {
+      method: "POST",
+      body: formData,
+    })
+  }
+
+  document
+    .getElementById("avatar-upload")
+    .addEventListener("click", uploadAvatarImage);
+
   document.getElementById("name-edit").addEventListener("click", () => {
     document.getElementById("name-input").disabled = false;
     document.getElementById("email-input").disabled = true;
@@ -76,6 +109,7 @@ function init() {
         "profile-status-message"
       );
       statusMessageHTML.innerHTML = message;
+      statusMessageHTML.hidden = false;
       if (status != 200) {
         statusMessageHTML.style.color = "red";
       } else {
