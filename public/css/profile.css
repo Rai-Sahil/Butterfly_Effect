@@ -4,15 +4,7 @@ body {
     font-family: 'Signika Negative', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #49BEAA;
-}
-
-#rectangle {
-    position: absolute;
-    height: 360px;
-    width: 1220px;
-    background-color: #F5DFBB;
-
+    background-color: #49beaa;
 }
 
 h1 {
@@ -35,17 +27,126 @@ h1 {
 }
 
 img {
-    width: 10%;
+    width: 160px;
+    border-radius: 15px;
+    border: 5px solid #444;
+    margin-bottom: 10px;
 }
 
-#profile-page {
-    margin: 2%;
+#profile-page{
+    padding: 3%;
+    margin: 3%;
+    border-radius: 20px;
+    border: 2px solid #444;
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 40%, rgba(245,223,187,1) 40%, rgba(245,223,187,1) 100%);    
     display: grid;
-    grid-template-columns: 30% 70%;
-    grid-template-rows: 50% 50%;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: 100%;
+    align-items: center;
 }
 
-#avatar button {
+#avatar{
     grid-column: 1 / span 1;
-    grid-row: 2;
+    display: grid;
+    grid-template-columns: 100%;;
+    grid-template-rows: 85% 15%;
+    align-items: end;
+    justify-items: center;
+    margin-right: 30px;
+}
+
+#changeAvatar {
+    background-color: #4290D8;
+    border: none;
+    font-weight: bold;
+    font-size: 14pt;
+    color: #F5DFBB;
+    padding: 10px 20px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+#user-information{
+    display: grid;
+    grid-template-columns: 100%;
+    margin: -20px 0 -40px 35px;
+}
+
+input[type="text"]{
+    border: 2px solid #4290D8;
+    border-radius: 4px;
+    width: 65%;
+}
+
+input:focus{
+    background-color: #4290D8;
+}
+
+label{
+    font-size: 15pt;
+}
+
+.profile-button {
+    background-color: #4290D8;
+    border: none;
+    font-weight: bold;
+    font-size: 14pt;
+    color: black;
+    padding: 5px 10px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+#changeAvatar:hover{
+    background-color: #49beaa;
+}
+
+.profile-button:hover{
+    background-color: #49beaa;
+}
+
+@media screen and (max-width: 800px) {
+
+    #profile-page{
+        padding: 3%;
+        margin: 3%;
+        border-radius: 20px;
+        border: 2px solid #444;
+        background: rgb(255,255,255);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 50%, rgba(245,223,187,1) 50%, rgba(245,223,187,1) 100%);        
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 50% 50%;
+        align-items: center;
+    }
+
+    #user-information{
+        margin-top: 20px;
+        justify-items: center;
+    }
+
+    h2{
+        margin-top: 35px;
+    }
+
+    input[type="text"]{
+        border: 2px solid #4290D8;
+        border-radius: 4px;
+        width: 50%;
+    }
+
+    img{
+        margin-left: 25px;
+    }
+
+    #changeAvatar{
+        margin-left: 25px;
+    }
+    
+    #password{
+        margin-bottom: 20px;
+    }
 }

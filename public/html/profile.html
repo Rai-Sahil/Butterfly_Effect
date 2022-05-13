@@ -18,21 +18,33 @@
     <div id="profile-page">
         <div id="avatar">
             <img src="/img/earth.svg" alt="">
-            <button type="button">Change Avatar</button>
+            <button type="button" id="changeAvatar">Change Avatar</button>
         </div>
         <div id="user-information">
+            <h2>Account Settings</h2>
+            <div id="name">
             <label>NAME</label>
+            <br>
             <input type="text" id="name-input" class="profile-form" placeholder="Enter your full name" disabled>
-            <button type="button" class="profile-button" onclick=""><i class="material-icons">&#xE254;</i></button>
-            <button type="button" class="profile-button" onclick=""><i class="material-icons">&#xE161;</i></button>
+            <button type="button" class="profile-button" onclick="">Edit</button>
+            <button type="button" class="profile-button" onclick="">Save</button>
+            </div>
+            <br>
+            <div id="email">
             <label>EMAIL ADDRESS</label>
+            <br>
             <input type="text" id="email-input" class="profile-form" placeholder="Enter your email" disabled>
-            <button type="button" class="profile-button" onclick=""><i class="material-icons">&#xE254;</i></button>
-            <button type="button" class="profile-button" onclick=""><i class="material-icons">&#xE161;</i></button>
+            <button type="button" class="profile-button" onclick="">Edit</button>
+            <button type="button" class="profile-button" onclick="">Save</button>
+            </div>
+            <br>
+            <div id="password">
             <label>PASSWORD</label>
+            <br>
             <input type="text" id="password-input" class="profile-form" placeholder="Enter your password" disabled>
-            <button type="button" class="profile-button" onclick=""><i class="material-icons">&#xE254;</i></button>
-            <button type="button" class="profile-button" onclick=""><i class="material-icons">&#xE161;</i></button>
+            <button type="button" class="profile-button" onclick="">Edit</button>
+            <button type="button" class="profile-button" onclick="">Save</button>
+            </div>
             <br>
             <p id="profile-error-message">&nbsp;</p>
             </form>
