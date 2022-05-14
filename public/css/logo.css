@@ -1,6 +1,6 @@
-img {
+#image, #image2{
     display: block;
-    margin: 0px auto;
-    width: 15%;
+    
+    width: 20%;
     height: auto;
 }

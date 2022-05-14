@@ -1,3 +1,5 @@
+"use strict";
+
 function init() {
   console.log("Client script loaded.");
 

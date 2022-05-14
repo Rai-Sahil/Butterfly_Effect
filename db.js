@@ -1,14 +1,12 @@
+"use strict";
+
 const mysql = require("mysql2/promise");
-const { dbName, connectionParams, saltRounds } = require("./constants");
+const { dbUserTable, connectionParams, saltRounds } = require("./constants");
 const bcrypt = require("bcrypt");
 
 async function authenticate(email, password, callback) {
-  const connection = await mysql.createConnection({
-    ...connectionParams,
-    database: dbName,
-  });
-
-  const query = "SELECT * FROM USER WHERE email = ? LIMIT 1;";
+  const connection = await mysql.createConnection(connectionParams);
+  const query = `SELECT uuid, name, email, password FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
 
   try {
     const [[user]] = await connection.query(query, [email]);
@@ -17,7 +15,11 @@ async function authenticate(email, password, callback) {
     } else {
       const passwordsMatch = await bcrypt.compare(password, user.password);
       if (passwordsMatch) {
-        return callback(user);
+        return callback({
+          name: user.name,
+          email: user.email,
+          uuid: user.uuid,
+        });
       } else {
         return callback(null);
       }
@@ -28,10 +30,7 @@ async function authenticate(email, password, callback) {
 }
 
 async function createUser(name, email, password, callback) {
-  const connection = await mysql.createConnection({
-    ...connectionParams,
-    database: dbName,
-  });
+  const connection = await mysql.createConnection(connectionParams);
 
   try {
     if (!name) {
@@ -52,9 +51,8 @@ async function createUser(name, email, password, callback) {
         message: "Cannot sign up without a password.",
       });
     }
-    const getUserByEmailQuery = "SELECT * FROM USER WHERE email = ? LIMIT 1;";
-    const insertUserQuery =
-      "INSERT INTO USER (name, email, password) values (?, ?, ?)";
+    const getUserByEmailQuery = `SELECT * FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
+    const insertUserQuery = `INSERT INTO ${dbUserTable} (name, email, password) values (?, ?, ?)`;
     const [existingUsers] = await connection.query(getUserByEmailQuery, [
       email,
     ]);
@@ -75,15 +73,12 @@ async function createUser(name, email, password, callback) {
   }
 }
 
-async function getUserById(userId, callback) {
-  const connection = await mysql.createConnection({
-    ...connectionParams,
-    database: dbName,
-  });
+async function getUserByUUID(uuid, callback) {
+  const connection = await mysql.createConnection(connectionParams);
 
-  const getUserByIdQuery = "SELECT * FROM USER WHERE id = ? LIMIT 1;";
+  const getUserByIdQuery = `SELECT uuid, name, email, role FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
   try {
-    const [[user]] = await connection.query(getUserByIdQuery, userId);
+    const [[user]] = await connection.query(getUserByIdQuery, uuid);
     if (!user) {
       console.error("User not found.");
       return callback({ status: 404, message: "User not found." });
@@ -99,13 +94,49 @@ async function getUserById(userId, callback) {
   }
 }
 
-async function getUsers(callback) {
-  const connection = await mysql.createConnection({
-    ...connectionParams,
-    database: dbName,
-  });
+async function deleteUser(uuid, callback) {
+  const connection = await mysql.createConnection(connectionParams);
+  const deleteUserQuery = `DELETE FROM ${dbUserTable} WHERE uuid = ? LIMIT 1`;
+  try {
+    await connection.query(deleteUserQuery, [uuid]);
+    return callback({ status: 200, message: "Successfully deleted user." });
+  } catch (error) {
+    console.error("Error getting users: ", error);
+    return callback({ status: 500, message: "Internal server error." });
+  }
+}
 
-  const getUsersQuery = "SELECT * FROM USER;";
+async function isEmailInUse(email, uuid, connection) {
+  const getUserByEmailQuery = `SELECT * FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
+  const [existingUsers] = await connection.query(getUserByEmailQuery, [email]);
+  return existingUsers.length === 1 && uuid !== existingUsers[0].uuid;
+}
+
+async function editUser(uuid, attribute, value, callback) {
+  const connection = await mysql.createConnection(connectionParams);
+  if (attribute == "email" && await isEmailInUse(value, uuid, connection)) {
+    return callback({ status: 409, message: "Email already in use." });
+  }
+  const editUserQuery = `UPDATE ${dbUserTable} SET ${attribute} = ? WHERE uuid = ? LIMIT 1;`;
+  if (attribute == "password") {
+    value = await bcrypt.hash(value, saltRounds);
+  }
+  try {
+    await connection.query(editUserQuery, [value, uuid]);
+    return callback({
+      status: 200,
+      message: `Successfully updated ${attribute}.`,
+    });
+  } catch (error) {
+    console.error("Error getting users: ", error);
+    return callback({ status: 500, message: "Internal server error." });
+  }
+}
+
+async function getUsers(callback) {
+  const connection = await mysql.createConnection(connectionParams);
+
+  const getUsersQuery = `SELECT name, email, role FROM ${dbUserTable};`;
   try {
     const [users] = await connection.query(getUsersQuery);
     return callback({
@@ -122,6 +153,8 @@ async function getUsers(callback) {
 module.exports = {
   authenticate,
   createUser,
-  getUserById,
+  deleteUser,
+  editUser,
+  getUserByUUID,
   getUsers,
 };

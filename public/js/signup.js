@@ -1,15 +1,11 @@
-function init() {
+"use strict";
+
+function initsignup() {
   console.info("Client script loaded.");
 
-  function slideIn() {
-    var elem = document.getElementById("box1");
-    elem.style.transition = "top 0.5s ease-in 0s";
-    elem.style.top = "0";
-  }
-
-  function DelayRedirect() {
+  function DelayRedirect2() {
     setTimeout(function () {
-      dvCountDown.style.display = "none";
+      // dvCountDown.style.display = "none";
       window.location.replace("/");
     }, 1000);
   }
@@ -27,13 +23,9 @@ function init() {
               },
             })
             .join("&");
-    console.info("ajaxPOST params: ", params);
 
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
-      if (!this.readyState == XMLHttpRequest.DONE || this.status != 200) {
-        console.warn(this.status);
-      }
       callback(this.responseText, this.status);
     };
     xhr.open("POST", url);
@@ -48,6 +40,7 @@ function init() {
     .addEventListener("click", function (event) {
       event.preventDefault();
       const name = document.getElementById("signup-name");
+
       const email = document.getElementById("signup-email");
       const password = document.getElementById("signup-password");
       const queryString =
@@ -69,8 +62,8 @@ function init() {
                 responseJSON.message;
             } else {
               sessionStorage.setItem("userId", responseJSON.user.ID);
-              slideIn();
-              DelayRedirect();
+             
+              DelayRedirect2();
             }
           }
         },
@@ -79,9 +72,22 @@ function init() {
     });
 }
 
-document.onreadystatechange = () => {
-  if (document.readyState === "complete") {
-    console.info("Document fully loaded.");
-    init();
+
+
+document.addEventListener('readystatechange', (event) => {
+  
+    if (document.readyState === "complete") {
+      console.info("Init signup Starting Now");
+      initsignup();
+    }
   }
-}
+  
+  );
+
+
+
+
+
+
+
+

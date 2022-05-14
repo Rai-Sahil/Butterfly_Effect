@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap%27");
+
+body {
+  font-family: "Signika Negative", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #49beaa;
+}
+
+h1 {
+  margin: auto;
+  padding: 1%;
+  max-width: 95%;
+  text-align: center;
+  border: outset 2px #444;
+  background: #4290d8;
+  border-radius: 100px;
+  text-shadow: -1px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+.header {
+  padding-top: 60px;
+  color: #f5dfbb;
+  font-size: 20px;
+  margin: auto;
+  line-height: 50px;
+}
+
+img {
+  width: 160px;
+  border-radius: 15px;
+  border: 5px solid #444;
+  margin-bottom: 10px;
+}
+
+#profile-page {
+  padding: 3%;
+  margin: 3%;
+  border-radius: 20px;
+  border: 2px solid #444;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1) 40%,
+    rgba(245, 223, 187, 1) 40%,
+    rgba(245, 223, 187, 1) 100%
+  );
+  display: grid;
+  grid-template-columns: 40% 60%;
+  grid-template-rows: 100%;
+  align-items: center;
+}
+
+#avatar {
+  grid-column: 1 / span 1;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 70% 15% 15%;
+  justify-items: center;
+  margin-right: 30px;
+  margin-top: -10px;
+}
+
+.changeAvatar {
+  background-color: #4290d8;
+  border: none;
+  font-weight: bold;
+  font-size: 14pt;
+  color: #f5dfbb;
+  padding: 10px 20px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 15px;
+}
+
+#user-information {
+  display: grid;
+  grid-template-columns: 100%;
+  margin: -20px 0 40px 35px;
+}
+
+input {
+  border: 2px solid #4290d8;
+  border-radius: 4px;
+  width: 65%;
+}
+
+input:focus {
+  background-color: #4290d8;
+}
+
+label {
+  font-size: 15pt;
+}
+
+.profile-button {
+  background-color: #4290d8;
+  border: none;
+  font-weight: bold;
+  font-size: 14pt;
+  color: black;
+  padding: 5px 10px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 15px;
+}
+
+.changeAvatar:hover {
+  background-color: #49beaa;
+}
+
+.profile-button:hover {
+  background-color: #49beaa;
+}
+
+#profile-status-message {
+  background-color: white;
+}
+
+p {
+  text-align: center;
+  margin: 5px 0 30px 140px;
+  border: outset 2px black;
+  background: #4290d8;
+  border-radius: 20px;
+  width: 40%;
+}
+
+#avatar-input {
+  margin-bottom: 15px;
+}
+
+@media screen and (max-width: 800px) {
+  #profile-page {
+    padding: 3%;
+    margin: 3%;
+    border-radius: 20px;
+    border: 2px solid #444;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(245, 223, 187, 1) 50%,
+      rgba(245, 223, 187, 1) 100%
+    );
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 50% 50%;
+    align-items: center;
+  }
+
+  #user-information {
+    margin-top: 20px;
+    justify-items: center;
+  }
+
+  h2 {
+    margin-top: 35px;
+  }
+
+  input[type="text"] {
+    border: 2px solid #4290d8;
+    border-radius: 4px;
+    width: 50%;
+  }
+
+  img {
+    margin-left: 25px;
+  }
+
+  .changeAvatar {
+    margin-left: 25px;
+  }
+
+  #password {
+    margin-bottom: 20px;
+  }
+
+  input {
+    width: 50%;
+  }
+
+  p {
+    margin: 0 30px 10px 10px;
+  }
+
+  #avatar-input {
+    margin-left: 20px;
+  }
+}

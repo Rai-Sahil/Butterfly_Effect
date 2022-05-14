@@ -1,11 +1,13 @@
-const { getUserById } = require("./db");
+"use strict";
 
-async function requireAdmin(req, res, next) {
-  const { userId } = req.session;
-  if (!userId) {
+const { getUserByUUID } = require("./db");
+
+function requireAdmin(req, res, next) {
+  const { uuid } = req.session;
+  if (!uuid) {
     res.status(404).send("No user found.");
   }
-  await getUserById(userId, ({ status, message, user }) => {
+  return getUserByUUID(uuid, ({ status, message, user }) => {
     if (status !== 200) {
       return res.status(status).send({ message });
     }
@@ -16,7 +18,23 @@ async function requireAdmin(req, res, next) {
   });
 }
 
-async function requireLoggedOut(req, res, next) {
+function requireCurrentUser(req, res, next) {
+  const { uuid } = req.session;
+  if (!uuid) {
+    return res.status(404).send("No user found.");
+  }
+  return getUserByUUID(uuid, ({ status, message, user }) => {
+    if (status !== 200) {
+      return res.status(status).send({ message });
+    }
+    if (user.role != "admin" && uuid != req.params.id) {
+      return res.status(403).send({ message: "Cannot edit other users." });
+    }
+    next();
+  });
+}
+
+function requireLoggedOut(req, res, next) {
   if (req.session.loggedIn) {
     res.redirect("/");
   } else {
@@ -24,7 +42,7 @@ async function requireLoggedOut(req, res, next) {
   }
 }
 
-async function requireLoggedIn(req, res, next) {
+function requireLoggedIn(req, res, next) {
   if (!req.session.loggedIn) {
     res.redirect("/login");
   } else {
@@ -34,6 +52,7 @@ async function requireLoggedIn(req, res, next) {
 
 module.exports = {
   requireAdmin,
+  requireCurrentUser,
   requireLoggedIn,
-  requireLoggedOut
+  requireLoggedOut,
 };
