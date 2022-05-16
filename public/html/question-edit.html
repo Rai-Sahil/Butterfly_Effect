@@ -7,42 +7,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Editor</title>
     <link rel="stylesheet" href="/css/question-edit.css" />
+    <link rel="stylesheet" href="/css/header-footer.css" />
 </head>
 
 <body>
-    <div class="mainframe">
-        <div class="anime">
-            <div class="container">
-                <div class="header">
-                    <div class="header-container">
-                        <span id="welcome">Welcome to the Game Editor</span>
-                    </div>
-                </div>
-                <div class="title-question"><div class="title-container">Questions</div></div>
-                <div class="title-choice"><div class="title-container">Choices</div></div>
-                <div class="question-column">
-                        <div id="questions"></div>
-                    <div class="adding" id="add-questions">
-                        <img src="../img/add.png" alt="">
-                    </div>
-                </div>
-                <div class="choice-column">
-                    <div id="options"></div>
-                    <div class="adding" id="add-choices">
-                        <img src="../img/add.png" alt="">
-                    </div>
-                </div>
-                <div class="footer">
-                    <div class="footer-container">
-                        <div class="footer-button"><a href="/"><img src="../img/home.png" alt="" title="Home"></a></div>
-                        <div class="footer-button"><a href="#"><img src="../img/tips.png" alt="" title="Tips"></a></div>
-                        <div class="footer-button"><a href="#"><img src="../img/setting.png" alt="" title="Settings"></a></div>
-                        <div class="footer-button"><a href="#"><img src="../img/quit.png" alt="" title="Exit"></a></div>
-                    </div>
-                </div>
+    <div id="header-placeholder"></div>
+
+    <div class="container">
+        <div class="page-title">
+            <div class="page-title-container">
+                <span id="welcome">Welcome to the Game Editor</span>
+            </div>
+        </div>
+        <div class="title-question">
+            <div class="title-container">Questions</div>
+        </div>
+        <div class="title-choice">
+            <div class="title-container">Choices</div>
+        </div>
+        <div class="question-column">
+            <div id="questions"></div>
+            <div class="adding" id="add-questions">
+                <img src="../img/add.png" alt="">
+            </div>
+        </div>
+        <div class="choice-column">
+            <div id="options"></div>
+            <div class="adding" id="add-choices">
+                <img src="../img/add.png" alt="">
             </div>
         </div>
     </div>
+
+    <div id="footer-placeholder"></div>
 
 
 
@@ -162,7 +159,7 @@
 
 
 
-
+    <script src="js/header-footer.js"></script>
     <script src="js/question-edit.js"></script>
 </body>
 
