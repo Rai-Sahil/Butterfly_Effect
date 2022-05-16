@@ -23,18 +23,34 @@ async function initDB() {
       role varchar(30) DEFAULT 'user'
     );
     CREATE TABLE IF NOT EXISTS QUESTION (
-      ID int NOT NULL AUTO_INCREMENT,
-      question varchar(300),
-      PRIMARY KEY (ID)
+      id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      question varchar(300)
     );
     CREATE TABLE IF NOT EXISTS CHOICE (
-      ID int NOT NULL AUTO_INCREMENT,
+      id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       question_id int NOT NULL,
       text varchar(100),
       env_pt int(10),
       com_pt int(10),
       next_q int(10),
-      PRIMARY KEY (ID)
+      FOREIGN KEY (question_id) REFERENCES QUESTION(id)
+    );
+    CREATE TABLE IF NOT EXISTS PLAYTHROUGH (
+      id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      is_complete bool DEFAULT FALSE NOT NULL,
+      user_id int NOT NULL,
+      last_question_id int,
+      FOREIGN KEY (user_id) REFERENCES ${dbUserTable}(id),
+      FOREIGN KEY (last_question_id) REFERENCES QUESTION(id)
+    );
+    CREATE TABLE IF NOT EXISTS PLAYTHROUGH_QUESTION (
+      id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      playthrough_id int NOT NULL,
+      question_id int NOT NULL,
+      selected_choice_id int,
+      FOREIGN KEY (playthrough_id) REFERENCES PLAYTHROUGH(id),
+      FOREIGN KEY (question_id) REFERENCES QUESTION(id),
+      FOREIGN KEY (selected_choice_id) REFERENCES CHOICE(id)
     );`;
   await connection.query(query);
 
