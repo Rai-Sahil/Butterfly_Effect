@@ -21,35 +21,12 @@ async function initDB() {
       email varchar(30),
       password varchar(60),
       role varchar(30) DEFAULT 'user'
-    );`;
-  await connection.query(query);
-
-  const [userRows] = await connection.query(`SELECT * FROM ${dbUserTable}`);
-
-  if (userRows.length == 0) {
-    const insertUsers = `INSERT INTO ${dbUserTable} (name, email, password, role) values ?`;
-    await connection.query(insertUsers, [users]);
-  }
-
-  //questions
-  const queryQuestion = `
-    use ${dbName};
+    );
     CREATE TABLE IF NOT EXISTS QUESTION (
       ID int NOT NULL AUTO_INCREMENT,
       question varchar(300),
       PRIMARY KEY (ID)
-    );`;
-  await connection.query(queryQuestion);
-
-  const [questionRows] = await connection.query("SELECT * FROM QUESTION");
-  if (questionRows.length == 0) {
-    const insertQuestion = `INSERT INTO QUESTION (question) values ?`;
-    await connection.query(insertQuestion, [questions]);
-  }
-
-  //choices
-  const queryChoices = `
-    use ${dbName};
+    );
     CREATE TABLE IF NOT EXISTS CHOICE (
       ID int NOT NULL AUTO_INCREMENT,
       question_id int NOT NULL,
@@ -59,14 +36,25 @@ async function initDB() {
       next_q int(10),
       PRIMARY KEY (ID)
     );`;
-  await connection.query(queryChoices);
+  await connection.query(query);
+
+  const [userRows] = await connection.query(`SELECT * FROM ${dbUserTable}`);
+  if (userRows.length == 0) {
+    const insertUsers = `INSERT INTO ${dbUserTable} (name, email, password, role) values ?`;
+    await connection.query(insertUsers, [users]);
+  }
+
+  const [questionRows] = await connection.query("SELECT * FROM QUESTION");
+  if (questionRows.length == 0) {
+    const insertQuestion = `INSERT INTO QUESTION (question) values ?`;
+    await connection.query(insertQuestion, [questions]);
+  }
 
   const [choiceRows] = await connection.query("SELECT * FROM CHOICE");
   if (choiceRows.length == 0) {
     const insertChoice = `INSERT INTO CHOICE (question_id, text, env_pt, com_pt, next_q) values ?`;
     await connection.query(insertChoice, [choices]);
   }
-
 }
 
 initDB().then(() => {
