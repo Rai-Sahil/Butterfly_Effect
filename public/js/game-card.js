@@ -80,6 +80,10 @@ function init() {
                 document.querySelector('#info').innerHTML = questionPool.message;
                 popup.classList.toggle("display-none");
             }
+            if (questionPool.length == 0){
+                document.querySelector('#info').innerHTML = "No queestion in the database.";
+                popup.classList.toggle("display-none");
+            }
             //Pick up question randomly from the question pool.
             questionList = questionPool.map((n, i, all) => {
                 const j = i + Math.floor(Math.random() * (all.length - i));
