@@ -300,6 +300,13 @@ router.delete("/delete", requireLoggedIn, requireAdmin, function (req, res) {
   deleteQuestion(qid, oid, res);
 });
 
+router.get("/playthrough", requireLoggedIn, function (req, res) {
+  const { uuid } = req.session;
+  return getPlaythrough(uuid, () => {
+    return res.send("GET playthrough success.");
+  });
+});
+
 router.post("/playthrough", requireLoggedIn, function (req, res) {
   const { uuid } = req.session;
   return startPlaythrough(

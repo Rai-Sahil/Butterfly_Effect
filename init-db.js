@@ -51,7 +51,11 @@ async function initDB() {
       FOREIGN KEY (playthrough_id) REFERENCES PLAYTHROUGH(id),
       FOREIGN KEY (question_id) REFERENCES QUESTION(id),
       FOREIGN KEY (selected_choice_id) REFERENCES CHOICE(id)
-    );`;
+    );
+    ALTER TABLE PLAYTHROUGH ADD CONSTRAINT FK_PTQ
+    FOREIGN KEY (last_question_id)
+    REFERENCES PLAYTHROUGH_QUESTION (id);
+    `;
   await connection.query(query);
 
   const [userRows] = await connection.query(`SELECT * FROM ${dbUserTable}`);
