@@ -102,3 +102,37 @@ h1{
     border-top-right-radius: 10px;
     border-bottom-left-radius: 10px;
  }
+
+ #edit {
+    padding: 5px;
+    justify-content: end;
+    margin-right: 100%;
+    outline: none;
+  }
+  
+  #end-editing{
+    display: none;
+    justify-content: end;
+  }
+  
+  button {
+    width: 80px;
+    padding: 5px;
+    margin: 0 3px;
+    background-color: #ff7e00;
+    outline: none;
+    border: 1px solid #ff7e00;
+    box-shadow: 2px 2px 2px #3f3f3f;
+  }
+  
+  button:hover {
+    box-shadow: 2px 2px 3px ;
+  }
+  
+  button:active {
+    box-shadow: 1px 1px 3px ;
+  }
+  
+  .save {
+    display: none;
+  }
