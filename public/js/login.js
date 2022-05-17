@@ -60,14 +60,14 @@ function initlogin() {
         "/login",
         function (data, status) {
           if (data) {
-            const responseJSON = JSON.parse(data);
+            const { user, message } = JSON.parse(data);
 
             if (status != 200) {
               document.getElementById("login-error-message").innerHTML =
-                responseJSON.message;
+                message;
             } else {
-              sessionStorage.setItem("userId", responseJSON.user.ID);
-              
+              sessionStorage.setItem("userId", user.uuid);
+
               DelayRedirect();
             }
           }
@@ -77,17 +77,12 @@ function initlogin() {
     });
 }
 
-
-
-document.addEventListener('readystatechange', (event) => {
-  
+document.addEventListener("readystatechange", () => {
   if (document.readyState === "complete") {
     console.info("Init login Starting Now");
     initlogin();
   }
-}
-
-);
+});
 
 let image = document.getElementById("image");
 let image2 = document.getElementById("image2");
