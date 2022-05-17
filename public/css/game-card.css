@@ -43,7 +43,7 @@ body {
 .indicator {
     height: inherit;
     border-radius: 25px;
-    background: linear-gradient(60deg, #55dbc5 0%, #96e4d7 100%);
+    background: linear-gradient(60deg, #4290D8 0%, #74ade3 100%);
 }
 #env-meter{
     width: 50%;
@@ -62,14 +62,14 @@ body {
 
 .choice-button {
     border-radius: 25px;
-    border: 1px solid #49BEAA;
+    border: 1px solid #4290D8;
     padding: 2%;
     text-align: center;
     margin: 3%;
 }
 
 .choice-button:hover {
-    box-shadow: 0px 0px 12px #49BEAA;
+    box-shadow: 0px 0px 12px #4290D8;
 }
 
 #info {
@@ -145,7 +145,7 @@ body {
 }
 
 .modal-button:hover {
-    box-shadow: 0px 0px 5px #49BEAA;
+    box-shadow: 0px 0px 5px #4290D8;
 }
 
 .display-none {
