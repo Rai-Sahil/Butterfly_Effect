@@ -136,3 +136,7 @@ h1{
   .save {
     display: none;
   }
+
+  span{
+    text-align: end;
+  }
