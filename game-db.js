@@ -272,7 +272,7 @@ async function getPlaythroughQuestions(uuid, playthroughId, callback) {
     ]);
     // Get playthrough questions with question text
     const getPlaythroughQuestionsQuery = `
-      SELECT PTQ.id as id, Q.id as question_id, Q.question as text, Q.com_pt, Q.env_pt
+      SELECT PTQ.id as id, Q.id as question_id, Q.question as text
       FROM PLAYTHROUGH_QUESTION AS PTQ, QUESTION AS Q 
       WHERE PTQ.playthrough_id = ? AND PTQ.question_id = Q.id
       ORDER BY id ASC
