@@ -6,11 +6,8 @@ const { dbName, dbUserTable, connectionParams } = require("./constants");
 //Get questions
 async function getQuestions(res) {
   try {
-    const connection = await mysql.createConnection({
-      ...connectionParams,
-      database: dbName,
-    });
-    const [row, fields] = await connection.execute("SELECT * FROM QUESTION");
+    const connection = await mysql.createConnection(connectionParams);
+    const [row] = await connection.execute("SELECT * FROM QUESTION");
     return res.send(row);
   } catch (error) {
     console.error(error);
@@ -20,11 +17,8 @@ async function getQuestions(res) {
 
 //Get choices
 async function getChoices(questionID, res) {
-  const connection = await mysql.createConnection({
-    ...connectionParams,
-    database: dbName,
-  });
-  var [row, fields] = await connection.execute(
+  const connection = await mysql.createConnection(connectionParams);
+  var [row] = await connection.execute(
     "SELECT * FROM CHOICE WHERE question_id = " + questionID
   );
   if (row == 0) {
@@ -35,10 +29,7 @@ async function getChoices(questionID, res) {
 
 //Add or update new question
 async function updateQuestion(questionText, questionID, callback) {
-  const connection = await mysql.createConnection({
-    ...connectionParams,
-    database: dbName,
-  });
+  const connection = await mysql.createConnection(connectionParams);
   try {
     if (!questionText) {
       return callback({
@@ -91,10 +82,7 @@ async function updateChoice(
   nextQuestion,
   callback
 ) {
-  const connection = await mysql.createConnection({
-    ...connectionParams,
-    database: dbName,
-  });
+  const connection = await mysql.createConnection(connectionParams);
   try {
     if (!questionID) {
       return callback({
@@ -150,10 +138,7 @@ async function updateChoice(
 
 //Delete question or choice
 async function deleteQuestion(questionID, optionID, res) {
-  const connection = await mysql.createConnection({
-    ...connectionParams,
-    database: dbName,
-  });
+  const connection = await mysql.createConnection(connectionParams);
   try {
     if (!optionID) {
       await connection.execute("DELETE FROM QUESTION WHERE ID = " + questionID);

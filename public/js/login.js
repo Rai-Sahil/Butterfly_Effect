@@ -15,12 +15,6 @@ function initlogin() {
     container.classList.remove("sign-up-mode");
   });
 
-  function slideIn() {
-    var elem = document.getElementById("box1");
-    elem.style.transition = "top 0.5s ease-in 0s";
-    elem.style.top = "0";
-  }
-
   function DelayRedirect() {
     setTimeout(function () {
       // dvCountDown.style.display = "none";
