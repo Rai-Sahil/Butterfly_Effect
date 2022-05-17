@@ -223,7 +223,7 @@ async function startPlaythrough(uuid, callback) {
       [selectedQuestions.map(({ id }) => [playthroughId, id])]
     );
     // Set first question as current playthrough question
-    const setPlaythroughQuestionQuery = `UPDATE PLAYTHROUGH SET last_question_id = ? WHERE id = ?;`;
+    const setPlaythroughQuestionQuery = `UPDATE PLAYTHROUGH SET current_question_id = ? WHERE id = ?;`;
     await connection.query(setPlaythroughQuestionQuery, [
       questionId,
       playthroughId,
@@ -249,9 +249,7 @@ async function savePlaythroughProgress(playthroughId, questionId, choiceId, call
     // Update playthrough question 
     const connection = await mysql.createConnection(connectionParams);
     const updatePlaythroughQuestionQuery = `UPDATE PLAYTHROUGH_QUESTION SET selected_choice_id = ? WHERE id = ?`;
-    const updatePlaythroughResult = await connection.query(updatePlaythroughQuestionQuery, [choiceId, questionId]);
-    console.log("questionId: ", questionId);
-    console.log("updatePlaythroughResult: ", updatePlaythroughResult);
+    await connection.query(updatePlaythroughQuestionQuery, [choiceId, questionId]);
     // Get next playthrough question
     const nextPlaythroughQuestionQuery = `SELECT * FROM PLAYTHROUGH_QUESTION WHERE id = ? AND playthrough_id = ?`;
     const nextQuestionId = (+questionId) + 1;
@@ -259,14 +257,13 @@ async function savePlaythroughProgress(playthroughId, questionId, choiceId, call
       nextPlaythroughQuestionQuery,
       [nextQuestionId, playthroughId]
     );
-    console.log("nextQuestion:", nextQuestion);
     // Update playthrough with next question (null if no more questions)
-    const updatePlaythroughQuery = `UPDATE PLAYTHROUGH SET last_question_id = ? WHERE id = ?`;
-    const playthroughUpdateResult = await connection.query(updatePlaythroughQuery, [
+    const updatePlaythroughQuery = `UPDATE PLAYTHROUGH SET current_question_id = ?, is_complete = ? WHERE id = ?`;
+    await connection.query(updatePlaythroughQuery, [
       nextQuestion ? nextQuestion.id : null,
-      playthroughId
-    ])
-    console.log("playthroughUpdateResult: ", playthroughUpdateResult);
+      nextQuestion ? 0 : 1,
+      playthroughId,
+    ]);
   } catch (error) {
     console.error("Error retrieving playthrough questions: ", error);
     return callback({
@@ -283,7 +280,7 @@ async function getPlaythroughQuestions(uuid, playthroughId, callback) {
     // Get latest playthrough for user
     const getUserByUUIDQuery = `SELECT id FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
     const [[user]] = await connection.query(getUserByUUIDQuery, uuid);
-    const getPlaythroughQuery = `SELECT id, last_question_id FROM PLAYTHROUGH WHERE id = ? AND user_id = ? ORDER BY ID DESC LIMIT 1`;
+    const getPlaythroughQuery = `SELECT id, current_question_id FROM PLAYTHROUGH WHERE id = ? AND user_id = ? ORDER BY ID DESC LIMIT 1`;
     const [[playthrough]] = await connection.query(getPlaythroughQuery, [
       playthroughId,
       user.id

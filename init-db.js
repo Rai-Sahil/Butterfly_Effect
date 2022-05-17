@@ -39,7 +39,7 @@ async function initDB() {
       id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       is_complete bool DEFAULT FALSE NOT NULL,
       user_id int NOT NULL,
-      last_question_id int,
+      current_question_id int,
       FOREIGN KEY (user_id) REFERENCES ${dbUserTable}(id)
     );
     CREATE TABLE IF NOT EXISTS PLAYTHROUGH_QUESTION (
@@ -52,7 +52,7 @@ async function initDB() {
       FOREIGN KEY (selected_choice_id) REFERENCES CHOICE(id)
     );
     ALTER TABLE PLAYTHROUGH ADD CONSTRAINT FK_PTQ
-    FOREIGN KEY (last_question_id)
+    FOREIGN KEY (current_question_id)
     REFERENCES PLAYTHROUGH_QUESTION (id);
     `;
   await connection.query(query);

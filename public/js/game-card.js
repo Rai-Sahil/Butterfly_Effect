@@ -11,7 +11,7 @@ let qnum; //Questions per round, less or equal to total question number in db
 let env_pt; //Environment Gauge
 let com_pt; //Comfort Gauge
 let questionList; //Game Question List
-let choiceInfo; //Choice related info for current question
+let currentQuestionChoices; //Choice related info for current question
 let step; //Current position in this round
 
 function init() {
@@ -102,7 +102,7 @@ function init() {
         //Pick up question randomly from the question pool.
         questionList = questions;
         step = questions.findIndex(
-          (question) => question.id === playthrough.last_question_id
+          (question) => question.id === playthrough.current_question_id
         );
         qnum = questions.length;
         showQuestion(step);
@@ -112,7 +112,7 @@ function init() {
 
   async function getChoices(qid) {
     await ajaxGET("/choices?qid=" + qid, function (data) {
-      choiceInfo = JSON.parse(data);
+      currentQuestionChoices = JSON.parse(data);
     });
   }
 
@@ -121,12 +121,11 @@ function init() {
     document.querySelector(".question").innerHTML = currentQuestion.text;
     await getChoices(currentQuestion.question_id);
     return ajaxGET("/choices?qid=" + currentQuestion.question_id, (data) => {
-      choiceInfo = JSON.parse(data);
+      currentQuestionChoices = JSON.parse(data);
       document.querySelector("#choices-go-here").innerHTML = null;
       let choiceTemplate = document.getElementById("choice");
-      for (let j = 0; j < choiceInfo.length; j++) {
-        const currentChoice = choiceInfo[j];
-        console.log(currentChoice)
+      
+      currentQuestionChoices.forEach((currentChoice) => {
         let choiceButton = choiceTemplate.content.cloneNode(true);
         choiceButton.querySelector("#option").innerHTML = currentChoice.text;
         choiceButton.querySelector("#option").onclick = () => {
@@ -134,14 +133,21 @@ function init() {
           const queryString =
             "playthroughId=" +
             sessionStorage.getItem("playthroughId") +
-            "&questionId=" + currentQuestion.id + "&choiceId=" + currentChoice.ID;
-          ajaxPUT("/playthrough", (data, status) => {
-            if (status !== 200) {
-              const {message} = JSON.parse(data);
-              document.querySelector("#info").innerHTML = message;
-              popup.classList.toggle("display-none");
-            }
-          }, queryString);
+            "&questionId=" +
+            currentQuestion.id +
+            "&choiceId=" +
+            currentChoice.ID;
+          ajaxPUT(
+            "/playthrough",
+            (data, status) => {
+              if (status !== 200) {
+                const { message } = JSON.parse(data);
+                document.querySelector("#info").innerHTML = message;
+                popup.classList.toggle("display-none");
+              }
+            },
+            queryString
+          );
           setCom(currentChoice.com_pt);
           setEnv(currentChoice.env_pt);
           step++;
@@ -201,7 +207,7 @@ function init() {
           .querySelector("#option")
           .setAttribute("id", "option" + currentChoice.ID); //Set unique id for each button
         document.querySelector("#choices-go-here").appendChild(choiceButton);
-      }
+      });
     });
   }
 

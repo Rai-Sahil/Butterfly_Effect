@@ -331,7 +331,6 @@ router.post("/playthrough", requireLoggedIn, function (req, res) {
 // Update db to save user choice and advance to next question
 router.put("/playthrough", requireLoggedIn, function (req, res) {
   const { playthroughId, questionId, choiceId } = req.body;
-  console.log("req.query:", req.body);
   return savePlaythroughProgress(
     playthroughId,
     questionId,
