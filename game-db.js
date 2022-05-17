@@ -196,7 +196,7 @@ function shuffle(array) {
   return array;
 }
 
-function getPlaythrough(uuid, callback) {
+async function getPlaythrough(uuid, callback) {
   try {
     const connection = await mysql.createConnection(connectionParams);
     const getLatestPlaythroughQuery = `SELECT * FROM PLAYTHROUGH WHERE uuid = ? ORDER BY ID DESC LIMIT 1 `;
