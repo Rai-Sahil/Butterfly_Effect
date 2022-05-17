@@ -8,43 +8,35 @@
     <link rel="icon" href="/img/favicon.svg" type="image/svg">
     <title>Game</title>
     <link rel="stylesheet" href="./css/game-card.css" />
+    <link rel="stylesheet" href="./css/header-footer.css" />
 </head>
 
 <body>
-    <div class="mainframe">
-        <div class="anime">
-            <div class="container">
-                <div class="picture"><img src="../img/blue.svg" alt=""></div>
-                <div class="status">
-                    <div class="status-container" id="environ" title="Environment">
-                        <img src="../img/earth.svg" alt="">
-                        <div class="indicator-container">
-                            <div class="indicator" id="env-meter"></div>
-                        </div>
-                    </div>
-                    <div class="status-container" id="comfort" title="Happiness">
-                        <img src="../img/smileyface.svg" alt="">
-                        <div class="indicator-container">
-                            <div class="indicator" id="com-meter"></div>
-                        </div>
-                    </div>
+    <div id="header-placeholder"></div>
+    <div class="container">
+        <div class="picture"><img src="../img/blue.svg" alt=""></div>
+        <div class="status">
+            <div class="status-container" id="environ" title="Environment">
+                <img src="../img/earth.svg" alt="">
+                <div class="indicator-container">
+                    <div class="indicator" id="env-meter"></div>
                 </div>
-                <div class="text">
-                    <div class="question"></div>
-                    <div class="choices" id="choices-go-here"></div>
-                </div>
-                <div class="footer">
-                    <div class="footer-container">
-                        <div class="footer-button"><a href="/"><img src="../img/home.png" alt="" title="Home"></a></div>
-                        <div class="footer-button"><a href="#"><img src="../img/tips.png" alt="" title="Tips"></a></div>
-                        <div class="footer-button"><a href="#"><img src="../img/setting.png" alt="" title="Settings"></a></div>
-                        <div class="footer-button"><a href="#"><img src="../img/quit.png" alt="" title="Exit"></a></div>
-                    </div>
+            </div>
+            <div class="status-container" id="comfort" title="Happiness">
+                <img src="../img/smileyface.svg" alt="">
+                <div class="indicator-container">
+                    <div class="indicator" id="com-meter"></div>
                 </div>
             </div>
         </div>
+        <div class="text">
+            <div class="question"></div>
+            <div class="choices" id="choices-go-here"></div>
+        </div>
     </div>
+    <div id="footer-placeholder"></div>
 
+    <!--Template-->
     <template id="choice">
         <div class="choice-button" id="option"></div>
     </template>
@@ -58,6 +50,7 @@
         </div>
     </div>
 
+    <script src="../js/header-footer.js"></script>
     <script src="../js/game-card.js"></script>
 </body>
 

@@ -1,97 +1,88 @@
-$(document).ready(function () {
-  function ajaxGET(path, callback) {
-    const xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-      if (this.readyState == XMLHttpRequest.DONE) {
-        callback(this.responseText, this.status);
-      }
-    };
-    xhr.open("GET", path);
-    xhr.send();
-  }
+function deleteRow(r) {
+  var i = r.parentNode.parentNode.rowIndex;
+  document.getElementById("data_table").deleteRow(i);
+}
 
-  ajaxGET("/users", (data, status) => {
-    const { users, message } = JSON.parse(data);
-    if (status === 200) {
-      const userTableBody = document.getElementById("user-table-body");
 
-      const template = document.getElementById("template-user-row");
-      users.forEach(({ name, email, role }) => {
-        let userRow = template.content.cloneNode(true);
-        userRow.querySelector(".user-row-name").innerHTML = name;
-        userRow.querySelector(".user-row-email").innerHTML = email;
-        userTableBody.appendChild(userRow);
-      });
-    }
-  });
+function myFunction() {
+//   var new_name=document.getElementById("new_name").value;
+//  var new_country=document.getElementById("new_country").value;
+//  var new_age=document.getElementById("new_age").value;
+ let table=document.getElementById("data_table");
+ var table_len=(table.rows.length);
+ 
+ var row = table.insertRow(table_len).outerHTML="<tr id='demo'><td><input type='text' id='new_name' required></td><td><input type='text' id='new_country'></td><td><input type='text' id='new_age'></td><td><div type='button' class='addrow' onclick='addRow()'><i class='material-icons'>&#xE03B;</i></div></td></tr>";
+//  document.getElementById("new_name").value="";
+//  document.getElementById("new_country").value="";
+//  document.getElementById("new_age").value="";
+}
 
-  $('[data-toggle="tooltip"]').tooltip();
-  // Append table with add row form on add new button click
-  $(".add-new").click(function () {
-    $(this).attr("disabled", "disabled");
-    var index = $("table tbody tr:last-child").index();
-	var actions = $("table td:last-child").html();
-    var row =
-      "<tr>" +
-      '<td><input type="text" class="form-control" name="name" id="new-user-name"></td>' +
-      '<td><input type="text" class="form-control" name="email" id="new-user-email"></td>' +
-      '<td><input type="text" class="form-control" name="password" id="new-user-password"></td>' +
-      "<td>" +
-      actions +
-      "</td>" +
-      "</tr>";
-    $("table").append(row);
-    $("table tbody tr")
-      .eq(index + 1)
-      .find(".add, .edit")
-      .toggle();
-    $('[data-toggle="tooltip"]').tooltip();
-  });
-  // Add row on add button click
-  $(document).on("click", ".add", function () {
-    var empty = false;
-    var input = $(this).parents("tr").find('input[type="text"]');
-    input.each(function () {
-      if (!$(this).val()) {
-        $(this).addClass("error");
-        empty = true;
-      } else {
-        $(this).removeClass("error");
-      }
-    });
-    $(this).parents("tr").find(".error").first().focus();
-    if (!empty) {
-      input.each(function () {
-        $(this).parent("td").html($(this).val());
-      });
-      $(this).parents("tr").find(".add, .edit").toggle();
-      $(".add-new").removeAttr("disabled");
-    }
-  });
-  // Edit row on edit button click
-  $(document).on("click", ".edit", function () {
-    $(this)
-      .parents("tr")
-      .find("td:not(:last-child)")
-      .each(function () {
-        $(this).html(
-          '<input type="text" class="form-control" value="' +
-            $(this).text() +
-            '" required>'
-        );
-      });
-    $(this).parents("tr").find(".add, .edit").toggle();
-    $(".add-new").attr("disabled", "disabled");
-  });
-  // Delete row on delete button click
-  $(document).on("click", ".delete", function () {
-    $(this).parents("tr").remove();
-    $(".add-new").removeAttr("disabled");
-  });
-});
+function addRow(){
+    var new_name=document.getElementById("new_name").value;
+ var new_country=document.getElementById("new_country").value;
+ var new_age=document.getElementById("new_age").value;
+	
+ let table=document.getElementById("data_table");
+ table_len=(table.rows.length);
+ row = table.insertRow(table_len).outerHTML="<tr id='row"+table_len+"'><td id='name_row"+table_len+"'>"+new_name+"<div type='button' id='edit_button1"+ table_len+"' value='Edit' class='edit' onclick='edit_row_cell1("+ table_len +")'><i class='material-icons'>&#xE254;</i></div><div type='button' id='save_button1"+table_len+"' value='Save' class='save' onclick='save_row_cell1(" + table_len + ")'><i class='material-icons'>&#xE03B;</i></div></td><td id='country_row" + table_len + "'>"+new_country+"<div type='button' id='edit_button2"+ table_len+"' value='Edit' class='edit' onclick='edit_row_cell2("+ table_len +")'><i class='material-icons'>&#xE254;</i></div><div type='button' id='save_button2"+table_len+"' value='Save' class='save' onclick='save_row_cell2(" + table_len + ")'><i class='material-icons'>&#xE03B;</i></div></td><td id='age_row"+table_len+"'>"+new_age+
+  "<div type='button' id='edit_button3"+ table_len+"' value='Edit' class='edit' onclick='edit_row_cell3("+ table_len +")'><i class='material-icons'>&#xE254;</i></div><div type='button' id='save_button3" +table_len+"' value='Save' class='save' onclick='save_row_cell3(" + table_len + ")'><i class='material-icons'>&#xE03B;</i></div></td><td><div type='button' onclick='deleteRow(this)''><i class='material-icons'>&#xE872;</i></div></td></tr>";
+ document.getElementById("new_name").value="";
+ document.getElementById("new_country").value="";
+ document.getElementById("new_age").value="";
 
-$(document).ready(function () {
-  $(".profile .icon_wrap").click(function () {
-    $(this).parent().toggleClass("active");
-  });
-});
+ document.getElementById('demo').style.display='none';
+  
+}
+
+function edit_row_cell1(no)
+{
+ document.getElementById("edit_button1"+no).style.display="none";
+ document.getElementById("save_button1"+no).style.display="flex";
+	
+ 
+ document.getElementById("name_row"+no).contentEditable=true;
+}
+
+function save_row_cell1(no)
+{
+ document.getElementById("name_row"+no).contentEditable=false;
+
+ document.getElementById("edit_button1"+no).style.display="block";
+ document.getElementById("save_button1"+no).style.display="none";
+}
+
+function edit_row_cell2(no)
+{
+ document.getElementById("edit_button2"+no).style.display="none";
+ document.getElementById("save_button2"+no).style.display="block";
+	
+ 
+ document.getElementById("country_row"+no).contentEditable=true;
+}
+
+function save_row_cell2(no)
+{
+ 
+ document.getElementById("country_row"+no).contentEditable=false;
+
+ document.getElementById("edit_button2"+no).style.display="block";
+ document.getElementById("save_button2"+no).style.display="none";
+}
+
+function edit_row_cell3(no)
+{
+ document.getElementById("edit_button3"+no).style.display="none";
+ document.getElementById("save_button3"+no).style.display="block";
+	
+ 
+ document.getElementById("age_row"+no).contentEditable=true;
+}
+
+function save_row_cell3(no)
+{
+ 
+ document.getElementById("age_row"+no).contentEditable=false;
+
+ document.getElementById("edit_button3"+no).style.display="block";
+ document.getElementById("save_button3"+no).style.display="none";
+}

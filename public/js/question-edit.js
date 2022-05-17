@@ -262,7 +262,7 @@ function selected(sel, all) {
   for (let x = 0; x < all; x++) {
     document.querySelector("#card" + x).style.backgroundColor = "white";
   }
-  document.querySelector("#card" + sel).style.backgroundColor = "#49BEAA";
+  document.querySelector("#card" + sel).style.backgroundColor = "#4290D8";
 }
 
 document.onreadystatechange = () => {

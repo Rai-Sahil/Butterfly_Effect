@@ -1,0 +1,140 @@
+body {
+    margin: 0 0 90px 0;
+}
+
+.header-container {
+    position: relative;
+    text-align: center;
+    background: linear-gradient(60deg, #4290D8 0%, #74ade3 100%);
+    color: white;
+}
+
+.waves {
+    position: relative;
+    width: 100%;
+    height: 8vh;
+    margin-bottom: -7px;
+}
+
+/* Header Animation */
+.parallax>use {
+    animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+}
+
+.parallax>use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+}
+
+.parallax>use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+}
+
+.parallax>use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+}
+
+.parallax>use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+}
+
+@keyframes move-forever {
+    0% {
+        transform: translate3d(-90px, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(85px, 0, 0);
+    }
+}
+
+/*Footer*/
+.footer-container {
+    z-index: 999;
+    position: fixed;
+    bottom: 10px;
+    display: grid;
+    grid-template-columns: 20vw 60vw 20vw;
+
+}
+
+.inside-wrapper {
+    grid-area: 1 / 2 / span 1 / span 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-bg {
+    flex: auto;
+    max-width: 1000px;
+    min-width: 200px;
+    height: 70px;
+    border-radius: 25px;
+    background: rgba(240, 240, 240, 0.5);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+}
+
+.footer-icon {
+    flex: auto;
+    text-align: center;
+}
+
+.footer-icon img {
+    height: 45px;
+}
+
+/*Footer Icon Animation*/
+.icon-enlarge {
+    animation: navbar-out 0.3s ease-out 1 backwards;
+}
+
+.icon-enlarge:hover {
+    animation: navbar 0.3s ease-in 1 forwards;
+}
+
+@keyframes navbar {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes navbar-out {
+    0% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/*Media Query*/
+@media screen and (min-width: 401px) and (max-width: 800px) {
+    .waves {
+        height: 7vh;
+    }
+
+    .footer-container {
+        grid-template-columns: 15vw 70vw 15vw;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .waves {
+        height: 6vh;
+    }
+
+    .footer-container {
+        grid-template-columns: 10vw 80vw 10vw;
+    }
+}

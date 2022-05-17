@@ -105,6 +105,7 @@ function init() {
           let choiceButton = choiceTemplate.content.cloneNode(true);
           choiceButton.querySelector("#option").innerHTML = choiceInfo[j].text;
           choiceButton.querySelector("#option").onclick = () => {
+            // @TODO save user choice and playthrough progress
             setCom(choiceInfo[j].com_pt);
             setEnv(choiceInfo[j].env_pt);
             step++;

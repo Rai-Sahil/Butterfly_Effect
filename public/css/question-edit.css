@@ -1,24 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap%27');
 
 body {
-    margin: 0;
     font-family: 'Signika Negative', sans-serif;
 }
 
-.container {
-    min-height: 100%;
-    position: absolute;
-    z-index: 99;
-}
-
-.header-container {
+.page-title-container {
     display: flex;
     align-items: center;
-}
-
-.question-column,
-.choice-column {
-    overflow: auto;
 }
 
 .title-question,
@@ -26,44 +14,19 @@ body {
     display: flex;
     align-items: flex-end;
     padding-left: 4%;
-    border-bottom: #4ABAA760 solid;
+    border-bottom: #94cbff solid;
 }
 
 .title-container {
     border-radius: 10px 10px 0px 0px;
-    background-color: #4ABAA760;
+    background-color: #94cbff;
     padding: 1% 2% 1% 2%;
-}
-
-.footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.footer-container {
-    display: grid;
-    grid-template-columns: 25vw 25vw 25vw 25vw;
-}
-
-.footer-button {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-}
-
-.footer-button img, .edit-icon {
-    animation: navbar-out 0.3s ease-out 1 backwards;
-}
-
-.footer-button img:hover, .edit-icon:hover {
-    animation: navbar 0.3s ease-in 1 forwards;
 }
 
 .question-card {
     margin: 2% 5% 2% 5%;
     padding: 2%;
-    border: 1px solid #49BEAA;
+    border: 1px solid #94cbff;
     border-radius: 20px;
     display: grid;
     grid-template-columns: 10% 80% 5% 5%;
@@ -74,13 +37,13 @@ body {
 }
 
 .question-card:hover {
-    box-shadow: 0px 0px 12px #49BEAA;
+    box-shadow: 0px 0px 12px #94cbff;
 }
 
 .adding {
     margin: 2% 5% 2% 5%;
     padding: 2%;
-    background-color: #4abaa760;
+    background: linear-gradient(60deg, #61b0f9 0%, #94cbff 100%);
     border-radius: 20px;
     text-align: center;
 }
@@ -91,7 +54,7 @@ body {
 
 .modal-container {
     padding: 2%;
-    background-color: #49BEAA;
+    background-color: #61b0f9;
     border-radius: 20px;
 }
 
@@ -110,18 +73,18 @@ body {
     background-color: white;
     border-radius: 15px;
     padding: 2%;
-    border: #49BEAA solid;
+    border: #61b0f9 solid;
 }
 
 .modal-button-primary {
-    background-color: #4ABAA760;
+    background-color: #61b0f9;
     border-radius: 15px;
     padding: 2%;
-    border: #4ABAA760 solid;
+    border: #61b0f9 solid;
 }
 
 .modal-button:hover, .modal-button-primary:hover {
-    box-shadow: 0px 0px 5px #49BEAA;
+    box-shadow: 0px 0px 5px #61b0f9;
 }
 
 .input-container {
@@ -151,71 +114,13 @@ body {
     font-size: 15pt;
 }
 
-/*Wave Animation*/
-.anime {
-    position: relative;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #49beaa;
-    overflow: hidden;
-}
-
-.anime:before,
-.anime:after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    min-width: 400vw;
-    min-height: 400vw;
-    background-color: #fff;
-    animation-name: rotate;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-}
-
-@keyframes rotate {
-    0% {
-        transform: translate(-50%, 0) rotateZ(0deg);
-    }
-
-    50% {
-        transform: translate(-50%, -0.5%) rotateZ(180deg);
-    }
-
-    100% {
-        transform: translate(-50%, 0%) rotateZ(360deg);
-    }
-}
-
-/*Icon animation*/
-@keyframes navbar {
-    0% {
-        transform: scale(1);
-    }
-
-    100% {
-        transform: scale(1.4);
-    }
-}
-
-@keyframes navbar-out {
-    0% {
-        transform: scale(1.4);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
 @media screen and (max-width: 800px) {
     .container {
         display: grid;
-        grid-template-rows: 0vh 5vh 40vh 5vh 40vh 10vh;
+        grid-auto-rows: min-content;
     }
 
-    .header {
-        /* grid-area: 1 / 1 / span 1 / span 1; */
+    .page-title {
         display: none;
     }
 
@@ -225,69 +130,58 @@ body {
     }
 
     .title-question {
-        grid-area: 2 / 1 / span 1 / span 1;
+        height: min-content;
+        grid-area: 1 / 1 / span 1 / span 1;
+        position: sticky;
+        top: 0;
+        background-color: white;
     }
 
     .question-column {
-        grid-area: 3 / 1 / span 1 / span 1;
+        grid-area: 2 / 1 / span 1 / span 1;
     }
 
     .title-choice {
-        grid-area: 4 / 1 / span 1 / span 1;
+        height: min-content;
+        grid-area: 3 / 1 / span 1 / span 1;
+        position: sticky;
+        top: 0;
+        background-color: white;
     }
 
     .choice-column {
-        grid-area: 5 / 1 / span 1 / span 1;
-    }
-
-    .footer {
-        grid-area: 6 / 1 / span 1 / span 1;
-    }
-
-    .footer-button img {
-        width: 15%;
-    }
-
-    .footer-button img {
-        width: 20%;
-    }
-
-    /*Wave Animation for smaller screen*/
-    .anime:before {
-        bottom: 11vh;
-        border-radius: 48%;
-        animation-duration: 10s;
-    }
-
-    .anime:after {
-        bottom: 9vh;
-        opacity: 0.5;
-        border-radius: 50%;
-        animation-duration: 10s;
+        grid-area: 4 / 1 / span 1 / span 1;
     }
 }
 
 @media screen and (min-width: 801px) {
     .container {
         display: grid;
-        grid-template-rows: 10vh 5vh 55vh 20vh 10vh;
+        grid-template-rows: auto;
         grid-template-columns: 50vw 50vw;
     }
 
-    .header {
+    .page-title {
         grid-area: 1 / 1 / span 1 / span 2;
     }
 
     #welcome {
         margin: 2%;
-        font-size: 20pt;
+        font-size: 18pt;
+        /* height: 300px; */
     }
 
     .title-question {
+        position: sticky;
+        top: 0;
+        background-color: white;
         grid-area: 2 / 1 / span 1 / span 1;
     }
 
     .title-choice {
+        position: sticky;
+        top: 0;
+        background-color: white;
         grid-area: 2 / 2 / span 1 / span 1;
     }
 
@@ -297,28 +191,6 @@ body {
 
     .choice-column {
         grid-area: 3 / 2 / span 1 / span 1;
-    }
-
-    .footer {
-        grid-area: 5 / 1 / span 1 / span 2;
-    }
-
-    .footer-button img {
-        width: 15%;
-    }
-
-    /*Wave Animation for bigger screen*/
-    .anime:before {
-        bottom: 12vh;
-        border-radius: 49%;
-        animation-duration: 10s;
-    }
-
-    .anime:after {
-        bottom: 10vh;
-        opacity: 0.5;
-        border-radius: 50%;
-        animation-duration: 10s;
     }
 }
 
