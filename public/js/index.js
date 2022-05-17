@@ -3,18 +3,55 @@
 function init() {
   console.log("Client script loaded.");
 
-  function ajaxGET(path, callback) {
+  function ajaxPOST(url, callback, data) {
+    const params =
+      typeof data == "string"
+        ? data
+        : Object.keys(data)
+            .map({
+              function(key) {
+                return (
+                  encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+                );
+              },
+            })
+            .join("&");
+
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
-      if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-        callback(this.responseText);
+      if (!this.readyState == XMLHttpRequest.DONE || this.status != 200) {
+        console.warn(this.status);
       }
+      callback(this.responseText, this.status);
     };
-    xhr.open("GET", path);
-    xhr.send();
+    xhr.open("POST", url);
+    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send(params);
   }
 
-  // @TODO make necessary requests here, will be called after docxument load.
+  document.getElementById("start").onclick = function (event) {
+    event.preventDefault();
+    ajaxPOST(
+      "/playthrough",
+      function (data, status) {
+        if (data) {
+          const { questions, playthrough, message } = JSON.parse(data);
+          if (status == 200) {
+            sessionStorage.setItem("playthroughId", playthrough.id);
+            console.log("questions:", questions);
+            console.log("playthrough:", playthrough);
+            window.location.replace("/game");
+          } else {
+            console.error(message);
+          }
+        } else {
+          console.error("No data in response.");
+        }
+      },
+      ""
+    );
+  };
 }
 
 document.onreadystatechange = () => {

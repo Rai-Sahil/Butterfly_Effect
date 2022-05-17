@@ -10,7 +10,14 @@ const {
   editUser,
   getUsers,
 } = require("./db");
-const { getQuestions, getChoices, updateQuestion, updateChoice, deleteQuestion } = require("./game-db");
+const {
+  getQuestions,
+  getChoices,
+  updateQuestion,
+  updateChoice,
+  deleteQuestion,
+  startPlaythrough,
+} = require("./game-db");
 const {
   requireAdmin,
   requireCurrentUser,
@@ -130,11 +137,16 @@ router.get("/rules", requireLoggedIn, function (req, res) {
   });
 });
 
-router.get("/admin-dashboard", requireLoggedIn, requireAdmin, function (req, res) {
-  res.sendFile("admin-dashboard.html", {
-    root: __dirname + "/public/html",
-  });
-});
+router.get(
+  "/admin-dashboard",
+  requireLoggedIn,
+  requireAdmin,
+  function (req, res) {
+    res.sendFile("admin-dashboard.html", {
+      root: __dirname + "/public/html",
+    });
+  }
+);
 
 router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
   return getUsers(({ status, message, users }) => {
@@ -240,11 +252,16 @@ router.post(
 );
 
 //game-db
-router.get("/question-edit", requireLoggedIn, requireAdmin, function (req, res) {
-  res.sendFile("question-edit.html", { root: __dirname + "/public/html" });
-});
+router.get(
+  "/question-edit",
+  requireLoggedIn,
+  requireAdmin,
+  function (req, res) {
+    res.sendFile("question-edit.html", { root: __dirname + "/public/html" });
+  }
+);
 
-router.get("/questions", requireLoggedIn,  function (req, res) {
+router.get("/questions", requireLoggedIn, function (req, res) {
   getQuestions(res);
 });
 
@@ -253,7 +270,7 @@ router.post("/questions", requireLoggedIn, requireAdmin, function (req, res) {
   var { question, qid } = req.body;
   updateQuestion(question, qid, ({ status, message }) => {
     res.status(status).send({ message });
-  })
+  });
 });
 
 router.get("/choices", requireLoggedIn, function (req, res) {
@@ -264,15 +281,36 @@ router.get("/choices", requireLoggedIn, function (req, res) {
 router.post("/choices", requireLoggedIn, requireAdmin, function (req, res) {
   res.setHeader("Content-Type", "application/json");
   var { questionID, optionID, text, envi, comf, nextQuestion } = req.body;
-  updateChoice(questionID, optionID, text, envi, comf, nextQuestion, ({ status, message }) => {
-    res.status(status).send({ message });
-  })
+  updateChoice(
+    questionID,
+    optionID,
+    text,
+    envi,
+    comf,
+    nextQuestion,
+    ({ status, message }) => {
+      res.status(status).send({ message });
+    }
+  );
 });
 
 router.delete("/delete", requireLoggedIn, requireAdmin, function (req, res) {
   var qid = req.query["qid"];
   var oid = req.query["oid"];
   deleteQuestion(qid, oid, res);
+});
+
+router.post("/playthrough", requireLoggedIn, function (req, res) {
+  const { uuid } = req.session;
+  return startPlaythrough(
+    uuid,
+    ({ status, message, playthrough, questions }) => {
+      if (status !== 200) {
+        return res.status(status).send({ message });
+      }
+      return res.status(status).send({ message, playthrough, questions });
+    }
+  );
 });
 
 router.use(function (_, res) {
