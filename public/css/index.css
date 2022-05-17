@@ -4,9 +4,6 @@
 body {
   font-family: 'Signika Negative', sans-serif;
   font-size: 18pt;
-  background-color: #49BEAA;
-  margin: 0;
-  padding: 0;
 }
 
 #app-name {
@@ -14,19 +11,19 @@ body {
   color: #F5DFBB;
   font-size: 30pt;
   margin-top: 1%;
-  text-shadow: -1px 0 #444, 0 2px #444, 2px 0 #444, 0 -2px #444;
+  text-shadow: -1px 0 #444, 0 1px #444, 2px 0 #444, 0 -1px #444;
 }
 
 #main-page {
   text-align: center;
 }
 
-a {
+.main-menu {
   text-decoration: none;
   color: #F5DFBB;
 }
 
-a:hover {
+.main-menu:hover {
   color: #4390D8;
 }
 
@@ -37,21 +34,8 @@ ul {
   font-size: 18pt;
 }
 
-#logout-button {
-  background-color: #1B72C1;
-  color: #F5DFBB;
-  border-style: none;
-  border-radius: 5px;
-  font-size: 18pt;
-  cursor: pointer;
-}
-
-#logout-button:hover {
-  background-color: darkblue;
-}
-
-img{
-  width: 190px;
+#image {
+  width: 180px;
   margin-top: 5%;
 }
 
@@ -71,7 +55,7 @@ form{
 }
 
 @media screen and (max-width: 700px) {
-  img{
+  .image {
     width: 150px;
     margin-top: 12%;
   }
