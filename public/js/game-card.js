@@ -59,6 +59,16 @@ function init() {
             env_pt = temp;
         }
         document.getElementById("env-meter").style.width = env_pt + "%";
+        if (value > 0){
+            document.getElementById("env-change").classList.toggle("hidden");
+            document.getElementById("env-change").style.color = "#49BEAA";
+            document.getElementById("env-change").innerHTML = "+" + value;
+        } else {
+            document.getElementById("env-change").classList.toggle("hidden");
+            document.getElementById("env-change").style.color = "#af1313";
+            document.getElementById("env-change").innerHTML = value;
+        }
+        setTimeout(() => {document.getElementById("env-change").classList.toggle("hidden");}, 2000);
     }
 
     function setCom(value) {
@@ -71,6 +81,16 @@ function init() {
             com_pt = temp;
         }
         document.getElementById("com-meter").style.width = com_pt + "%";
+        if (value > 0){
+            document.getElementById("com-change").classList.toggle("hidden");
+            document.getElementById("com-change").style.color = "#49BEAA";
+            document.getElementById("com-change").innerHTML = "+" + value;
+        } else {
+            document.getElementById("com-change").classList.toggle("hidden");
+            document.getElementById("com-change").style.color = "#af1313";
+            document.getElementById("com-change").innerHTML = value;
+        }
+        setTimeout(() => {document.getElementById("com-change").classList.toggle("hidden");}, 2000);
     }
 
     async function getQuestions() {
