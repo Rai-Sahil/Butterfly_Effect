@@ -30,6 +30,7 @@ function init() {
     xhr.send(params);
   }
 
+  // @TODO notify user if playthrough fails to start 
   document.getElementById("start").onclick = function (event) {
     event.preventDefault();
     ajaxPOST(

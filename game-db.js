@@ -196,6 +196,21 @@ function shuffle(array) {
   return array;
 }
 
+function getPlaythrough(uuid, callback) {
+  try {
+    const connection = await mysql.createConnection(connectionParams);
+    const getLatestPlaythroughQuery = `SELECT * FROM PLAYTHROUGH WHERE uuid = ? ORDER BY ID DESC LIMIT 1 `;
+    const[[playthrough]] = await connection.query(getLatestPlaythroughQuery, [uuid]);
+    return callback({status: 200, message: "Successfully retrieved playthrough.", playthrough});
+  } catch (error) {
+    console.error("Error retrieving playthrough: ", error);
+    return callback({
+      status: 500,
+      message: "Internal error while attempting to retrieve playthrough.",
+    });
+  }
+}
+
 async function startPlaythrough(uuid, callback) {
   try {
     // Create new playthrough
@@ -240,5 +255,6 @@ module.exports = {
   updateQuestion,
   updateChoice,
   deleteQuestion,
+  getPlaythrough,
   startPlaythrough,
 };
