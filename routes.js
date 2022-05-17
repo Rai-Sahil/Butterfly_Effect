@@ -304,11 +304,11 @@ router.post("/playthrough", requireLoggedIn, function (req, res) {
   const { uuid } = req.session;
   return startPlaythrough(
     uuid,
-    ({ status, message, playthrough, questions }) => {
+    ({ status, message, playthroughId }) => {
       if (status !== 200) {
         return res.status(status).send({ message });
       }
-      return res.status(status).send({ message, playthrough, questions });
+      return res.status(status).send({ message, playthroughId });
     }
   );
 });

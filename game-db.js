@@ -199,19 +199,26 @@ function shuffle(array) {
 async function startPlaythrough(uuid, callback) {
   try {
     const connection = await mysql.createConnection(connectionParams);
-    const [[user]] = await connection.query(`SELECT uuid, name, email, role FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`, uuid);
-    console.log(user);
-    // const insertPlaythroughQuery = `INSERT INTO PLAYTHROUGH (user_id) values ? `;
-    const playthrough = { id: 1 };
+    const getUserByUUIDQuery = `SELECT id FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`
+    const [[user]] = await connection.query(getUserByUUIDQuery, uuid);
+    const insertPlaythroughQuery = `INSERT INTO PLAYTHROUGH (user_id) VALUES (?)`;
+    const [{ insertId: playthroughId }] = await connection.query(insertPlaythroughQuery, [
+      user.id,
+    ]);
     const numQuestions = 3;
-    const [questions] = await connection.execute("SELECT * FROM QUESTION");
+    const [questions] = await connection.query("SELECT id FROM QUESTION");
     const selectedQuestions = shuffle(questions).slice(0, numQuestions);
-    console.log(selectedQuestions);
+    const insertPlaythroughQuestionsQuery = `INSERT INTO PLAYTHROUGH_QUESTION (playthrough_id, question_id) VALUES ?`;
+    const [{insertId: questionId}] = await connection.query(
+      insertPlaythroughQuestionsQuery,
+      [selectedQuestions.map(({ id }) => [playthroughId, id])]
+    );
+    console.log(result);
     return callback({
       status: 200,
       message: "Successfully started playthrough.",
-      playthrough,
-      questions: selectedQuestions,
+      playthroughId,
+      questionId
     });
   } catch (error) {
     console.error("Error starting playthrough: ", error);

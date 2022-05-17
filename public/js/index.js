@@ -36,11 +36,9 @@ function init() {
       "/playthrough",
       function (data, status) {
         if (data) {
-          const { questions, playthrough, message } = JSON.parse(data);
+          const { playthroughId, message } = JSON.parse(data);
           if (status == 200) {
-            sessionStorage.setItem("playthroughId", playthrough.id);
-            console.log("questions:", questions);
-            console.log("playthrough:", playthrough);
+            sessionStorage.setItem("playthroughId", playthroughId);
             window.location.replace("/game");
           } else {
             console.error(message);
