@@ -27,6 +27,30 @@ function init() {
     xhr.send();
   }
 
+  function ajaxPUT(url, callback, data) {
+    const params =
+      typeof data == "string"
+        ? data
+        : Object.keys(data)
+            .map({
+              function(key) {
+                return (
+                  encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+                );
+              },
+            })
+            .join("&");
+
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      callback(this.responseText, this.status);
+    };
+    xhr.open("PUT", url);
+    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send(params);
+  }
+
   //Start the game
   initMeters();
   getQuestions();
@@ -93,81 +117,92 @@ function init() {
   }
 
   async function showQuestion(index) {
-    document.querySelector(".question").innerHTML = questionList[index].text;
-    await getChoices(questionList[index].question_id);
-    return ajaxGET(
-      "/choices?qid=" + questionList[index].question_id,
-      (data) => {
-        choiceInfo = JSON.parse(data);
-        document.querySelector("#choices-go-here").innerHTML = null;
-        let choiceTemplate = document.getElementById("choice");
-        for (let j = 0; j < choiceInfo.length; j++) {
-          let choiceButton = choiceTemplate.content.cloneNode(true);
-          choiceButton.querySelector("#option").innerHTML = choiceInfo[j].text;
-          choiceButton.querySelector("#option").onclick = () => {
-            // @TODO save user choice and playthrough progress
-            setCom(choiceInfo[j].com_pt);
-            setEnv(choiceInfo[j].env_pt);
-            step++;
-            if (com_pt == 0) {
-              //Comfort=0, bad ending 1
-              document.querySelector("#info").innerHTML =
-                "You reached the BAD ENDING 1<br/>Environment = " +
-                env_pt +
-                "<br/>Happiness = " +
-                com_pt;
+    const currentQuestion = questionList[index];
+    document.querySelector(".question").innerHTML = currentQuestion.text;
+    await getChoices(currentQuestion.question_id);
+    return ajaxGET("/choices?qid=" + currentQuestion.question_id, (data) => {
+      choiceInfo = JSON.parse(data);
+      document.querySelector("#choices-go-here").innerHTML = null;
+      let choiceTemplate = document.getElementById("choice");
+      for (let j = 0; j < choiceInfo.length; j++) {
+        const currentChoice = choiceInfo[j];
+        console.log(currentChoice)
+        let choiceButton = choiceTemplate.content.cloneNode(true);
+        choiceButton.querySelector("#option").innerHTML = currentChoice.text;
+        choiceButton.querySelector("#option").onclick = () => {
+          // @TODO save user choice and playthrough progress
+          const queryString =
+            "playthroughId=" +
+            sessionStorage.getItem("playthroughId") +
+            "&questionId=" + currentQuestion.id + "&choiceId=" + currentChoice.ID;
+          ajaxPUT("/playthrough", (data, status) => {
+            if (status !== 200) {
+              const {message} = JSON.parse(data);
+              document.querySelector("#info").innerHTML = message;
               popup.classList.toggle("display-none");
-              return;
             }
-            if (env_pt == 0) {
-              //Environment=0, bad ending 2
-              document.querySelector("#info").innerHTML =
-                "You reached the BAD ENDING 2<br/>Environment = " +
-                env_pt +
-                "<br/>Happiness = " +
-                com_pt;
-              popup.classList.toggle("display-none");
-              return;
-            }
-            if (com_pt == 100) {
-              //Comfort=100, good ending 1
-              document.querySelector("#info").innerHTML =
-                "You reached the GOOD ENDING 1<br/>Environment = " +
-                env_pt +
-                "<br/>Happiness = " +
-                com_pt;
-              popup.classList.toggle("display-none");
-              return;
-            }
-            if (env_pt == 100) {
-              //Environment=100, good ending 2
-              document.querySelector("#info").innerHTML =
-                "You reached the GOOD ENDING 2<br/>Environment = " +
-                env_pt +
-                "<br/>Happiness = " +
-                com_pt;
-              popup.classList.toggle("display-none");
-              return;
-            }
-            if (step == qnum) {
-              //No more question left in this round
-              document.querySelector("#info").innerHTML =
-                "This is the last question!<br/>Environment = " +
-                env_pt +
-                "<br/>Happiness = " +
-                com_pt;
-              popup.classList.toggle("display-none");
-              return;
-            }
-            showQuestion(step);
-          };
-          choiceButton
-            .querySelector("#option")
-            .setAttribute("id", "option" + choiceInfo[j].ID); //Set unique id for each button
-          document.querySelector("#choices-go-here").appendChild(choiceButton);
-        }
+          }, queryString);
+          setCom(currentChoice.com_pt);
+          setEnv(currentChoice.env_pt);
+          step++;
+          if (com_pt == 0) {
+            //Comfort=0, bad ending 1
+            document.querySelector("#info").innerHTML =
+              "You reached the BAD ENDING 1<br/>Environment = " +
+              env_pt +
+              "<br/>Happiness = " +
+              com_pt;
+            popup.classList.toggle("display-none");
+            return;
+          }
+          if (env_pt == 0) {
+            //Environment=0, bad ending 2
+            document.querySelector("#info").innerHTML =
+              "You reached the BAD ENDING 2<br/>Environment = " +
+              env_pt +
+              "<br/>Happiness = " +
+              com_pt;
+            popup.classList.toggle("display-none");
+            return;
+          }
+          if (com_pt == 100) {
+            //Comfort=100, good ending 1
+            document.querySelector("#info").innerHTML =
+              "You reached the GOOD ENDING 1<br/>Environment = " +
+              env_pt +
+              "<br/>Happiness = " +
+              com_pt;
+            popup.classList.toggle("display-none");
+            return;
+          }
+          if (env_pt == 100) {
+            //Environment=100, good ending 2
+            document.querySelector("#info").innerHTML =
+              "You reached the GOOD ENDING 2<br/>Environment = " +
+              env_pt +
+              "<br/>Happiness = " +
+              com_pt;
+            popup.classList.toggle("display-none");
+            return;
+          }
+          if (step == qnum) {
+            //No more question left in this round
+            document.querySelector("#info").innerHTML =
+              "This is the last question!<br/>Environment = " +
+              env_pt +
+              "<br/>Happiness = " +
+              com_pt;
+            popup.classList.toggle("display-none");
+            return;
+          }
+          showQuestion(step);
+        };
+        choiceButton
+          .querySelector("#option")
+          .setAttribute("id", "option" + currentChoice.ID); //Set unique id for each button
+        document.querySelector("#choices-go-here").appendChild(choiceButton);
       }
-    );
+    });
   }
 
   //Close modal and return to main page

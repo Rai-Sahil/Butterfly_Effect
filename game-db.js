@@ -244,10 +244,43 @@ async function startPlaythrough(uuid, callback) {
   }
 }
 
+async function savePlaythroughProgress(playthroughId, questionId, choiceId, callback) {
+  try {
+    // Update playthrough question 
+    const connection = await mysql.createConnection(connectionParams);
+    const updatePlaythroughQuestionQuery = `UPDATE PLAYTHROUGH_QUESTION SET selected_choice_id = ? WHERE id = ?`;
+    const updatePlaythroughResult = await connection.query(updatePlaythroughQuestionQuery, [choiceId, questionId]);
+    console.log("questionId: ", questionId);
+    console.log("updatePlaythroughResult: ", updatePlaythroughResult);
+    // Get next playthrough question
+    const nextPlaythroughQuestionQuery = `SELECT * FROM PLAYTHROUGH_QUESTION WHERE id = ? AND playthrough_id = ?`;
+    const nextQuestionId = (+questionId) + 1;
+    const [[nextQuestion]] = await connection.query(
+      nextPlaythroughQuestionQuery,
+      [nextQuestionId, playthroughId]
+    );
+    console.log("nextQuestion:", nextQuestion);
+    // Update playthrough with next question (null if no more questions)
+    const updatePlaythroughQuery = `UPDATE PLAYTHROUGH SET last_question_id = ? WHERE id = ?`;
+    const playthroughUpdateResult = await connection.query(updatePlaythroughQuery, [
+      nextQuestion ? nextQuestion.id : null,
+      playthroughId
+    ])
+    console.log("playthroughUpdateResult: ", playthroughUpdateResult);
+  } catch (error) {
+    console.error("Error retrieving playthrough questions: ", error);
+    return callback({
+      status: 500,
+      message:
+        "Internal error while attempting to retrieve playthrough questions.",
+    });
+  }
+}
+
 async function getPlaythroughQuestions(uuid, playthroughId, callback) {
   try {
-    // Get latest playthrough for user
     const connection = await mysql.createConnection(connectionParams);
+    // Get latest playthrough for user
     const getUserByUUIDQuery = `SELECT id FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
     const [[user]] = await connection.query(getUserByUUIDQuery, uuid);
     const getPlaythroughQuery = `SELECT id, last_question_id FROM PLAYTHROUGH WHERE id = ? AND user_id = ? ORDER BY ID DESC LIMIT 1`;
@@ -289,5 +322,6 @@ module.exports = {
   deleteQuestion,
   getPlaythrough,
   startPlaythrough,
+  savePlaythroughProgress,
   getPlaythroughQuestions,
 };

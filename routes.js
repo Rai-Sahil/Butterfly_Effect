@@ -1,7 +1,6 @@
 "use strict";
 
 const express = require("express");
-const { route } = require("express/lib/application");
 const router = express.Router();
 const {
   authenticate,
@@ -19,6 +18,7 @@ const {
   deleteQuestion,
   getPlaythrough,
   startPlaythrough,
+  savePlaythroughProgress,
   getPlaythroughQuestions,
 } = require("./game-db");
 const {
@@ -328,6 +328,20 @@ router.post("/playthrough", requireLoggedIn, function (req, res) {
   );
 });
 
+// Update db to save user choice and advance to next question
+router.put("/playthrough", requireLoggedIn, function (req, res) {
+  const { playthroughId, questionId, choiceId } = req.body;
+  console.log("req.query:", req.body);
+  return savePlaythroughProgress(
+    playthroughId,
+    questionId,
+    choiceId,
+    ({ status, message }) => {
+      return res.status(status).send({ message });
+    }
+  );
+});
+
 // Get playthrough and playthrough questions
 router.get("/playthrough/questions", requireLoggedIn, function (req, res) {
   const { uuid } = req.session;
@@ -342,11 +356,6 @@ router.get("/playthrough/questions", requireLoggedIn, function (req, res) {
       return res.status(status).send({ message, playthrough, questions });
     }
   );
-});
-
-// Update db to save user choice and advance to next question
-router.post("/playthrough/questions", requireLoggedIn, function (req, res) {
-  res.send("POST /playthrough/questions success");
 });
 
 router.use(function (_, res) {
