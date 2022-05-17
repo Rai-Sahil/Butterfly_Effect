@@ -1,6 +1,7 @@
 "use strict";
 
 const express = require("express");
+const { route } = require("express/lib/application");
 const router = express.Router();
 const {
   authenticate,
@@ -325,6 +326,16 @@ router.post("/playthrough", requireLoggedIn, function (req, res) {
     }
   );
 });
+
+// Get current playthrough question
+router.get("/playthrough/questions", requireLoggedIn, function (req, res) {
+  res.send("GET /playthrough/questions success");
+});
+
+// Update db to save user choice and advance to next question
+router.post("/playthrough/questions", requireLoggedIn, function (req, res) {
+  res.send("POST /playthrough/questions success");
+})
 
 router.use(function (_, res) {
   res.status(404).sendFile("404.html", {
