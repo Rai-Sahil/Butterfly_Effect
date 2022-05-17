@@ -19,6 +19,7 @@ const {
   deleteQuestion,
   getPlaythrough,
   startPlaythrough,
+  getPlaythroughQuestions,
 } = require("./game-db");
 const {
   requireAdmin,
@@ -327,15 +328,26 @@ router.post("/playthrough", requireLoggedIn, function (req, res) {
   );
 });
 
-// Get current playthrough question
+// Get playthrough and playthrough questions
 router.get("/playthrough/questions", requireLoggedIn, function (req, res) {
-  res.send("GET /playthrough/questions success");
+  const { uuid } = req.session;
+  const { playthroughId } = req.query;
+  return getPlaythroughQuestions(
+    uuid,
+    playthroughId,
+    ({ status, message, playthrough, questions }) => {
+      if (status !== 200) {
+        return res.status(status).send({ message });
+      }
+      return res.status(status).send({ message, playthrough, questions });
+    }
+  );
 });
 
 // Update db to save user choice and advance to next question
 router.post("/playthrough/questions", requireLoggedIn, function (req, res) {
   res.send("POST /playthrough/questions success");
-})
+});
 
 router.use(function (_, res) {
   res.status(404).sendFile("404.html", {

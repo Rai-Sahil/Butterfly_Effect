@@ -200,8 +200,14 @@ async function getPlaythrough(uuid, callback) {
   try {
     const connection = await mysql.createConnection(connectionParams);
     const getLatestPlaythroughQuery = `SELECT * FROM PLAYTHROUGH WHERE uuid = ? ORDER BY ID DESC LIMIT 1 `;
-    const[[playthrough]] = await connection.query(getLatestPlaythroughQuery, [uuid]);
-    return callback({status: 200, message: "Successfully retrieved playthrough.", playthrough});
+    const [[playthrough]] = await connection.query(getLatestPlaythroughQuery, [
+      uuid,
+    ]);
+    return callback({
+      status: 200,
+      message: "Successfully retrieved playthrough.",
+      playthrough,
+    });
   } catch (error) {
     console.error("Error retrieving playthrough: ", error);
     return callback({
@@ -215,36 +221,77 @@ async function startPlaythrough(uuid, callback) {
   try {
     // Create new playthrough
     const connection = await mysql.createConnection(connectionParams);
-    const getUserByUUIDQuery = `SELECT id FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`
+    const getUserByUUIDQuery = `SELECT id FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
     const [[user]] = await connection.query(getUserByUUIDQuery, uuid);
     const insertPlaythroughQuery = `INSERT INTO PLAYTHROUGH (user_id) VALUES (?)`;
-    const [{ insertId: playthroughId }] = await connection.query(insertPlaythroughQuery, [
-      user.id,
-    ]);
+    const [{ insertId: playthroughId }] = await connection.query(
+      insertPlaythroughQuery,
+      [user.id]
+    );
     // Insert randomized questions into playthrough questions
     const numQuestions = 3;
     const [questions] = await connection.query("SELECT id FROM QUESTION");
     const selectedQuestions = shuffle(questions).slice(0, numQuestions);
     const insertPlaythroughQuestionsQuery = `INSERT INTO PLAYTHROUGH_QUESTION (playthrough_id, question_id) VALUES ?`;
-    const [{insertId: questionId}] = await connection.query(
+    const [{ insertId: questionId }] = await connection.query(
       insertPlaythroughQuestionsQuery,
       [selectedQuestions.map(({ id }) => [playthroughId, id])]
     );
     // Set first question as current playthrough question
     const setPlaythroughQuestionQuery = `UPDATE PLAYTHROUGH SET last_question_id = ? WHERE id = ?;`;
-    await connection.query(setPlaythroughQuestionQuery, [questionId, playthroughId]);
+    await connection.query(setPlaythroughQuestionQuery, [
+      questionId,
+      playthroughId,
+    ]);
 
     return callback({
       status: 200,
       message: "Successfully started playthrough.",
       playthroughId,
-      questionId
+      questionId,
     });
   } catch (error) {
     console.error("Error starting playthrough: ", error);
     return callback({
       status: 500,
       message: "Internal error while attempting to start playthrough.",
+    });
+  }
+}
+
+async function getPlaythroughQuestions(uuid, playthroughId, callback) {
+  try {
+    // Get latest playthrough for user
+    const connection = await mysql.createConnection(connectionParams);
+    const getUserByUUIDQuery = `SELECT id FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
+    const [[user]] = await connection.query(getUserByUUIDQuery, uuid);
+    const getPlaythroughQuery = `SELECT id, last_question_id FROM PLAYTHROUGH WHERE id = ? AND user_id = ? ORDER BY ID DESC LIMIT 1`;
+    const [[playthrough]] = await connection.query(getPlaythroughQuery, [
+      playthroughId,
+      user.id
+    ]);
+    // Get playthrough questions with question text
+    const getPlaythroughQuestionsQuery = `
+      SELECT PTQ.id as id, Q.id as question_id, Q.question as text, Q.com_pt, Q.env_pt
+      FROM PLAYTHROUGH_QUESTION AS PTQ, QUESTION AS Q 
+      WHERE PTQ.playthrough_id = ? AND PTQ.question_id = Q.id
+      ORDER BY id ASC
+    `;
+    const [questions] = await connection.query(getPlaythroughQuestionsQuery, [
+      playthrough.id,
+    ]);
+    return callback({
+      status: 200,
+      message: "Successfully retrieved playthrough questions",
+      playthrough,
+      questions,
+    });
+  } catch (error) {
+    console.error("Error retrieving playthrough questions: ", error);
+    return callback({
+      status: 500,
+      message:
+        "Internal error while attempting to retrieve playthrough questions.",
     });
   }
 }
@@ -257,4 +304,5 @@ module.exports = {
   deleteQuestion,
   getPlaythrough,
   startPlaythrough,
+  getPlaythroughQuestions,
 };

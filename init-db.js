@@ -40,8 +40,7 @@ async function initDB() {
       is_complete bool DEFAULT FALSE NOT NULL,
       user_id int NOT NULL,
       last_question_id int,
-      FOREIGN KEY (user_id) REFERENCES ${dbUserTable}(id),
-      FOREIGN KEY (last_question_id) REFERENCES QUESTION(id)
+      FOREIGN KEY (user_id) REFERENCES ${dbUserTable}(id)
     );
     CREATE TABLE IF NOT EXISTS PLAYTHROUGH_QUESTION (
       id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
