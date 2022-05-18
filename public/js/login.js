@@ -15,12 +15,6 @@ function initlogin() {
     container.classList.remove("sign-up-mode");
   });
 
-  function slideIn() {
-    var elem = document.getElementById("box1");
-    elem.style.transition = "top 0.5s ease-in 0s";
-    elem.style.top = "0";
-  }
-
   function DelayRedirect() {
     setTimeout(function () {
       // dvCountDown.style.display = "none";
@@ -66,14 +60,14 @@ function initlogin() {
         "/login",
         function (data, status) {
           if (data) {
-            const responseJSON = JSON.parse(data);
+            const { user, message } = JSON.parse(data);
 
             if (status != 200) {
               document.getElementById("login-error-message").innerHTML =
-                responseJSON.message;
+                message;
             } else {
-              sessionStorage.setItem("userId", responseJSON.user.ID);
-              
+              sessionStorage.setItem("userId", user.uuid);
+
               DelayRedirect();
             }
           }
@@ -83,17 +77,12 @@ function initlogin() {
     });
 }
 
-
-
-document.addEventListener('readystatechange', (event) => {
-  
+document.addEventListener("readystatechange", () => {
   if (document.readyState === "complete") {
     console.info("Init login Starting Now");
     initlogin();
   }
-}
-
-);
+});
 
 let image = document.getElementById("image");
 let image2 = document.getElementById("image2");
