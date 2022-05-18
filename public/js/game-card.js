@@ -136,7 +136,7 @@ function init() {
             "&questionId=" +
             currentQuestion.id +
             "&choiceId=" +
-            currentChoice.ID;
+            currentChoice.id;
           ajaxPUT(
             "/playthrough",
             (data, status) => {
