@@ -40,7 +40,6 @@ function init() {
             },
           })
           .join("&");
-    console.info("ajaxPOST params: ", params);
 
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -158,13 +157,13 @@ function init() {
       for (let i = 0; i < parsedData.length; i++) {
         let nc = template.content.cloneNode(true);
         nc.querySelector("#q-num").innerHTML = i + 1;
-        nc.querySelector("#q-id").innerHTML = parsedData[i].ID;
+        nc.querySelector("#q-id").innerHTML = parsedData[i].id;
         nc.querySelector("#text").innerHTML = parsedData[i].question;
         nc.querySelector('.question-card').setAttribute("id", "card" + i);
 
         //Delete question
         nc.querySelector('#delete').onclick = () => {
-          ajaxDELETE("/delete?qid=" + parsedData[i].ID + "&oid=", function (e) {
+          ajaxDELETE("/delete?qid=" + parsedData[i].id + "&oid=", function (e) {
             let response = JSON.parse(e);
             document.querySelector('#info').innerHTML = response.message;
             popup.classList.toggle("display-none");
@@ -173,13 +172,13 @@ function init() {
         }
         //Edit question
         nc.querySelector('#edit').onclick = () => {
-          currentQID = parsedData[i].ID;
+          currentQID = parsedData[i].id;
           document.querySelector('#edit-question').value = parsedData[i].question;
           modalEditQuestion.classList.toggle("display-none");
         }
 
         nc.querySelector(".question-card").onclick = () => {
-          currentQID = parsedData[i].ID;
+          currentQID = parsedData[i].id;
           selected(i, parsedData.length);
           populateChoices();
         }
@@ -205,7 +204,7 @@ function init() {
         cc.querySelector("#opt-text").innerHTML = choiceData[j].text;
         //Show choice details
         cc.querySelector("#edit-option").onclick = () => {
-          currentOID = choiceData[j].ID;
+          currentOID = choiceData[j].id;
           modalEditChoice.classList.toggle("display-none");
           document.querySelector("#l1").value = choiceData[j].text;
           document.querySelector("#l2").value = choiceData[j].env_pt;
@@ -214,7 +213,7 @@ function init() {
         }
         //Delete choice
         cc.querySelector('#delete-option').onclick = () => {
-          ajaxDELETE("/delete?qid=" + currentQID + "&oid=" + choiceData[j].ID, function (e) {
+          ajaxDELETE("/delete?qid=" + currentQID + "&oid=" + choiceData[j].id, function (e) {
             let response = JSON.parse(e);
             document.querySelector('#info').innerHTML = response.message;
             popup.classList.toggle("display-none");
