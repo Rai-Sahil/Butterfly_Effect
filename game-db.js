@@ -202,9 +202,11 @@ function shuffle(array) {
 async function getPlaythrough(uuid, callback) {
   try {
     const connection = await mysql.createConnection(connectionParams);
-    const getLatestPlaythroughQuery = `SELECT * FROM PLAYTHROUGH WHERE uuid = ? ORDER BY ID DESC LIMIT 1 `;
+    const getUserByUUIDQuery = `SELECT id FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
+    const [[user]] = await connection.query(getUserByUUIDQuery, uuid);
+    const getLatestPlaythroughQuery = `SELECT * FROM PLAYTHROUGH WHERE user_id = ? ORDER BY ID DESC LIMIT 1 `;
     const [[playthrough]] = await connection.query(getLatestPlaythroughQuery, [
-      uuid,
+      user.id,
     ]);
     return callback({
       status: 200,
