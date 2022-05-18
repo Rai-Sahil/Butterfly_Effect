@@ -15,7 +15,7 @@
 <body>
 
   <template id="template-user-row">
-    <tr>
+    <tr id="user-id">
       <td class="user-row-name">
         <input type="text" class="profile-form name-input" required disabled>
         <button type="button" class="profile-button name-submit" onclick=""><i class="material-icons">&#xE03B;</i></button>
@@ -36,12 +36,12 @@
     </tr>
   </template>
   <template id="template-new-user-row">
-    <tr>
-      <td><input type="text" id="new_user_name" required></td>
-      <td><input type="text" id="new_user_email" required></td>
-      <td><input type="text" id="new_user_password" required></td>
+    <tr id="new-user-row">
+      <td><input type="text" id="new-user-name" required></td>
+      <td><input type="text" id="new-user-email" required></td>
+      <td><input type="password" id="new-user-password" required></td>
       <td>
-        <button class="profile-button"><i class="material-icons">&#xE03B;</i></button>
+        <button class="profile-button" onclick="addNewUser()"><i class="material-icons">&#xE03B;</i></button>
       </td>
     </tr>
   </template>
@@ -74,11 +74,12 @@
       <div class="table-wrapper">
         <div class="table-title">
           <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-4">
               <h2><b>Users</b></h2>
             </div>
+            <div class="col-sm-4" id="dashboard-status-message"></div>
             <div class="col-sm-4">
-              <button type="button" class="btn btn-info add-new" onclick="addNewUser()" id="addnew"><i class="fa fa-plus"></i> Add New</button>
+              <button type="button" class="btn btn-info add-new" onclick="addNewUserRow()" id="addnew"><i class="fa fa-plus"></i> Add New</button>
             </div>
           </div>
         </div>
