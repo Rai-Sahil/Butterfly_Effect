@@ -64,17 +64,20 @@ function init() {
     );
   };
 
-  document.getElementById("continue").onclick = function (event) {
-    event.preventDefault();
-    ajaxGET("/playthrough", (data, status) =>{
-      if (data) {
-        const x = JSON.parse(data);
-        console.log(x)
-      } else {
-        console.error("No data in response");
+  // Check if player has a playthrough in progress to display "Continue" 
+  ajaxGET("/playthrough", (data, status) => {
+    if (data) {
+      const {message, playthrough} = JSON.parse(data);
+      if (status !== 200) {
+        console.error(message);
       }
-    });
-  }
+      if (!playthrough.is_complete) {
+        document.getElementById("continue").hidden = false;
+      }
+    } else {
+      console.error("No data in response");
+    }
+  });
 }
 
 document.onreadystatechange = () => {

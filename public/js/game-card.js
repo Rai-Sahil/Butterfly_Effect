@@ -149,7 +149,6 @@ function init() {
         let choiceButton = choiceTemplate.content.cloneNode(true);
         choiceButton.querySelector("#option").innerHTML = currentChoice.text;
         choiceButton.querySelector("#option").onclick = () => {
-          // @TODO save user choice and playthrough progress
           const queryString =
             "playthroughId=" +
             sessionStorage.getItem("playthroughId") +
