@@ -4,7 +4,6 @@ body {
     font-family: 'Signika Negative', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #49BEAA;
 }
 
 h1 {
@@ -37,7 +36,7 @@ h2 {
     margin-left: -2%;
 }
 
-img {
+#contact {
     width: 80%;
     margin-left: 12%;
 }
@@ -92,7 +91,7 @@ input[type=submit]:hover {
         margin-top: -3%;
     }
 
-    img {
+    #contact {
         width: 55%;
         margin-left: 22%;
         grid-row: 1 / span 1;
