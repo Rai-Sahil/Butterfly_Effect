@@ -18,7 +18,7 @@ h1 {
 }
 
 .header {
-    padding-top: 60px;
+    padding-top: 20px;
     color: #F5DFBB;
     font-size: 20px;
     margin: auto;
@@ -84,7 +84,6 @@ input[type=submit]:hover {
     #contactus-page {
         display: grid;
         grid-template-columns: 100%;
-        grid-template-rows: 40% 60%;
     }
 
     h2 {
