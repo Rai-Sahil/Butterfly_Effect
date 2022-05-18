@@ -74,7 +74,7 @@ function addNewUserRow() {
 const loadUsers = () => ajaxGET("/users", (data, status) => {
     const { users, message } = JSON.parse(data);
     if (status !== 200) {
-      console.error(message);
+      statusMessageHTML.innerHTML = message;
     } else {
       const userTableBody = document.getElementById("user-table-body");
       userTableBody.innerHTML = "";
