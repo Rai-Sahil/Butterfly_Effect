@@ -1,3 +1,5 @@
+"use strict";
+
 function deleteRow(r) {
   var i = r.parentNode.parentNode.rowIndex;
   document.getElementById("data_table").deleteRow(i);
@@ -5,17 +7,11 @@ function deleteRow(r) {
 
 
 function myFunction() {
-//   var new_name=document.getElementById("new_name").value;
-//  var new_country=document.getElementById("new_country").value;
-//  var new_age=document.getElementById("new_age").value;
  let table=document.getElementById("data_table");
  var table_len=1;
  
  
  var row = table.insertRow(table_len).outerHTML="<tr id='demo'><td><input type='text' id='new_name' required></td><td><input type='text' id='new_country'></td><td><input type='text' id='new_age'></td><td><div type='button' class='addrow' onclick='addRow()'><i class='material-icons'>&#xE03B;</i></div></td></tr>";
-//  document.getElementById("new_name").value="";
-//  document.getElementById("new_country").value="";
-//  document.getElementById("new_age").value="";
 }
 
 function addRow(){
@@ -90,3 +86,41 @@ function save_row_cell3(no)
  document.getElementById("edit_button3"+no).style.display="block";
  document.getElementById("save_button3"+no).style.display="none";
 }
+
+function init() {
+  function ajaxGET(path, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      if (this.readyState == XMLHttpRequest.DONE) {
+        callback(this.responseText, this.status);
+      }
+    };
+    xhr.open("GET", path);
+    xhr.send();
+  }
+
+  ajaxGET("/users", (data, status) => {
+    const { users, message } = JSON.parse(data);
+    if (status !== 200) {
+      console.error(message);
+    } else {
+      const userTableBody = document.getElementById("user-table-body");
+
+      const template = document.getElementById("template-user-row");
+      users.forEach(({ name, email, role }) => {
+        let userRow = template.content.cloneNode(true);
+        userRow.querySelector(".user-row-name").innerHTML = name;
+        userRow.querySelector(".user-row-email").innerHTML = email;
+        userTableBody.appendChild(userRow);
+      });
+    }
+  });
+
+}
+
+document.onreadystatechange = () => {
+  if (document.readyState === "complete") {
+    console.info("Document fully loaded.");
+    init();
+  }
+};
