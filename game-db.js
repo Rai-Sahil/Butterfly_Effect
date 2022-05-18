@@ -32,6 +32,21 @@ async function getChoices(questionID, res) {
   }
 }
 
+//Get choice by choice_id
+async function getChoiceByID(choice_id, res){
+  try{
+    const connection = await mysql.createConnection(connectionParams);
+    var [row] = await connection.execute("SELECT * FROM CHOICE WHERE id = " + choice_id);
+    if (row == 0) {
+      return res.send({ status: 200, message: "No choice found." });
+    }
+    res.send(row);
+  } catch (error) {
+    console.error(error);
+    return callback({ status: 500, message: "Internal server error." });
+  }
+}
+
 //Add or update new question
 async function updateQuestion(questionText, questionID, callback) {
   try {
@@ -334,6 +349,7 @@ async function getPlaythroughQuestions(uuid, playthroughId, callback) {
 module.exports = {
   getQuestions,
   getChoices,
+  getChoiceByID,
   updateQuestion,
   updateChoice,
   deleteQuestion,

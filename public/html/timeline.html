@@ -21,7 +21,7 @@
         <div class="center-line"></div>
         <div class="timeline-content">
             <ul class="ulist" id="cards-go-here">
-                
+
             </ul>
         </div>
     </div>
@@ -32,9 +32,26 @@
                 <h1 class="decision-count">Decision 1</h1>
                 <p class="decision-content">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam
                     explicabo
-                    inventore sequi natus totam culpa quos nobis dignissimos autem ut.</p>
+                    inventore sequi natus totam culpa quos nobis dignissimos autem ut.
+                </p>
+                <div class="selected-choice"></div>
                 <hr>
-                <p class="points">+2 comfort or -2 earth here</p>
+                <div class="points status">
+                    <div class="status-container" id="environ" title="Environment">
+                        <img src="../img/earth.svg" alt="">
+                        <div class="indicator-container">
+                            <div class="indicator" id="env-meter"></div>
+                            <div class="score-change" id="env-change">+30</div>
+                        </div>
+                    </div>
+                    <div class="status-container" id="comfort" title="Happiness">
+                        <img src="../img/smileyface.svg" alt="">
+                        <div class="indicator-container">
+                            <div class="indicator" id="com-meter"></div>
+                            <div class="score-change" id="com-change">+30</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </li>
     </template>

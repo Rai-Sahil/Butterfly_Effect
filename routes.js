@@ -13,6 +13,7 @@ const {
 const {
   getQuestions,
   getChoices,
+  getChoiceByID,
   updateQuestion,
   updateChoice,
   deleteQuestion,
@@ -279,6 +280,11 @@ router.post("/questions", requireLoggedIn, requireAdmin, function (req, res) {
 router.get("/choices", requireLoggedIn, function (req, res) {
   var qid = req.query["qid"];
   getChoices(qid, res);
+});
+
+router.get("/choice-by-id", requireLoggedIn, function (req, res) {
+  var choice_id = req.query["cid"];
+  getChoiceByID(choice_id, res);
 });
 
 router.post("/choices", requireLoggedIn, requireAdmin, function (req, res) {
