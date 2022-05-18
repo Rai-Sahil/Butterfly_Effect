@@ -16,23 +16,36 @@
 
   <template id="template-user-row">
     <tr>
-      <td class="user-row-name"><span type="button" id="edit_button11" value="Edit" class="edit" onclick="edit_row_cell1('1')"><i class="material-icons">&#xE254;</i></span>
-        <span type="button" id="save_button11" value="Save" class="save" onclick="save_row_cell1('1')"><i class="material-icons">&#xE03B;</i></span>
+      <td class="user-row-name">
+        <input type="text" class="profile-form name-input" required disabled>
+        <button type="button" class="profile-button name-submit" onclick=""><i class="material-icons">&#xE03B;</i></button>
+      </td>
+      <td class="user-row-email">
+        <input type="text" id="name-input" class="profile-form email-input" required disabled>
+        <button id="name-save" class="profile-button email-submit" onclick=""><i class="material-icons">&#xE03B;</i></button>
       </td>
 
-      <td class="user-row-email"><span type="button" id="edit_button21" value="Edit" class="edit" onclick="edit_row_cell2('1')"><i class="material-icons">&#xE254;</i></span>
-        <sp type="button" id="save_button21" value="Save" class="save" onclick="save_row_cell2('1')"><i class="material-icons">&#xE03B;</i></span>
-      </td>
-
-      <td class="user-row-password"><span type="button" id="edit_button31" value="Edit" class="edit" onclick="edit_row_cell3('1')"><i class="material-icons">&#xE254;</i></span>
-        <span type="button" id="save_button31" value="Save" class="save" onclick="save_row_cell3('1')"><i class="material-icons">&#xE03B;</i></span>
+      <td class="user-row-password">
+        <input type="text" class="profile-form password-input" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required disabled>
+        <button class="profile-button password-submit" onclick=""><i class="material-icons">&#xE03B;</i></button>
       </td>
       <td>
-        <div type="button" onclick="deleteRow(this)"><i class="material-icons">&#xE872;</i></div>
+        <button class="profile-button user-delete" onclick=""><i class="material-icons">&#xE872;</i></button>
+      </td>
       </td>
     </tr>
   </template>
-
+  <template id="template-new-user-row">
+    <tr>
+      <td><input type="text" id="new_user_name" required></td>
+      <td><input type="text" id="new_user_email" required></td>
+      <td><input type="text" id="new_user_password" required></td>
+      <td>
+        <button class="profile-button"><i class="material-icons">&#xE03B;</i></button>
+      </td>
+    </tr>
+  </template>
+  <!-- <i class="material-icons">&#xE03B;</i> -->
   <div class="navbar">
     <div class="navbar_left">
       <span class="logo appname">Butterfly Effect</span>
@@ -79,22 +92,6 @@
             </tr>
           </thead>
           <tbody id="user-table-body">
-            <tr id="row1">
-              <td id="name_row1">John Doe <span type="button" id="edit_button11" value="Edit" class="edit" onclick="edit_row_cell1('1')"><i class="material-icons">&#xE254;</i></span>
-                <span type="button" id="save_button11" value="Save" class="save" onclick="save_row_cell1('1')"><i class="material-icons">&#xE03B;</i></span>
-              </td>
-
-              <td id="country_row1">John Doe <span type="button" id="edit_button21" value="Edit" class="edit" onclick="edit_row_cell2('1')"><i class="material-icons">&#xE254;</i></span>
-                <sp type="button" id="save_button21" value="Save" class="save" onclick="save_row_cell2('1')"><i class="material-icons">&#xE03B;</i></span>
-              </td>
-
-              <td id="age_row1">John Doe<span type="button" id="edit_button31" value="Edit" class="edit" onclick="edit_row_cell3('1')"><i class="material-icons">&#xE254;</i></span>
-                <span type="button" id="save_button31" value="Save" class="save" onclick="save_row_cell3('1')"><i class="material-icons">&#xE03B;</i></span>
-              </td>
-              <td>
-                <div type="button" onclick="deleteRow(this)"><i class="material-icons">&#xE872;</i></div>
-              </td>
-            </tr>
           </tbody>
         </table>
       </div>
