@@ -53,10 +53,11 @@ function addNewUser() {
           statusMessageHTML.style.color = "red";
         } else {
           statusMessageHTML.style.color = "green";
-          document.getElementById("new-user-row").remove();
+          loadUsers();
+          document.getElementById("addnew").disabled = false;
         }
       } else {
-        console.error("No data in reponse.");
+        statusMessageHTML.innerHTML = "No data in reponse.";
       }
     },
     params
@@ -70,14 +71,13 @@ function addNewUserRow() {
   document.getElementById("addnew").disabled = true;
 }
 
-function init() {
-  ajaxGET("/users", (data, status) => {
+const loadUsers = () => ajaxGET("/users", (data, status) => {
     const { users, message } = JSON.parse(data);
     if (status !== 200) {
       console.error(message);
     } else {
       const userTableBody = document.getElementById("user-table-body");
-
+      userTableBody.innerHTML = "";
       const template = document.getElementById("template-user-row");
       users.forEach(({ uuid, name, email, role }) => {
         let userRow = template.content.cloneNode(true);
@@ -88,6 +88,11 @@ function init() {
       });
     }
   });
+
+loadUsers();
+
+function init() {
+  
 }
 
 document.onreadystatechange = () => {
