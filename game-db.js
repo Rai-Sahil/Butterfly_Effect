@@ -37,10 +37,10 @@ async function updateQuestion(questionText, questionID, callback) {
         message: "No question typed in.",
       });
     }
-    var checkQuestionID = "SELECT * FROM QUESTION WHERE ID = ? LIMIT 1;";
+    var checkQuestionID = "SELECT * FROM QUESTION WHERE id = ? LIMIT 1;";
     var checkQuestionText =
       "SELECT * FROM QUESTION WHERE question = ? LIMIT 1;";
-    var updateQuestion = "UPDATE QUESTION SET question = ? WHERE ID = ?";
+    var updateQuestion = "UPDATE QUESTION SET question = ? WHERE id = ?";
     var insertQuestion = "INSERT QUESTION (question) values (?)";
     var [existingQuestionID] = await connection.query(checkQuestionID, [
       questionID,
@@ -96,9 +96,9 @@ async function updateChoice(
         message: "Input is not complete.",
       });
     }
-    var checkOption = "SELECT * FROM CHOICE WHERE question_id = ? AND ID = ?";
+    var checkOption = "SELECT * FROM CHOICE WHERE question_id = ? AND id = ?";
     var updateOption =
-      "UPDATE CHOICE SET text = ?, env_pt = ?, com_pt = ?, next_q = ? WHERE question_id = ? AND ID = ?";
+      "UPDATE CHOICE SET text = ?, env_pt = ?, com_pt = ?, next_q = ? WHERE question_id = ? AND id = ?";
     var insertOption =
       "INSERT CHOICE (question_id, text, env_pt, com_pt, next_q) values (?, ?, ?, ?, ?)";
     var [existingOption] = await connection.query(checkOption, [
@@ -141,17 +141,30 @@ async function deleteQuestion(questionID, optionID, res) {
   const connection = await mysql.createConnection(connectionParams);
   try {
     if (!optionID) {
-      await connection.execute("DELETE FROM QUESTION WHERE ID = " + questionID);
+      // To solve FK constraints, may cause futher error
+      let [row] = await connection.execute("SELECT * FROM PLAYTHROUGH_QUESTION WHERE question_id = " + questionID);
+      for (let i = 0; i < row.length; i++) {
+        await connection.execute("UPDATE PLAYTHROUGH SET current_question_id = NULL WHERE current_question_id = " + row[i].id);
+        await connection.execute("DELETE FROM PLAYTHROUGH_QUESTION WHERE id = " + row[i].id);
+      }
+      await connection.execute("DELETE FROM PLAYTHROUGH_QUESTION WHERE question_id = " + questionID);
+      
       await connection.execute(
         "DELETE FROM CHOICE WHERE question_id = " + questionID
       );
+      await connection.execute("DELETE FROM QUESTION WHERE id = " + questionID);
       return res.send({ status: 204, message: "Question deleted." });
     }
     await connection.execute(
+      "DELETE FROM PLAYTHROUGH_QUESTION WHERE question_id = " +
+      questionID +
+      " AND selected_choice_id = " +
+      optionID); //To solve FK constraints, may cause futher error
+    await connection.execute(
       "DELETE FROM CHOICE WHERE question_id = " +
-        questionID +
-        " AND ID = " +
-        optionID
+      questionID +
+      " AND id = " +
+      optionID
     );
     return res.send({ status: 204, message: "Choice deleted." });
   } catch (error) {

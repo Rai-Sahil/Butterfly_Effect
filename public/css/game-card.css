@@ -45,6 +45,20 @@ body {
     border-radius: 25px;
     background: linear-gradient(60deg, #4290D8 0%, #74ade3 100%);
 }
+
+.score-change {
+    position:relative;
+    top: -80px;
+    left: 50px;
+    font-size: 40pt;
+}
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 2s, opacity 2s linear;
+  }
+
 #env-meter{
     width: 50%;
 }
@@ -66,6 +80,7 @@ body {
     padding: 2%;
     text-align: center;
     margin: 3%;
+    cursor: pointer;
 }
 
 .choice-button:hover {
@@ -141,7 +156,7 @@ body {
     background-color: white;
     border-radius: 15px;
     padding: 2%;
-    border: #49BEAA solid;
+    border: #4290D8 solid;
 }
 
 .modal-button:hover {
