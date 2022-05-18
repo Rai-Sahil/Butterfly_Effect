@@ -46,6 +46,7 @@ body {
     background: linear-gradient(60deg, #61b0f9 0%, #94cbff 100%);
     border-radius: 20px;
     text-align: center;
+    cursor: pointer;
 }
 
 .adding img {
@@ -74,6 +75,7 @@ body {
     border-radius: 15px;
     padding: 2%;
     border: #61b0f9 solid;
+    cursor: pointer;
 }
 
 .modal-button-primary {
@@ -81,6 +83,7 @@ body {
     border-radius: 15px;
     padding: 2%;
     border: #61b0f9 solid;
+    cursor: pointer;
 }
 
 .modal-button:hover, .modal-button-primary:hover {
@@ -112,6 +115,45 @@ body {
 
 #info {
     font-size: 15pt;
+}
+
+.edit-icon {
+    cursor: pointer;
+}
+
+/*For modal*/
+.modal-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-wrap .modal {
+    text-align: center;
+    padding: 50px;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.modal-wrap .modal img {
+    width: 10%;
+    height: auto;
+    margin-bottom: 16px;
+}
+
+.modal-wrap .modal p:nth-child(2) {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.display-none {
+    display: none;
 }
 
 @media screen and (max-width: 800px) {
@@ -192,39 +234,4 @@ body {
     .choice-column {
         grid-area: 3 / 2 / span 1 / span 1;
     }
-}
-
-/*For modal*/
-.modal-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    z-index: 9999;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-wrap .modal {
-    text-align: center;
-    padding: 50px;
-    border-radius: 20px;
-    background-color: white;
-}
-
-.modal-wrap .modal img {
-    width: 10%;
-    height: auto;
-    margin-bottom: 16px;
-}
-
-.modal-wrap .modal p:nth-child(2) {
-    font-size: 24px;
-    margin-bottom: 16px;
-}
-
-.display-none {
-    display: none;
 }

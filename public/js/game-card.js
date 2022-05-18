@@ -32,14 +32,14 @@ function init() {
       typeof data == "string"
         ? data
         : Object.keys(data)
-            .map({
-              function(key) {
-                return (
-                  encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
-                );
-              },
-            })
-            .join("&");
+          .map({
+            function(key) {
+              return (
+                encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+              );
+            },
+          })
+          .join("&");
 
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -73,6 +73,16 @@ function init() {
       env_pt = temp;
     }
     document.getElementById("env-meter").style.width = env_pt + "%";
+    if (value > 0) {
+      document.getElementById("env-change").classList.toggle("hidden");
+      document.getElementById("env-change").style.color = "#49BEAA";
+      document.getElementById("env-change").innerHTML = "+" + value;
+    } else {
+      document.getElementById("env-change").classList.toggle("hidden");
+      document.getElementById("env-change").style.color = "#af1313";
+      document.getElementById("env-change").innerHTML = value;
+    }
+    setTimeout(() => { document.getElementById("env-change").classList.toggle("hidden"); }, 1000);
   }
 
   function setCom(value) {
@@ -85,6 +95,16 @@ function init() {
       com_pt = temp;
     }
     document.getElementById("com-meter").style.width = com_pt + "%";
+    if (value > 0) {
+      document.getElementById("com-change").classList.toggle("hidden");
+      document.getElementById("com-change").style.color = "#49BEAA";
+      document.getElementById("com-change").innerHTML = "+" + value;
+    } else {
+      document.getElementById("com-change").classList.toggle("hidden");
+      document.getElementById("com-change").style.color = "#af1313";
+      document.getElementById("com-change").innerHTML = value;
+    }
+    setTimeout(() => { document.getElementById("com-change").classList.toggle("hidden"); }, 1000);
   }
 
   function getQuestions() {
@@ -124,7 +144,7 @@ function init() {
       currentQuestionChoices = JSON.parse(data);
       document.querySelector("#choices-go-here").innerHTML = null;
       let choiceTemplate = document.getElementById("choice");
-      
+
       currentQuestionChoices.forEach((currentChoice) => {
         let choiceButton = choiceTemplate.content.cloneNode(true);
         choiceButton.querySelector("#option").innerHTML = currentChoice.text;
@@ -151,46 +171,6 @@ function init() {
           setCom(currentChoice.com_pt);
           setEnv(currentChoice.env_pt);
           step++;
-          if (com_pt == 0) {
-            //Comfort=0, bad ending 1
-            document.querySelector("#info").innerHTML =
-              "You reached the BAD ENDING 1<br/>Environment = " +
-              env_pt +
-              "<br/>Happiness = " +
-              com_pt;
-            popup.classList.toggle("display-none");
-            return;
-          }
-          if (env_pt == 0) {
-            //Environment=0, bad ending 2
-            document.querySelector("#info").innerHTML =
-              "You reached the BAD ENDING 2<br/>Environment = " +
-              env_pt +
-              "<br/>Happiness = " +
-              com_pt;
-            popup.classList.toggle("display-none");
-            return;
-          }
-          if (com_pt == 100) {
-            //Comfort=100, good ending 1
-            document.querySelector("#info").innerHTML =
-              "You reached the GOOD ENDING 1<br/>Environment = " +
-              env_pt +
-              "<br/>Happiness = " +
-              com_pt;
-            popup.classList.toggle("display-none");
-            return;
-          }
-          if (env_pt == 100) {
-            //Environment=100, good ending 2
-            document.querySelector("#info").innerHTML =
-              "You reached the GOOD ENDING 2<br/>Environment = " +
-              env_pt +
-              "<br/>Happiness = " +
-              com_pt;
-            popup.classList.toggle("display-none");
-            return;
-          }
           if (step == qnum) {
             //No more question left in this round
             document.querySelector("#info").innerHTML =
@@ -205,7 +185,7 @@ function init() {
         };
         choiceButton
           .querySelector("#option")
-          .setAttribute("id", "option" + currentChoice.ID); //Set unique id for each button
+          .setAttribute("id", "option" + currentChoice.id); //Set unique id for each button
         document.querySelector("#choices-go-here").appendChild(choiceButton);
       });
     });
