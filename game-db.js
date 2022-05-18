@@ -1,7 +1,7 @@
 "use strict";
 
 const mysql = require("mysql2/promise");
-const { dbName, dbUserTable, connectionParams } = require("./constants");
+const { dbUserTable, connectionParams } = require("./constants");
 
 //Get questions
 async function getQuestions(res) {
@@ -17,20 +17,25 @@ async function getQuestions(res) {
 
 //Get choices
 async function getChoices(questionID, res) {
-  const connection = await mysql.createConnection(connectionParams);
-  var [row] = await connection.execute(
-    "SELECT * FROM CHOICE WHERE question_id = " + questionID
-  );
-  if (row == 0) {
-    return res.send({ status: 200, message: "No choice found." });
+  try {
+    const connection = await mysql.createConnection(connectionParams);
+    var [row] = await connection.execute(
+      "SELECT * FROM CHOICE WHERE question_id = " + questionID
+    );
+    if (row == 0) {
+      return res.send({ status: 200, message: "No choice found." });
+    }
+    res.send(row);
+  } catch (error) {
+    console.error(error);
+    return callback({ status: 500, message: "Internal server error." });
   }
-  res.send(row);
 }
 
 //Add or update new question
 async function updateQuestion(questionText, questionID, callback) {
-  const connection = await mysql.createConnection(connectionParams);
   try {
+    const connection = await mysql.createConnection(connectionParams);
     if (!questionText) {
       return callback({
         status: 400,
@@ -82,8 +87,8 @@ async function updateChoice(
   nextQuestion,
   callback
 ) {
-  const connection = await mysql.createConnection(connectionParams);
   try {
+    const connection = await mysql.createConnection(connectionParams);
     if (!questionID) {
       return callback({
         status: 400,
@@ -138,8 +143,8 @@ async function updateChoice(
 
 //Delete question or choice
 async function deleteQuestion(questionID, optionID, res) {
-  const connection = await mysql.createConnection(connectionParams);
   try {
+    const connection = await mysql.createConnection(connectionParams);
     if (!optionID) {
       // To solve FK constraints, may cause futher error
       let [row] = await connection.execute("SELECT * FROM PLAYTHROUGH_QUESTION WHERE question_id = " + questionID);
