@@ -1,7 +1,18 @@
 "use strict";
 
 function init() {
-  console.log("Client script loaded.");
+  console.info("Client script loaded.");
+
+  function ajaxGET(path, callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      if (this.readyState == XMLHttpRequest.DONE) {
+        callback(this.responseText, this.status);
+      }
+    };
+    xhr.open("GET", path);
+    xhr.send();
+  }
 
   function ajaxPOST(url, callback, data) {
     const params =
@@ -52,6 +63,18 @@ function init() {
       ""
     );
   };
+
+  document.getElementById("continue").onclick = function (event) {
+    event.preventDefault();
+    ajaxGET("/playthrough", (data, status) =>{
+      if (data) {
+        const x = JSON.parse(data);
+        console.log(x)
+      } else {
+        console.error("No data in response");
+      }
+    });
+  }
 }
 
 document.onreadystatechange = () => {

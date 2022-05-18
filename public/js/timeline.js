@@ -12,7 +12,22 @@ function init() {
         xhr.send();
       }
 
-      
+     
+
+      ajaxGET("/playthrough", function (data){
+        let pdata = JSON.parse(data);
+        let p_id = pdata.playthrough.id;
+        console.log(p_id);
+
+
+        ajaxGET("/playthrough/questions?playthroughId=" + p_id, function (data){
+            let pdata = JSON.parse(data);
+            // let p_id = pdata.playthrough.id;
+            console.log(pdata);
+          });
+
+      });
+
 
 
 
