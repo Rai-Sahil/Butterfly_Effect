@@ -35,6 +35,30 @@ function ajaxPOST(url, callback, data) {
   xhr.send(params);
 }
 
+function ajaxPUT(url, callback, data) {
+  const params =
+    typeof data == "string"
+      ? data
+      : Object.keys(data)
+          .map({
+            function(key) {
+              return (
+                encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+              );
+            },
+          })
+          .join("&");
+
+  const xhr = new XMLHttpRequest();
+  xhr.onload = function () {
+    callback(this.responseText, this.status);
+  };
+  xhr.open("PUT", url);
+  xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.send(params);
+}
+
 function addNewUser() {
   const name = document.getElementById("new-user-name").value;
   const email = document.getElementById("new-user-email").value;
@@ -43,11 +67,12 @@ function addNewUser() {
   ajaxPOST(
     "/users",
     (data, status) => {
+      const statusMessageHTML = document.getElementById(
+        "dashboard-status-message"
+      );
       if (data) {
         const { message } = JSON.parse(data);
-        const statusMessageHTML = document.getElementById(
-          "dashboard-status-message"
-        );
+        
         statusMessageHTML.innerHTML = message;
         if (status !== 200) {
           statusMessageHTML.style.color = "red";
@@ -84,15 +109,43 @@ const loadUsers = () => ajaxGET("/users", (data, status) => {
         userRow.getElementById("user-id").id = uuid;
         userRow.querySelector(".name-input").value = name;
         userRow.querySelector(".email-input").value = email;
+        userRow.querySelector(".name-edit").onclick = enableEditName;
         userTableBody.appendChild(userRow);
       });
     }
   });
 
-loadUsers();
+function enableEditName() {
+  this.closest("td").querySelector(".name-input").disabled = false;
+  this.querySelector(".material-icons").innerHTML = "save";
+  this.onclick = saveUserName;
+}
+
+function saveUserName() {
+  
+  const name = this.closest("tr").querySelector(".name-input").value;
+  const param = "name=" + name;
+  ajaxPUT(`users/${this.closest("tr").id}`, (data, status) => {
+    const statusMessageHTML = document.getElementById(
+      "dashboard-status-message"
+    );
+    if (data) {
+      const { message } = JSON.parse(data);
+
+      statusMessageHTML.innerHTML = message;
+      if (status !== 200) {
+        statusMessageHTML.style.color = "red";
+      } else {
+        statusMessageHTML.style.color = "green";
+      }
+    } else {
+      statusMessageHTML.innerHTML = "No data in reponse.";
+    }
+  }, param);
+}
 
 function init() {
-  
+  loadUsers();
 }
 
 document.onreadystatechange = () => {

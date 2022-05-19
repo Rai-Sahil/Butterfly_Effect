@@ -18,19 +18,19 @@
     <tr id="user-id">
       <td class="user-row-name">
         <input type="text" class="profile-form name-input" required disabled>
-        <button type="button" class="profile-button name-submit" onclick=""><i class="material-icons">&#xE03B;</i></button>
+        <button type="button" class="profile-button name-edit"><i class="material-icons">edit</i></button>
       </td>
       <td class="user-row-email">
-        <input type="text" id="name-input" class="profile-form email-input" required disabled>
-        <button id="name-save" class="profile-button email-submit" onclick=""><i class="material-icons">&#xE03B;</i></button>
+        <input type="text" class="profile-form email-input" required disabled>
+        <button class="profile-button email-edit" onclick=""><i class="material-icons">edit</i></button>
       </td>
 
       <td class="user-row-password">
-        <input type="text" class="profile-form password-input" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required disabled>
-        <button class="profile-button password-submit" onclick=""><i class="material-icons">&#xE03B;</i></button>
+        <input type="password" class="profile-form password-input" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" required disabled>
+        <button class="profile-button password-edit" onclick=""><i class="material-icons">edit</i></button>
       </td>
       <td>
-        <button class="profile-button user-delete" onclick=""><i class="material-icons">&#xE872;</i></button>
+        <button class="profile-button user-delete" onclick=""><i class="material-icons">delete</i></button>
       </td>
       </td>
     </tr>
@@ -41,7 +41,7 @@
       <td><input type="text" id="new-user-email" required></td>
       <td><input type="password" id="new-user-password" required></td>
       <td>
-        <button class="profile-button" onclick="addNewUser()"><i class="material-icons">&#xE03B;</i></button>
+        <button class="profile-button" onclick="addNewUser()"><i class="material-icons">add</i></button>
       </td>
     </tr>
   </template>
