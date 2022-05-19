@@ -72,7 +72,7 @@ function addNewUser() {
       );
       if (data) {
         const { message } = JSON.parse(data);
-        
+
         statusMessageHTML.innerHTML = message;
         if (status !== 200) {
           statusMessageHTML.style.color = "red";
@@ -96,7 +96,51 @@ function addNewUserRow() {
   document.getElementById("addnew").disabled = true;
 }
 
-const loadUsers = () => ajaxGET("/users", (data, status) => {
+function enableEdit(element, attribute) {
+  element.closest("td").querySelector(`.${attribute}-input`).disabled = false;
+  element.querySelector(".material-icons").innerHTML = "save";
+  element.onclick = function () {
+    return saveChanges(element, attribute);
+  };
+}
+
+function saveChanges(element, attribute) {
+  const value = element
+    .closest("tr")
+    .querySelector(`.${attribute}-input`).value;
+  const param = `${attribute}=${value}`;
+  ajaxPUT(
+    `users/${element.closest("tr").id}`,
+    (data, status) => {
+      const statusMessageHTML = document.getElementById(
+        "dashboard-status-message"
+      );
+      if (data) {
+        const { message } = JSON.parse(data);
+
+        statusMessageHTML.innerHTML = message;
+        if (status !== 200) {
+          statusMessageHTML.style.color = "red";
+        } else {
+          statusMessageHTML.style.color = "green";
+          element.querySelector(".material-icons").innerHTML = "edit";
+          element
+            .closest("td")
+            .querySelector(`.${attribute}-input`).disabled = true;
+          element.onclick = function () {
+            enableEdit(element, attribute);
+          };
+        }
+      } else {
+        statusMessageHTML.innerHTML = "No data in reponse.";
+      }
+    },
+    param
+  );
+}
+
+const loadUsers = () =>
+  ajaxGET("/users", (data, status) => {
     const { users, message } = JSON.parse(data);
     if (status !== 200) {
       statusMessageHTML.innerHTML = message;
@@ -109,51 +153,23 @@ const loadUsers = () => ajaxGET("/users", (data, status) => {
         userRow.getElementById("user-id").id = uuid;
         userRow.querySelector(".name-input").value = name;
         userRow.querySelector(".email-input").value = email;
-        userRow.querySelector(".name-edit").onclick = enableEditName;
+        userRow.querySelector(".name-edit").onclick = function () {
+          enableEdit(this, "name");
+        };
+        userRow.querySelector(".email-edit").onclick = function () {
+          enableEdit(this, "email");
+        };
+        userRow.querySelector(".password-edit").onclick = function () {
+          enableEdit(this, "password");
+        };
         userTableBody.appendChild(userRow);
       });
     }
   });
 
-function enableEditName() {
-  this.closest("td").querySelector(".name-input").disabled = false;
-  this.querySelector(".material-icons").innerHTML = "save";
-  this.onclick = saveUserName;
-}
-
-function saveUserName() {
-  
-  const name = this.closest("tr").querySelector(".name-input").value;
-  const param = "name=" + name;
-  ajaxPUT(`users/${this.closest("tr").id}`, (data, status) => {
-    const statusMessageHTML = document.getElementById(
-      "dashboard-status-message"
-    );
-    if (data) {
-      const { message } = JSON.parse(data);
-
-      statusMessageHTML.innerHTML = message;
-      if (status !== 200) {
-        statusMessageHTML.style.color = "red";
-      } else {
-        statusMessageHTML.style.color = "green";
-        this.querySelector(".material-icons").innerHTML = "edit";
-        this.closest("td").querySelector(".name-input").disabled = true;
-        this.onclick = enableEditName;
-      }
-    } else {
-      statusMessageHTML.innerHTML = "No data in reponse.";
-    }
-  }, param);
-}
-
-function init() {
-  loadUsers();
-}
-
 document.onreadystatechange = () => {
   if (document.readyState === "complete") {
     console.info("Document fully loaded.");
-    init();
+    loadUsers();
   }
 };
