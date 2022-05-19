@@ -257,7 +257,7 @@ router.post(
 );
 
 //Check admin
-router.get("/checkadmin", requireLoggedIn, function (req, res) {
+router.get("/checkadmin", requireLoggedIn, async function (req, res) {
   if (await isAdmin(req.session.uuid)){
     console.log("user is an admin.");
     } else { 
