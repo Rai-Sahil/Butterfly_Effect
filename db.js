@@ -134,7 +134,7 @@ async function editUser(uuid, attribute, value, callback) {
 async function getUsers(callback) {
   try {
     const connection = await mysql.createConnection(connectionParams);
-    const getUsersQuery = `SELECT name, email, role FROM ${dbUserTable};`;
+    const getUsersQuery = `SELECT name, email, role, uuid FROM ${dbUserTable};`;
     const [users] = await connection.query(getUsersQuery);
     return callback({
       status: 200,
