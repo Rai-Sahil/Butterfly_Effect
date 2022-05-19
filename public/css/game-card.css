@@ -157,6 +157,7 @@ body {
     border-radius: 15px;
     padding: 2%;
     border: #4290D8 solid;
+    cursor: pointer;
 }
 
 .modal-button:hover {
