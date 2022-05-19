@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*For env and com indicators*/
+.status {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 2%;
+}
+
+.status-container {
+    display: flex;
+    align-items: center;
+}
+
+.status img {
+    display: inline-block;
+    max-width: 30px;
+}
+
+.indicator-container {
+    width: 80%;
+    height: 25px;
+    border-radius: 25px;
+    background: #eee;
+}
+.indicator {
+    height: inherit;
+    border-radius: 25px;
+    background: linear-gradient(60deg, #4290D8 0%, #74ade3 100%);
+}
+
+.score-change {
+    font-size: 15pt;
+}
+
+#env-meter{
+    width: 50%;
+}
+#com-meter{
+    width: 50%;
+}
+    </style>
+</head>
+<body>
+    
+    <div id="cards-go-here"></div>
+
+
+    <template id="decision-pin">
+            <div class="content">
+                <h1 class="decision-count">Decision 1</h1>
+                <p class="decision-content">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam
+                    explicabo
+                    inventore sequi natus totam culpa quos nobis dignissimos autem ut.
+                </p>
+                <div class="selected-choice"></div>
+                <hr>
+                <div class="points status">
+                    <div class="status-container" id="environ" title="Environment">
+                        <img src="../img/earth.svg" alt="">
+                        <div class="indicator-container">
+                            <div class="indicator" id="env-meter"></div>
+                            <div class="score-change" id="env-change">+30</div>
+                        </div>
+                    </div>
+                    <div class="status-container" id="comfort" title="Happiness">
+                        <img src="../img/smileyface.svg" alt="">
+                        <div class="indicator-container">
+                            <div class="indicator" id="com-meter"></div>
+                            <div class="score-change" id="com-change">+30</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </template>
+
+    <script src="/js/timeline.js"></script>
+</body>
+</html>

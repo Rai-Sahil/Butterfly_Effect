@@ -4,35 +4,43 @@ var com_pt = 50; //Comfort value at start, 0-100
 function init() {
     console.log("Client script loaded.");
 
-    function ajaxGET(path, callback) {
+    function ajaxGET(url) {
         const xhr = new XMLHttpRequest();
-        xhr.onload = function () {
-            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                callback(this.responseText);
+        return new Promise(function (resolve, reject) {
+            xhr.onload = function () {
+                if (this.readyState == XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        resolve(this.responseText);
+                    } else {
+                        console.log(this.status);
+                    }
+                } else {
+                    reject(this.status);
+                }
             }
-        };
-        xhr.open("GET", path);
-        xhr.send();
+            xhr.open("GET", url);
+            xhr.send();
+        });
     }
 
 
 
-    ajaxGET("/playthrough", function (data) {
+    ajaxGET("/playthrough").then(function (data) {
         let p_id = JSON.parse(data).playthrough.id;
 
-        ajaxGET("/playthrough/questions?playthroughId=" + p_id, function (data) {
+        ajaxGET("/playthrough/questions?playthroughId=" + p_id).then(async function (data) {
             let pdata = JSON.parse(data).questions;
-            let cardTemplate = document.getElementById("decision-pin");
+            console.log(pdata);
 
-            for (let i = 0; i < pdata.length; i++) {
-                ajaxGET("/choice-by-id?cid=" + pdata[i].selected_choice_id, function (data) {
+            let cardTemplate = document.getElementById("decision-pin");
+            for (let i = pdata.length; i > 0; i--) {
+                await ajaxGET("/choice-by-id?cid=" + pdata[i-1].selected_choice_id).then(function (data) {
                     let cards = cardTemplate.content.cloneNode(true);
                     let choiceInfo = JSON.parse(data);
-                    console.log(choiceInfo);
-                    cards.querySelector(".decision-count").innerHTML = (pdata.length - i);
-                    cards.querySelector(".decision-content").innerHTML = pdata[i].text;
+                    cards.querySelector(".decision-count").innerHTML = i;
+                    cards.querySelector(".decision-content").innerHTML = pdata[i-1].text;
                     cards.querySelector(".selected-choice").innerHTML = choiceInfo[0].text;
-                    if(choiceInfo[0].env_pt > 0){
+                    if (choiceInfo[0].env_pt > 0) {
                         cards.querySelector("#env-change").innerHTML = "+" + choiceInfo[0].env_pt;
                     } else {
                         cards.querySelector("#env-change").innerHTML = choiceInfo[0].env_pt;
