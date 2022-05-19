@@ -51,6 +51,7 @@ h1 {
     font-family: 'Oleo Script Swash Caps', cursive;
     color: wheat;
     border: none;
+
 }
 
 .decision-content{
@@ -58,6 +59,8 @@ h1 {
     color: white;
     line-height: 37px;
     font-weight: 350px;
+    padding: 2%;
+    text-align: center; 
 }
 
 .points{
@@ -78,6 +81,7 @@ h1 {
     background-color: #4290D8;
     border-radius: 10px;
     margin-top:10px;
+    border: 5px solid #333;
 }
 
 /*For env and com indicators*/
@@ -121,7 +125,7 @@ h1 {
 }
 
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 801px) {
     .timeline-content ul li {
         width: 50%;
         margin-top: -5px;
@@ -174,12 +178,12 @@ h1 {
     }
 
     .timeline-content ul li:nth-child(odd)::after {
-        right: -80px;
+        right: -85px;
         transform: translate(50%, -50%);
     }
 
     .timeline-content ul li:nth-child(even)::after {
-        left: -80px;
+        left: -85px;
         transform: translate(-50%, 50%);
     }
 
@@ -189,10 +193,10 @@ h1 {
         position: absolute;
         top: 13px;
         width: 0;
-        left: -10px;
+        left: -19px;
         border: medium solid white;
-        border-width: 10px 10px 10px 0;
-        border-color: transparent #4290D8 transparent transparent;
+        border-width: 15px 15px 15px 0;
+        border-color: transparent #333 transparent transparent;
     }
 
     .timeline-content ul li:nth-child(odd)::before {
@@ -201,14 +205,14 @@ h1 {
         position: absolute;
         top: 13px;
         width: 0;
-        left: 400px;
+        left: 394px;
         border: medium solid white;
-        border-width: 10px 10px 10px 10px;
-        border-color: transparent transparent transparent #4290D8;
+        border-width: 15px 15px 15px 15px;
+        border-color: transparent transparent transparent #333;
     }
 }
 
-@media only screen and (min-width: 200px) and (max-width: 799px) {
+@media only screen and (max-width: 800px) {
     .timeline-content ul li {
         width: 50%;
         margin-top: -5px;
@@ -261,12 +265,12 @@ h1 {
     }
 
     .timeline-content ul li:nth-child(odd)::after {
-        right: -39px;
+        right: -69px;
         transform: translate(50%, -50%);
     }
 
     .timeline-content ul li:nth-child(even)::after {
-        left: -39px;
+        left: -69px;
         transform: translate(-50%, 50%);
     }
 
@@ -276,10 +280,10 @@ h1 {
         position: absolute;
         top: 13px;
         width: 0;
-        left: -10px;
+        left: -19px;
         border: medium solid white;
-        border-width: 10px 10px 10px 0;
-        border-color: transparent #4290D8 transparent transparent;
+        border-width: 15px 15px 15px 0;
+        border-color: transparent #333 transparent transparent;
     }
 
     .timeline-content ul li:nth-child(odd)::before {
@@ -288,9 +292,9 @@ h1 {
         position: absolute;
         top: 13px;
         width: 0;
-        left: 193px;
+        left: 313px;
         border: medium solid white;
-        border-width: 10px 10px 10px 10px;
-        border-color: transparent transparent transparent #4290D8;
+        border-width: 15px 15px 15px 15px;
+        border-color: transparent transparent transparent #333;
     }
 }
