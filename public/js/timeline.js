@@ -33,12 +33,12 @@ function init() {
             console.log(pdata);
 
             let cardTemplate = document.getElementById("decision-pin");
-            for (let i = pdata.length; i > 0; i--) {
-                await ajaxGET("/choice-by-id?cid=" + pdata[i-1].selected_choice_id).then(function (data) {
+            for (let i = 0; i < pdata.length; i++) {
+                await ajaxGET("/choice-by-id?cid=" + pdata[i].selected_choice_id).then(function (data) {
                     let cards = cardTemplate.content.cloneNode(true);
                     let choiceInfo = JSON.parse(data);
-                    cards.querySelector(".decision-count").innerHTML = i;
-                    cards.querySelector(".decision-content").innerHTML = pdata[i-1].text;
+                    cards.querySelector(".decision-count").innerHTML = (i + 1);
+                    cards.querySelector(".decision-content").innerHTML = pdata[i].text;
                     cards.querySelector(".selected-choice").innerHTML = choiceInfo[0].text;
                     if (choiceInfo[0].env_pt > 0) {
                         cards.querySelector("#env-change").innerHTML = "+" + choiceInfo[0].env_pt;
@@ -57,7 +57,7 @@ function init() {
                     com_pt += choiceInfo[0].com_pt;
                     cards.querySelector("#com-meter").style.width = com_pt + "%";
 
-                    document.querySelector("#cards-go-here").appendChild(cards);
+                    document.querySelector("#cards-go-here").prepend(cards);
                 });
             }
         });
