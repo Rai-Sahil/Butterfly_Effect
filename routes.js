@@ -140,6 +140,12 @@ router.get("/rules", requireLoggedIn, function (req, res) {
   });
 });
 
+router.get("/aboutus", requireLoggedIn, function (req, res) {
+  res.sendFile("AboutUs.html", {
+    root: __dirname + "/public/html",
+  });
+});
+
 router.get(
   "/admin-dashboard",
   requireLoggedIn,
