@@ -255,6 +255,10 @@ router.post(
   }
 );
 
+router.get("/checkadmin", requireLoggedIn, requireAdmin, function (_, res) {
+  res.status(200).send({ message: "User is admin." });
+});
+
 //game-db
 router.get(
   "/question-edit",
