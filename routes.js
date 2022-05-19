@@ -9,6 +9,7 @@ const {
   deleteUser,
   editUser,
   getUsers,
+  isAdmin
 } = require("./db");
 const {
   getQuestions,
@@ -255,8 +256,11 @@ router.post(
   }
 );
 
-router.get("/checkadmin", requireLoggedIn, requireAdmin, function (_, res) {
-  res.status(200).send({ message: "User is admin." });
+//Check admin
+router.get("/checkadmin", requireLoggedIn, function (req, res) {
+  if (isAdmin(req.session.uuid)){
+    console.log("user is an admin.");
+    }
 });
 
 //game-db

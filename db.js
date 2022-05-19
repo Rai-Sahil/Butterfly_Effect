@@ -147,6 +147,18 @@ async function getUsers(callback) {
   }
 }
 
+async function isAdmin(uuid) {
+  try {
+   const connection = await mysql.createConnection(connectionParams);
+   const getUserByIdQuery = `SELECT uuid, name, email, role FROM ${dbUserTable} WHERE uuid = ? AND role = 'admin' LIMIT 1;`;
+   const [users] = await connection.query(getUserByIdQuery, [uuid]);
+   return users.length === 1;
+ } catch (error) {
+   console.error("Error getting user: ", error);
+   return false;
+ }
+}
+
 module.exports = {
   authenticate,
   createUser,
@@ -154,4 +166,5 @@ module.exports = {
   editUser,
   getUserByUUID,
   getUsers,
+  isAdmin
 };
