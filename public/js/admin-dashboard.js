@@ -137,6 +137,9 @@ function saveUserName() {
         statusMessageHTML.style.color = "red";
       } else {
         statusMessageHTML.style.color = "green";
+        this.querySelector(".material-icons").innerHTML = "edit";
+        this.closest("td").querySelector(".name-input").disabled = true;
+        this.onclick = enableEditName;
       }
     } else {
       statusMessageHTML.innerHTML = "No data in reponse.";
