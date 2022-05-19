@@ -1,17 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap');
 
-body {
-  font-family: 'Signika Negative', sans-serif;
-}
-
 #app-name {
   font-family: 'Oleo Script Swash Caps', cursive;
   color: #4390D8;
-  margin-bottom: 2%;
-  margin-top: -10px;
-  font-size: 35pt;
-  margin-top: 1%;
   text-shadow: -1px 0 #444, 0 1px #444, 2px 0 #444, 0 -1px #444;
 }
 
@@ -42,6 +34,7 @@ ul {
 li {
   margin-bottom: 1.5%;
   font-size: 20pt;
+  font-family: 'Signika Negative', sans-serif;
 }
 
 form{
