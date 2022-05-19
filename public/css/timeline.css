@@ -63,6 +63,14 @@ h1 {
     text-align: center; 
 }
 
+.selected-choice{
+    text-align: center;
+    font-family: 'Signika Negative', sans-serif;
+    color: white;
+    line-height: 37px;
+    font-weight: 350px;
+}
+
 .points{
     font-family: 'Signika Negative', sans-serif;
     color: white;
@@ -226,11 +234,13 @@ h1 {
     .timeline-content ul li:nth-child(odd)::after {
         right: -85px;
         transform: translate(50%, -50%);
+        position: fixed;
     }
 
     .timeline-content ul li:nth-child(even)::after {
         left: -85px;
         transform: translate(-50%, 50%);
+        position: fixed;
     }
 
     .timeline-content ul li:nth-child(even)::before {
@@ -258,7 +268,7 @@ h1 {
     }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 480px) {
     .timeline-content ul li {
         width: 50%;
         margin-top: -5px;
@@ -311,12 +321,12 @@ h1 {
     }
 
     .timeline-content ul li:nth-child(odd)::after {
-        right: -69px;
+        right: -43px;
         transform: translate(50%, -50%);
     }
 
     .timeline-content ul li:nth-child(even)::after {
-        left: -69px;
+        left: -43px;
         transform: translate(-50%, 50%);
     }
 
@@ -338,9 +348,9 @@ h1 {
         position: absolute;
         top: 13px;
         width: 0;
-        left: 313px;
+        left: 186px;
         border: medium solid white;
         border-width: 15px 15px 15px 15px;
         border-color: transparent transparent transparent #333;
     }
-}
+} 
