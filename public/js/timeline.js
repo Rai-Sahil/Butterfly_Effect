@@ -1,3 +1,6 @@
+const popup = document.querySelector("#popup");
+const closePopup = document.querySelector("#popup-close");
+
 var env_pt = 50; //Environment value at start, 0-100
 var com_pt = 50; //Comfort value at start, 0-100
 
@@ -23,15 +26,18 @@ function init() {
         });
     }
 
-
-
     ajaxGET("/playthrough").then(function (data) {
-        let p_id = JSON.parse(data).playthrough.id;
+        let parsedJSON = JSON.parse(data);
+        if (!parsedJSON.playthrough) {
+            console.log("No game record.");
+            document.querySelector("#info").innerHTML = "No game record.";
+            popup.classList.toggle("display-none");
+            return;
+        }
+        let p_id = parsedJSON.playthrough.id;
 
         ajaxGET("/playthrough/questions?playthroughId=" + p_id).then(async function (data) {
             let pdata = JSON.parse(data).questions;
-            console.log(pdata);
-
             let cardTemplate = document.getElementById("decision-pin");
             for (let i = 0; i < pdata.length; i++) {
                 await ajaxGET("/choice-by-id?cid=" + pdata[i].selected_choice_id).then(function (data) {
@@ -63,6 +69,11 @@ function init() {
         });
     });
 }
+
+ //Close modal and return to main page
+ closePopup.addEventListener("click", () => {
+    window.location.replace("/");
+  });
 
 document.onreadystatechange = () => {
     if (document.readyState === "complete") {
