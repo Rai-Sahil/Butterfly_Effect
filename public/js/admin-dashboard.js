@@ -59,6 +59,18 @@ function ajaxPUT(url, callback, data) {
   xhr.send(params);
 }
 
+function ajaxDELETE(url, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("DELETE", url);
+  xhr.send();
+  xhr.onload = function () {
+    callback(this.responseText, this.status);
+  };
+  xhr.onerror = function () {
+    console.error("NO CONNECTION");
+  };
+}
+
 function addNewUser() {
   const name = document.getElementById("new-user-name").value;
   const email = document.getElementById("new-user-email").value;
@@ -139,6 +151,27 @@ function saveChanges(element, attribute) {
   );
 }
 
+function deleteUser() {
+  ajaxDELETE(`users/${this.closest("tr").id}`, (data, status) => {
+    const statusMessageHTML = document.getElementById(
+      "dashboard-status-message"
+    );
+    if (data) {
+      const { message } = JSON.parse(data);
+
+      statusMessageHTML.innerHTML = message;
+      if (status !== 200) {
+        statusMessageHTML.style.color = "red";
+      } else {
+        statusMessageHTML.style.color = "green";
+        loadUsers();
+      }
+    } else {
+      statusMessageHTML.innerHTML = "No data in reponse.";
+    }
+  });
+}
+
 const loadUsers = () =>
   ajaxGET("/users", (data, status) => {
     const { users, message } = JSON.parse(data);
@@ -162,6 +195,7 @@ const loadUsers = () =>
         userRow.querySelector(".password-edit").onclick = function () {
           enableEdit(this, "password");
         };
+        userRow.querySelector(".delete-user").onclick = deleteUser;
         userTableBody.appendChild(userRow);
       });
     }
