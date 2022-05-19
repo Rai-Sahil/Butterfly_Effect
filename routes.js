@@ -258,8 +258,10 @@ router.post(
 
 //Check admin
 router.get("/checkadmin", requireLoggedIn, function (req, res) {
-  if (isAdmin(req.session.uuid)){
+  if (await isAdmin(req.session.uuid)){
     console.log("user is an admin.");
+    } else { 
+      console.log("not admin")
     }
 });
 
