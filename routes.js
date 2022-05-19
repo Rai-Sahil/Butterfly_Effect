@@ -258,10 +258,12 @@ router.post(
 
 //Check admin
 router.get("/checkadmin", requireLoggedIn, function (req, res) {
-  if (isAdmin(req.session.uuid)){
-    console.log("user is an admin.");
-    }
+  isAdmin(req.session.uuid, ({admin}) => {
+    res.send(admin);
+  });
 });
+
+
 
 //game-db
 router.get(

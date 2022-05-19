@@ -147,15 +147,18 @@ async function getUsers(callback) {
   }
 }
 
-async function isAdmin(uuid) {
+async function isAdmin(uuid, callback) {
   try {
    const connection = await mysql.createConnection(connectionParams);
    const getUserByIdQuery = `SELECT uuid, name, email, role FROM ${dbUserTable} WHERE uuid = ? AND role = 'admin' LIMIT 1;`;
    const [users] = await connection.query(getUserByIdQuery, [uuid]);
-   return users.length === 1;
+   if (users.length === 1) {
+    return callback({admin: true});
+   }
+   return callback({admin: false});
  } catch (error) {
    console.error("Error getting user: ", error);
-   return false;
+   return callback({admin: false});
  }
 }
 
