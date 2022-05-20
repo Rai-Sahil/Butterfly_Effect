@@ -26,6 +26,7 @@ async function authenticate(email, password, callback) {
     }
   } catch (error) {
     console.error("Error authenticating: ", error);
+    return callback({ status: 500, message: "Internal server error." });
   }
 }
 
@@ -50,16 +51,13 @@ async function createUser(name, email, password, callback) {
         message: "Cannot sign up without a password.",
       });
     }
-    const getUserByEmailQuery = `SELECT * FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
-    const insertUserQuery = `INSERT INTO ${dbUserTable} (name, email, password) values (?, ?, ?)`;
-    const [existingUsers] = await connection.query(getUserByEmailQuery, [
-      email,
-    ]);
-    if (existingUsers.length == 1) {
+    if (await isEmailInUse(connection, email)) {
       return callback({ status: 409, message: "Email already in use." });
     }
     const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const insertUserQuery = `INSERT INTO ${dbUserTable} (name, email, password) values (?, ?, ?)`;
     await connection.query(insertUserQuery, [name, email, hashedPassword]);
+    const getUserByEmailQuery = `SELECT * FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
     const [[user]] = await connection.query(getUserByEmailQuery, [email]);
     return callback({
       status: 200,
@@ -104,16 +102,19 @@ async function deleteUser(uuid, callback) {
   }
 }
 
-async function isEmailInUse(email, uuid, connection) {
+async function isEmailInUse(connection, email, uuid) {
   const getUserByEmailQuery = `SELECT * FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
   const [existingUsers] = await connection.query(getUserByEmailQuery, [email]);
+  if (!uuid) {
+    return existingUsers.length === 1;
+  }
   return existingUsers.length === 1 && uuid !== existingUsers[0].uuid;
 }
 
 async function editUser(uuid, attribute, value, callback) {
   try {
     const connection = await mysql.createConnection(connectionParams);
-    if (attribute == "email" && (await isEmailInUse(value, uuid, connection))) {
+    if (attribute == "email" && (await isEmailInUse(connection, value, uuid))) {
       return callback({ status: 409, message: "Email already in use." });
     }
     const editUserQuery = `UPDATE ${dbUserTable} SET ${attribute} = ? WHERE uuid = ? LIMIT 1;`;
