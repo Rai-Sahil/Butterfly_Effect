@@ -89,6 +89,14 @@ body {
     height: 45px;
 }
 
+.display-none {
+    display: none;
+}
+
+#admin-dashboard {
+    border-left: lightgray solid 2px;
+}
+
 /*Footer Icon Animation*/
 .icon-enlarge {
     animation: navbar-out 0.3s ease-out 1 backwards;
@@ -136,5 +144,9 @@ body {
 
     .footer-container {
         grid-template-columns: 10vw 80vw 10vw;
+    }
+
+    .footer-icon img {
+        height: 40px;
     }
 }

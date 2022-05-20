@@ -9,6 +9,7 @@ const {
   deleteUser,
   editUser,
   getUsers,
+  isAdmin
 } = require("./db");
 const {
   getQuestions,
@@ -260,6 +261,11 @@ router.post(
     res.status(200).send("POST upload avatar image success");
   }
 );
+
+//Check admin
+router.get("/checkadmin", requireLoggedIn, async function (req, res) {
+  res.send(await isAdmin(req.session.uuid));
+});
 
 //game-db
 router.get(
