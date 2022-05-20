@@ -1,12 +1,11 @@
 "use strict";
 
 const mysql = require("mysql2/promise");
-const { dbUserTable, connectionParams, saltRounds } = require("./constants");
+const { dbUserTable, connection, saltRounds } = require("./constants");
 const bcrypt = require("bcrypt");
 
 async function authenticate(email, password, callback) {
   try {
-    const connection = await mysql.createConnection(connectionParams);
     const query = `SELECT uuid, name, email, password FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
 
     const [[user]] = await connection.query(query, [email]);
@@ -32,7 +31,6 @@ async function authenticate(email, password, callback) {
 
 async function createUser(name, email, password, callback) {
   try {
-    const connection = await mysql.createConnection(connectionParams);
     if (!name) {
       return callback({
         status: 400,
@@ -51,7 +49,7 @@ async function createUser(name, email, password, callback) {
         message: "Cannot sign up without a password.",
       });
     }
-    if (await isEmailInUse(connection, email)) {
+    if (await isEmailInUse(email)) {
       return callback({ status: 409, message: "Email already in use." });
     }
     const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -72,7 +70,6 @@ async function createUser(name, email, password, callback) {
 
 async function getUserByUUID(uuid, callback) {
   try {
-    const connection = await mysql.createConnection(connectionParams);
     const getUserByIdQuery = `SELECT uuid, name, email, role FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
     const [[user]] = await connection.query(getUserByIdQuery, uuid);
     if (!user) {
@@ -92,7 +89,6 @@ async function getUserByUUID(uuid, callback) {
 
 async function deleteUser(uuid, callback) {
   try {
-    const connection = await mysql.createConnection(connectionParams);
     const deleteUserQuery = `DELETE FROM ${dbUserTable} WHERE uuid = ? LIMIT 1`;
     await connection.query(deleteUserQuery, [uuid]);
     return callback({ status: 200, message: "Successfully deleted user." });
@@ -102,7 +98,7 @@ async function deleteUser(uuid, callback) {
   }
 }
 
-async function isEmailInUse(connection, email, uuid) {
+async function isEmailInUse(email, uuid) {
   const getUserByEmailQuery = `SELECT * FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
   const [existingUsers] = await connection.query(getUserByEmailQuery, [email]);
   if (!uuid) {
@@ -113,8 +109,7 @@ async function isEmailInUse(connection, email, uuid) {
 
 async function editUser(uuid, attribute, value, callback) {
   try {
-    const connection = await mysql.createConnection(connectionParams);
-    if (attribute == "email" && (await isEmailInUse(connection, value, uuid))) {
+    if (attribute == "email" && (await isEmailInUse(value, uuid))) {
       return callback({ status: 409, message: "Email already in use." });
     }
     const editUserQuery = `UPDATE ${dbUserTable} SET ${attribute} = ? WHERE uuid = ? LIMIT 1;`;
@@ -134,7 +129,6 @@ async function editUser(uuid, attribute, value, callback) {
 
 async function getUsers(callback) {
   try {
-    const connection = await mysql.createConnection(connectionParams);
     const getUsersQuery = `SELECT name, email, role, uuid FROM ${dbUserTable};`;
     const [users] = await connection.query(getUsersQuery);
     return callback({
@@ -150,7 +144,6 @@ async function getUsers(callback) {
 
 async function isAdmin(uuid) {
   try {
-   const connection = await mysql.createConnection(connectionParams);
    const getUserByIdQuery = `SELECT uuid, name, email, role FROM ${dbUserTable} WHERE uuid = ? AND role = 'admin' LIMIT 1;`;
    const [users] = await connection.query(getUserByIdQuery, [uuid]);
    return (users.length === 1);
