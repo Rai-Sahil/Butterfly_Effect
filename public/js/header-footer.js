@@ -7,7 +7,7 @@ async function loadComponentToId(nodeId, component) {
 }
 
 async function loadHeaderFooter() {
-  await loadComponentToId("#header-placeholder", "../html/components/header.html");
+  loadComponentToId("#header-placeholder", "../html/components/header.html");
   await loadComponentToId("#footer-placeholder", "../html/components/footer.html");
 }
 
@@ -23,8 +23,8 @@ function ajaxGET(path, callback) {
   xhr.send();
 }
 
-loadHeaderFooter().then(() => {ajaxGET("/checkadmin", async function (isAdmin) {
-  if (await JSON.parse(isAdmin)) {
+loadHeaderFooter().then(() => {ajaxGET("/checkadmin", function (isAdmin) {
+  if (JSON.parse(isAdmin)) {
     document.querySelector('#admin-dashboard').classList.toggle('display-none');
     document.querySelector('#game-editor').classList.toggle('display-none');
   }
