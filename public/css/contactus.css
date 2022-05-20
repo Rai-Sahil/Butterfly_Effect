@@ -2,9 +2,7 @@
 
 body {
     font-family: 'Signika Negative', sans-serif;
-    margin: 0;
     padding: 0;
-    background-color: #49BEAA;
 }
 
 h1 {
@@ -19,7 +17,7 @@ h1 {
 }
 
 .header {
-    padding-top: 60px;
+    padding-top: 20px;
     color: #F5DFBB;
     font-size: 20px;
     margin: auto;
@@ -37,7 +35,7 @@ h2 {
     margin-left: -2%;
 }
 
-img {
+#contact {
     width: 80%;
     margin-left: 12%;
 }
@@ -47,7 +45,7 @@ label {
     text-align: left;
 }
 
-form {
+#contact-form {
     margin-left: 10%;
     margin-top: 5%;
 }
@@ -85,20 +83,19 @@ input[type=submit]:hover {
     #contactus-page {
         display: grid;
         grid-template-columns: 100%;
-        grid-template-rows: 40% 60%;
     }
 
     h2 {
         margin-top: -3%;
     }
 
-    img {
+    #contact {
         width: 55%;
         margin-left: 22%;
         grid-row: 1 / span 1;
     }
 
-    form {
+    #contact-form {
         grid-row: 2;
         margin-right: 5%;
     }

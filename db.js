@@ -5,10 +5,10 @@ const { dbUserTable, connectionParams, saltRounds } = require("./constants");
 const bcrypt = require("bcrypt");
 
 async function authenticate(email, password, callback) {
-  const connection = await mysql.createConnection(connectionParams);
-  const query = `SELECT uuid, name, email, password FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
-
   try {
+    const connection = await mysql.createConnection(connectionParams);
+    const query = `SELECT uuid, name, email, password FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
+
     const [[user]] = await connection.query(query, [email]);
     if (!user) {
       return callback(null);
@@ -26,13 +26,13 @@ async function authenticate(email, password, callback) {
     }
   } catch (error) {
     console.error("Error authenticating: ", error);
+    return callback({ status: 500, message: "Internal server error." });
   }
 }
 
 async function createUser(name, email, password, callback) {
-  const connection = await mysql.createConnection(connectionParams);
-
   try {
+    const connection = await mysql.createConnection(connectionParams);
     if (!name) {
       return callback({
         status: 400,
@@ -51,16 +51,13 @@ async function createUser(name, email, password, callback) {
         message: "Cannot sign up without a password.",
       });
     }
-    const getUserByEmailQuery = `SELECT * FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
-    const insertUserQuery = `INSERT INTO ${dbUserTable} (name, email, password) values (?, ?, ?)`;
-    const [existingUsers] = await connection.query(getUserByEmailQuery, [
-      email,
-    ]);
-    if (existingUsers.length == 1) {
+    if (await isEmailInUse(connection, email)) {
       return callback({ status: 409, message: "Email already in use." });
     }
     const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const insertUserQuery = `INSERT INTO ${dbUserTable} (name, email, password) values (?, ?, ?)`;
     await connection.query(insertUserQuery, [name, email, hashedPassword]);
+    const getUserByEmailQuery = `SELECT * FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
     const [[user]] = await connection.query(getUserByEmailQuery, [email]);
     return callback({
       status: 200,
@@ -74,10 +71,9 @@ async function createUser(name, email, password, callback) {
 }
 
 async function getUserByUUID(uuid, callback) {
-  const connection = await mysql.createConnection(connectionParams);
-
-  const getUserByIdQuery = `SELECT uuid, name, email, role FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
   try {
+    const connection = await mysql.createConnection(connectionParams);
+    const getUserByIdQuery = `SELECT uuid, name, email, role FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
     const [[user]] = await connection.query(getUserByIdQuery, uuid);
     if (!user) {
       console.error("User not found.");
@@ -95,9 +91,9 @@ async function getUserByUUID(uuid, callback) {
 }
 
 async function deleteUser(uuid, callback) {
-  const connection = await mysql.createConnection(connectionParams);
-  const deleteUserQuery = `DELETE FROM ${dbUserTable} WHERE uuid = ? LIMIT 1`;
   try {
+    const connection = await mysql.createConnection(connectionParams);
+    const deleteUserQuery = `DELETE FROM ${dbUserTable} WHERE uuid = ? LIMIT 1`;
     await connection.query(deleteUserQuery, [uuid]);
     return callback({ status: 200, message: "Successfully deleted user." });
   } catch (error) {
@@ -106,22 +102,25 @@ async function deleteUser(uuid, callback) {
   }
 }
 
-async function isEmailInUse(email, uuid, connection) {
+async function isEmailInUse(connection, email, uuid) {
   const getUserByEmailQuery = `SELECT * FROM ${dbUserTable} WHERE email = ? LIMIT 1;`;
   const [existingUsers] = await connection.query(getUserByEmailQuery, [email]);
+  if (!uuid) {
+    return existingUsers.length === 1;
+  }
   return existingUsers.length === 1 && uuid !== existingUsers[0].uuid;
 }
 
 async function editUser(uuid, attribute, value, callback) {
-  const connection = await mysql.createConnection(connectionParams);
-  if (attribute == "email" && await isEmailInUse(value, uuid, connection)) {
-    return callback({ status: 409, message: "Email already in use." });
-  }
-  const editUserQuery = `UPDATE ${dbUserTable} SET ${attribute} = ? WHERE uuid = ? LIMIT 1;`;
-  if (attribute == "password") {
-    value = await bcrypt.hash(value, saltRounds);
-  }
   try {
+    const connection = await mysql.createConnection(connectionParams);
+    if (attribute == "email" && (await isEmailInUse(connection, value, uuid))) {
+      return callback({ status: 409, message: "Email already in use." });
+    }
+    const editUserQuery = `UPDATE ${dbUserTable} SET ${attribute} = ? WHERE uuid = ? LIMIT 1;`;
+    if (attribute == "password") {
+      value = await bcrypt.hash(value, saltRounds);
+    }
     await connection.query(editUserQuery, [value, uuid]);
     return callback({
       status: 200,
@@ -134,10 +133,9 @@ async function editUser(uuid, attribute, value, callback) {
 }
 
 async function getUsers(callback) {
-  const connection = await mysql.createConnection(connectionParams);
-
-  const getUsersQuery = `SELECT name, email, role FROM ${dbUserTable};`;
   try {
+    const connection = await mysql.createConnection(connectionParams);
+    const getUsersQuery = `SELECT name, email, role, uuid FROM ${dbUserTable};`;
     const [users] = await connection.query(getUsersQuery);
     return callback({
       status: 200,
@@ -150,6 +148,18 @@ async function getUsers(callback) {
   }
 }
 
+async function isAdmin(uuid) {
+  try {
+   const connection = await mysql.createConnection(connectionParams);
+   const getUserByIdQuery = `SELECT uuid, name, email, role FROM ${dbUserTable} WHERE uuid = ? AND role = 'admin' LIMIT 1;`;
+   const [users] = await connection.query(getUserByIdQuery, [uuid]);
+   return (users.length === 1);
+ } catch (error) {
+   console.error("Error getting user: ", error);
+   return false;
+ }
+}
+
 module.exports = {
   authenticate,
   createUser,
@@ -157,4 +167,5 @@ module.exports = {
   editUser,
   getUserByUUID,
   getUsers,
+  isAdmin
 };

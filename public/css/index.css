@@ -1,32 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap');
 
-body {
-  font-family: 'Signika Negative', sans-serif;
-  font-size: 18pt;
-  background-color: #49BEAA;
-  margin: 0;
-  padding: 0;
-}
-
 #app-name {
   font-family: 'Oleo Script Swash Caps', cursive;
-  color: #F5DFBB;
-  font-size: 30pt;
-  margin-top: 1%;
-  text-shadow: -1px 0 #444, 0 2px #444, 2px 0 #444, 0 -2px #444;
+  color: #4390D8;
+  font-size: 35pt;
+  text-shadow: -1px 0 #444, 0 1px #444, 2px 0 #444, 0 -1px #444;
+}
+
+#easter{
+  text-decoration: none;
+   border:none; 
+   background:none;
+}
+
+.wrapper {
+  height: 75vh;
+  display: grid;
+  place-items: center;
+  overflow: auto;
 }
 
 #main-page {
   text-align: center;
 }
 
-a {
+.main-menu {
   text-decoration: none;
   color: #F5DFBB;
 }
 
-a:hover {
+.main-menu:hover {
   color: #4390D8;
 }
 
@@ -34,36 +38,18 @@ ul {
   list-style: none;
   display: contents;
   font-weight: bold;
-  font-size: 18pt;
 }
 
-#logout-button {
-  background-color: #1B72C1;
-  color: #F5DFBB;
-  border-style: none;
-  border-radius: 5px;
-  font-size: 18pt;
-  cursor: pointer;
-}
-
-#logout-button:hover {
-  background-color: darkblue;
-}
-
-img{
-  width: 190px;
-  margin-top: 5%;
+#image {
+  width: 155px;
 }
 
 li {
+  margin-top: 4%;
   margin-bottom: 1.5%;
-  font-size: 20pt;
-}
-
-#app-name{
-  margin-bottom: 2%;
-  margin-top: -10px;
-  font-size: 40pt;
+  font-size: 17pt;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  font-family: 'Signika Negative', sans-serif;
 }
 
 form{
@@ -71,19 +57,20 @@ form{
 }
 
 @media screen and (max-width: 700px) {
-  img{
-    width: 150px;
+  .image {
+    width: 140px;
     margin-top: 12%;
   }
 
   li {
     margin-bottom: 4%;
-    font-size: 20pt;
+    font-size: 16pt;
+    margin-top: 3%;
   }
   
   #app-name{
     margin-bottom: 6%;
     margin-top: -10px;
-    font-size: 35pt;
+    font-size: 30pt;
   }
 }

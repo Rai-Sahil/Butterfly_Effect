@@ -1,104 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap');
+
 body {
-    color: #404E67;
-    background:linear-gradient(45deg, #49BEAA, #4390D8);
-
-
+  padding: 0;
 }
+
 .table-wrapper {
-    width: 1000px;
-    margin: 30px auto;
-    background: #fff;
-    padding: 20px;	
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  width: 1000px;
+  margin: 30px auto;
+  background: #f5dfbb;
+  padding: 20px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 .table-title {
-    padding-bottom: 10px;
-    margin: 0 0 10px;
+  padding-bottom: 10px;
+  margin: 0 0 10px;
 }
 .table-title h2 {
-    margin: 6px 0 0;
-    font-size: 22px;
+  margin: 6px 0 0;
+  font-size: 22px;
 }
 .table-title .add-new {
-    float: right;
-    height: 30px;
-    font-weight: bold;
-    font-size: 12px;
-    text-shadow: none;
-    min-width: 100px;
-    border-radius: 50px;
-    line-height: 13px;
+  float: right;
+  height: 30px;
+  font-weight: bold;
+  font-size: 12px;
+  text-shadow: none;
+  min-width: 100px;
+  border-radius: 50px;
+  line-height: 13px;
 }
 .table-title .add-new i {
-    margin-right: 4px;
+  margin-right: 4px;
 }
 table.table {
-    table-layout: fixed;
+  table-layout: fixed;
 }
-table.table tr th, table.table tr td {
-    border-color: #e9e9e9;
+table.table tr th,
+table.table tr td {
+  border-color: #e9e9e9;
 }
 table.table th i {
-    font-size: 13px;
-    margin: 0 5px;
-    cursor: pointer;
+  font-size: 13px;
+  margin: 0 5px;
+  cursor: pointer;
 }
 table.table th:last-child {
-    width: 100px;
+  width: 100px;
 }
 table.table td a {
-    cursor: pointer;
-    display: inline-block;
-    margin: 0 5px;
-    min-width: 24px;
-}    
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 5px;
+  min-width: 24px;
+}
 table.table td a.add {
-    color: #27C46B;
+  color: #27c46b;
 }
 table.table td a.edit {
-    color: #FFC107;
+  color: #ffc107;
 }
 table.table td a.delete {
-    color: #E34724;
+  color: #e34724;
 }
 table.table td i {
-    font-size: 19px;
+  font-size: 19px;
 }
 table.table td a.add i {
-    font-size: 24px;
-    margin-right: -1px;
-    position: relative;
-    top: 3px;
-}    
+  font-size: 24px;
+  margin-right: -1px;
+  position: relative;
+  top: 3px;
+}
 table.table .form-control {
-    height: 32px;
-    line-height: 32px;
-    box-shadow: none;
-    border-radius: 2px;
+  height: 32px;
+  line-height: 32px;
+  box-shadow: none;
+  border-radius: 2px;
 }
 table.table .form-control.error {
-    border-color: #f50000;
+  border-color: #f50000;
 }
 table.table td .add {
-    display: none;
+  display: none;
 }
 
-.header{
-padding-top: 60px;
-color: #444;
-margin: auto;
-line-height: 50px;
+#edit {
+  padding: 5px;
+  justify-content: end;
+  margin-right: 100%;
+  outline: none;
 }
 
-h1{
-    margin: auto;
-    padding: 1%;
-     max-width: 95%;
-     text-align: center;
-     border: outset 2px #369384;
-    background:linear-gradient(45deg, #49BEAA, #4390D8);
-    border-bottom-right-radius: 10px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
- }
+#end-editing {
+  display: none;
+  justify-content: end;
+}
+
+button {
+  width: 80px;
+  padding: 5px;
+  margin: 0 3px;
+  background-color: #ff7e00;
+  outline: none;
+  border: 1px solid #ff7e00;
+  box-shadow: 2px 2px 2px #3f3f3f;
+}
+
+button:hover {
+  box-shadow: 2px 2px 3px;
+}
+
+button:active {
+  box-shadow: 1px 1px 3px;
+}
+
+.user-delete {
+  background-color: red;
+  border: 1px solid darkred;
+}
+
+.save {
+  display: none;
+}
+
+span {
+  text-align: end;
+}
+
+#dashboard-error-message {
+  text-align: center;
+  color: red;
+  font-weight: bold;
+}
+
+.app-name{
+  font-size: 20pt;
+  font-family: 'Oleo Script Swash Caps', cursive;
+}

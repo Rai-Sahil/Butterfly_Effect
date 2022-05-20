@@ -9,8 +9,20 @@ const {
   deleteUser,
   editUser,
   getUsers,
+  isAdmin
 } = require("./db");
-const { getQuestions, getChoices, updateQuestion, updateChoice, deleteQuestion } = require("./game-db");
+const {
+  getQuestions,
+  getChoices,
+  getChoiceByID,
+  updateQuestion,
+  updateChoice,
+  deleteQuestion,
+  getPlaythrough,
+  startPlaythrough,
+  savePlaythroughProgress,
+  getPlaythroughQuestions,
+} = require("./game-db");
 const {
   requireAdmin,
   requireCurrentUser,
@@ -130,11 +142,84 @@ router.get("/rules", requireLoggedIn, function (req, res) {
   });
 });
 
-router.get("/admin-dashboard", requireLoggedIn, requireAdmin, function (req, res) {
-  res.sendFile("admin-dashboard.html", {
+router.get("/aboutus", requireLoggedIn, function (req, res) {
+  res.sendFile("AboutUs.html", {
     root: __dirname + "/public/html",
   });
 });
+
+router.get("/Ending_Collection", requireLoggedIn, function (req, res) {
+  res.sendFile("Ending_Collection.html", {
+    root: __dirname + "/public/html",
+  });
+});
+
+
+
+router.get("/comfort-0_earth-0", requireLoggedIn, function (req, res) {
+  res.sendFile("Ending0-0.html", {
+    root: __dirname + "/public/html",
+  });
+});
+
+router.get("/comfort-0_earth-50", requireLoggedIn, function (req, res) {
+  res.sendFile("Ending0-50.html", {
+    root: __dirname + "/public/html",
+  });
+});
+
+router.get("/comfort-0_earth-100", requireLoggedIn, function (req, res) {
+  res.sendFile("Ending0-100.html", {
+    root: __dirname + "/public/html",
+  });
+});
+router.get("/comfort-50_earth-0", requireLoggedIn, function (req, res) {
+  res.sendFile("Ending50-0.html", {
+    root: __dirname + "/public/html",
+  });
+});
+
+router.get("/comfort-50_earth-50", requireLoggedIn, function (req, res) {
+  res.sendFile("Ending50-50.html", {
+    root: __dirname + "/public/html",
+  });
+});
+
+router.get("/comfort-50_earth-100", requireLoggedIn, function (req, res) {
+  res.sendFile("Ending50-100.html", {
+    root: __dirname + "/public/html",
+  });
+});
+
+router.get("/comfort-100_earth-0", requireLoggedIn, function (req, res) {
+  res.sendFile("Ending100-0.html", {
+    root: __dirname + "/public/html",
+  });
+});
+
+router.get("/comfort-100_earth-50", requireLoggedIn, function (req, res) {
+  res.sendFile("Ending100-50.html", {
+    root: __dirname + "/public/html",
+  });
+});
+
+router.get("/comfort-100_earth-100", requireLoggedIn, function (req, res) {
+  res.sendFile("Ending100-100.html", {
+    root: __dirname + "/public/html",
+  });
+});
+
+
+router.get(
+  "/admin-dashboard",
+  requireLoggedIn,
+  requireAdmin,
+  function (req, res) {
+    res.sendFile("admin-dashboard.html", {
+      root: __dirname + "/public/html",
+    });
+  }
+);
 
 router.get("/users", requireLoggedIn, requireAdmin, function (_, res) {
   return getUsers(({ status, message, users }) => {
@@ -216,12 +301,6 @@ router.delete("/users/:id", requireLoggedIn, requireAdmin, function (req, res) {
   });
 });
 
-router.get("/upload-test", requireLoggedIn, function (req, res) {
-  res.sendFile("upload-test.html", {
-    root: __dirname + "/public/html",
-  });
-});
-
 router.get("/avatar-image", requireLoggedIn, function (req, res) {
   const { uuid } = req.session;
   const avatarPath = getAvatarPathByUUID(uuid);
@@ -239,12 +318,22 @@ router.post(
   }
 );
 
-//game-db
-router.get("/question-edit", requireLoggedIn, requireAdmin, function (req, res) {
-  res.sendFile("question-edit.html", { root: __dirname + "/public/html" });
+//Check admin
+router.get("/checkadmin", requireLoggedIn, async function (req, res) {
+  res.send(await isAdmin(req.session.uuid));
 });
 
-router.get("/questions", requireLoggedIn,  function (req, res) {
+//game-db
+router.get(
+  "/question-edit",
+  requireLoggedIn,
+  requireAdmin,
+  function (req, res) {
+    res.sendFile("question-edit.html", { root: __dirname + "/public/html" });
+  }
+);
+
+router.get("/questions", requireLoggedIn, function (req, res) {
   getQuestions(res);
 });
 
@@ -253,7 +342,7 @@ router.post("/questions", requireLoggedIn, requireAdmin, function (req, res) {
   var { question, qid } = req.body;
   updateQuestion(question, qid, ({ status, message }) => {
     res.status(status).send({ message });
-  })
+  });
 });
 
 router.get("/choices", requireLoggedIn, function (req, res) {
@@ -261,18 +350,85 @@ router.get("/choices", requireLoggedIn, function (req, res) {
   getChoices(qid, res);
 });
 
+router.get("/choice-by-id", requireLoggedIn, function (req, res) {
+  var choice_id = req.query["cid"];
+  getChoiceByID(choice_id, res);
+});
+
 router.post("/choices", requireLoggedIn, requireAdmin, function (req, res) {
   res.setHeader("Content-Type", "application/json");
   var { questionID, optionID, text, envi, comf, nextQuestion } = req.body;
-  updateChoice(questionID, optionID, text, envi, comf, nextQuestion, ({ status, message }) => {
-    res.status(status).send({ message });
-  })
+  updateChoice(
+    questionID,
+    optionID,
+    text,
+    envi,
+    comf,
+    nextQuestion,
+    ({ status, message }) => {
+      res.status(status).send({ message });
+    }
+  );
 });
 
 router.delete("/delete", requireLoggedIn, requireAdmin, function (req, res) {
   var qid = req.query["qid"];
   var oid = req.query["oid"];
   deleteQuestion(qid, oid, res);
+});
+
+// Get current playthrough
+router.get("/playthrough", requireLoggedIn, function (req, res) {
+  const { uuid } = req.session;
+  return getPlaythrough(uuid, ({ status, message, playthrough }) => {
+    if (status !== 200) {
+      return res.status(status).send({ message });
+    }
+    return res.status(status).send({ message, playthrough });
+  });
+});
+
+// Starts a new playthrough
+router.post("/playthrough", requireLoggedIn, function (req, res) {
+  const { uuid } = req.session;
+  return startPlaythrough(
+    uuid,
+    ({ status, message, playthroughId, questionId }) => {
+      if (status !== 200) {
+        return res.status(status).send({ message });
+      }
+      return res.status(status).send({ message, playthroughId, questionId });
+    }
+  );
+});
+
+// Update db to save user choice and advance to next question
+router.put("/playthrough", requireLoggedIn, function (req, res) {
+  const { playthroughId, questionId, choiceId } = req.body;
+  return savePlaythroughProgress(
+    playthroughId,
+    questionId,
+    choiceId,
+    ({ status, message }) => {
+      return res.status(status).send({ message });
+    }
+  );
+});
+
+// Get playthrough and playthrough questions
+router.get("/playthrough/questions", requireLoggedIn, function (req, res) {
+  const { uuid } = req.session;
+  const { playthroughId } = req.query;
+  return getPlaythroughQuestions(
+    uuid,
+    playthroughId,
+    ({ status, message, playthrough, questions }) => {
+      if (status !== 200) {
+        return res.status(status).send({ message });
+      }
+      return res.status(status).send({ message, playthrough, questions });
+    }
+  );
 });
 
 router.use(function (_, res) {

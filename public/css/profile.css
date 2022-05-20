@@ -2,9 +2,7 @@
 
 body {
   font-family: "Signika Negative", sans-serif;
-  margin: 0;
   padding: 0;
-  background-color: #49beaa;
 }
 
 h1 {
@@ -19,15 +17,23 @@ h1 {
 }
 
 .header {
-  padding-top: 60px;
+  padding-top: 20px;
   color: #f5dfbb;
-  font-size: 20px;
   margin: auto;
   line-height: 50px;
 }
 
-img {
+canvas {
   width: 160px;
+  height: 160px;
+  border-radius: 15px;
+  border: 5px solid #444;
+  margin-bottom: 10px;
+}
+
+#avatar-image {
+  width: 160px;
+  height: 160px;
   border-radius: 15px;
   border: 5px solid #444;
   margin-bottom: 10px;
@@ -56,7 +62,6 @@ img {
   grid-template-columns: 100%;
   grid-template-rows: 70% 15% 15%;
   justify-items: center;
-  margin-right: 30px;
   margin-top: -10px;
 }
 
@@ -135,7 +140,6 @@ p {
     margin: 3%;
     border-radius: 20px;
     border: 2px solid #444;
-    background: rgb(255, 255, 255);
     background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 1) 50%,
@@ -163,14 +167,6 @@ p {
     width: 50%;
   }
 
-  img {
-    margin-left: 25px;
-  }
-
-  .changeAvatar {
-    margin-left: 25px;
-  }
-
   #password {
     margin-bottom: 20px;
   }
@@ -182,8 +178,5 @@ p {
   p {
     margin: 0 30px 10px 10px;
   }
-
-  #avatar-input {
-    margin-left: 20px;
-  }
+  
 }

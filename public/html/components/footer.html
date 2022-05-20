@@ -1,0 +1,23 @@
+<div class="footer-container">
+    <div class="inside-wrapper">
+        <div class="footer-bg">
+            <div class="footer-icon icon-enlarge"><a href="/" title="Home"><img src="../img/blue.svg" alt=""></a></div>
+            <div class="footer-icon icon-enlarge"><a href="/profile" title="User Profile"><img src="../img/user.svg"
+                        alt=""></a></div>
+            <div class="footer-icon icon-enlarge">
+                <form method="post" action="/logout">
+                    <input type="hidden" name="name" value="value" />
+                    <a href="#" onclick="this.parentNode.submit();" title="Log out"><img src="../img/logout.svg" alt=""></a>
+                </form>
+            </div>
+            <div class="footer-icon display-none" id="admin-dashboard">
+                <a href="/admin-dashboard" title="Admin Dashboard"><img
+                    src="../img/admin-dash.svg" alt=""></a>
+            </div>
+            <div class="footer-icon display-none" id="game-editor">
+                <a href="/question-edit" title="Game Editor"><img
+                    src="../img/game-editor.svg" alt=""></a>
+            </div>
+        </div>
+    </div>
+</div>
