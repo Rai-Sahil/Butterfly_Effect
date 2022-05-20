@@ -13,38 +13,9 @@ btn.addEventListener('click', function () {
         var Xmax=8;                               
         var Tmax=500;                        
                 
-        var floatimages=new Array();
-        floatimages[0]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[1]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[2]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[3]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[4]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[5]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[6]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[7]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[8]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[9]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[10]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[11]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[12]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[13]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[14]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[15]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[16]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[17]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[18]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[19]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[20]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[21]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[22]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[23]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[24]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[25]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[26]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[27]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[28]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[29]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
-        floatimages[30]='https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif';
+        const floatimages = Array(30).fill(
+          "https://i.pinimg.com/originals/73/25/b5/7325b5da1c12314824328579aeed59f4.gif"
+        );
         
         var butterfly_speed = (navigator.appName.indexOf("Netscape")>=0 && parseFloat(navigator.appVersion) >= 2 && parseFloat(navigator.appVersion) < 2)? true : false;
         var Moving_Index = (document.all)? true : false;
