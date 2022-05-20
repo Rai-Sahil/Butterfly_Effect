@@ -81,7 +81,6 @@ function init() {
   ajaxGET(`/users/${sessionStorage.getItem("userId")}`, (data, status) => {
     if (data) {
       const { user, message } = JSON.parse(data);
-      console.log("user:", user);
       if (status !== 200) {
         document.getElementById("profile-status-message").innerHTML = message;
       } else {
