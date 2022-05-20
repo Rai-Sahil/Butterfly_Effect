@@ -42,6 +42,17 @@ function init() {
             let pdata = JSON.parse(data).questions;
             let cardTemplate = document.getElementById("decision-pin");
             for (let i = 0; i < pdata.length; i++) {
+
+                    if (i == 0 && pdata[i].selected_choice_id == null) {
+                        document.getElementById('game-notification').classList.toggle("display-none");
+                        document.getElementById('main-container').classList.add("display-none");
+                        return;
+                    }
+                    if (pdata[i].selected_choice_id == null) {
+                        document.getElementById('game-notification').classList.toggle("display-none");
+                        return;
+                    }
+
                 await ajaxGET("/choice-by-id?cid=" + pdata[i].selected_choice_id).then(function (data) {
                     let cards = cardTemplate.content.cloneNode(true);
                     let choiceInfo = JSON.parse(data);
