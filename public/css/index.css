@@ -18,6 +18,7 @@
   height: 75vh;
   display: grid;
   place-items: center;
+  overflow: auto;
 }
 
 #main-page {
