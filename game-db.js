@@ -1,12 +1,10 @@
 "use strict";
 
-const mysql = require("mysql2/promise");
-const { dbUserTable, connectionParams } = require("./constants");
+const { dbUserTable, connection } = require("./constants");
 
 //Get questions
 async function getQuestions(res) {
   try {
-    const connection = await mysql.createConnection(connectionParams);
     const [row] = await connection.execute("SELECT * FROM QUESTION");
     return res.send(row);
   } catch (error) {
@@ -18,7 +16,6 @@ async function getQuestions(res) {
 //Get choices
 async function getChoices(questionID, res) {
   try {
-    const connection = await mysql.createConnection(connectionParams);
     var [row] = await connection.execute(
       "SELECT * FROM CHOICE WHERE question_id = " + questionID
     );
@@ -35,7 +32,6 @@ async function getChoices(questionID, res) {
 //Get choice by choice_id
 async function getChoiceByID(choice_id, res){
   try{
-    const connection = await mysql.createConnection(connectionParams);
     var [row] = await connection.execute("SELECT * FROM CHOICE WHERE id = " + choice_id);
     if (row == 0) {
       return res.send({ status: 200, message: "No choice found." });
@@ -50,7 +46,6 @@ async function getChoiceByID(choice_id, res){
 //Add or update new question
 async function updateQuestion(questionText, questionID, callback) {
   try {
-    const connection = await mysql.createConnection(connectionParams);
     if (!questionText) {
       return callback({
         status: 400,
@@ -103,7 +98,6 @@ async function updateChoice(
   callback
 ) {
   try {
-    const connection = await mysql.createConnection(connectionParams);
     if (!questionID) {
       return callback({
         status: 400,
@@ -159,7 +153,6 @@ async function updateChoice(
 //Delete question or choice
 async function deleteQuestion(questionID, optionID, res) {
   try {
-    const connection = await mysql.createConnection(connectionParams);
     if (!optionID) {
       // To solve FK constraints, may cause futher error
       let [row] = await connection.execute("SELECT * FROM PLAYTHROUGH_QUESTION WHERE question_id = " + questionID);
@@ -216,7 +209,6 @@ function shuffle(array) {
 
 async function getPlaythrough(uuid, callback) {
   try {
-    const connection = await mysql.createConnection(connectionParams);
     const getUserByUUIDQuery = `SELECT id FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
     const [[user]] = await connection.query(getUserByUUIDQuery, uuid);
     const getLatestPlaythroughQuery = `SELECT * FROM PLAYTHROUGH WHERE user_id = ? ORDER BY ID DESC LIMIT 1 `;
@@ -240,7 +232,6 @@ async function getPlaythrough(uuid, callback) {
 async function startPlaythrough(uuid, callback) {
   try {
     // Create new playthrough
-    const connection = await mysql.createConnection(connectionParams);
     const getUserByUUIDQuery = `SELECT id FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
     const [[user]] = await connection.query(getUserByUUIDQuery, uuid);
     const insertPlaythroughQuery = `INSERT INTO PLAYTHROUGH (user_id) VALUES (?)`;
@@ -282,7 +273,6 @@ async function startPlaythrough(uuid, callback) {
 async function savePlaythroughProgress(playthroughId, questionId, choiceId, callback) {
   try {
     // Update playthrough question 
-    const connection = await mysql.createConnection(connectionParams);
     const updatePlaythroughQuestionQuery = `UPDATE PLAYTHROUGH_QUESTION SET selected_choice_id = ? WHERE id = ?`;
     await connection.query(updatePlaythroughQuestionQuery, [choiceId, questionId]);
     // Get next playthrough question
@@ -311,7 +301,6 @@ async function savePlaythroughProgress(playthroughId, questionId, choiceId, call
 
 async function getPlaythroughQuestions(uuid, playthroughId, callback) {
   try {
-    const connection = await mysql.createConnection(connectionParams);
     // Get latest playthrough for user
     const getUserByUUIDQuery = `SELECT id FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
     const [[user]] = await connection.query(getUserByUUIDQuery, uuid);

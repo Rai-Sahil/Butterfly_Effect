@@ -75,6 +75,7 @@ async function initDB() {
     const insertChoice = `INSERT INTO CHOICE (question_id, text, env_pt, com_pt, next_q) values ?`;
     await connection.query(insertChoice, [choices]);
   }
+  connection.close();
 }
 
 initDB().then(() => {
