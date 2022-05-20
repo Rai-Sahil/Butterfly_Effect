@@ -145,4 +145,8 @@ body {
     .footer-container {
         grid-template-columns: 10vw 80vw 10vw;
     }
+
+    .footer-icon img {
+        height: 40px;
+    }
 }
