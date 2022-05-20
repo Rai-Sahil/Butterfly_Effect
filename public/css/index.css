@@ -14,6 +14,12 @@
    background:none;
 }
 
+.wrapper {
+  height: 80vh;
+  display: grid;
+  place-items: center;
+}
+
 #main-page {
   text-align: center;
 }
