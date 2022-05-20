@@ -14,6 +14,7 @@ async function initDB() {
   const query = `
     CREATE DATABASE IF NOT EXISTS ${dbName};
     use ${dbName};
+    DROP TABLE IF EXISTS QUESTION, CHOICE, PLAYTHROUGH, PLAYTHROUGH_QUESTION;
     CREATE TABLE IF NOT EXISTS ${dbUserTable} (
       id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       uuid varchar(40) DEFAULT (uuid()) NOT NULL,

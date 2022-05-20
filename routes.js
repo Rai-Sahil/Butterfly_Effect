@@ -301,12 +301,6 @@ router.delete("/users/:id", requireLoggedIn, requireAdmin, function (req, res) {
   });
 });
 
-router.get("/upload-test", requireLoggedIn, function (req, res) {
-  res.sendFile("upload-test.html", {
-    root: __dirname + "/public/html",
-  });
-});
-
 router.get("/avatar-image", requireLoggedIn, function (req, res) {
   const { uuid } = req.session;
   const avatarPath = getAvatarPathByUUID(uuid);

@@ -4,7 +4,7 @@
 #app-name {
   font-family: 'Oleo Script Swash Caps', cursive;
   color: #4390D8;
-  font-size: 40pt;
+  font-size: 35pt;
   text-shadow: -1px 0 #444, 0 1px #444, 2px 0 #444, 0 -1px #444;
 }
 
@@ -38,7 +38,6 @@ ul {
   list-style: none;
   display: contents;
   font-weight: bold;
-  font-size: 18pt;
 }
 
 #image {
@@ -46,8 +45,10 @@ ul {
 }
 
 li {
+  margin-top: 4%;
   margin-bottom: 1.5%;
-  font-size: 20pt;
+  font-size: 17pt;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
   font-family: 'Signika Negative', sans-serif;
 }
 
@@ -57,18 +58,19 @@ form{
 
 @media screen and (max-width: 700px) {
   .image {
-    width: 150px;
+    width: 140px;
     margin-top: 12%;
   }
 
   li {
     margin-bottom: 4%;
-    font-size: 20pt;
+    font-size: 16pt;
+    margin-top: 3%;
   }
   
   #app-name{
     margin-bottom: 6%;
     margin-top: -10px;
-    font-size: 35pt;
+    font-size: 30pt;
   }
 }
