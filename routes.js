@@ -257,13 +257,9 @@ router.post(
 );
 
 //Check admin
-router.get("/checkadmin", requireLoggedIn, function (req, res) {
-  isAdmin(req.session.uuid, ({admin}) => {
-    res.send(admin);
-  });
+router.get("/checkadmin", requireLoggedIn, async function (req, res) {
+  res.send(await isAdmin(req.session.uuid));
 });
-
-
 
 //game-db
 router.get(

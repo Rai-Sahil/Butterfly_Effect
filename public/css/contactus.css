@@ -46,7 +46,7 @@ label {
     text-align: left;
 }
 
-form {
+#contact-form {
     margin-left: 10%;
     margin-top: 5%;
 }
@@ -96,7 +96,7 @@ input[type=submit]:hover {
         grid-row: 1 / span 1;
     }
 
-    form {
+    #contact-form {
         grid-row: 2;
         margin-right: 5%;
     }

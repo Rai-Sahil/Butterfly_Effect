@@ -12,18 +12,12 @@ function ajaxGET(path, callback) {
   xhr.send();
 }
 
-ajaxGET("/checkadmin", function (data, status) {
-  console.log(data);
-  console.log(status);
-  // if (status != 200) {
-  //   console.log(JSON.parse(data).message);
-  //   return;
-  // }
-  // document.querySelector('#admin-dashboard').classList.toggle('display-none');
-  // document.querySelector('#game-editor').classList.toggle('display-none');
+ajaxGET("/checkadmin", function (isAdmin) {
+  if (JSON.parse(isAdmin)) {
+    document.querySelector('#admin-dashboard').classList.toggle('display-none');
+    document.querySelector('#game-editor').classList.toggle('display-none');
+  }
 });
-
-
 
 function loadComponentToId(nodeId, component) {
   fetch(component)
