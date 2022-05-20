@@ -1,6 +1,5 @@
 "use strict";
 
-const mysql = require("mysql2/promise");
 const { dbUserTable, connection } = require("./constants");
 
 //Get questions

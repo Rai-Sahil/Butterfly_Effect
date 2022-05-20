@@ -17,13 +17,6 @@ const connectionParams = {
 
 const connection = mysql.createConnection(connectionParams).promise();
 
-mysql.createPool({
-  ...connectionParams,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
-});
-
 const saltRounds = 10;
 
 // name | email | password | role
