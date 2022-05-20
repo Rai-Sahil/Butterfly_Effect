@@ -23,8 +23,11 @@ function ajaxGET(path, callback) {
   xhr.send();
 }
 
-loadHeaderFooter().then(() => {ajaxGET("/checkadmin", async function (isAdmin) {
-  if (await JSON.parse(isAdmin)) {
+loadHeaderFooter().then(() => {ajaxGET("/checkadmin", function (data, status) {
+  if (status !== 200) {
+    console.error("Error checking admin.");
+  }
+  if (JSON.parse(data)) {
     document.querySelector('#admin-dashboard').classList.toggle('display-none');
     document.querySelector('#game-editor').classList.toggle('display-none');
   }
