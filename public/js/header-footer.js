@@ -7,7 +7,7 @@ async function loadComponentToId(nodeId, component) {
 }
 
 async function loadHeaderFooter() {
-  loadComponentToId("#header-placeholder", "../html/components/header.html");
+  await loadComponentToId("#header-placeholder", "../html/components/header.html");
   await loadComponentToId("#footer-placeholder", "../html/components/footer.html");
 }
 
