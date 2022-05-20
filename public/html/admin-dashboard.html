@@ -4,14 +4,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Admin Table</title>
+  <title>Admin-dashboard</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="css/admin-dashboard.css">
   <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="../css/header-footer.css">
 </head>
 
 <body>
+  <div id="header-placeholder"></div>
   <template id="template-user-row">
     <tr id="user-id">
       <td class="user-row-name">
@@ -44,7 +46,7 @@
   </template>
   <div class="navbar">
     <div class="navbar_left">
-      <span class="logo appname">Butterfly Effect</span>
+      <span class="app-name">Dashboard</span>
     </div>
     <div class="navbar_right">
       <div class="profile">
@@ -90,6 +92,8 @@
       </div>
     </div>
   </div>
+  <div id="footer-placeholder"></div>
+  <script src="../js/header-footer.js"></script>
   <script src="/js/admin-dashboard.js"></script>
 </body>
 

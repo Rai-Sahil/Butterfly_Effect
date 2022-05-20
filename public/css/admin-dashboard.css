@@ -1,11 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap');
+
 body {
-  color: #404e67;
-  background: linear-gradient(45deg, #49beaa, #4390d8);
+  padding: 0;
 }
+
 .table-wrapper {
   width: 1000px;
   margin: 30px auto;
-  background: #fff;
+  background: #f5dfbb;
   padding: 20px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
@@ -82,26 +84,6 @@ table.table td .add {
   display: none;
 }
 
-.header {
-  padding-top: 60px;
-  color: #444;
-  margin: auto;
-  line-height: 50px;
-}
-
-h1 {
-  margin: auto;
-  padding: 1%;
-  max-width: 95%;
-  text-align: center;
-  border: outset 2px #369384;
-  background: linear-gradient(45deg, #49beaa, #4390d8);
-  border-bottom-right-radius: 10px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-
 #edit {
   padding: 5px;
   justify-content: end;
@@ -149,4 +131,9 @@ span {
   text-align: center;
   color: red;
   font-weight: bold;
+}
+
+.app-name{
+  font-size: 20pt;
+  font-family: 'Oleo Script Swash Caps', cursive;
 }
