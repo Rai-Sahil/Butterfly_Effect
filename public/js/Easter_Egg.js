@@ -1,22 +1,3 @@
-let box = document.getElementById("box"),
-  btn = document.querySelector("button");
-
-btn.addEventListener(
-  "click",
-  function () {
-    box.classList.toggle("hidden");
-  },
-  false
-);
-
-btn.addEventListener(
-  "click",
-  function () {
-    box.classList.toggle("hidden");
-  },
-  false
-);
-
 var Ymax = 8;
 var Xmax = 8;
 var Tmax = 500;
