@@ -41,19 +41,19 @@ async function initDB() {
       is_complete bool DEFAULT FALSE NOT NULL,
       user_id int NOT NULL,
       current_question_id int,
-      FOREIGN KEY (user_id) REFERENCES ${dbUserTable}(id)
+      FOREIGN KEY (user_id) REFERENCES ${dbUserTable}(id) ON DELETE CASCADE
     );
     CREATE TABLE IF NOT EXISTS PLAYTHROUGH_QUESTION (
       id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       playthrough_id int NOT NULL,
       question_id int NOT NULL,
       selected_choice_id int,
-      FOREIGN KEY (playthrough_id) REFERENCES PLAYTHROUGH(id),
+      FOREIGN KEY (playthrough_id) REFERENCES PLAYTHROUGH(id) ON DELETE CASCADE,
       FOREIGN KEY (question_id) REFERENCES QUESTION(id),
       FOREIGN KEY (selected_choice_id) REFERENCES CHOICE(id)
     );
     ALTER TABLE PLAYTHROUGH ADD CONSTRAINT FK_PTQ
-    FOREIGN KEY (current_question_id)
+    FOREIGN KEY (current_question_id) 
     REFERENCES PLAYTHROUGH_QUESTION (id);
     `;
   await connection.query(query);
