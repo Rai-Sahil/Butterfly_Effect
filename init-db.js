@@ -65,10 +65,11 @@ async function initDB() {
     CREATE TABLE IF NOT EXISTS EARNED_ENDING (
       id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       user_id int NOT NULL,
+      playthrough_id int NOT NULL,
       ending_id int NOT NULL,
-      comfort_points int NOT NULL,
-      environment_points int NOT NULL,
+      earned_points int NOT NULL,
       FOREIGN KEY (user_id) REFERENCES ${dbUserTable}(id) ON DELETE CASCADE,
+      FOREIGN KEY (playthrough_id) REFERENCES PLAYTHROUGH(id) ON DELETE CASCADE,
       FOREIGN KEY (ending_id) REFERENCES ENDING(id)
     );`;
   await connection.query(query);

@@ -431,6 +431,16 @@ router.get("/playthrough/questions", requireLoggedIn, function (req, res) {
   );
 });
 
+router.get("/ending", requireLoggedIn, function (req, res) {
+  // @TODO query for total points and insert new earned ending here.
+  res.send("GET /ending success")
+})
+
+router.get("/endings", requireLoggedIn, function (req, res) {
+  // @TODO query for and return endings earned by user here.
+  res.send("GET /endings success");
+});
+
 router.use(function (_, res) {
   res.status(404).sendFile("404.html", {
     root: __dirname + "/public/html",
