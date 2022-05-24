@@ -58,16 +58,18 @@ async function initDB() {
     CREATE TABLE IF NOT EXISTS ENDING (
       id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       type enum('comfort', 'environment') NOT NULL,
-      threshold int NOT NULL
+      threshold int NOT NULL,
+      text varchar(255)
     );
     ALTER TABLE ENDING ADD CONSTRAINT UQ_type_threshold UNIQUE(type, threshold);
     CREATE TABLE IF NOT EXISTS EARNED_ENDING (
       id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       user_id int NOT NULL,
+      playthrough_id int NOT NULL,
       ending_id int NOT NULL,
-      comfort_points int NOT NULL,
-      environment_points int NOT NULL,
+      earned_points int NOT NULL,
       FOREIGN KEY (user_id) REFERENCES ${dbUserTable}(id) ON DELETE CASCADE,
+      FOREIGN KEY (playthrough_id) REFERENCES PLAYTHROUGH(id) ON DELETE CASCADE,
       FOREIGN KEY (ending_id) REFERENCES ENDING(id)
     );`;
   await connection.query(query);
@@ -92,7 +94,7 @@ async function initDB() {
 
   const [endingRows] = await connection.query("SELECT * FROM ENDING");
   if (endingRows.length == 0) {
-    const insertEnding = `INSERT INTO ENDING (type, threshold) values ?`;
+    const insertEnding = `INSERT INTO ENDING (type, threshold, text) values ?`;
     await connection.query(insertEnding, [endings]);
   }
   connection.close();
