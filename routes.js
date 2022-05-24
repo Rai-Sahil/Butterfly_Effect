@@ -22,6 +22,7 @@ const {
   startPlaythrough,
   savePlaythroughProgress,
   getPlaythroughQuestions,
+  saveEnding,
 } = require("./game-db");
 const {
   requireAdmin,
@@ -432,13 +433,24 @@ router.get("/playthrough/questions", requireLoggedIn, function (req, res) {
 });
 
 router.get("/ending", requireLoggedIn, function (req, res) {
-  // @TODO query for total points and insert new earned ending here.
-  res.send("GET /ending success")
+  res.sendFile("ending.html", {
+    root: __dirname + "/public/html",
+  });
 })
 
 router.get("/endings", requireLoggedIn, function (req, res) {
   // @TODO query for and return endings earned by user here.
   res.send("GET /endings success");
+});
+
+router.post("/endings", function (req, res) {
+  const { uuid } = req.session;
+  return saveEnding(
+    uuid,
+    ({ status, message }) => {
+      return res.status(status).send({ message });
+    }
+  );
 });
 
 router.use(function (_, res) {
