@@ -27,6 +27,30 @@ function init() {
     xhr.send();
   }
 
+  function ajaxPOST(url, callback, data) {
+    const params =
+      typeof data == "string"
+        ? data
+        : Object.keys(data)
+            .map({
+              function(key) {
+                return (
+                  encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
+                );
+              },
+            })
+            .join("&");
+
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      callback(this.responseText, this.status);
+    };
+    xhr.open("POST", url);
+    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send(params);
+  }
+
   function ajaxPUT(url, callback, data) {
     const params =
       typeof data == "string"
@@ -163,24 +187,26 @@ function init() {
                 const { message } = JSON.parse(data);
                 document.querySelector("#info").innerHTML = message;
                 popup.classList.toggle("display-none");
+              } else {
+                setCom(currentChoice.com_pt);
+                setEnv(currentChoice.env_pt);
+                step++;
+                if (step == qnum) {
+                  ajaxPOST("/ending", (data, status) => {
+                    const {message} = JSON.parse(data);
+                    if (status !== 200) {
+                       document.querySelector("#info").innerHTML = message;
+                    } else {
+                      window.location.replace("/ending");
+                    }
+                  }, "")
+                  return;
+                }
+                showQuestion(step);
               }
             },
             queryString
           );
-          setCom(currentChoice.com_pt);
-          setEnv(currentChoice.env_pt);
-          step++;
-          if (step == qnum) {
-            //No more question left in this round
-            document.querySelector("#info").innerHTML =
-              "This is the last question!<br/>Environment = " +
-              env_pt +
-              "<br/>Happiness = " +
-              com_pt;
-            popup.classList.toggle("display-none");
-            return;
-          }
-          showQuestion(step);
         };
         choiceButton
           .querySelector("#option")
