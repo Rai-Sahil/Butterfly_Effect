@@ -309,6 +309,7 @@ async function savePlaythroughProgress(
       nextQuestion ? 0 : 1,
       playthroughId,
     ]);
+    return callback({status: 200, message: "Successfully saved playthrough progress."});
   } catch (error) {
     console.error("Error retrieving playthrough questions: ", error);
     return callback({

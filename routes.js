@@ -438,19 +438,16 @@ router.get("/ending", requireLoggedIn, function (req, res) {
   });
 })
 
+router.post("/ending", function (req, res) {
+  const { uuid } = req.session;
+  return saveEnding(uuid, ({ status, message }) => {
+    return res.status(status).send({ message });
+  });
+});
+
 router.get("/endings", requireLoggedIn, function (req, res) {
   // @TODO query for and return endings earned by user here.
   res.send("GET /endings success");
-});
-
-router.post("/endings", function (req, res) {
-  const { uuid } = req.session;
-  return saveEnding(
-    uuid,
-    ({ status, message }) => {
-      return res.status(status).send({ message });
-    }
-  );
 });
 
 router.use(function (_, res) {
