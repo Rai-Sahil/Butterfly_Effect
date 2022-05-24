@@ -192,13 +192,14 @@ function init() {
                 setEnv(currentChoice.env_pt);
                 step++;
                 if (step == qnum) {
-                  //No more question left in this round
-                  document.querySelector("#info").innerHTML =
-                    "This is the last question!<br/>Environment = " +
-                    env_pt +
-                    "<br/>Happiness = " +
-                    com_pt;
-                  popup.classList.toggle("display-none");
+                  ajaxPOST("/ending", (data, status) => {
+                    const {message} = JSON.parse(data);
+                    if (status !== 200) {
+                       document.querySelector("#info").innerHTML = message;
+                    } else {
+                      window.location.replace("/ending");
+                    }
+                  }, "")
                   return;
                 }
                 showQuestion(step);
