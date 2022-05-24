@@ -2,7 +2,7 @@
 
 const mysql = require("mysql2/promise");
 
-const { dbName, dbUserTable, connectionParams, users, questions, choices } = require("./constants");
+const { dbName, dbUserTable, connectionParams, users, questions, choices, endings } = require("./constants");
 
 async function initDB() {
   const {database, ...connectWithoutDB} = connectionParams;
@@ -14,14 +14,14 @@ async function initDB() {
   const query = `
     CREATE DATABASE IF NOT EXISTS ${dbName};
     use ${dbName};
-    DROP TABLE IF EXISTS QUESTION, CHOICE, PLAYTHROUGH, PLAYTHROUGH_QUESTION;
+    DROP TABLE IF EXISTS ${dbUserTable}, QUESTION, CHOICE, PLAYTHROUGH, PLAYTHROUGH_QUESTION, ENDING, EARNED_ENDING;
     CREATE TABLE IF NOT EXISTS ${dbUserTable} (
       id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       uuid varchar(40) DEFAULT (uuid()) NOT NULL,
       name varchar(30),
       email varchar(30),
       password varchar(60),
-      role varchar(30) DEFAULT 'user'
+      role enum('user', 'admin') NOT NULL
     );
     CREATE TABLE IF NOT EXISTS QUESTION (
       id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -42,7 +42,7 @@ async function initDB() {
       user_id int NOT NULL,
       current_question_id int,
       FOREIGN KEY (user_id) REFERENCES ${dbUserTable}(id) ON DELETE CASCADE
-    );
+      );
     CREATE TABLE IF NOT EXISTS PLAYTHROUGH_QUESTION (
       id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       playthrough_id int NOT NULL,
@@ -53,9 +53,23 @@ async function initDB() {
       FOREIGN KEY (selected_choice_id) REFERENCES CHOICE(id)
     );
     ALTER TABLE PLAYTHROUGH ADD CONSTRAINT FK_PTQ
-    FOREIGN KEY (current_question_id) 
-    REFERENCES PLAYTHROUGH_QUESTION (id);
-    `;
+      FOREIGN KEY (current_question_id) 
+      REFERENCES PLAYTHROUGH_QUESTION (id);
+    CREATE TABLE IF NOT EXISTS ENDING (
+      id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      type enum('comfort', 'environment') NOT NULL,
+      threshold int NOT NULL
+    );
+    ALTER TABLE ENDING ADD CONSTRAINT UQ_type_threshold UNIQUE(type, threshold);
+    CREATE TABLE IF NOT EXISTS EARNED_ENDING (
+      id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      user_id int NOT NULL,
+      ending_id int NOT NULL,
+      comfort_points int NOT NULL,
+      environment_points int NOT NULL,
+      FOREIGN KEY (user_id) REFERENCES ${dbUserTable}(id) ON DELETE CASCADE,
+      FOREIGN KEY (ending_id) REFERENCES ENDING(id)
+    );`;
   await connection.query(query);
 
   const [userRows] = await connection.query(`SELECT * FROM ${dbUserTable}`);
@@ -74,6 +88,12 @@ async function initDB() {
   if (choiceRows.length == 0) {
     const insertChoice = `INSERT INTO CHOICE (question_id, text, env_pt, com_pt, next_q) values ?`;
     await connection.query(insertChoice, [choices]);
+  }
+
+  const [endingRows] = await connection.query("SELECT * FROM ENDING");
+  if (endingRows.length == 0) {
+    const insertEnding = `INSERT INTO ENDING (type, threshold) values ?`;
+    await connection.query(insertEnding, [endings]);
   }
   connection.close();
 }

@@ -39,8 +39,8 @@ const users = [
 const questions = [
   ["Should I turn on the A/C?"],
   ["Should I go there?"],
-  ["What is carbon sink?"]
-]
+  ["What is carbon sink?"],
+];
 
 //question_id | text | environment | comfort | next_question
 const choices = [
@@ -51,8 +51,18 @@ const choices = [
   [3, "Forest", 2, 0, 1],
   [3, "Soil", 2, 0, 1],
   [3, "Ocean", 2, 0, 1],
-  [3, "All", 6, 0, 1]
-]
+  [3, "All", 6, 0, 1],
+];
+
+// type | threshold
+const endings = [
+  ["comfort", 25],
+  ["comfort", 50],
+  ["comfort", 75],
+  ["environment", 25],
+  ["environment", 50],
+  ["environment", 75],
+];
 
 module.exports = {
   dbName,
@@ -63,4 +73,5 @@ module.exports = {
   users,
   questions,
   choices,
+  endings,
 };
