@@ -54,14 +54,14 @@ const choices = [
   [3, "All", 6, 0, 1],
 ];
 
-// type | threshold
+// type | threshold | text
 const endings = [
-  ["comfort", 25],
-  ["comfort", 50],
-  ["comfort", 75],
-  ["environment", 25],
-  ["environment", 50],
-  ["environment", 75],
+  ["comfort", 25, "this is comfort 25 ending"],
+  ["comfort", 50, "this is comfort 50 ending"],
+  ["comfort", 75, "this is comfort 75 ending"],
+  ["environment", 25, "this is environment 25 ending"],
+  ["environment", 50, "this is environment 50 ending"],
+  ["environment", 75, "this is environment 75 ending"],
 ];
 
 module.exports = {
