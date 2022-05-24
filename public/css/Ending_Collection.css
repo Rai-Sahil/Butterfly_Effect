@@ -39,7 +39,7 @@ ul {
 }
 
 li {
-  margin-bottom: 1.5%;
+  margin-bottom: -1.5%;
   font-size: 20pt;
   font-family: 'Signika Negative', sans-serif;
 }
@@ -55,8 +55,8 @@ form{
   }
 
   li {
-    margin-bottom: 4%;
     font-size: 20pt;
+    margin-bottom: 2.5%;
   }
   
   #app-name{
