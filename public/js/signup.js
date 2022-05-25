@@ -60,6 +60,13 @@ function initsignup() {
             if (status != 200) {
               document.getElementById("signup-error-message").innerHTML =
                 responseJSON.message;
+                document.getElementById("signup-email").value =
+                "";
+                document
+                .getElementById("signup-email")
+                .addEventListener("click", function (e) {
+                  document.getElementById("signup-error-message").innerHTML = "";
+                });
             } else {
               sessionStorage.setItem("userId", responseJSON.user.ID);
              
