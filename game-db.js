@@ -416,7 +416,7 @@ async function getLatestEndings(uuid, callback) {
     FROM earned_ending, ending 
     WHERE user_id = (
 	    SELECT id
-	    FROM bby_32_user
+	    FROM ${dbUserTable}
       WHERE uuid = ?
     )
     AND ending_id = ending.id
