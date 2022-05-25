@@ -158,58 +158,41 @@ router.get("/Ending_Collection", requireLoggedIn, function (req, res) {
 
 
 
-router.get("/comfort-0_earth-0", requireLoggedIn, function (req, res) {
+router.get("/comfort0", requireLoggedIn, function (req, res) {
   res.sendFile("Ending0-0.html", {
     root: __dirname + "/public/html",
   });
 });
 
-router.get("/comfort-0_earth-50", requireLoggedIn, function (req, res) {
+router.get("/comfort50", requireLoggedIn, function (req, res) {
   res.sendFile("Ending0-50.html", {
     root: __dirname + "/public/html",
   });
 });
 
-router.get("/comfort-0_earth-100", requireLoggedIn, function (req, res) {
+router.get("/comfort100", requireLoggedIn, function (req, res) {
   res.sendFile("Ending0-100.html", {
     root: __dirname + "/public/html",
   });
 });
-router.get("/comfort-50_earth-0", requireLoggedIn, function (req, res) {
+router.get("/enviroment0", requireLoggedIn, function (req, res) {
   res.sendFile("Ending50-0.html", {
     root: __dirname + "/public/html",
   });
 });
 
-router.get("/comfort-50_earth-50", requireLoggedIn, function (req, res) {
+router.get("/enviroment50", requireLoggedIn, function (req, res) {
   res.sendFile("Ending50-50.html", {
     root: __dirname + "/public/html",
   });
 });
 
-router.get("/comfort-50_earth-100", requireLoggedIn, function (req, res) {
+router.get("/enviroment100", requireLoggedIn, function (req, res) {
   res.sendFile("Ending50-100.html", {
     root: __dirname + "/public/html",
   });
 });
 
-router.get("/comfort-100_earth-0", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending100-0.html", {
-    root: __dirname + "/public/html",
-  });
-});
-
-router.get("/comfort-100_earth-50", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending100-50.html", {
-    root: __dirname + "/public/html",
-  });
-});
-
-router.get("/comfort-100_earth-100", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending100-100.html", {
-    root: __dirname + "/public/html",
-  });
-});
 
 
 router.get(
