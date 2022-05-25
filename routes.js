@@ -127,8 +127,8 @@ router.get("/timeline", requireLoggedIn, function (req, res) {
   });
 });
 
-router.get("/contactus", requireLoggedIn, function (req, res) {
-  res.sendFile("contactus.html", {
+router.get("/contact-us", requireLoggedIn, function (req, res) {
+  res.sendFile("contact-us.html", {
     root: __dirname + "/public/html",
   });
 });
