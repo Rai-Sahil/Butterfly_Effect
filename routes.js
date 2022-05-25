@@ -324,7 +324,7 @@ router.post("/choices", requireLoggedIn, requireAdmin, function (req, res) {
   );
 });
 
-router.delete("/delete", requireLoggedIn, requireAdmin, function (req, res) {
+router.delete("/question", requireLoggedIn, requireAdmin, function (req, res) {
   var qid = req.query["qid"];
   var oid = req.query["oid"];
   deleteQuestion(qid, oid, res);
