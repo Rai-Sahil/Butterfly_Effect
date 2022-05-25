@@ -154,8 +154,6 @@ a {
   height: 100%;
   fill: none;
   stroke-width: 10;
-  stroke-dashoffset: 220;
-  stroke-dasharray: 440;
   stroke-linecap: round;
   transform: translate(5px, 5px);
   -webkit-animation: animate-meter 1s ease-in-out forwards;
@@ -168,18 +166,6 @@ a {
 
 #environment-ending-meter {
   stroke: #49beaa;
-}
-
-@-webkit-keyframes animate-meter {
-  to {
-    stroke-dashoffset: var(--stroke-dashoffset);
-  }
-}
-
-@keyframes animate-meter {
-  to {
-    stroke-dashoffset: var(--stroke-dashoffset);
-  }
 }
 
 .environment {
