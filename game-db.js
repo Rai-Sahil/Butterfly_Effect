@@ -417,13 +417,12 @@ async function getLatestEndings(uuid, callback) {
     WHERE user_id = (
 	    SELECT id
 	    FROM bby_32_user
-      WHERE uuid = 'f308a09f-db8c-11ec-baae-60a44c2babee'
+      WHERE uuid = ?
     )
     AND ending_id = ending.id
     ORDER BY playthrough_id DESC LIMIT 2
     `;
     const [endings] = await connection.query(query, [uuid]);
-
     return callback({
       status: 200,
       message: "Successfully retrieved endings.",
@@ -438,6 +437,7 @@ async function getLatestEndings(uuid, callback) {
     });
   }
 }
+
 //Return endings the user has earned.
 async function endingsEarned(uuid, callback) {
   try {
