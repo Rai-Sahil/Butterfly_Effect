@@ -451,3 +451,17 @@ a {
     
     
 }
+
+section{
+    width: 100%;
+    margin-top: 2%;
+}
+
+#container{
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 7px #49beaa solid;
+    background-color:#F5DFBB;
+    box-shadow: 0 0 0.50em #49beaa;
+}
