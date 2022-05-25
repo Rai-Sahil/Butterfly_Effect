@@ -56,12 +56,12 @@ const choices = [
 
 // type | threshold | text
 const endings = [
-  ["comfort", 25, "this is comfort 25 ending"],
+  ["comfort", 0, "this is comfort 0 ending"],
   ["comfort", 50, "this is comfort 50 ending"],
-  ["comfort", 75, "this is comfort 75 ending"],
-  ["environment", 25, "this is environment 25 ending"],
+  ["comfort", 100, "this is comfort 100 ending"],
+  ["environment", 0, "this is environment 0 ending"],
   ["environment", 50, "this is environment 50 ending"],
-  ["environment", 75, "this is environment 75 ending"],
+  ["environment", 100, "this is environment 100 ending"],
 ];
 
 module.exports = {
