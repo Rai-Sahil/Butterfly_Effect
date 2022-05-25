@@ -17,6 +17,7 @@ function init() {
         console.log(endings);
         for (let i = 0; i < endings.length; i++) {
             document.getElementById("ending-" + endings[i].ending_id).classList.toggle("display-none");
+            document.getElementById("ending-" + endings[i].ending_id).href = "endingdetails?id="+ endings[i].ending_id +"&type=" + endings[i].type + "&threshold=" + endings[i].threshold + "&text=" + endings[i].text;
         }
     });
 

@@ -193,7 +193,11 @@ router.get("/enviroment100", requireLoggedIn, function (req, res) {
   });
 });
 
-
+router.get("/endingdetails", requireLoggedIn, function (req, res) {
+  res.sendFile("ending-details.html", {
+    root: __dirname + "/public/html",
+  });
+});
 
 router.get(
   "/admin-dashboard",
