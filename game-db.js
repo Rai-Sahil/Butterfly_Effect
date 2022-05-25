@@ -96,7 +96,6 @@ async function updateChoice(
   text,
   envi,
   comf,
-  nextQuestion,
   callback
 ) {
   try {
@@ -106,7 +105,7 @@ async function updateChoice(
         message: "No question selected.",
       });
     }
-    if (!envi || !comf || !nextQuestion || !text) {
+    if (!envi || !comf || !text) {
       return callback({
         status: 400,
         message: "Input is not complete.",
@@ -114,9 +113,9 @@ async function updateChoice(
     }
     var checkOption = "SELECT * FROM CHOICE WHERE question_id = ? AND id = ?";
     var updateOption =
-      "UPDATE CHOICE SET text = ?, env_pt = ?, com_pt = ?, next_q = ? WHERE question_id = ? AND id = ?";
+      "UPDATE CHOICE SET text = ?, env_pt = ?, com_pt = ? WHERE question_id = ? AND id = ?";
     var insertOption =
-      "INSERT CHOICE (question_id, text, env_pt, com_pt, next_q) values (?, ?, ?, ?, ?)";
+      "INSERT CHOICE (question_id, text, env_pt, com_pt) values (?, ?, ?, ?)";
     var [existingOption] = await connection.query(checkOption, [
       questionID,
       optionID,
@@ -126,7 +125,6 @@ async function updateChoice(
         text,
         envi,
         comf,
-        nextQuestion,
         questionID,
         optionID,
       ]);
@@ -140,7 +138,6 @@ async function updateChoice(
       text,
       envi,
       comf,
-      nextQuestion,
     ]);
     return callback({
       status: 200,
@@ -156,7 +153,7 @@ async function updateChoice(
 async function deleteQuestion(questionID, optionID, res) {
   try {
     if (!optionID) {
-      // To solve FK constraints, may cause futher error
+      // To solve FK constraints, cascade delete
       let [row] = await connection.execute(
         "SELECT * FROM PLAYTHROUGH_QUESTION WHERE question_id = " + questionID
       );
@@ -184,7 +181,7 @@ async function deleteQuestion(questionID, optionID, res) {
         questionID +
         " AND selected_choice_id = " +
         optionID
-    ); //To solve FK constraints, may cause futher error
+    ); //To solve FK constraints, cascade delete
     await connection.execute(
       "DELETE FROM CHOICE WHERE question_id = " +
         questionID +

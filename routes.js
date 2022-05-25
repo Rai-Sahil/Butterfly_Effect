@@ -345,14 +345,13 @@ router.get("/choice-by-id", requireLoggedIn, function (req, res) {
 
 router.post("/choices", requireLoggedIn, requireAdmin, function (req, res) {
   res.setHeader("Content-Type", "application/json");
-  var { questionID, optionID, text, envi, comf, nextQuestion } = req.body;
+  var { questionID, optionID, text, envi, comf } = req.body;
   updateChoice(
     questionID,
     optionID,
     text,
     envi,
     comf,
-    nextQuestion,
     ({ status, message }) => {
       res.status(status).send({ message });
     }
