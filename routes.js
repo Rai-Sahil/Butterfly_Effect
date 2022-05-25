@@ -145,8 +145,8 @@ router.get("/rules", requireLoggedIn, function (req, res) {
   });
 });
 
-router.get("/aboutus", requireLoggedIn, function (req, res) {
-  res.sendFile("AboutUs.html", {
+router.get("/about-us", requireLoggedIn, function (req, res) {
+  res.sendFile("about-us.html", {
     root: __dirname + "/public/html",
   });
 });
