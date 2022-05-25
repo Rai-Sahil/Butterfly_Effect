@@ -30,9 +30,11 @@ async function getChoices(questionID, res) {
 }
 
 //Get choice by choice_id
-async function getChoiceByID(choice_id, res){
-  try{
-    var [row] = await connection.execute("SELECT * FROM CHOICE WHERE id = " + choice_id);
+async function getChoiceByID(choice_id, res) {
+  try {
+    var [row] = await connection.execute(
+      "SELECT * FROM CHOICE WHERE id = " + choice_id
+    );
     if (row == 0) {
       return res.send({ status: 200, message: "No choice found." });
     }
@@ -155,13 +157,22 @@ async function deleteQuestion(questionID, optionID, res) {
   try {
     if (!optionID) {
       // To solve FK constraints, may cause futher error
-      let [row] = await connection.execute("SELECT * FROM PLAYTHROUGH_QUESTION WHERE question_id = " + questionID);
+      let [row] = await connection.execute(
+        "SELECT * FROM PLAYTHROUGH_QUESTION WHERE question_id = " + questionID
+      );
       for (let i = 0; i < row.length; i++) {
-        await connection.execute("UPDATE PLAYTHROUGH SET current_question_id = NULL WHERE current_question_id = " + row[i].id);
-        await connection.execute("DELETE FROM PLAYTHROUGH_QUESTION WHERE id = " + row[i].id);
+        await connection.execute(
+          "UPDATE PLAYTHROUGH SET current_question_id = NULL WHERE current_question_id = " +
+            row[i].id
+        );
+        await connection.execute(
+          "DELETE FROM PLAYTHROUGH_QUESTION WHERE id = " + row[i].id
+        );
       }
-      await connection.execute("DELETE FROM PLAYTHROUGH_QUESTION WHERE question_id = " + questionID);
-      
+      await connection.execute(
+        "DELETE FROM PLAYTHROUGH_QUESTION WHERE question_id = " + questionID
+      );
+
       await connection.execute(
         "DELETE FROM CHOICE WHERE question_id = " + questionID
       );
@@ -170,14 +181,15 @@ async function deleteQuestion(questionID, optionID, res) {
     }
     await connection.execute(
       "DELETE FROM PLAYTHROUGH_QUESTION WHERE question_id = " +
-      questionID +
-      " AND selected_choice_id = " +
-      optionID); //To solve FK constraints, may cause futher error
+        questionID +
+        " AND selected_choice_id = " +
+        optionID
+    ); //To solve FK constraints, may cause futher error
     await connection.execute(
       "DELETE FROM CHOICE WHERE question_id = " +
-      questionID +
-      " AND id = " +
-      optionID
+        questionID +
+        " AND id = " +
+        optionID
     );
     return res.send({ status: 204, message: "Choice deleted." });
   } catch (error) {
@@ -270,14 +282,22 @@ async function startPlaythrough(uuid, callback) {
   }
 }
 
-async function savePlaythroughProgress(playthroughId, questionId, choiceId, callback) {
+async function savePlaythroughProgress(
+  playthroughId,
+  questionId,
+  choiceId,
+  callback
+) {
   try {
-    // Update playthrough question 
+    // Update playthrough question
     const updatePlaythroughQuestionQuery = `UPDATE PLAYTHROUGH_QUESTION SET selected_choice_id = ? WHERE id = ?`;
-    await connection.query(updatePlaythroughQuestionQuery, [choiceId, questionId]);
+    await connection.query(updatePlaythroughQuestionQuery, [
+      choiceId,
+      questionId,
+    ]);
     // Get next playthrough question
     const nextPlaythroughQuestionQuery = `SELECT * FROM PLAYTHROUGH_QUESTION WHERE id = ? AND playthrough_id = ?`;
-    const nextQuestionId = (+questionId) + 1;
+    const nextQuestionId = +questionId + 1;
     const [[nextQuestion]] = await connection.query(
       nextPlaythroughQuestionQuery,
       [nextQuestionId, playthroughId]
@@ -289,6 +309,7 @@ async function savePlaythroughProgress(playthroughId, questionId, choiceId, call
       nextQuestion ? 0 : 1,
       playthroughId,
     ]);
+    return callback({status: 200, message: "Successfully saved playthrough progress."});
   } catch (error) {
     console.error("Error retrieving playthrough questions: ", error);
     return callback({
@@ -307,7 +328,7 @@ async function getPlaythroughQuestions(uuid, playthroughId, callback) {
     const getPlaythroughQuery = `SELECT id, current_question_id FROM PLAYTHROUGH WHERE id = ? AND user_id = ? ORDER BY ID DESC LIMIT 1`;
     const [[playthrough]] = await connection.query(getPlaythroughQuery, [
       playthroughId,
-      user.id
+      user.id,
     ]);
     // Get playthrough questions with question text
     const getPlaythroughQuestionsQuery = `
@@ -335,6 +356,72 @@ async function getPlaythroughQuestions(uuid, playthroughId, callback) {
   }
 }
 
+async function saveEnding(uuid, callback) {
+  try {
+    // Get user's latest completed playthrough with total points
+    const getUserByUUIDQuery = `SELECT id FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
+    const [[{id: user_id}]] = await connection.query(getUserByUUIDQuery, [uuid]);
+    const query = `
+      SELECT SUM(env_pt) as env_pts, SUM(com_pt) as com_pts, playthrough_id
+        FROM PLAYTHROUGH_QUESTION, CHOICE 
+        WHERE selected_choice_id = CHOICE.id AND playthrough_id = (
+          SELECT id FROM PLAYTHROUGH 
+          WHERE is_complete = 1 AND user_id = ?
+          ORDER BY id DESC LIMIT 1)`;
+    const [[{ env_pts, com_pts, playthrough_id }]] = await connection.query(
+      query,
+      [user_id]
+    );
+    // Get the first endings in each category which had their threshold exceeded
+    const getEndingsQuery = 'SELECT * FROM ENDING ORDER BY threshold ASC';
+    const [endings] = await connection.query(getEndingsQuery);
+    const comfortEnding = endings.find((ending) => (ending.type === 'comfort' && ending.threshold > com_pts ))
+    const environmentEnding = endings.find((ending) => (ending.type === 'environment' && ending.threshold > env_pts ))
+    // Format data for insertion into earned_endings
+    // user_id | playthrough_id | ending_id | earned_points
+    const earnedEndings = [
+      [user_id, playthrough_id, comfortEnding.id, 50 + parseInt(com_pts)],
+      [user_id, playthrough_id, environmentEnding.id, 50 + parseInt(env_pts)],
+    ];
+    const insertEndingsQuery = 'INSERT INTO EARNED_ENDING (user_id, playthrough_id, ending_id, earned_points) VALUES ?'
+    await connection.query(insertEndingsQuery, [earnedEndings]);
+
+    return callback({
+      status: 200,
+      message: "Successfully saved ending."
+    })
+  } catch (error) {
+    console.error(error)
+    return callback({
+      status: 500,
+      message:
+        "Internal error while attempting to save ending.",
+    });
+  }
+}
+
+//Return endings the user has earned.
+async function endingsEarned(uuid, callback) {
+  try {
+    const getUserByIdQuery = `SELECT * FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
+    const [users] = await connection.query(getUserByIdQuery, [uuid]);
+    const [endings] = await connection.execute("SELECT DISTINCT ending_id, type, threshold, text FROM EARNED_ENDING, ENDING WHERE ending_id = ending.id AND user_id = " + users[0].id);
+    console.log(endings);
+    return callback({
+      status: 200,
+      message: "Successfully retrieved earned endings.",
+      endings
+    });
+  } catch (error) {
+    console.error("Error retrieving earned endings: ", error);
+    return callback({
+      status: 500,
+      message:
+        "Internal error while attempting to retrieve earned endings."
+    });
+  }
+}
+
 module.exports = {
   getQuestions,
   getChoices,
@@ -346,4 +433,6 @@ module.exports = {
   startPlaythrough,
   savePlaythroughProgress,
   getPlaythroughQuestions,
+  saveEnding,
+  endingsEarned
 };
