@@ -90,7 +90,6 @@ function initlogin() {
 
 document.addEventListener("readystatechange", () => {
   if (document.readyState === "complete") {
-    console.info("Init login Starting Now");
     initlogin();
   }
 });
