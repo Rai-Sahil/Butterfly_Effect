@@ -14,6 +14,7 @@ async function initDB() {
   const query = `
     CREATE DATABASE IF NOT EXISTS ${dbName};
     use ${dbName};
+    SET FOREIGN_KEY_CHECKS=0;
     DROP TABLE IF EXISTS ${dbUserTable}, QUESTION, CHOICE, PLAYTHROUGH, PLAYTHROUGH_QUESTION, ENDING, EARNED_ENDING;
     CREATE TABLE IF NOT EXISTS ${dbUserTable} (
       id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -71,7 +72,8 @@ async function initDB() {
       FOREIGN KEY (user_id) REFERENCES ${dbUserTable}(id) ON DELETE CASCADE,
       FOREIGN KEY (playthrough_id) REFERENCES PLAYTHROUGH(id) ON DELETE CASCADE,
       FOREIGN KEY (ending_id) REFERENCES ENDING(id)
-    );`;
+    );
+    SET FOREIGN_KEY_CHECKS=1;`;
   await connection.query(query);
 
   const [userRows] = await connection.query(`SELECT * FROM ${dbUserTable}`);
