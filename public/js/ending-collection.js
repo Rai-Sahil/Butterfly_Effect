@@ -20,7 +20,7 @@ function init() {
         }
         for (let i = 0; i < endings.length; i++) {
             document.getElementById("ending-" + endings[i].ending_id).classList.toggle("display-none");
-            document.getElementById("ending-" + endings[i].ending_id).href = "endingdetails?id="+ endings[i].ending_id +"&type=" + endings[i].type + "&threshold=" + endings[i].threshold + "&text=" + endings[i].text;
+            document.getElementById("ending-" + endings[i].ending_id).href = "ending-details?id="+ endings[i].ending_id +"&type=" + endings[i].type + "&threshold=" + endings[i].threshold + "&text=" + endings[i].text;
         }
         for (let j = 0; j < (6 - endings.length); j++) {
             document.querySelector("#options").innerHTML +=  "<li>?</li>";

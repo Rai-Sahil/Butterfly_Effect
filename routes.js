@@ -157,42 +157,7 @@ router.get("/ending-collection", requireLoggedIn, function (req, res) {
   });
 });
 
-router.get("/comfort0", requireLoggedIn, function (req, res) {
-  res.sendFile("Comfort-0.html", {
-    root: __dirname + "/public/html",
-  });
-});
-
-router.get("/comfort50", requireLoggedIn, function (req, res) {
-  res.sendFile("Comfort-50.html", {
-    root: __dirname + "/public/html",
-  });
-});
-
-router.get("/comfort100", requireLoggedIn, function (req, res) {
-  res.sendFile("Comfort-100.html", {
-    root: __dirname + "/public/html",
-  });
-});
-router.get("/enviroment0", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending50-0.html", {
-    root: __dirname + "/public/html",
-  });
-});
-
-router.get("/enviroment50", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending50-50.html", {
-    root: __dirname + "/public/html",
-  });
-});
-
-router.get("/enviroment100", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending50-100.html", {
-    root: __dirname + "/public/html",
-  });
-});
-
-router.get("/endingdetails", requireLoggedIn, function (req, res) {
+router.get("/ending-details", requireLoggedIn, function (req, res) {
   res.sendFile("ending-details.html", {
     root: __dirname + "/public/html",
   });
