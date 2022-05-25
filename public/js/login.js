@@ -65,8 +65,6 @@ function initlogin() {
             if (status != 200) {
               document.getElementById("login-error-message").innerHTML =
                 message;
-              document.getElementById("login-password").value = "";
-              document.getElementById("login-email").value = "";
               document
                 .getElementById("login-email")
                 .addEventListener("click", function (e) {
