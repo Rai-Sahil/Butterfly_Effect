@@ -163,7 +163,7 @@ function init() {
 
         //Delete question
         nc.querySelector('#delete').onclick = () => {
-          ajaxDELETE("/delete?qid=" + parsedData[i].id + "&oid=", function (e) {
+          ajaxDELETE("/question?qid=" + parsedData[i].id + "&oid=", function (e) {
             let response = JSON.parse(e);
             document.querySelector('#info').innerHTML = response.message;
             popup.classList.toggle("display-none");
@@ -213,12 +213,15 @@ function init() {
         }
         //Delete choice
         cc.querySelector('#delete-option').onclick = () => {
-          ajaxDELETE("/delete?qid=" + currentQID + "&oid=" + choiceData[j].id, function (e) {
-            let response = JSON.parse(e);
-            document.querySelector('#info').innerHTML = response.message;
-            popup.classList.toggle("display-none");
-            populateChoices();
-          });
+          ajaxDELETE(
+            "/question?qid=" + currentQID + "&oid=" + choiceData[j].id,
+            function (e) {
+              let response = JSON.parse(e);
+              document.querySelector("#info").innerHTML = response.message;
+              popup.classList.toggle("display-none");
+              populateChoices();
+            }
+          );
         };
         document.querySelector("#options").appendChild(cc);
       }

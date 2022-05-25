@@ -127,8 +127,8 @@ router.get("/timeline", requireLoggedIn, function (req, res) {
   });
 });
 
-router.get("/contactus", requireLoggedIn, function (req, res) {
-  res.sendFile("contactus.html", {
+router.get("/contact-us", requireLoggedIn, function (req, res) {
+  res.sendFile("contact-us.html", {
     root: __dirname + "/public/html",
   });
 });
@@ -145,54 +145,19 @@ router.get("/rules", requireLoggedIn, function (req, res) {
   });
 });
 
-router.get("/aboutus", requireLoggedIn, function (req, res) {
-  res.sendFile("AboutUs.html", {
+router.get("/about-us", requireLoggedIn, function (req, res) {
+  res.sendFile("about-us.html", {
     root: __dirname + "/public/html",
   });
 });
 
-router.get("/Ending_Collection", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending_Collection.html", {
+router.get("/ending-collection", requireLoggedIn, function (req, res) {
+  res.sendFile("ending-collection.html", {
     root: __dirname + "/public/html",
   });
 });
 
-router.get("/comfort0", requireLoggedIn, function (req, res) {
-  res.sendFile("Comfort-0.html", {
-    root: __dirname + "/public/html",
-  });
-});
-
-router.get("/comfort50", requireLoggedIn, function (req, res) {
-  res.sendFile("Comfort-50.html", {
-    root: __dirname + "/public/html",
-  });
-});
-
-router.get("/comfort100", requireLoggedIn, function (req, res) {
-  res.sendFile("Comfort-100.html", {
-    root: __dirname + "/public/html",
-  });
-});
-router.get("/enviroment0", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending50-0.html", {
-    root: __dirname + "/public/html",
-  });
-});
-
-router.get("/enviroment50", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending50-50.html", {
-    root: __dirname + "/public/html",
-  });
-});
-
-router.get("/enviroment100", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending50-100.html", {
-    root: __dirname + "/public/html",
-  });
-});
-
-router.get("/endingdetails", requireLoggedIn, function (req, res) {
+router.get("/ending-details", requireLoggedIn, function (req, res) {
   res.sendFile("ending-details.html", {
     root: __dirname + "/public/html",
   });
@@ -359,7 +324,7 @@ router.post("/choices", requireLoggedIn, requireAdmin, function (req, res) {
   );
 });
 
-router.delete("/delete", requireLoggedIn, requireAdmin, function (req, res) {
+router.delete("/question", requireLoggedIn, requireAdmin, function (req, res) {
   var qid = req.query["qid"];
   var oid = req.query["oid"];
   deleteQuestion(qid, oid, res);

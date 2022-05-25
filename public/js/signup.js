@@ -1,8 +1,6 @@
 "use strict";
 
 function initsignup() {
-  console.info("Client script loaded.");
-
   function DelayRedirect2() {
     setTimeout(function () {
       // dvCountDown.style.display = "none";
@@ -82,7 +80,6 @@ function initsignup() {
 document.addEventListener('readystatechange', (event) => {
   
     if (document.readyState === "complete") {
-      console.info("Init signup Starting Now");
       initsignup();
     }
   }
