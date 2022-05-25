@@ -14,10 +14,16 @@ function init() {
     ajaxGET("/endings", (data) => {
         const parsedData = JSON.parse(data);
         const endings = parsedData.endings;
-        console.log(endings);
+        if (endings.length == 0) {
+            document.querySelector("#options").innerHTML +=  "<li>No collected ending.</li>";
+            return;
+        }
         for (let i = 0; i < endings.length; i++) {
             document.getElementById("ending-" + endings[i].ending_id).classList.toggle("display-none");
             document.getElementById("ending-" + endings[i].ending_id).href = "endingdetails?id="+ endings[i].ending_id +"&type=" + endings[i].type + "&threshold=" + endings[i].threshold + "&text=" + endings[i].text;
+        }
+        for (let j = 0; j < (6 - endings.length); j++) {
+            document.querySelector("#options").innerHTML +=  "<li>?</li>";
         }
     });
 
