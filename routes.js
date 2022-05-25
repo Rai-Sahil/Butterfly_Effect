@@ -9,7 +9,7 @@ const {
   deleteUser,
   editUser,
   getUsers,
-  isAdmin
+  isAdmin,
 } = require("./db");
 const {
   getQuestions,
@@ -23,7 +23,8 @@ const {
   savePlaythroughProgress,
   getPlaythroughQuestions,
   saveEnding,
-  endingsEarned
+  getLatestEndings,
+  endingsEarned,
 } = require("./game-db");
 const {
   requireAdmin,
@@ -156,61 +157,46 @@ router.get("/Ending_Collection", requireLoggedIn, function (req, res) {
   });
 });
 
-
-
-router.get("/comfort-0_earth-0", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending0-0.html", {
+router.get("/comfort0", requireLoggedIn, function (req, res) {
+  res.sendFile("Comfort-0.html", {
     root: __dirname + "/public/html",
   });
 });
 
-router.get("/comfort-0_earth-50", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending0-50.html", {
+router.get("/comfort50", requireLoggedIn, function (req, res) {
+  res.sendFile("Comfort-50.html", {
     root: __dirname + "/public/html",
   });
 });
 
-router.get("/comfort-0_earth-100", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending0-100.html", {
+router.get("/comfort100", requireLoggedIn, function (req, res) {
+  res.sendFile("Comfort-100.html", {
     root: __dirname + "/public/html",
   });
 });
-router.get("/comfort-50_earth-0", requireLoggedIn, function (req, res) {
+router.get("/enviroment0", requireLoggedIn, function (req, res) {
   res.sendFile("Ending50-0.html", {
     root: __dirname + "/public/html",
   });
 });
 
-router.get("/comfort-50_earth-50", requireLoggedIn, function (req, res) {
+router.get("/enviroment50", requireLoggedIn, function (req, res) {
   res.sendFile("Ending50-50.html", {
     root: __dirname + "/public/html",
   });
 });
 
-router.get("/comfort-50_earth-100", requireLoggedIn, function (req, res) {
+router.get("/enviroment100", requireLoggedIn, function (req, res) {
   res.sendFile("Ending50-100.html", {
     root: __dirname + "/public/html",
   });
 });
 
-router.get("/comfort-100_earth-0", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending100-0.html", {
+router.get("/endingdetails", requireLoggedIn, function (req, res) {
+  res.sendFile("ending-details.html", {
     root: __dirname + "/public/html",
   });
 });
-
-router.get("/comfort-100_earth-50", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending100-50.html", {
-    root: __dirname + "/public/html",
-  });
-});
-
-router.get("/comfort-100_earth-100", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending100-100.html", {
-    root: __dirname + "/public/html",
-  });
-});
-
 
 router.get(
   "/admin-dashboard",
@@ -433,11 +419,22 @@ router.get("/playthrough/questions", requireLoggedIn, function (req, res) {
   );
 });
 
+router.get("/ending/:id", requireLoggedIn, function (req, res) {
+  const uuid = req.params.id;
+  return getLatestEndings(uuid, ({ status, message, endings }) => {
+    if (status === 200) {
+      return res.status(status).send({ message, endings });
+    } else {
+      return res.status(status).send({ message });
+    }
+  });
+});
+
 router.get("/ending", requireLoggedIn, function (req, res) {
   res.sendFile("ending.html", {
     root: __dirname + "/public/html",
   });
-})
+});
 
 router.post("/ending", function (req, res) {
   const { uuid } = req.session;

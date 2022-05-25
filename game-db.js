@@ -309,7 +309,10 @@ async function savePlaythroughProgress(
       nextQuestion ? 0 : 1,
       playthroughId,
     ]);
-    return callback({status: 200, message: "Successfully saved playthrough progress."});
+    return callback({
+      status: 200,
+      message: "Successfully saved playthrough progress.",
+    });
   } catch (error) {
     console.error("Error retrieving playthrough questions: ", error);
     return callback({
@@ -360,7 +363,9 @@ async function saveEnding(uuid, callback) {
   try {
     // Get user's latest completed playthrough with total points
     const getUserByUUIDQuery = `SELECT id FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
-    const [[{id: user_id}]] = await connection.query(getUserByUUIDQuery, [uuid]);
+    const [[{ id: user_id }]] = await connection.query(getUserByUUIDQuery, [
+      uuid,
+    ]);
     const query = `
       SELECT SUM(env_pt) as env_pts, SUM(com_pt) as com_pts, playthrough_id
         FROM PLAYTHROUGH_QUESTION, CHOICE 
@@ -373,29 +378,86 @@ async function saveEnding(uuid, callback) {
       [user_id]
     );
     // Get the first endings in each category which had their threshold exceeded
-    const getEndingsQuery = 'SELECT * FROM ENDING ORDER BY threshold ASC';
+    const getEndingsQuery = "SELECT * FROM ENDING ORDER BY threshold ASC";
     const [endings] = await connection.query(getEndingsQuery);
-    const comfortEnding = endings.find((ending) => (ending.type === 'comfort' && ending.threshold > com_pts ))
-    const environmentEnding = endings.find((ending) => (ending.type === 'environment' && ending.threshold > env_pts ))
+    const comfortEnding = endings.find(
+      (ending) => ending.type === "comfort" && ending.threshold > com_pts
+    );
+    const environmentEnding = endings.find(
+      (ending) => ending.type === "environment" && ending.threshold > env_pts
+    );
     // Format data for insertion into earned_endings
     // user_id | playthrough_id | ending_id | earned_points
     const earnedEndings = [
       [user_id, playthrough_id, comfortEnding.id, 50 + parseInt(com_pts)],
       [user_id, playthrough_id, environmentEnding.id, 50 + parseInt(env_pts)],
     ];
-    const insertEndingsQuery = 'INSERT INTO EARNED_ENDING (user_id, playthrough_id, ending_id, earned_points) VALUES ?'
+    const insertEndingsQuery =
+      "INSERT INTO EARNED_ENDING (user_id, playthrough_id, ending_id, earned_points) VALUES ?";
     await connection.query(insertEndingsQuery, [earnedEndings]);
 
     return callback({
       status: 200,
-      message: "Successfully saved ending."
-    })
+      message: "Successfully saved ending.",
+    });
   } catch (error) {
-    console.error(error)
+    console.error("Error saving the ending: ", error);
+    return callback({
+      status: 500,
+      message: "Internal error while attempting to save ending.",
+    });
+  }
+}
+
+async function getLatestEndings(uuid, callback) {
+  try {
+    const query = `
+    SELECT * 
+    FROM earned_ending, ending 
+    WHERE user_id = (
+	    SELECT id
+	    FROM ${dbUserTable}
+      WHERE uuid = ?
+    )
+    AND ending_id = ending.id
+    ORDER BY playthrough_id DESC LIMIT 2
+    `;
+    const [endings] = await connection.query(query, [uuid]);
+    return callback({
+      status: 200,
+      message: "Successfully retrieved endings.",
+      endings,
+    });
+  } catch (error) {
+    console.error("Error retrieving the latest endings: ", error);
     return callback({
       status: 500,
       message:
-        "Internal error while attempting to save ending.",
+        "Internal error while attempting to retrieve the latest endings.",
+    });
+  }
+}
+
+//Return endings the user has earned.
+async function endingsEarned(uuid, callback) {
+  try {
+    const getUserByIdQuery = `SELECT * FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
+    const [users] = await connection.query(getUserByIdQuery, [uuid]);
+    const [endings] = await connection.execute(
+      "SELECT DISTINCT ending_id, type, threshold, text FROM EARNED_ENDING, ENDING WHERE ending_id = ending.id AND user_id = " +
+        users[0].id
+    );
+    console.log(endings);
+    return callback({
+      status: 200,
+      message: "Successfully retrieved earned endings.",
+      endings,
+    });
+  } catch (error) {
+    console.error("Error retrieving earned endings: ", error);
+    return callback({
+      status: 500,
+      message: "Internal error while attempting to retrieve earned endings.",
     });
   }
 }
@@ -406,7 +468,6 @@ async function endingsEarned(uuid, callback) {
     const getUserByIdQuery = `SELECT * FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
     const [users] = await connection.query(getUserByIdQuery, [uuid]);
     const [endings] = await connection.execute("SELECT DISTINCT ending_id, type, threshold, text FROM EARNED_ENDING, ENDING WHERE ending_id = ending.id AND user_id = " + users[0].id);
-    console.log(endings);
     return callback({
       status: 200,
       message: "Successfully retrieved earned endings.",
@@ -434,5 +495,6 @@ module.exports = {
   savePlaythroughProgress,
   getPlaythroughQuestions,
   saveEnding,
-  endingsEarned
+  getLatestEndings,
+  endingsEarned,
 };

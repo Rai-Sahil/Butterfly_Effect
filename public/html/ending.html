@@ -1,64 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Endings Page</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/ending.css" />
-    <link rel="stylesheet" href="/css/logo.css" />
-    <link rel="stylesheet" href="/css/header-footer.css" />
-  </head>
-  <body>
-    <div id="header-placeholder"></div>
-      <div id="logo">
-        <img src="#" id="image" alt="logo" />
 
-        <div id="menus">
-          <span id="app-name">Game Over</span>
-        </div>
+<head>
+  <title>Game Ending</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/img/favicon.svg" type="image/svg">
+  <link rel="stylesheet" href="/css/ending.css" />
+  <link rel="stylesheet" href="/css/logo.css" />
+  <link rel="stylesheet" href="/css/header-footer.css" />
+</head>
+
+<body>
+  <div id="header-placeholder"></div>
+  <div id="logo">
+    <img src="#" id="image" alt="logo" />
+
+    <div id="menus">
+      <span id="app-name">Thank you for playing!</span>
+    </div>
+  </div>
+  <div id="content">
+    <div id="header">
+      <div class="progressbar">
+        <svg class="progressbar__svg">
+          <circle id="comfort-ending-meter" cx="80" cy="80" r="70"></circle>
+        </svg>
+        <span class="progressbar__text"><img src="/img/smileyface.svg" id="smiley" alt="comfort" /></span>
       </div>
-      <div id="content">
-        <div id="header">
-          <div class="progressbar">
-            <svg class="progressbar__svg">
-              <circle
-                cx="80"
-                cy="80"
-                r="70"
-                class="progressbar__svg-circle circle-comfort50 shadow-js"
-              ></circle>
-            </svg>
-            <span class="progressbar__text shadow-js"
-              ><img
-                src="/img/smileyface.svg"
-                id="smiley"
-                alt="comfort"
-            /></span>
-          </div>
-          <img
-            src="/img/Comfort50.svg"
-            id="comfort"
-            alt=""
-          />
-          <div class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet consequatur minima optio magni magnam. Sed nostrum animi vitae omnis tenetur totam, accusantium aut, amet dolor a dicta veniam, exercitationem sint.</div>
-        </div>
-        <div id="nav">
-          <div class="progressbar">
-            <svg class="progressbar__svg">
-              <circle cx="80" cy="80" r="70" class="progressbar__svg-circle2 circle-earth50 shadow-html"> </circle>
-            </svg>
-            <span class="progressbar__text shadow-html"><img
-              src="/img/earth.svg"
-              id="earth"
-              alt="earth"
-          /></span>
-          </div>
-          <img src="/img/earth50.png" id="enviroment" alt="" />
-          <div class="text2" id="enviroment_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, debitis adipisci? Provident fuga animi aliquam sed molestias magnam id sequi eum, nobis consequatur? Doloremque molestiae cumque repellat enim quisquam facere.</div>
-          </div>
-        </div>
-      <div id="footer-placeholder"></div>
-      <script src="/js/header-footer.js"></script>
+      <img id="comfort-ending-image" class="comfort" src="" alt="" />
+      <div id="comfort-ending-text" class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet consequatur minima optio magni magnam. Sed nostrum animi vitae omnis tenetur totam, accusantium aut, amet
+        dolor a dicta veniam, exercitationem sint.</div>
+    </div>
+    <div id="nav">
+      <div class="progressbar">
+        <svg class="progressbar__svg">
+          <circle id="environment-ending-meter" cx="80" cy="80" r="70"> </circle>
+        </svg>
+        <span  class="progressbar__text"><img src="/img/earth.svg" id="earth" alt="earth" /></span>
+      </div>
+      <img id="environment-ending-image" class="environment" src="" alt="" />
+      <div id="environment-ending-text" class="text2" id="enviroment_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, debitis adipisci? Provident fuga animi aliquam sed molestias magnam id sequi eum,
+        nobis consequatur? Doloremque molestiae cumque repellat enim quisquam facere.</div>
+    </div>
+  </div>
+  <div id="footer-placeholder"></div>
+  <script src="/js/header-footer.js"></script>
+  <script src="/js/logo.js"></script>
+  <script src="/js/ending.js"></script>
+</body>
 
-      <script src="/js/logo.js"></script>  </body>
 </html>

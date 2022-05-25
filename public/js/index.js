@@ -70,9 +70,10 @@ function init() {
       const {message, playthrough} = JSON.parse(data);
       if (status !== 200) {
         console.error(message);
-      }
-      if (!playthrough.is_complete) {
-        document.getElementById("continue").hidden = false;
+      } else {
+        if (playthrough && !playthrough.is_complete) {
+          document.getElementById("continue").hidden = false;
+        }
       }
     } else {
       console.error("No data in response");
