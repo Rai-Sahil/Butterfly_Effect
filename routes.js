@@ -151,8 +151,8 @@ router.get("/about-us", requireLoggedIn, function (req, res) {
   });
 });
 
-router.get("/Ending_Collection", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending_Collection.html", {
+router.get("/ending-collection", requireLoggedIn, function (req, res) {
+  res.sendFile("ending-collection.html", {
     root: __dirname + "/public/html",
   });
 });
