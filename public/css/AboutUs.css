@@ -49,19 +49,14 @@ body {
     width: 200px;
     height: 200px;
  }
+
  .name{
     padding: 12px;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
     text-transform: uppercase;
  }
 
-.name{
-    padding: 12px;
-    font-weight: bold;
-    font-size: 16px;
-    text-transform: uppercase;
-}
 .desig{
     font-style: italic;
     color: #888;
@@ -101,14 +96,7 @@ body {
     padding: 1%;
      max-width: 95%;
      text-align: center;
-     border: outset 2px #369384;
  }
-
- @media screen and (max-width: 600px){
-    .teams{
-        max-width: 100%;
-    }
-}
 
 .title{
     text-align: center;
@@ -156,7 +144,7 @@ body {
     display: block;
     width: 150px; height: 150px;
     object-fit: cover;
-    border:4px solid #726a95;
+    border:4px solid #4290D8;
     border-radius: 50%;
     margin: 0 auto;
 }
@@ -164,7 +152,6 @@ body {
 .member h2{
     text-transform: uppercase;
     font-size: 24px;
-    color: #726a95;
     margin: 15px 0;
 }
 
@@ -174,28 +161,30 @@ body {
     line-height: 1.6;
 }
 
-
 .wrapper{
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .background-container{
     width: 100%;
     min-height: 100vh;
     display: flex; 
 }
+
 .bg-1{
     flex: 1;
     background-color: #4390D8;
 }
+
 .bg-2{
     flex: 1;
     background-color: #49BEAA;
 }
+
 .about-container{
-    width: 85%;
     min-height: 80vh;
     position: absolute;
     background-color: white;
@@ -206,18 +195,21 @@ body {
     padding: 20px 40px;
     border-radius: 5px;
 }
+
 .image-container{
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .image-container img {
     width: 500px;
     height: 500px;
     margin: 20px;
     border-radius: 10px;
 }
+
 .text-container{
     flex: 1;
     display: flex;
@@ -226,11 +218,13 @@ body {
     flex-direction: column;
     font-size: 22px;
 }
+
 .text-container h1{
     font-size: 70px;
     padding: 20px 0px;
     margin: auto;
 }
+
 .text-container a{
     text-decoration: none;
     padding: 12px;
@@ -241,11 +235,13 @@ body {
     border-radius: 5px;
     transition: .3s all ease;
 }
+
 .text-container a:hover{
     background-color: transparent;
     color: black;
     border: 2px solid rebeccapurple;
 }
+
 @media screen and (max-width: 1600px){
     .about-container{
         width: 90%;
@@ -258,6 +254,7 @@ body {
         font-size: 50px;
     }
 }
+
 @media screen and (max-width: 1100px){
     .about-container{
         flex-direction: column;
@@ -268,5 +265,19 @@ body {
     }
     .text-container {
         align-items: center;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .teams{
+        max-width: 100%;
+    }
+
+    #team{
+        margin-top: 15%;
+    }
+
+    #app{
+        margin-top: -15%;
     }
 }
