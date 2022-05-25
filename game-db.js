@@ -391,11 +391,41 @@ async function saveEnding(uuid, callback) {
       message: "Successfully saved ending."
     })
   } catch (error) {
-    console.error(error)
+    console.error("Error saving the ending: ", error)
     return callback({
       status: 500,
       message:
         "Internal error while attempting to save ending.",
+    });
+  }
+}
+
+async function getLatestEndings(uuid, callback) {
+  try {
+    const query = `
+    SELECT * 
+    FROM earned_ending, ending 
+    WHERE user_id = (
+	    SELECT id
+	    FROM bby_32_user
+      WHERE uuid = 'f308a09f-db8c-11ec-baae-60a44c2babee'
+    )
+    AND ending_id = ending.id
+    ORDER BY playthrough_id DESC LIMIT 2
+    `;
+    const [endings] = await connection.query(query, [uuid]);
+    
+    return callback({
+      status: 200,
+      message: "Successfully retrieved endings.",
+      endings
+
+    });
+  } catch (error) {
+    console.error("Error retrieving the latest endings: ", error);
+    return callback({
+      status: 500,
+      message: "Internal error while attempting to retrieve the latest endings.",
     });
   }
 }
@@ -412,4 +442,5 @@ module.exports = {
   savePlaythroughProgress,
   getPlaythroughQuestions,
   saveEnding,
+  getLatestEndings,
 };
