@@ -14,7 +14,8 @@ function init() {
     const {message, endings} = JSON.parse(data);
     if (status === 200) {
       endings.forEach((ending) => {
-        console.log(ending)
+        document.getElementById(`${ending.type}-ending-text`).innerHTML = ending.text;
+        document.getElementById(`${ending.type}-ending-image`).src = `/img/${ending.type}${ending.threshold}.png`
       })
     } else {
       console.error(message);
