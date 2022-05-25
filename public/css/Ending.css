@@ -294,7 +294,7 @@ a {
 }
 
 
-#enviroment {
+.enviroment {
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -302,7 +302,7 @@ a {
     height: 400px;
 }
 
-#comfort {
+.comfort {
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -322,7 +322,7 @@ a {
 }
 
 @media only screen and (max-width:1193px) and (min-width:1101px) {
-    #enviroment{
+    .enviroment{
         margin-top: 0%;
         margin-bottom: 2%;
     }
@@ -336,12 +336,12 @@ a {
 }
 
 @media only screen and (max-width: 1100px) and (min-width:879px) {
-    #enviroment {
+    .enviroment {
         height: 300px;
         margin-top: 11%;
     }
 
-    #comfort {
+    .comfort {
         height: 400px;
         margin-top: 2%;
 
@@ -370,14 +370,14 @@ a {
         grid-row: 2 / span 1;
     }
 
-    #enviroment {
+    .enviroment {
         margin-top: -16%;
         height: 400px;
     }
 
     
     
-    #comfort {
+    .comfort {
         margin-left: auto;
         margin-right: auto;
         display: block;
@@ -399,13 +399,13 @@ a {
 
 @media only screen and (max-width: 555px) and (min-width:456px) {
 
-    #enviroment {
+    .enviroment {
         height: 300px;
         margin-top: -80px;
 
     }
     
-    #comfort {
+    .comfort {
         margin-left: auto;
         margin-right: auto;
         display: block;
@@ -428,11 +428,11 @@ a {
 
 @media only screen and (max-width: 455px) and (min-width:356px) {
 
-    #enviroment {
+    .enviroment {
         height: 200px;
     }
     
-    #comfort {
+    .comfort {
         margin-left: auto;
         margin-right: auto;
         display: block;

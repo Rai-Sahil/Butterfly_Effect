@@ -12,7 +12,13 @@ function init() {
 
   ajaxGET(`/ending/${sessionStorage.getItem("userId")}`, (data, status) => {
     const {message, endings} = JSON.parse(data);
-    console.log(message, endings);
+    if (status === 200) {
+      endings.forEach((ending) => {
+        console.log(ending)
+      })
+    } else {
+      console.error(message);
+    }
   });
 }
 
