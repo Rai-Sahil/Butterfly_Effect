@@ -159,19 +159,19 @@ router.get("/Ending_Collection", requireLoggedIn, function (req, res) {
 
 
 router.get("/comfort0", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending0-0.html", {
+  res.sendFile("Comfort-0.html", {
     root: __dirname + "/public/html",
   });
 });
 
 router.get("/comfort50", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending0-50.html", {
+  res.sendFile("Comfort-50.html", {
     root: __dirname + "/public/html",
   });
 });
 
 router.get("/comfort100", requireLoggedIn, function (req, res) {
-  res.sendFile("Ending0-100.html", {
+  res.sendFile("Comfort-100.html", {
     root: __dirname + "/public/html",
   });
 });
