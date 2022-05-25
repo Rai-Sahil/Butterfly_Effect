@@ -12,7 +12,8 @@ function showDetails() {
     }
     if (details.searchParams.get("type") === "comfort") {
         document.getElementById('meter').classList.add("circle-comfort" + details.searchParams.get("threshold"));
-
+        document.getElementById('comfort').src ="../img/comfort"+details.searchParams.get("threshold")+".png";
+        document.getElementById("smiley").src="../img/smileyface.svg";
     }
     
 }
