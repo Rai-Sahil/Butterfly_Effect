@@ -370,3 +370,8 @@ form.sign-in-form {
     left: 50%;
   }
 }
+
+#signup-error-message, #login-error-message{
+  color:red;
+  font-size: larger;
+}
