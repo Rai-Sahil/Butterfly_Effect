@@ -73,8 +73,10 @@ function init() {
                     //Calculate the env_pt and com_pt
                     env_pt += choiceInfo[0].env_pt;
                     cards.querySelector("#env-meter").style.width = env_pt + "%";
+                    cards.querySelector("#env-current").innerHTML = env_pt;
                     com_pt += choiceInfo[0].com_pt;
                     cards.querySelector("#com-meter").style.width = com_pt + "%";
+                    cards.querySelector("#com-current").innerHTML = com_pt;
 
                     document.querySelector("#cards-go-here").prepend(cards);
                 });

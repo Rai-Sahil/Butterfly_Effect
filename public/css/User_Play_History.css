@@ -145,7 +145,13 @@ h1 {
 }
 
 .score-change {
-    font-size: 15pt;
+    font-size: 14pt;
+}
+
+.current-score {
+    font-size: 14pt;
+    position: inherit;
+    color: #014a8f;
 }
 
 #env-meter{

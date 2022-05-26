@@ -46,15 +46,21 @@
                     <div class="status-container" id="environ" title="Environment">
                         <img src="../img/earth.svg" alt="">
                         <div class="indicator-container">
-                            <div class="indicator" id="env-meter"></div>
+                            <div class="indicator" id="env-meter">
+                                <div class="current-score" id="env-current">30</div>
+                            </div>
                             <div class="score-change" id="env-change">+30</div>
+
                         </div>
                     </div>
                     <div class="status-container" id="comfort" title="Happiness">
                         <img src="../img/smileyface.svg" alt="">
                         <div class="indicator-container">
-                            <div class="indicator" id="com-meter"></div>
+                            <div class="indicator" id="com-meter">
+                                <div class="current-score" id="com-current">30</div>
+                            </div>
                             <div class="score-change" id="com-change">+30</div>
+
                         </div>
                     </div>
                 </div>
@@ -66,7 +72,7 @@
     <div class="modal-wrap display-none" id="popup">
         <div class="modal">
             <img src="../img/exclamation_Mark.png" alt="">
-            <div id="info"></div><br/>
+            <div id="info"></div><br />
             <button class="modal-button" id="popup-close">OK</button>
         </div>
     </div>
