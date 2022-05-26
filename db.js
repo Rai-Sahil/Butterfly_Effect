@@ -1,6 +1,7 @@
 "use strict";
 
-const { dbUserTable, connection, saltRounds } = require("./constants");
+const { dbUserTable, saltRounds } = require("./constants");
+const { connection } = require("./db-connect.js");
 const bcrypt = require("bcrypt");
 
 async function authenticate(email, password, callback) {

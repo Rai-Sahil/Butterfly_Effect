@@ -1,6 +1,7 @@
 "use strict";
 
-const { dbUserTable, connection } = require("./constants");
+const { dbUserTable } = require("./constants");
+const { connection } = require("./db-connect.js");
 
 //Get questions
 async function getQuestions(res) {

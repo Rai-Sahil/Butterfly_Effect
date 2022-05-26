@@ -2,7 +2,6 @@
 
 require("dotenv").config();
 const bcrypt = require("bcrypt");
-const mysql = require("mysql2");
 
 const dbName = process.env.DB_NAME || "COMP2800";
 
@@ -14,8 +13,6 @@ const connectionParams = {
   password: process.env.DB_PASSWORD,
   database: dbName,
 };
-
-const connection = mysql.createConnection(connectionParams).promise();
 
 const saltRounds = 10;
 
@@ -67,7 +64,6 @@ const endings = [
 module.exports = {
   dbName,
   dbUserTable,
-  connection,
   connectionParams,
   saltRounds,
   users,
