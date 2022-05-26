@@ -1,6 +1,7 @@
 "use strict";
 
-const { dbUserTable, connection } = require("./constants");
+const { dbUserTable } = require("./constants");
+const { connection } = require("./db");
 
 //Get questions
 async function getQuestions(res) {
@@ -90,14 +91,7 @@ async function updateQuestion(questionText, questionID, callback) {
 }
 
 //Add or update choice
-async function updateChoice(
-  questionID,
-  optionID,
-  text,
-  envi,
-  comf,
-  callback
-) {
+async function updateChoice(questionID, optionID, text, envi, comf, callback) {
   try {
     if (!questionID) {
       return callback({
@@ -133,12 +127,7 @@ async function updateChoice(
         message: "Choice updated.",
       });
     }
-    await connection.query(insertOption, [
-      questionID,
-      text,
-      envi,
-      comf,
-    ]);
+    await connection.query(insertOption, [questionID, text, envi, comf]);
     return callback({
       status: 200,
       message: "Choice inserted.",
@@ -464,18 +453,20 @@ async function endingsEarned(uuid, callback) {
   try {
     const getUserByIdQuery = `SELECT * FROM ${dbUserTable} WHERE uuid = ? LIMIT 1;`;
     const [users] = await connection.query(getUserByIdQuery, [uuid]);
-    const [endings] = await connection.execute("SELECT DISTINCT ending_id, type, threshold, text FROM EARNED_ENDING, ENDING WHERE ending_id = ending.id AND user_id = " + users[0].id);
+    const [endings] = await connection.execute(
+      "SELECT DISTINCT ending_id, type, threshold, text FROM EARNED_ENDING, ENDING WHERE ending_id = ending.id AND user_id = " +
+        users[0].id
+    );
     return callback({
       status: 200,
       message: "Successfully retrieved earned endings.",
-      endings
+      endings,
     });
   } catch (error) {
     console.error("Error retrieving earned endings: ", error);
     return callback({
       status: 500,
-      message:
-        "Internal error while attempting to retrieve earned endings."
+      message: "Internal error while attempting to retrieve earned endings.",
     });
   }
 }

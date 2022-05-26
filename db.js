@@ -1,7 +1,10 @@
 "use strict";
 
-const { dbUserTable, connection, saltRounds } = require("./constants");
+const { connectionParams, dbUserTable, saltRounds } = require("./constants");
 const bcrypt = require("bcrypt");
+const mysql = require("mysql2");
+
+const connection = mysql.createConnection(connectionParams).promise();
 
 async function authenticate(email, password, callback) {
   try {
@@ -143,21 +146,22 @@ async function getUsers(callback) {
 
 async function isAdmin(uuid) {
   try {
-   const getUserByIdQuery = `SELECT uuid, name, email, role FROM ${dbUserTable} WHERE uuid = ? AND role = 'admin' LIMIT 1;`;
-   const [users] = await connection.query(getUserByIdQuery, [uuid]);
-   return (users.length === 1);
- } catch (error) {
-   console.error("Error getting user: ", error);
-   return false;
- }
+    const getUserByIdQuery = `SELECT uuid, name, email, role FROM ${dbUserTable} WHERE uuid = ? AND role = 'admin' LIMIT 1;`;
+    const [users] = await connection.query(getUserByIdQuery, [uuid]);
+    return users.length === 1;
+  } catch (error) {
+    console.error("Error getting user: ", error);
+    return false;
+  }
 }
 
 module.exports = {
+  connection,
   authenticate,
   createUser,
   deleteUser,
   editUser,
   getUserByUUID,
   getUsers,
-  isAdmin
+  isAdmin,
 };

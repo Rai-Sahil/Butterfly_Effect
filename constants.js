@@ -15,8 +15,6 @@ const connectionParams = {
   database: dbName,
 };
 
-const connection = mysql.createConnection(connectionParams).promise();
-
 const saltRounds = 10;
 
 // name | email | password | role
@@ -67,7 +65,6 @@ const endings = [
 module.exports = {
   dbName,
   dbUserTable,
-  connection,
   connectionParams,
   saltRounds,
   users,
