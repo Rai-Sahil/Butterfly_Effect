@@ -10,9 +10,9 @@ async function initDB() {
     ...connectWithoutDB,
     multipleStatements: true,
   });
+  const createDBQuery = `CREATE DATABASE IF NOT EXISTS ${dbName};`;
 
   const query = `
-    CREATE DATABASE IF NOT EXISTS ${dbName};
     use ${dbName};
     SET FOREIGN_KEY_CHECKS=0;
     DROP TABLE IF EXISTS ${dbUserTable}, QUESTION, CHOICE, PLAYTHROUGH, PLAYTHROUGH_QUESTION, ENDING, EARNED_ENDING;
@@ -59,7 +59,7 @@ async function initDB() {
       id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       type enum('comfort', 'environment') NOT NULL,
       threshold int NOT NULL,
-      text varchar(255)
+      text varchar(500)
     );
     ALTER TABLE ENDING ADD CONSTRAINT UQ_type_threshold UNIQUE(type, threshold);
     CREATE TABLE IF NOT EXISTS EARNED_ENDING (
@@ -73,6 +73,7 @@ async function initDB() {
       FOREIGN KEY (ending_id) REFERENCES ENDING(id)
     );
     SET FOREIGN_KEY_CHECKS=1;`;
+  await connection.query(createDBQuery);
   await connection.query(query);
 
   const [userRows] = await connection.query(`SELECT * FROM ${dbUserTable}`);
