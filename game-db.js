@@ -3,6 +3,8 @@
 const { dbUserTable } = require("./constants");
 const { connection } = require("./db");
 
+const numQuestions = 10; //Questions per round
+
 //Get questions
 async function getQuestions(res) {
   try {
@@ -238,7 +240,6 @@ async function startPlaythrough(uuid, callback) {
       [user.id]
     );
     // Insert randomized questions into playthrough questions
-    const numQuestions = 3;
     const [questions] = await connection.query("SELECT id FROM QUESTION");
     const selectedQuestions = shuffle(questions).slice(0, numQuestions);
     const insertPlaythroughQuestionsQuery = `INSERT INTO PLAYTHROUGH_QUESTION (playthrough_id, question_id) VALUES ?`;
