@@ -149,7 +149,7 @@ async function deleteQuestion(questionID, optionID, res) {
       for (let i = 0; i < row.length; i++) {
         await connection.execute(
           "UPDATE PLAYTHROUGH SET current_question_id = NULL WHERE current_question_id = " +
-            row[i].id
+          row[i].id
         );
         await connection.execute(
           "DELETE FROM PLAYTHROUGH_QUESTION WHERE id = " + row[i].id
@@ -167,15 +167,15 @@ async function deleteQuestion(questionID, optionID, res) {
     }
     await connection.execute(
       "DELETE FROM PLAYTHROUGH_QUESTION WHERE question_id = " +
-        questionID +
-        " AND selected_choice_id = " +
-        optionID
+      questionID +
+      " AND selected_choice_id = " +
+      optionID
     ); //To solve FK constraints, cascade delete
     await connection.execute(
       "DELETE FROM CHOICE WHERE question_id = " +
-        questionID +
-        " AND id = " +
-        optionID
+      questionID +
+      " AND id = " +
+      optionID
     );
     return res.send({ status: 204, message: "Choice deleted." });
   } catch (error) {
@@ -353,12 +353,13 @@ async function saveEnding(uuid, callback) {
       uuid,
     ]);
     const query = `
-      SELECT SUM(env_pt) as env_pts, SUM(com_pt) as com_pts, playthrough_id
-        FROM PLAYTHROUGH_QUESTION, CHOICE 
-        WHERE selected_choice_id = CHOICE.id AND playthrough_id = (
-          SELECT id FROM PLAYTHROUGH 
-          WHERE is_complete = 1 AND user_id = ?
-          ORDER BY id DESC LIMIT 1)`;
+    SELECT SUM(env_pt) as env_pts, SUM(com_pt) as com_pts, playthrough_id
+    FROM PLAYTHROUGH_QUESTION, CHOICE 
+    WHERE selected_choice_id = CHOICE.id AND playthrough_id = (
+      SELECT id FROM PLAYTHROUGH 
+      WHERE is_complete = 1 AND user_id = ?
+      ORDER BY id DESC LIMIT 1)
+    GROUP BY playthrough_id;`;
     const [[{ env_pts, com_pts, playthrough_id }]] = await connection.query(
       query,
       [user_id]
@@ -431,7 +432,7 @@ async function endingsEarned(uuid, callback) {
     const [users] = await connection.query(getUserByIdQuery, [uuid]);
     const [endings] = await connection.execute(
       "SELECT DISTINCT ending_id, type, threshold, text FROM EARNED_ENDING, ENDING WHERE ending_id = ending.id AND user_id = " +
-        users[0].id
+      users[0].id
     );
     console.log(endings);
     return callback({
@@ -455,7 +456,7 @@ async function endingsEarned(uuid, callback) {
     const [users] = await connection.query(getUserByIdQuery, [uuid]);
     const [endings] = await connection.execute(
       "SELECT DISTINCT ending_id, type, threshold, text FROM EARNED_ENDING, ENDING WHERE ending_id = ending.id AND user_id = " +
-        users[0].id
+      users[0].id
     );
     return callback({
       status: 200,
