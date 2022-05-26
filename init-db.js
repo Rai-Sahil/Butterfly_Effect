@@ -34,7 +34,7 @@ async function initDB() {
       text varchar(100),
       env_pt int(10),
       com_pt int(10),
-      FOREIGN KEY (question_id) REFERENCES QUESTION(id)
+      FOREIGN KEY (question_id) REFERENCES QUESTION(id) ON DELETE CASCADE
     );
     CREATE TABLE IF NOT EXISTS PLAYTHROUGH (
       id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -49,12 +49,13 @@ async function initDB() {
       question_id int NOT NULL,
       selected_choice_id int,
       FOREIGN KEY (playthrough_id) REFERENCES PLAYTHROUGH(id) ON DELETE CASCADE,
-      FOREIGN KEY (question_id) REFERENCES QUESTION(id),
-      FOREIGN KEY (selected_choice_id) REFERENCES CHOICE(id)
+      FOREIGN KEY (question_id) REFERENCES QUESTION(id) ON DELETE CASCADE,
+      FOREIGN KEY (selected_choice_id) REFERENCES CHOICE(id) ON DELETE CASCADE
     );
     ALTER TABLE PLAYTHROUGH ADD CONSTRAINT FK_PTQ
-      FOREIGN KEY (current_question_id) 
-      REFERENCES PLAYTHROUGH_QUESTION (id);
+      FOREIGN KEY (current_question_id)
+      REFERENCES PLAYTHROUGH_QUESTION (id)
+      ON DELETE CASCADE;
     CREATE TABLE IF NOT EXISTS ENDING (
       id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
       type enum('comfort', 'environment') NOT NULL,
@@ -70,7 +71,7 @@ async function initDB() {
       earned_points int NOT NULL,
       FOREIGN KEY (user_id) REFERENCES ${dbUserTable}(id) ON DELETE CASCADE,
       FOREIGN KEY (playthrough_id) REFERENCES PLAYTHROUGH(id) ON DELETE CASCADE,
-      FOREIGN KEY (ending_id) REFERENCES ENDING(id)
+      FOREIGN KEY (ending_id) REFERENCES ENDING(id) ON DELETE CASCADE
     );
     SET FOREIGN_KEY_CHECKS=1;`;
   await connection.query(createDBQuery);
