@@ -34,7 +34,6 @@ async function initDB() {
       text varchar(100),
       env_pt int(10),
       com_pt int(10),
-      next_q int(10),
       FOREIGN KEY (question_id) REFERENCES QUESTION(id)
     );
     CREATE TABLE IF NOT EXISTS PLAYTHROUGH (
@@ -90,7 +89,7 @@ async function initDB() {
 
   const [choiceRows] = await connection.query("SELECT * FROM CHOICE");
   if (choiceRows.length == 0) {
-    const insertChoice = `INSERT INTO CHOICE (question_id, text, env_pt, com_pt, next_q) values ?`;
+    const insertChoice = `INSERT INTO CHOICE (question_id, text, env_pt, com_pt) values ?`;
     await connection.query(insertChoice, [choices]);
   }
 

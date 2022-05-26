@@ -109,7 +109,7 @@ function init() {
   //Update choices
   document.querySelector('#update-choice').addEventListener("click", function (e) {
     e.preventDefault();
-    var updates = "questionID=" + currentQID + "&optionID=" + currentOID + "&text=" + document.querySelector('#l1').value + "&envi=" + document.querySelector('#l2').value + "&comf=" + document.querySelector('#l3').value + "&nextQuestion=" + document.querySelector('#l4').value;
+    var updates = "questionID=" + currentQID + "&optionID=" + currentOID + "&text=" + document.querySelector('#l1').value + "&envi=" + document.querySelector('#l2').value + "&comf=" + document.querySelector('#l3').value;
     ajaxPOST("/choices", function (data, status) {
       var response = JSON.parse(data);
       if (status != 200) {
@@ -126,7 +126,7 @@ function init() {
   //Add choice
   document.querySelector('#insert-choice').addEventListener("click", function (e) {
     e.preventDefault();
-    var updates = "questionID=" + currentQID + "&optionID=&text=" + document.querySelector('#al1').value + "&envi=" + document.querySelector('#al2').value + "&comf=" + document.querySelector('#al3').value + "&nextQuestion=" + document.querySelector('#al4').value;
+    var updates = "questionID=" + currentQID + "&optionID=&text=" + document.querySelector('#al1').value + "&envi=" + document.querySelector('#al2').value + "&comf=" + document.querySelector('#al3').value;
     ajaxPOST("/choices", function (data, status) {
       var response = JSON.parse(data);
       if (status != 200) {
@@ -192,7 +192,6 @@ function init() {
     document.querySelector("#al1").value = null;
     document.querySelector("#al2").value = null;
     document.querySelector("#al3").value = null;
-    document.querySelector("#al4").value = null;
     currentOID = "";
     ajaxGET("/choices?qid=" + currentQID, function (option) {
       //Populate choices
@@ -209,7 +208,6 @@ function init() {
           document.querySelector("#l1").value = choiceData[j].text;
           document.querySelector("#l2").value = choiceData[j].env_pt;
           document.querySelector("#l3").value = choiceData[j].com_pt;
-          document.querySelector("#l4").value = choiceData[j].next_q;
         }
         //Delete choice
         cc.querySelector('#delete-option').onclick = () => {

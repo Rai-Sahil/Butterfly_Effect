@@ -42,16 +42,16 @@ const questions = [
   ["What is carbon sink?"],
 ];
 
-//question_id | text | environment | comfort | next_question
+//question_id | text | environment | comfort
 const choices = [
-  [1, "Yes", -5, 5, 2],
-  [1, "No", 0, -5, 2],
-  [2, "Yes", 5, 5, 3],
-  [2, "No", 0, -5, 3],
-  [3, "Forest", 2, 0, 1],
-  [3, "Soil", 2, 0, 1],
-  [3, "Ocean", 2, 0, 1],
-  [3, "All", 6, 0, 1],
+  [1, "Yes", -5, 5],
+  [1, "No", 0, -5],
+  [2, "Yes", 5, 5],
+  [2, "No", 0, -5],
+  [3, "Forest", 2, 0],
+  [3, "Soil", 2, 0],
+  [3, "Ocean", 2, 0],
+  [3, "All", 6, 0],
 ];
 
 // type | threshold | text
