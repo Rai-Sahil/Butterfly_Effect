@@ -102,7 +102,7 @@ body {
     color: #444;
 }
 
-.h1{
+.head{
     margin: auto;
     padding: 1%;
      max-width: 95%;
@@ -290,4 +290,8 @@ body {
     #app{
         margin-top: -15%;
     }
+}
+
+#aboutus{
+    font-size: 60px;
 }
