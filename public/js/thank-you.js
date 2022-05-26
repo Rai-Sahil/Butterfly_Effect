@@ -3,5 +3,9 @@
 const popup = document.getElementById("thankyou-popup");
 
 function openPopup(){
-    popup.classList.add("thankyou-openpopup");
+    if (document.getElementById("user_name").value != "" 
+    && document.getElementById("user_email").value != "" 
+    && document.getElementById("message").value != "") {
+        popup.classList.add("thankyou-openpopup");
+    }
 }
