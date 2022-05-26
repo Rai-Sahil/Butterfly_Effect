@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap%27');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
 
 html,
 body {
@@ -7,9 +7,8 @@ body {
 body {
   display: grid;
   width: 100%;
-  /* CHANGE BACKGROUND HERE */
   background-color: #7fd4c5;
-  font-family: 'Signika Negative', sans-serif;
+  font-family: 'patrick hand', cursive;
 }
 div#error {
   position: relative;

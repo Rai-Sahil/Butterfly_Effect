@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap%27');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
 
 body {
-    font-family: 'Signika Negative', sans-serif;
+    font-family: 'patrick hand', cursive;
 }
 
 .picture {
@@ -76,6 +76,7 @@ body {
 
 .choice-button {
     border-radius: 25px;
+    font-size: 15pt;
     border: 1px solid #4290D8;
     padding: 2%;
     text-align: center;
@@ -117,7 +118,7 @@ body {
     }
 
     .question {
-        font-size: large;
+        font-size: 20pt;
     }
 }
 
