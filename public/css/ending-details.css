@@ -1,9 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+@font-face {
+  font-family: logo;
+  src: url(../font/SuperMarioBros2.ttf);
+}
 
 body {
-    font-family: 'Signika Negative', sans-serif;
-    font-size: 18pt;
+    font-family: 'patrick hand', cursive;
+    font-size: 20pt;
     overflow-x: hidden;
 }
 
@@ -30,20 +33,18 @@ body {
 
 
 #app-name {
-    font-family: 'Oleo Script Swash Caps', cursive;
+    font-family: logo;
     color: #4390D8;
-    font-size: 50pt;
+    font-size: 30pt;
     margin-top: 1%;
     text-align: center;
     text-shadow: -1px 0 #444, 0 1px #444, 2px 0 #444, 0 -1px #444;
 }
 
 body {
-    margin: 0px;
     padding: 0px;
     font-size: 12pt;
     background-color:white;
-    
 }
 
 #content {
@@ -58,7 +59,6 @@ body {
 
 #header {
     border: 7px #49beaa solid;
-    background-color: none;
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
     background-color:#F5DFBB;
@@ -67,7 +67,6 @@ body {
 
 #nav {
     border: 7px #49beaa solid;
-    background-color: none;
     grid-column: 2 / span 1;
     grid-row: 1 / span 1;
     background-color:#F5DFBB;
@@ -280,7 +279,6 @@ a {
     }
   }
 
-
 @-webkit-keyframes anim_circle-comfort100 {
     to {
         stroke-dashoffset: 0;
@@ -326,13 +324,11 @@ a {
         margin-top: 0%;
         margin-bottom: 2%;
     }
-
     
     .text {
         margin-top: -8%;
+        font-size: 15pt;
     }
-
-    
 }
 
 @media only screen and (max-width: 1100px) and (min-width:879px) {
@@ -395,9 +391,10 @@ a {
     
 }
 
-
-
 @media only screen and (max-width: 555px) and (min-width:456px) {
+    #app-name {
+        font-size: 20pt;
+    }
 
     #enviroment {
         height: 300px;
@@ -420,13 +417,13 @@ a {
     .text2{
         margin-top: -0%;
     }
-    
-    
-    
-    
 }
 
 @media only screen and (max-width: 455px) and (min-width:356px) {
+    #app-name{
+        font-size: 20pt;
+    }
+
 
     #enviroment {
         height: 200px;

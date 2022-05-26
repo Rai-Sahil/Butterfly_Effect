@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap%27");
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
 
 .thankyou-popup {
     background-color: #f5dfbb;
@@ -13,7 +13,7 @@
     visibility: hidden;
     padding: 15px 30px 25px;
     box-sizing: border-box;
-    font-family: "Signika Negative", sans-serif;
+    font-family: 'patrick hand', cursive;
 }
 
 .thankyou-openpopup {
@@ -33,7 +33,7 @@
     padding: 3px 5px;
     background-color: #4290d8;
     cursor: pointer;
-    font-family: "Signika Negative", sans-serif;
+    font-family: 'patrick hand', cursive;
     border-radius: 8px;
 }
 

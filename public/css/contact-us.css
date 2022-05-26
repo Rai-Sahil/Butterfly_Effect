@@ -1,12 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+@font-face {
+  font-family: logo;
+  src: url(../font/SuperMarioBros2.ttf);
+}
 body {
-    font-family: 'Signika Negative', sans-serif;
+    font-family: 'patrick hand', cursive;
     padding: 0;
 }
 
 h1 {
     margin: auto;
+    font-family: logo;
+    font-size: 20pt;
     padding: 1%;
     max-width: 95%;
     text-align: center;
@@ -19,7 +24,6 @@ h1 {
 .header {
     padding-top: 20px;
     color: #F5DFBB;
-    font-size: 20px;
     margin: auto;
     line-height: 50px;
 }
@@ -65,6 +69,7 @@ textarea:focus {
 
 input[type=submit] {
     background-color: #4290D8;
+    font-family: 'patrick hand', cursive;
     border: none;
     font-weight: bold;
     color: #F5DFBB;

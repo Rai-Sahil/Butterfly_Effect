@@ -1,8 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+@font-face {
+  font-family: logo;
+  src: url(../font/SuperMarioBros2.ttf);
+}
 
 body {
-  font-family: "Signika Negative", sans-serif;
+  font-family: 'patrick hand', cursive;
   font-size: 18pt;
   overflow-x: hidden;
 }
@@ -29,9 +32,9 @@ body {
 }
 
 #app-name {
-  font-family: "Oleo Script Swash Caps", cursive;
+  font-family: logo;
   color: #4390d8;
-  font-size: 50pt;
+  font-size: 30pt;
   margin-top: 1%;
   text-align: center;
   text-shadow: -1px 0 #444, 0 1px #444, 2px 0 #444, 0 -1px #444;
@@ -55,7 +58,6 @@ body {
 
 #header {
   border: 7px #49beaa solid;
-  background-color: none;
   grid-column: 1 / span 1;
   grid-row: 1 / span 1;
   background-color: #f5dfbb;
@@ -64,7 +66,6 @@ body {
 
 #nav {
   border: 7px #49beaa solid;
-  background-color: none;
   grid-column: 2 / span 1;
   grid-row: 1 / span 1;
   background-color: #f5dfbb;
@@ -95,6 +96,7 @@ body {
   border: 3px #4390d8 solid;
   margin: 2%;
   box-shadow: 0 0 0.5em #4390d8;
+  font-size: 15pt;
 }
 
 a {

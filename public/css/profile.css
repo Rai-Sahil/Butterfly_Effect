@@ -1,12 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap%27");
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+@font-face {
+  font-family: logo;
+  src: url(../font/SuperMarioBros2.ttf);
+}
 
 body {
-  font-family: "Signika Negative", sans-serif;
+  font-family: 'patrick hand', cursive;
   padding: 0;
 }
 
 h1 {
   margin: auto;
+  font-family: logo;
+  font-size: 25pt;
   padding: 1%;
   max-width: 95%;
   text-align: center;
@@ -67,11 +73,11 @@ canvas {
 
 .changeAvatar {
   background-color: #4290d8;
+  font-family: 'patrick hand', cursive;
   border: none;
   font-weight: bold;
-  font-size: 14pt;
+  font-size: 15pt;
   color: #f5dfbb;
-  padding: 10px 20px;
   text-decoration: none;
   cursor: pointer;
   border-radius: 15px;
@@ -135,6 +141,10 @@ p {
 }
 
 @media screen and (max-width: 800px) {
+  h1 {
+    font-size: 20pt;
+  }
+
   #profile-page {
     padding: 3%;
     margin: 3%;
