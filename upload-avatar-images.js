@@ -23,13 +23,18 @@ const storage = multer.diskStorage({
 const uploadAvatarImage = multer({ storage });
 
 function getAvatarPathByUUID(uuid) {
-  const avatarDirPath = `${__dirname}/app/${uuid}`;
-  const files = fs.readdirSync(avatarDirPath);
-  const avatarFileName = files.find((file) => file.includes("avatar-image"));
-  if (!avatarFileName) {
+  try {
+    const avatarDirPath = `${__dirname}/app/${uuid}`;
+    const files = fs.readdirSync(avatarDirPath);
+    const avatarFileName = files.find((file) => file.includes("avatar-image"));
+    if (!avatarFileName) {
+      return null;
+    }
+    return `${avatarDirPath}/${avatarFileName}`;
+  } catch(error) {
+    console.error("Error getting avatar path by UUID: ", error);
     return null;
   }
-  return `${avatarDirPath}/${avatarFileName}`;
 }
 
 module.exports = {

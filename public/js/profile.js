@@ -61,6 +61,8 @@ function init() {
           );
         };
         avatarImageElement.replaceWith(canvas);
+      } else if (status === 404) {
+        console.info("No user avatar found.");
       }
     });
   }
