@@ -32,9 +32,5 @@ function init() {
   });
 }
 
-document.onreadystatechange = () => {
-  if (document.readyState === "complete") {
-    console.info("Document fully loaded.");
-    init();
-  }
-};
+document.onreadystatechange = () =>
+  document.readyState === "complete" && init();

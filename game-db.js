@@ -435,7 +435,6 @@ async function endingsEarned(uuid, callback) {
       "SELECT DISTINCT ending_id, type, threshold, text FROM EARNED_ENDING, ENDING WHERE ending_id = ending.id AND user_id = " +
       users[0].id
     );
-    console.log(endings);
     return callback({
       status: 200,
       message: "Successfully retrieved earned endings.",

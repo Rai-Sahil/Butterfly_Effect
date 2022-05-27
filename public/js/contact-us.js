@@ -13,10 +13,5 @@ window.onload = function () {
             message: document.getElementById("message").value
         }
         emailjs.send('service_aar4kv5', 'template_xjczf8h', params)
-            .then(function () {
-                console.log('SUCCESS!');
-            }, function (error) {
-                console.log('FAILED...', error);
-            });
     });
 }

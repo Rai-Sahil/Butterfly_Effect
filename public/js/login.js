@@ -1,8 +1,6 @@
 "use strict";
 
-function initlogin() {
-  console.info("Client script loaded.");
-
+function init() {
   const sign_in_btn = document.querySelector("#sign-in-btn");
   const sign_up_btn = document.querySelector("#sign-up-btn");
   const container = document.querySelector(".container");
@@ -88,11 +86,8 @@ function initlogin() {
     });
 }
 
-document.addEventListener("readystatechange", () => {
-  if (document.readyState === "complete") {
-    initlogin();
-  }
-});
+document.onreadystatechange = () =>
+  document.readyState === "complete" && init();
 
 let image = document.getElementById("image");
 let image2 = document.getElementById("image2");
