@@ -122,7 +122,7 @@ router.get("/game", requireLoggedIn, function (req, res) {
 });
 
 router.get("/timeline", requireLoggedIn, function (req, res) {
-  res.sendFile("User_Play_History.html", {
+  res.sendFile("play-history.html", {
     root: __dirname + "/public/html",
   });
 });
