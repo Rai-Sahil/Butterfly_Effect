@@ -204,22 +204,22 @@ https://imperfectidealist.com/common-recycling-mistakes/
 
 ## Contact Information
 
-* Delson Tan
-delsonwtan@gmail.com
+* Delson Tan  
+delsonwtan@gmail.com  
 Github - https://github.com/DelsonTan
 
-* Wendy Kong
-eoeomj97@gmail.com
+* Wendy Kong  
+eoeomj97@gmail.com  
 Github - https://github.com/MinjiKong
 
-* Navdeep Litt
-navdeepnx@gmail.com
+* Navdeep Litt  
+navdeepnx@gmail.com  
 Github - https://github.com/nvlt1
 
-* Kemp Liao
-kempliao@gmail.com
+* Kemp Liao  
+kempliao@gmail.com  
 Github - https://github.com/kemp-liao
 
-* Sahil Rai
-raisahil580@gmail.com
+* Sahil Rai  
+raisahil580@gmail.com  
 Github - https://github.com/Rai-Sahil
