@@ -4,10 +4,10 @@
   "description": "COMP2800 group project, April 2022",
   "main": "app.js",
   "scripts": {
-    "start": "node ./server/app.js",
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "init-db": "node ./server/init-db.js",
-    "dev": "nodemon ./server/app.js"
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
