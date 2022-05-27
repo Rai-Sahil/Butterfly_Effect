@@ -1,5 +1,6 @@
 "use strict";
 
+const path = require("path");
 const express = require("express");
 const router = express.Router();
 const {
@@ -39,13 +40,13 @@ const {
 
 router.get("/", requireLoggedIn, function (_, res) {
   res.sendFile("index.html", {
-    root: __dirname + "/public/html",
+    root: path.join(__dirname, "../public/html"),
   });
 });
 
 router.get("/signup", requireLoggedOut, function (req, res) {
   res.sendFile("login.html", {
-    root: __dirname + "/public/html",
+    root: path.join(__dirname, "../public/html"),
   });
 });
 
@@ -75,7 +76,7 @@ router.post("/signup", function (req, res) {
 
 router.get("/login", requireLoggedOut, function (req, res) {
   res.sendFile("login.html", {
-    root: __dirname + "/public/html",
+    root: path.join(__dirname, "../public/html"),
   });
 });
 
@@ -117,49 +118,49 @@ router.post("/logout", function (req, res) {
 
 router.get("/game", requireLoggedIn, function (req, res) {
   res.sendFile("game-card.html", {
-    root: __dirname + "/public/html",
+    root: path.join(__dirname, "../public/html"),
   });
 });
 
 router.get("/timeline", requireLoggedIn, function (req, res) {
   res.sendFile("timeline.html", {
-    root: __dirname + "/public/html",
+    root: path.join(__dirname, "../public/html"),
   });
 });
 
 router.get("/contact-us", requireLoggedIn, function (req, res) {
   res.sendFile("contact-us.html", {
-    root: __dirname + "/public/html",
+    root: path.join(__dirname, "../public/html"),
   });
 });
 
 router.get("/profile", requireLoggedIn, function (req, res) {
   res.sendFile("profile.html", {
-    root: __dirname + "/public/html",
+    root: path.join(__dirname, "../public/html"),
   });
 });
 
 router.get("/rules", requireLoggedIn, function (req, res) {
   res.sendFile("How_To_Play.html", {
-    root: __dirname + "/public/html",
+    root: path.join(__dirname, "../public/html"),
   });
 });
 
 router.get("/about-us", requireLoggedIn, function (req, res) {
   res.sendFile("about-us.html", {
-    root: __dirname + "/public/html",
+    root: path.join(__dirname, "../public/html"),
   });
 });
 
 router.get("/ending-collection", requireLoggedIn, function (req, res) {
   res.sendFile("ending-collection.html", {
-    root: __dirname + "/public/html",
+    root: path.join(__dirname, "../public/html"),
   });
 });
 
 router.get("/ending-details", requireLoggedIn, function (req, res) {
   res.sendFile("ending-details.html", {
-    root: __dirname + "/public/html",
+    root: path.join(__dirname, "../public/html"),
   });
 });
 
@@ -169,7 +170,7 @@ router.get(
   requireAdmin,
   function (req, res) {
     res.sendFile("admin-dashboard.html", {
-      root: __dirname + "/public/html",
+      root: path.join(__dirname, "../public/html"),
     });
   }
 );
@@ -396,7 +397,7 @@ router.get("/ending/:id", requireLoggedIn, function (req, res) {
 
 router.get("/ending", requireLoggedIn, function (req, res) {
   res.sendFile("ending.html", {
-    root: __dirname + "/public/html",
+    root: path.join(__dirname, "../public/html"),
   });
 });
 
@@ -419,7 +420,7 @@ router.get("/endings", requireLoggedIn, function (req, res) {
 
 router.use(function (_, res) {
   res.status(404).sendFile("404.html", {
-    root: __dirname + "/public/html",
+    root: path.join(__dirname, "../public/html"),
   });
 });
 
