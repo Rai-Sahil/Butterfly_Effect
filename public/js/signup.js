@@ -63,7 +63,7 @@ function initsignup() {
                   document.getElementById("signup-error-message").innerHTML = "";
                 });
             } else {
-              sessionStorage.setItem("userId", responseJSON.user.ID);
+              sessionStorage.setItem("userId", responseJSON.user.uuid);
              
               DelayRedirect2();
             }
