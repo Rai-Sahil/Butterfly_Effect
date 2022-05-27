@@ -1,8 +1,6 @@
 "use strict";
 
 function init() {
-  console.info("Client script loaded.");
-
   function ajaxGET(path, callback) {
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -61,6 +59,8 @@ function init() {
           );
         };
         avatarImageElement.replaceWith(canvas);
+      } else if (status === 404) {
+        console.info("No user avatar found.");
       }
     });
   }
@@ -81,7 +81,6 @@ function init() {
   ajaxGET(`/users/${sessionStorage.getItem("userId")}`, (data, status) => {
     if (data) {
       const { user, message } = JSON.parse(data);
-      console.log("user:", user);
       if (status !== 200) {
         document.getElementById("profile-status-message").innerHTML = message;
       } else {
@@ -162,9 +161,5 @@ function init() {
   });
 }
 
-document.onreadystatechange = () => {
-  if (document.readyState === "complete") {
-    console.info("Document fully loaded.");
-    init();
-  }
-};
+document.onreadystatechange = () =>
+  document.readyState === "complete" && init();

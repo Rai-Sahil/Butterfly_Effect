@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+.thankyou-popup {
+    background-color: #f5dfbb;
+    border-radius: 6px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    visibility: hidden;
+    padding: 15px 30px 25px;
+    box-sizing: border-box;
+    font-family: 'patrick hand', cursive;
+}
+
+.thankyou-openpopup {
+    visibility: visible;
+}
+
+#tick {
+    width: 100px;
+    margin-top: -60px;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#back {
+    text-decoration: none;
+    color: black;
+    padding: 3px 5px;
+    background-color: #4290d8;
+    cursor: pointer;
+    font-family: 'patrick hand', cursive;
+    border-radius: 8px;
+}
+
+@media screen and (max-width: 800px) {
+    .thankyou-popup {
+        width: 300px;
+        font-size: 11pt;
+    }
+}

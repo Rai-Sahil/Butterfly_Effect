@@ -201,9 +201,5 @@ const loadUsers = () =>
     }
   });
 
-document.onreadystatechange = () => {
-  if (document.readyState === "complete") {
-    console.info("Document fully loaded.");
-    loadUsers();
-  }
-};
+document.onreadystatechange = () =>
+  document.readyState === "complete" && loadUsers();  

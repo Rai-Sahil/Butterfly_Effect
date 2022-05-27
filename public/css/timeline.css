@@ -1,17 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+@font-face {
+  font-family: logo;
+  src: url(../font/SuperMarioBros2.ttf);
+}
+
 * {
-    margin: 0%;
     padding-left: 0%;
     box-sizing: border-box;
 }
 
 body {
-    font-family: 'Signika Negative', sans-serif;
-    margin: 0;
+    font-family: 'patrick hand', cursive;
     padding: 0;
 }
 
 h1 {
     margin: auto;
+    font-family: logo;
     padding: 1%;
     max-width: 95%;
     text-align: center;
@@ -48,31 +53,29 @@ h1 {
 }
 
 .decision-count{
-    font-family: 'Oleo Script Swash Caps', cursive;
+    font-family: 'patrick hand', cursive;
     color: wheat;
     border: none;
-
 }
 
 .decision-content{
-    font-family: 'Signika Negative', sans-serif;
+    font-family: 'patrick hand', cursive;
     color: white;
-    line-height: 37px;
-    font-weight: 350px;
+    font-size: 18pt;
     padding: 2%;
     text-align: center; 
 }
 
 .selected-choice{
     text-align: center;
-    font-family: 'Signika Negative', sans-serif;
+    font-size: 15pt;
+    font-family: 'patrick hand', cursive;
     color: white;
     line-height: 37px;
-    font-weight: 350px;
 }
 
 .points{
-    font-family: 'Signika Negative', sans-serif;
+    font-family: 'patrick hand', cursive;
     color: white;
     text-align: center;
     margin-top: 15px;
@@ -142,7 +145,13 @@ h1 {
 }
 
 .score-change {
-    font-size: 15pt;
+    font-size: 14pt;
+}
+
+.current-score {
+    font-size: 14pt;
+    position: inherit;
+    color: #014a8f;
 }
 
 #env-meter{
@@ -200,6 +209,10 @@ h1 {
 }
 
 @media only screen and (min-width: 1000px) {
+    h1 {
+        font-size: 20pt;
+    }
+
     .timeline-content ul li {
         width: 50%;
         margin-top: -5px;

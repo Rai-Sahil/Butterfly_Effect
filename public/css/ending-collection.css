@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+@font-face {
+  font-family: logo;
+  src: url(../font/SuperMarioBros2.ttf);
+}
+
+#app-name {
+  font-family: logo;
+  color: #4390D8;
+  font-size: 20pt;
+  text-shadow: -1px 0 #444, 0 1px #444, 2px 0 #444, 0 -1px #444;
+}
+
+#easter{
+  text-decoration: none;
+   border:none; 
+   background:none;
+}
+
+#main-page {
+  text-align: center;
+}
+
+.main-menu {
+  text-decoration: none;
+  color: #F5DFBB;
+}
+
+.main-menu:hover {
+  color: #4390D8;
+}
+
+ul {
+  list-style: none;
+  display: contents;
+  font-weight: bold;
+  font-size: 18pt;
+}
+
+#image {
+  width: 155px;
+}
+
+li {
+  margin-bottom: -1.5%;
+  font-size: 20pt;
+  font-family: 'patrick hand', cursive;
+}
+
+form{
+  margin-top: -1%;
+}
+
+.display-none {
+  display: none;
+}
+
+@media screen and (max-width: 700px) {
+  .image {
+    width: 150px;
+    margin-top: 12%;
+  }
+
+  li {
+    font-size: 20pt;
+    margin-bottom: 2.5%;
+  }
+  
+  #app-name{
+    margin-bottom: 6%;
+    margin-top: -10px;
+  }
+}

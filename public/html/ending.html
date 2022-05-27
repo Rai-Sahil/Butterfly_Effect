@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Game Ending</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/img/favicon.svg" type="image/svg">
+  <link rel="stylesheet" href="/css/ending.css" />
+  <link rel="stylesheet" href="/css/logo.css" />
+  <link rel="stylesheet" href="/css/header-footer.css" />
+</head>
+
+<body>
+  <div id="header-placeholder"></div>
+  <div id="logo">
+    <img src="#" id="image" alt="logo" />
+
+    <div id="menus">
+      <span id="app-name">Thank you for playing!</span>
+    </div>
+  </div>
+  <div id="content">
+    <div id="header">
+      <div class="progressbar">
+        <svg class="progressbar__svg">
+          <circle id="comfort-ending-meter" cx="80" cy="80" r="70"></circle>
+        </svg>
+        <span class="progressbar__text"><img src="/img/smileyface.svg" id="smiley" alt="comfort" /></span>
+      </div>
+      <img id="comfort-ending-image" class="comfort" src="#" alt="" />
+      <div id="comfort-ending-text" class="text"></div>
+    </div>
+    <div id="nav">
+      <div class="progressbar">
+        <svg class="progressbar__svg">
+          <circle id="environment-ending-meter" cx="80" cy="80" r="70"> </circle>
+        </svg>
+        <span  class="progressbar__text"><img src="/img/earth.svg" id="earth" alt="earth" /></span>
+      </div>
+      <img id="environment-ending-image" class="environment" src="#" alt="" />
+      <div id="environment-ending-text" class="text2"></div>
+    </div>
+  </div>
+  <div id="footer-placeholder"></div>
+  <script src="/js/header-footer.js"></script>
+  <script src="/js/logo.js"></script>
+  <script src="/js/ending.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+@font-face {
+  font-family: logo;
+  src: url(../font/SuperMarioBros2.ttf);
+}
+body {
+    font-family: 'patrick hand', cursive;
+    padding: 0;
+}
+
+h1 {
+    margin: auto;
+    font-family: logo;
+    font-size: 20pt;
+    padding: 1%;
+    max-width: 95%;
+    text-align: center;
+    border: outset 2px #444;
+    background: #4290D8;
+    border-radius: 100px;
+    text-shadow: -1px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+.header {
+    padding-top: 20px;
+    color: #F5DFBB;
+    margin: auto;
+    line-height: 50px;
+}
+
+#contactus-page {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 5%;
+    margin-left: -2%;
+}
+
+#contact {
+    width: 80%;
+    margin-left: 12%;
+}
+
+label {
+    font-size: 15pt;
+    text-align: left;
+}
+
+#contact-form {
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+input[type="text"],
+textarea {
+    border: 2px solid #4290D8;
+    border-radius: 4px;
+    width: 95%;
+    resize: none;
+}
+
+input:focus,
+textarea:focus {
+    background-color: #F5DFBB;
+}
+
+input[type=submit] {
+    background-color: #4290D8;
+    font-family: 'patrick hand', cursive;
+    border: none;
+    font-weight: bold;
+    color: #F5DFBB;
+    padding: 10px 20px;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 1%;
+    border-radius: 15px;
+}
+
+input[type=submit]:hover {
+    background-color: #0d66ba;
+}
+
+@media screen and (max-width: 800px) {
+    #contactus-page {
+        display: grid;
+        grid-template-columns: 100%;
+    }
+
+    h2 {
+        margin-top: -3%;
+    }
+
+    #contact {
+        width: 55%;
+        margin-left: 22%;
+        grid-row: 1 / span 1;
+    }
+
+    #contact-form {
+        grid-row: 2;
+        margin-right: 5%;
+    }
+}

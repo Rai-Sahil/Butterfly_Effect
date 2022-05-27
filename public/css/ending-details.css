@@ -1,0 +1,464 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+@font-face {
+  font-family: logo;
+  src: url(../font/SuperMarioBros2.ttf);
+}
+
+body {
+    font-family: 'patrick hand', cursive;
+    font-size: 20pt;
+    overflow-x: hidden;
+}
+
+#image{
+    display: block;
+    width: 10%;
+    height: auto;
+}
+
+#logo {
+    max-width: 100%;
+}
+
+#image {
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#menus {
+    justify-content: center;
+    text-align: center;
+}
+
+
+#app-name {
+    font-family: logo;
+    color: #4390D8;
+    font-size: 30pt;
+    margin-top: 1%;
+    text-align: center;
+    text-shadow: -1px 0 #444, 0 1px #444, 2px 0 #444, 0 -1px #444;
+}
+
+body {
+    padding: 0px;
+    font-size: 12pt;
+    background-color:white;
+}
+
+#content {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100%;
+    padding: 2%;
+    background-color:white;
+    gap: 2%;
+
+}
+
+#header {
+    border: 7px #49beaa solid;
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+    background-color:#F5DFBB;
+    box-shadow: 0 0 0.50em #49beaa;
+}
+
+#nav {
+    border: 7px #49beaa solid;
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 1;
+    background-color:#F5DFBB;
+    box-shadow: 0 0 0.50em #49beaa;
+}
+
+@media only screen and (max-width: 600px) {
+    #content {
+        grid-template-columns: 100%;
+        grid-template-rows: 50% 50%;
+    }
+
+    #header {
+        border: 7px #49beaa solid;
+        grid-column: 1 / span 1;
+        grid-row: 1 / span 1;
+    }
+
+    #nav {
+        border: 7px #49beaa solid;
+        grid-column: 1 / span 1;
+        grid-row: 2 / span 1;
+        
+    }
+}
+
+.text, .text2 {
+    border: 3px #4390D8 solid;
+    margin: 2%;
+    box-shadow: 0 0 0.50em #4390D8;
+}
+
+a {
+    text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #0d0d0d;
+}
+
+.container__progressbars {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    min-width: 270px;
+    width: 100%;
+    min-height: 100%;
+}
+
+.progressbar {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    margin: 1em;
+    transform: rotate(-90deg);
+}
+
+.progressbar__svg {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.progressbar__svg-circle {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke-width: 10;
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+    stroke: #4290d8;
+    stroke-linecap: round;
+    transform: translate(5px, 5px);
+}
+
+
+.progressbar__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 0.25em 0.5em;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 0.25em;
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.circle-comfort0 {
+    -webkit-animation: anim_circle-comfort0 1s ease-in-out forwards;
+    animation: anim_circle-comfort0 1s ease-in-out forwards;
+}
+
+  .circle-Earth0 {
+    -webkit-animation: anim_circle-earth0 1s ease-in-out forwards;
+            animation: anim_circle-earth0 1s ease-in-out forwards;
+  }
+
+  @-webkit-keyframes anim_circle-earth0 {
+    to {
+      stroke-dashoffset: 439.56;
+    }
+  }
+  
+  @keyframes anim_circle-earth0 {
+    to {
+      stroke-dashoffset: 439.56;
+    }
+  }
+
+
+@-webkit-keyframes anim_circle-comfort0 {
+    to {
+        stroke-dashoffset: 439.56;
+    }
+}
+
+@keyframes anim_circle-comfort0 {
+    to {
+        stroke-dashoffset: 439.56;
+    }
+}
+
+.circle-comfort50 {
+    -webkit-animation: anim_circle-comfort50 1s ease-in-out forwards;
+    animation: anim_circle-comfort50 1s ease-in-out forwards;
+}
+
+.progressbar__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 0.25em 0.5em;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 0.25em;
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+
+@-webkit-keyframes anim_circle-comfort50 {
+    to {
+        stroke-dashoffset: 220;
+    }
+}
+
+@keyframes anim_circle-comfort50 {
+    to {
+        stroke-dashoffset: 220;
+    }
+}
+
+.progressbar__svg-circle2 {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke-width: 10;
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+    stroke: #49beaa;
+    stroke-linecap: round;
+    transform: translate(5px, 5px);
+}
+
+
+  .circle-earth50 {
+    -webkit-animation: anim_circle-earth50 1s ease-in-out forwards;
+            animation: anim_circle-earth50 1s ease-in-out forwards;
+  }
+
+  @-webkit-keyframes anim_circle-earth50 {
+    to {
+      stroke-dashoffset: 220;
+    }
+  }
+  
+  @keyframes anim_circle-earth50 {
+    to {
+      stroke-dashoffset: 220;
+    }
+  }
+
+  .circle-comfort100 {
+    -webkit-animation: anim_circle-comfort00 1s ease-in-out forwards;
+    animation: anim_circle-comfort100 1s ease-in-out forwards;
+}
+
+  .circle-earth100 {
+    -webkit-animation: anim_circle-earth100 1s ease-in-out forwards;
+            animation: anim_circle-earth100 1s ease-in-out forwards;
+  }
+
+  @-webkit-keyframes anim_circle-earth100 {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  
+  @keyframes anim_circle-earth100 {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+@-webkit-keyframes anim_circle-comfort100 {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes anim_circle-comfort100 {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+
+#enviroment {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: -2.5%;
+    height: 400px;
+}
+
+#comfort {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: -10%;
+    height: 500px;
+   
+}
+
+.text{
+    margin-top: -4.5%;
+}
+
+
+
+#smiley, #earth{
+    height: 60px;
+}
+
+@media only screen and (max-width:1193px) and (min-width:1101px) {
+    #enviroment{
+        margin-top: 0%;
+        margin-bottom: 2%;
+    }
+    
+    .text {
+        margin-top: -8%;
+        font-size: 15pt;
+    }
+}
+
+@media only screen and (max-width: 1100px) and (min-width:879px) {
+    #enviroment {
+        height: 300px;
+        margin-top: 11%;
+    }
+
+    #comfort {
+        height: 400px;
+        margin-top: 2%;
+
+    }
+.text2{
+    margin-top: 9%;
+}
+    
+}
+
+@media only screen and (max-width: 879px) and (min-width:556px) {
+    #content {
+        grid-template-columns: 100%;
+        grid-template-rows: 50% 50%;
+    }
+
+    #header {
+        border: 7px #49beaa solid;
+        grid-column: 1 / span 1;
+        grid-row: 1 / span 1;
+            }
+
+    #nav {
+        border: 7px #49beaa solid;
+        grid-column: 1 / span 1;
+        grid-row: 2 / span 1;
+    }
+
+    #enviroment {
+        margin-top: -16%;
+        height: 400px;
+    }
+
+    
+    
+    #comfort {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        height: 500px;
+        margin-top: -20%;
+       
+    }
+    .text{
+        margin-top: -13%;
+    }
+
+    .text2{
+        margin-top: -.3%;
+    }
+    
+}
+
+@media only screen and (max-width: 555px) and (min-width:456px) {
+    #app-name {
+        font-size: 20pt;
+    }
+
+    #enviroment {
+        height: 300px;
+        margin-top: -80px;
+
+    }
+    
+    #comfort {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        height: 300px;
+       
+    }
+
+    .text{
+         margin-top: -4%;
+    }
+
+    .text2{
+        margin-top: -0%;
+    }
+}
+
+@media only screen and (max-width: 455px) and (min-width:356px) {
+    #app-name{
+        font-size: 20pt;
+    }
+
+
+    #enviroment {
+        height: 200px;
+    }
+    
+    #comfort {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        height: 300px;
+        margin-top: -70px;
+
+       
+    }
+    .text {
+        margin-top: -9%;
+    }
+    
+    .text2 {
+        margin-bottom: 1%;
+    }
+    
+    
+}
+
+.section{
+    width: 100%;
+    margin-top: 2%;
+}
+
+#container{
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 7px #49beaa solid;
+    background-color:#F5DFBB;
+    box-shadow: 0 0 0.50em #49beaa;
+}

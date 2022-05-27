@@ -1,11 +1,8 @@
 "use strict";
 
 function initsignup() {
-  console.info("Client script loaded.");
-
   function DelayRedirect2() {
     setTimeout(function () {
-      // dvCountDown.style.display = "none";
       window.location.replace("/");
     }, 1000);
   }
@@ -60,6 +57,11 @@ function initsignup() {
             if (status != 200) {
               document.getElementById("signup-error-message").innerHTML =
                 responseJSON.message;
+                document
+                .getElementById("signup-email")
+                .addEventListener("click", function (e) {
+                  document.getElementById("signup-error-message").innerHTML = "";
+                });
             } else {
               sessionStorage.setItem("userId", responseJSON.user.ID);
              
@@ -77,7 +79,6 @@ function initsignup() {
 document.addEventListener('readystatechange', (event) => {
   
     if (document.readyState === "complete") {
-      console.info("Init signup Starting Now");
       initsignup();
     }
   }

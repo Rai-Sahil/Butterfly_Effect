@@ -1,8 +1,6 @@
 "use strict";
 
-function initlogin() {
-  console.info("Client script loaded.");
-
+function init() {
   const sign_in_btn = document.querySelector("#sign-in-btn");
   const sign_up_btn = document.querySelector("#sign-up-btn");
   const container = document.querySelector(".container");
@@ -17,7 +15,6 @@ function initlogin() {
 
   function DelayRedirect() {
     setTimeout(function () {
-      // dvCountDown.style.display = "none";
       window.location.replace("/");
     }, 1000);
   }
@@ -65,6 +62,17 @@ function initlogin() {
             if (status != 200) {
               document.getElementById("login-error-message").innerHTML =
                 message;
+              document
+                .getElementById("login-email")
+                .addEventListener("click", function (e) {
+                  document.getElementById("login-error-message").innerHTML = "";
+                });
+
+              document
+                .getElementById("login-password")
+                .addEventListener("click", function (e) {
+                  document.getElementById("login-error-message").innerHTML = "";
+                });
             } else {
               sessionStorage.setItem("userId", user.uuid);
 
@@ -77,16 +85,12 @@ function initlogin() {
     });
 }
 
-document.addEventListener("readystatechange", () => {
-  if (document.readyState === "complete") {
-    console.info("Init login Starting Now");
-    initlogin();
-  }
-});
+document.onreadystatechange = () =>
+  document.readyState === "complete" && init();
 
 let image = document.getElementById("image");
 let image2 = document.getElementById("image2");
-let images = ["./img/blue.svg", "./img/blueflap.svg"];
+let images = ["./img/Butterfly_flaps_up.svg", "./img/Butterfly_flaps_down.svg"];
 setInterval(function () {
   let random = Math.floor(Math.random() * 2);
   image.src = images[random];
