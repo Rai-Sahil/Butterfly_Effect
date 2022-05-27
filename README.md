@@ -49,121 +49,121 @@ Demo URL - https://bby32-2800-202210.herokuapp.com/
 
 ## File Contents
 
-.
-├── README.md
-├── Readme.txt
-├── app
-│   ├── a86cb1f3-d285-11ec-873f-744ca1bdc988
-│   │   └── avatar-image.png
-│   └── a9ec65da-d30d-11ec-873f-744ca1bdc988
-│       └── avatar-image.png
-├── app.js
-├── package-lock.json
-├── package.json
-├── public
-│   ├── css
-│   │   ├── 404.css
-│   │   ├── How_To_Play.css
-│   │   ├── about-us.css
-│   │   ├── admin-dashboard.css
-│   │   ├── contact-us.css
-│   │   ├── ending-collection.css
-│   │   ├── ending-details.css
-│   │   ├── ending.css
-│   │   ├── game-card.css
-│   │   ├── header-footer.css
-│   │   ├── index.css
-│   │   ├── login-signup.css
-│   │   ├── logo.css
-│   │   ├── navbar.css
-│   │   ├── profile.css
-│   │   ├── question-edit.css
-│   │   ├── style.css
-│   │   ├── thank-you.css
-│   │   └── timeline.css
-│   ├── font
-│   │   └── SuperMarioBros2.ttf
-│   ├── html
-│   │   ├── 404.html
-│   │   ├── How_To_Play.html
-│   │   ├── about-us.html
-│   │   ├── admin-dashboard.html
-│   │   ├── components
-│   │   │   ├── footer.html
-│   │   │   └── header.html
-│   │   ├── contact-us.html
-│   │   ├── ending-collection.html
-│   │   ├── ending-details.html
-│   │   ├── ending.html
-│   │   ├── game-card.html
-│   │   ├── index.html
-│   │   ├── login.html
-│   │   ├── profile.html
-│   │   ├── question-edit.html
-│   │   └── timeline.html
-│   ├── img
-│   │   ├── Blue.ico
-│   │   ├── Butterfly_flaps_down.svg
-│   │   ├── Butterfly_flaps_up.svg
-│   │   ├── Confirmation_Icon.png
-│   │   ├── achievement_icon.png
-│   │   ├── add.png
-│   │   ├── admin-dash.svg
-│   │   ├── comfort0.png
-│   │   ├── comfort100.png
-│   │   ├── comfort50.png
-│   │   ├── contactus.png
-│   │   ├── default-avatar.png
-│   │   ├── delete.png
-│   │   ├── earth.svg
-│   │   ├── edit.png
-│   │   ├── environment0.png
-│   │   ├── environment100.png
-│   │   ├── environment50.png
-│   │   ├── exclamation_Mark.png
-│   │   ├── favicon.svg
-│   │   ├── game
-│   │   │   └── 1.jpg
-│   │   ├── game-editor.svg
-│   │   ├── home.svg
-│   │   ├── logout_icon.svg
-│   │   ├── mission_icon.jpg
-│   │   ├── nature-for-aboutus-page.svg
-│   │   ├── nature-for-login-page.svg
-│   │   ├── nature-for-signup-page.svg
-│   │   ├── profile.svg
-│   │   ├── profile1.svg
-│   │   ├── profile2.svg
-│   │   ├── smileyface.svg
-│   │   ├── timeline.svg
-│   │   ├── user.svg
-│   │   └── vision_icon.png
-│   └── js
-│       ├── admin-dashboard.js
-│       ├── contact-us.js
-│       ├── easter-egg.js
-│       ├── ending-collection.js
-│       ├── ending-details.js
-│       ├── ending.js
-│       ├── game-card.js
-│       ├── header-footer.js
-│       ├── index.js
-│       ├── login.js
-│       ├── logo.js
-│       ├── profile.js
-│       ├── question-edit.js
-│       ├── signup.js
-│       ├── thank-you.js
-│       └── timeline.js
-└── server
-    ├── constants.js
-    ├── database.sql
-    ├── db.js
-    ├── game-db.js
-    ├── init-db.js
-    ├── middleware.js
-    ├── routes.js
-    └── upload-avatar-images.js
+.  
+├── README.md  
+├── Readme.txt  
+├── app  
+│   ├── a86cb1f3-d285-11ec-873f-744ca1bdc988  
+│   │   └── avatar-image.png  
+│   └── a9ec65da-d30d-11ec-873f-744ca1bdc988  
+│       └── avatar-image.png  
+├── app.js  
+├── package-lock.json  
+├── package.json  
+├── public  
+│   ├── css  
+│   │   ├── 404.css  
+│   │   ├── How_To_Play.css  
+│   │   ├── about-us.css  
+│   │   ├── admin-dashboard.css  
+│   │   ├── contact-us.css  
+│   │   ├── ending-collection.css  
+│   │   ├── ending-details.css  
+│   │   ├── ending.css  
+│   │   ├── game-card.css  
+│   │   ├── header-footer.css  
+│   │   ├── index.css  
+│   │   ├── login-signup.css  
+│   │   ├── logo.css  
+│   │   ├── navbar.css  
+│   │   ├── profile.css  
+│   │   ├── question-edit.css  
+│   │   ├── style.css  
+│   │   ├── thank-you.css  
+│   │   └── timeline.css  
+│   ├── font  
+│   │   └── SuperMarioBros2.ttf  
+│   ├── html  
+│   │   ├── 404.html  
+│   │   ├── How_To_Play.html  
+│   │   ├── about-us.html  
+│   │   ├── admin-dashboard.html  
+│   │   ├── components  
+│   │   │   ├── footer.html  
+│   │   │   └── header.html  
+│   │   ├── contact-us.html  
+│   │   ├── ending-collection.html  
+│   │   ├── ending-details.html  
+│   │   ├── ending.html  
+│   │   ├── game-card.html  
+│   │   ├── index.html  
+│   │   ├── login.html  
+│   │   ├── profile.html  
+│   │   ├── question-edit.html  
+│   │   └── timeline.html  
+│   ├── img  
+│   │   ├── Blue.ico  
+│   │   ├── Butterfly_flaps_down.svg  
+│   │   ├── Butterfly_flaps_up.svg  
+│   │   ├── Confirmation_Icon.png  
+│   │   ├── achievement_icon.png  
+│   │   ├── add.png  
+│   │   ├── admin-dash.svg  
+│   │   ├── comfort0.png  
+│   │   ├── comfort100.png  
+│   │   ├── comfort50.png  
+│   │   ├── contactus.png  
+│   │   ├── default-avatar.png  
+│   │   ├── delete.png  
+│   │   ├── earth.svg  
+│   │   ├── edit.png  
+│   │   ├── environment0.png  
+│   │   ├── environment100.png  
+│   │   ├── environment50.png  
+│   │   ├── exclamation_Mark.png  
+│   │   ├── favicon.svg  
+│   │   ├── game  
+│   │   │   └── 1.jpg  
+│   │   ├── game-editor.svg  
+│   │   ├── home.svg  
+│   │   ├── logout_icon.svg  
+│   │   ├── mission_icon.jpg  
+│   │   ├── nature-for-aboutus-page.svg  
+│   │   ├── nature-for-login-page.svg  
+│   │   ├── nature-for-signup-page.svg  
+│   │   ├── profile.svg  
+│   │   ├── profile1.svg  
+│   │   ├── profile2.svg  
+│   │   ├── smileyface.svg  
+│   │   ├── timeline.svg  
+│   │   ├── user.svg  
+│   │   └── vision_icon.png  
+│   └── js  
+│       ├── admin-dashboard.js  
+│       ├── contact-us.js  
+│       ├── easter-egg.js  
+│       ├── ending-collection.js  
+│       ├── ending-details.js  
+│       ├── ending.js  
+│       ├── game-card.js  
+│       ├── header-footer.js  
+│       ├── index.js  
+│       ├── login.js  
+│       ├── logo.js  
+│       ├── profile.js  
+│       ├── question-edit.js  
+│       ├── signup.js  
+│       ├── thank-you.js  
+│       └── timeline.js  
+└── server  
+    ├── constants.js  
+    ├── database.sql  
+    ├── db.js  
+    ├── game-db.js  
+    ├── init-db.js  
+    ├── middleware.js  
+    ├── routes.js  
+    └── upload-avatar-images.js  
 
 ## How to install
 
@@ -193,7 +193,10 @@ Demo URL - https://bby32-2800-202210.herokuapp.com/
 10. If you log in with an admin account, you will have two extra options in the navbar. One is admin dashboard, which allows you to manage users; another one is game editor, which allows you to manage questions for the game.
 
 ## References
-
+Resources for the questions:
+https://archive.curbed.com/2017/6/7/15749900/how-to-stop-climate-change-actions 
+https://www.realsimple.com/home-organizing/green-living/plastic-bottle-caps-recylable 
+https://imperfectidealist.com/common-recycling-mistakes/ 
 
 
 ## Contact Information
