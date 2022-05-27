@@ -12,13 +12,13 @@
 
 Butterfly Effect is a text-based game designed to help educate the general public on how they can contribute to climate change, with carefully researched game scenarios illustrating the impact of daily lifestyle decisions on the environment.
 
-Delson Tan - Developer
-Wendy Kong - Developer
-Navdeep Litt - Developer
-Kemp Liao - Developer
-Sahil Rai - Developer
+Delson Tan - Developer  
+Wendy Kong - Developer  
+Navdeep Litt - Developer  
+Kemp Liao - Developer  
+Sahil Rai - Developer  
 
-Demo URL - https://bby32-2800-202210.herokuapp.com/
+Demo URL - https://bby32-2800-202210.herokuapp.com/  
 
 ## Technologies
 
