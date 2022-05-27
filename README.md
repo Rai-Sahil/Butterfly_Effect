@@ -194,8 +194,11 @@ Demo URL - https://bby32-2800-202210.herokuapp.com/
 
 ## References
 Resources for the questions:
+
 https://archive.curbed.com/2017/6/7/15749900/how-to-stop-climate-change-actions 
+
 https://www.realsimple.com/home-organizing/green-living/plastic-bottle-caps-recylable 
+
 https://imperfectidealist.com/common-recycling-mistakes/ 
 
 
