@@ -200,26 +200,3 @@ https://archive.curbed.com/2017/6/7/15749900/how-to-stop-climate-change-actions
 https://www.realsimple.com/home-organizing/green-living/plastic-bottle-caps-recylable 
 
 https://imperfectidealist.com/common-recycling-mistakes/ 
-
-
-## Contact Information
-
-* Delson Tan  
-delsonwtan@gmail.com  
-Github - https://github.com/DelsonTan
-
-* Wendy Kong  
-eoeomj97@gmail.com  
-Github - https://github.com/MinjiKong
-
-* Navdeep Litt  
-navdeepnx@gmail.com  
-Github - https://github.com/nvlt1
-
-* Kemp Liao  
-kempliao@gmail.com  
-Github - https://github.com/kemp-liao
-
-* Sahil Rai  
-raisahil580@gmail.com  
-Github - https://github.com/Rai-Sahil
